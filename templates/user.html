@@ -1,0 +1,24 @@
+$def with (jsonData)
+
+<div id="carousel">
+	<ul>
+		$for user in jsonData:
+		<li>
+			<ul>
+				<strong>UserName:</strong>  
+				<li>
+					<a href="/$user['userUserName']">$user['userUserName']</a> 
+				</li>
+				<strong>Achievements:</strong> 
+				<li>
+					$user['userAchievementCount']
+				</li>
+				<strong>Followers:</strong> 
+				<li>
+					$user['totalFollowers']
+				</li>
+			</ul>
+			<br/>
+		</li>
+	</ul>
+</div>

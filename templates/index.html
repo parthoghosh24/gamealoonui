@@ -1,0 +1,175 @@
+$def with (jsonData)
+$ carouselData = jsonData['carouselArticles']
+$ top10Articles=jsonData['top10Articles']
+$ platformValue = jsonData['platform']
+$if platformValue != 'all':
+			   <div id="platformFilter" style="float: right">
+				<select class="platformSelector" onchange="if(this.value) window.location.href='/platform/'+this.value">
+					<option selected value="choose">Choose</option>
+					<option value="pc"> PC </option>
+					<option value="ps3"> Playstation 3 </option>
+					<option value="ps4"> Playstation 4 </option>
+					<option value="xbox360"> Xbox 360 </option>
+					<option value="wiiu"> WII-U </option>
+					<option value="3ds"> 3DS </option>
+					<option value="vita"> PS Vita </option>
+					<option value="ios"> IOS </option>
+					<option value="android"> Android </option>
+				</select>
+			   </div>
+
+<div id="carousel">
+	
+	<div id="cVideoAndCnews">
+
+		<div id="cVideos">
+
+			Videos
+			<ul id='carouselVideos'>
+				<li>
+					Video 1
+				</li>
+				<li>
+					Video 2
+				</li>
+				<li>
+					Video 3
+				</li>
+				<li>
+					Video 4
+				</li>
+				<li>
+					Video 5
+				</li>
+			</ul>
+		</div>
+
+		<div id="cNews">
+			News
+			<ul id='carouselNews'>
+				$for article in carouselData['carouselNews']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="cReview">
+		Reviews
+		<ul id='carouselReviews'>
+			$for article in carouselData['carouselReviews']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+		</ul>
+	</div>
+
+	<div id="cFeaturesAndcGloonicles">
+		<div id="cFeatures">
+			Features
+			<ul id='carouselFeatures'>
+				$for article in carouselData['carouselFeatures']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</div>
+		<div id="cGloonicles">
+			Gloonicles
+			<ul id='carouselGloonicles'>
+				$for article in carouselData['carouselGloonicles']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+</div>
+
+<div id="recentArticles">
+	<h2>Recent Articles</h2>
+	<ul id='top10articles'>
+
+		<li>
+			All
+			<ul id='recentAllarticles'>
+				$for article in top10Articles['recentAllArticles']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</li>
+
+		<li>
+			Reviews
+			<ul id='recentReviews'>
+				$for article in top10Articles['recentReviews']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</li>
+
+		<li>
+			Features
+			<ul id='recentFeatures'>
+				$for article in top10Articles['recentFeatures']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</li>
+
+		<li>
+			News
+			<ul id='recentNews'>
+				$for article in top10Articles['recentNews']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</li>
+
+		<li>
+			Gloonicles
+			<ul id='recentGloonicles'>
+
+				$for article in top10Articles['recentGloonicles']:
+				<li>
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+				</li>
+
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="topUsers">
+	<h2>Top Users</h2>
+	<ul id='top5users'>
+		$for user in jsonData['top5Users']:
+		<li>
+			<a href="/$user['userUserName']">$user['userUserName']</a> 
+		</li>
+
+	</ul>
+
+</div>
+<div id="topGames">
+	<h2>Top Games</h2>
+	<ul id='top10games'>
+		$for game in jsonData['top10Games']:
+		<li>
+			$game['gameTitle']
+		</li>
+	</ul>
+</div>
