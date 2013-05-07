@@ -1,5 +1,8 @@
-(function() {  
-  $(function() {
-   
-  });
-}).call(this);
+$(function() {  
+  $(".basic").click(function(e) {
+       $("#container").modal();
+       
+       return false;
+      });	
+  
+});

@@ -3,6 +3,7 @@ import urllib2
 import json
 
 render = web.template.render('templates', base='main')
+create = web.template.render('templates',base='editmain')
 
 urls = (
         '/','Index',
@@ -35,7 +36,9 @@ class Platform:
 
 class Article:
     def GET(self,category):
-        url="http://192.168.0.102:9000/articles/"+category
+        if "create" == category:
+            return create.editarticle()      
+        url="http://192.168.0.102:9000/articles/"+category+"/totalScore"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)
         return render.article(jsonData)
@@ -47,7 +50,7 @@ class SingleArticle:
         article=json.load(response)
         return render.singlearticle(article)
     
-class User:
+class User: 
     def GET(self):
         url="http://192.168.0.102:9000/users"
         response = urllib2.urlopen(url)
