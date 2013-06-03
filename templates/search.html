@@ -1,0 +1,18 @@
+$def with (responseQuery)
+$var title:Gamealoon Search- Search all your favorite Games, Articles, Users and Media over here
+$ links = responseQuery['queryResponse']
+
+<div id='searchWidget'>
+	<form method="get" action="/searchSite/">
+		<input type="text" name="searchbox" id="searchbox" />
+		<input type="submit" name="search" id="search" value="Search"/>
+	</form>
+	<div id='searchresult'>
+		<ul>
+		$if links:
+		    $for link in links:
+				<li><a href="$link">$link</a></li>
+		
+		</ul>        
+	</div>
+</div>

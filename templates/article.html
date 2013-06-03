@@ -1,4 +1,5 @@
 $def with (jsonData)
+$var title: Gamealoon Articles- Reviews, Features, News, Gloonicles related to games
 
 <div id="articleFilter" style="float: right">
 	<select class="articleSelector" onchange="if(this.value) window.location.href='/article/'+this.value+'/';">
@@ -25,21 +26,20 @@ $def with (jsonData)
 <table id="container">
 	<tr>
 		<td width="75%">
-		<div class="editor">
-			<input type="button" name="bold" id="bold" value="B" />
-			<input type="button" name="italic" id="italic" value="I" />
-			<input type="button" name="underline" id="underline" value="U" />
-			<input type="button" name="anchor" id="anchor" value="a" />
-
+		<div class="editor">			
 			<br/>
-			<textarea class="edit" id="content">
+			<form method="post">
+				<textarea id="content"> </textarea>									
+			</form>
 			
-		</textarea>									
+			
+		
 
 		</div></td>
 		<td width="25%">
 		<div class="sidePane">
 			<input type="button" name="save" id="save" value="Save">
+			<input type="button" name="preview" id = "preview" value="Preview">
 			<input type="button" name="publish" id = "publish" value="Publish">
 			<br/>
 			<br/>
@@ -73,4 +73,4 @@ $def with (jsonData)
 
 	</tr>
 </table>
-<script src="/static/javascripts/gloon.js" type="text/javascript"></script>
+

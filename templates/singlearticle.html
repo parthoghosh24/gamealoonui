@@ -1,5 +1,6 @@
 $def with (article)
 $ platforms = article['articlePlatforms']
+$var title: $article['articleTitle']- $article['articleAuthor'] 
 <div id="buttons" style="float: right">
 	<input id="cool" name="cool" type="button" value="Cool"/>
 	<input id="notcool" name="notcool" type="button" value="!Cool"/>
@@ -8,7 +9,7 @@ $ platforms = article['articlePlatforms']
 	<ul>
 		<strong>Article Title:</strong>
 		<li>
-			$article['articleTitle']
+			$article['articleTitle']			
 		</li>
 		<strong>Article Body:</strong>
 		<li>
