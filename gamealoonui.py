@@ -4,35 +4,39 @@ import json
 
 
 web.config.debug=False
-web.config.session_parameters['cookie_name'] = 'webpy_session_id'
-web.config.session_parameters['cookie_domain'] = None
-web.config.session_parameters['timeout'] = 86400, #24 * 60 * 60, # 24 hours   in seconds
-web.config.session_parameters['ignore_expiry'] = True
-web.config.session_parameters['ignore_change_ip'] = True
-web.config.session_parameters['secret_key'] = 'fLjUfxqXtfNoIldA0A0J'
-web.config.session_parameters['expired_message'] = 'Session expired'
-
 
 urls = (
         '/','Index',
         '/login/','Login',
+        '/logout/','Logout',
+        '/signup/','Signup',
         '/search/','SearchHome',
         '/searchSite/','Search',
         '/platform/(.*)','Platform',
         '/article/(.*)/','Article',
         '/article/(.*)/(.*)','SingleArticle',
         '/user/','User',        
-        '/(.*)','SingleUser'   
-             
+        '/(.*)','SingleUser'                
         )
 
 app = web.application(urls, globals())
-session = web.session.Session(app,web.session.DiskStore('sessions'), {'count': 0})
-render = web.template.render('templates', base='main', globals={'session':session})
-create = web.template.render('templates',base='editmain',globals={'context':session})
+store=web.session.DiskStore('sessions')
+if web.config.get('_session') is None:
+    session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False})
+    web.config._session = session
+else:
+    session = web.config._session
+
+web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
+render = web.template.render('templates/', base='main', globals={'session':session})
+
+
 
 class Index:
-    def GET(self):                        
+    def GET(self):       
+        print "Session username---->", session.username
+        print "Session loggedIn---->", session.loggedIn
+        print "Session userId---->", session.userId                                 
         url="http://localhost:9000/platform/all"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)        
@@ -40,7 +44,7 @@ class Index:
 
 
 class Platform:
-    def GET(self, platform):
+    def GET(self, platform):        
         if platform == 'all':            
             return web.redirect('/')
         url="http://localhost:9000/platform/"+platform        
@@ -50,9 +54,7 @@ class Platform:
 
 
 class Article:
-    def GET(self,category):
-        if "create" == category:
-            return create.editarticle()      
+    def GET(self,category):            
         url="http://localhost:9000/articles/"+category+"/totalScore"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)
@@ -82,11 +84,37 @@ class SingleUser:
 class Login:
     def POST(self):
         sFormData = web.input()        
-        url="http://localhost:9000/user/"+sFormData.username+"/"+sFormData.password
+        url="http://localhost:9000/login/"+sFormData.username+"/"+sFormData.password
         response = urllib2.urlopen(url)
-        user=json.load(response)
-        web.header('Content-Type', 'application/json')    
-        return json.dumps(user)                    
+        user=json.load(response)        
+        
+        if user['available']:            
+            session.username=user['username']
+            session.userId=user['userid']
+            session.loggedIn=True
+                                        
+        print "returning json dump"  
+        print "Session username in login---->", session.username
+        print "Session loggedIn in login---->", session.loggedIn
+        print "Session userId in login---->", session.userId     
+        return json.dumps(user)    
+        
+class Logout:
+    def GET(self):
+        session.username="Guest"
+        session.userId="Guest"
+        session.loggedIn=False               
+        return "done"
+    
+class Signup:
+    
+    def POST(self):
+        sFormData=web.input()
+        url="http://localhost:9000/register"
+        data={"username":sFormData.username, "password":sFormData.password, "email":sFormData.email}
+        response = urllib2.urlopen(url, data)
+        registrationStatus = json.load(response)
+        return json.dumps(registrationStatus)                       
        
 class Search:
     
@@ -104,6 +132,5 @@ class SearchHome:
         responseQuery['queryResponse']=[]
         return render.search(responseQuery)
     
-if __name__ == "__main__":
-    
-    app.run()    
+if __name__ == "__main__":        
+        app.run()    

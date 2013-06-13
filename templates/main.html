@@ -31,10 +31,19 @@ $def with (page)
 			<div id='subheader'>
 				<div id='headerbox'>				
 				<div id='box'>
-					<input type="image" value="" src="/static/images/button.png" class="signin" width='60' height='37' id="login" title="Login"/>
-					<div id="userdetailsbox">
-						<span>Guest</span>						
-					</div>
+					$if session.loggedIn:
+						<input type="image" value="" src="/static/images/button.png" class="signin" id="login" width='60' height='37' title="Login" style="display: none;"/>
+						<input type="image" value="" src="/static/images/button.png" class="signin" id="logout" width='60' height='37' title="Logout" style="display: block;"/>
+						<div id="userdetailsbox">						
+							 <a href="#"><span>$session.username</span></a>							
+						</div>					
+					$else:
+						<input type="image" value="" src="/static/images/button.png" class="signin" id="login" width='60' height='37' title="Login" style="display: block;"/>
+						<input type="image" value="" src="/static/images/button.png" class="signin" id="logout" width='60' height='37' title="Logout" style="display: none;"/>
+						<div id="userdetailsbox">						
+							 <span>$session.username</span>							
+						</div>
+						
 					<div class='signuplogin'>
 						<div id='signinbox'>
 								<form method="post"  id="loginForm" action="/login/">
@@ -60,7 +69,7 @@ $def with (page)
 
 							</div>
 						<div id='registerbox'>
-							<form>
+							<form method="post"  id="signupForm" action="/signup/">
 									<div class="formfields">
 										<h2>Register</h2>
 										<br />
