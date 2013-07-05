@@ -70,7 +70,6 @@ ul {
 	padding: 10px;
 }
 
-
 .editor {
 	position: relative;
 	width: 80%;
@@ -176,74 +175,72 @@ body {
 
 .signuplogin {
 	display: none;
-	/*border-style: solid;*/
-	/*border-width: 5px;*/
 	width: 100%;
 	height: 100%;
 	padding: 10px;
 }
-
 
 .signin {
 	position: relative;
 	margin-top: 58px;
 	float: left;
 }
-#userdetailsbox{
+#userdetailsbox {
 	position: relative;
 	margin-top: 50px;
-	margin-left:10px;
+	margin-left: 10px;
 	float: left;
 }
-#userdetailsbox span{
-	color:#999;
-	font-size:12px;
-	font-weight:bold;
-	text-align:center;
-	text-shadow:  0px 3px 8px #2a2a2a;
+#userdetailsbox span {
+	color: #999;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 0px 3px 8px #2a2a2a;
 }
-#errormessage{
+#errormessage {
 	display: none;
 	color: #CD0A0A;
 }
-#signinbox{
+#signinbox {
 	/*position: relative;*/
-	width:45%;	
-	height:inherit;
+	width: 45%;
+	height: inherit;
 	/*border-style:solid;*/
-	float:left;
-	margin:0 auto; 
+	float: left;
+	margin: 0 auto;
 	border-right: solid 2px #000000;
 }
 
-form{
+form {
 	padding: 10px;
 	margin: 0 auto;
 }
-.formfields{
+.formfields {
 	display: block;
 	padding: 5px;
 	margin: 0 auto;
 }
-#registerbox{
+#registerbox {
 	/*position: relative;*/
-	width:55%;
-	height:inherit;
+	width: 55%;
+	height: inherit;
 	/*border-style:solid;*/
-	float:left;
-	margin:0 auto;
+	float: left;
+	margin: 0 auto;
 }
 #logo {
 	position: relative;
 	float: right;
 	color: #006DCC;
 }
-#logo a{
-	border:0; 
+#logo a {
+	border: 0;
 }
 #logo img {
+	border: 0;
 	width: 350px;
-	height: 140px;	
+	height: 140px;
 }
 #container_layout {
 	width: 960px;
@@ -260,6 +257,9 @@ form{
 	margin-bottom: 10px;
 }
 
+img {
+	border: 0;
+}
 /* Carousel CSS*/
 
 #play {
@@ -470,6 +470,9 @@ form{
 	left: 30px;
 	top: -1px;
 	text-align: center;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 22px;
 	color: #F4F4F4;
 }
 
@@ -681,7 +684,7 @@ form{
 .recentarticlediv {
 	position: relative;
 	height: 110px;
-	border-style: solid;
+	border-bottom-style: solid;
 }
 #rightboxrestcontent {
 	position: relative;
@@ -695,11 +698,13 @@ form{
 	height: 260px;
 	position: relative;
 	border-style: solid;
+	display: none;
 }
 #adbox2 {
 	height: 260px;
 	position: relative;
 	border-style: solid;
+	display: none;
 }
 #topUsers, #topGames {
 	position: relative;
@@ -744,10 +749,302 @@ form{
 	width: 728px;
 	border-style: solid;
 	margin: 0 auto 15px auto;
-	display: inline-block;
+	display: none;
 	text-align: center;
 }
 
+/*user profile*/
+#profile_container {
+	position: relative;
+	width: 940px;
+	overflow: hidden;
+	padding: 10px;
+	/*border-style: solid;*/
+}
+
+#user_card {
+	float: left;
+	width: 250px;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 10px;
+	word-wrap: break-word;
+}
+#labeldiv {
+	position: absolute;
+	width: 200px;
+}
+
+.userdetailstext {
+	float: left;
+	font-size: 13px;
+	color: #FFFFFF;
+	margin-left: 10px;
+}
+.marginleft {
+	margin-left: 2px;
+}
+.labeltext {
+	margin-bottom: 15px;
+	color: white;
+	font-size: 16px;
+}
+
+#gamebiobox {
+	float: left;
+	width: 630px;
+	height: 200px;
+	margin-left: 25px;
+	border-style: solid;
+	border-width: 10px;
+	border-color: #E46F62;
+	padding: 60px;
+}
+#posts {
+	float: left;
+	width: 630px;
+	height: 360px;
+	margin-left: 25px;
+	margin-top: 81px;
+	border-style: solid;
+	border-width: 10px;
+	border-color: #76A7F5;
+	overflow: hidden;
+}
+#posts:hover {
+	overflow: scroll;
+}
+#activites {
+	float: left;
+	width: 630px;
+	height: 505px;
+	margin-left: 25px;
+	margin-top: 20px;
+	border-style: solid;
+	border-width: 10px;
+	border-color: #4DBFDB;
+	overflow: hidden;
+}
+
+#activites:hover {
+	overflow: scroll;
+}
+#user_profile_picture {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	border-color: #002B80;
+	border-width: 2px;
+}
+#fullName {
+	/*display: inline;*/
+}
+
+#userdetailsemiheader {
+	position: absolute;
+	color: #005FB3;
+	background-color: #FFFFFF;
+	width: 80px;
+	height: 40px;
+	top: 292px;
+	left: 20px;
+	text-align: center;
+	padding-left: 15px;
+	line-height: 190%;
+	font-size: 19px;
+}
+#userdetailangle {
+	position: absolute;
+	height: 0;
+	width: 0;
+	left: 100px;
+	border-top: 40px solid #FFFFFF;
+	border-right: 25px solid transparent;
+}
+
+#achievementsemiheader {
+	position: absolute;
+	color: #6F85CF;
+	background-color: #FFFFFF;
+	width: 150px;
+	height: 40px;
+	top: 0px;
+	left: -18px;
+	text-align: center;
+	padding-left: 15px;
+	line-height: 190%;
+	font-size: 18px;
+}
+
+#achievementangle {
+	position: absolute;
+	height: 0;
+	width: 0;
+	left: 132px;
+	top: 0px;
+	border-top: 40px solid #FFFFFF;
+	border-right: 25px solid transparent;
+}
+
+#followedbysemiheader {
+	position: absolute;
+	color: #bc5679;
+	background-color: #FFFFFF;
+	width: 120px;
+	height: 40px;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	padding-left: 15px;
+	line-height: 190%;
+	font-size: 19px;
+}
+#followedbyangle {
+	position: absolute;
+	height: 0;
+	width: 0;
+	left: 120px;
+	top: 0px;
+	border-top: 40px solid #FFFFFF;
+	border-right: 25px solid transparent;
+}
+
+#followingsemiheader {
+	position: absolute;
+	color: #f9b256;
+	background-color: #FFFFFF;
+	width: 120px;
+	height: 40px;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	padding-left: 15px;
+	line-height: 190%;
+	font-size: 19px;
+}
+#followingangle {
+	position: absolute;
+	height: 0;
+	width: 0;
+	left: 120px;
+	top: 0px;
+	border-top: 40px solid #FFFFFF;
+	border-right: 25px solid transparent;
+}
+
+.shadow {
+	box-shadow: 10px 10px 11px #888888;
+	-webkit-box-shadow: 10px 10px 11px #888888;
+	-moz-box-shadow: 10px 10px 11px #888888;
+}
+
+#userdetailheader {
+	background-color: #005FB3;
+	height: 40px;
+}
+
+#userdetail {
+	padding: 25px;
+	background-color: #005FB3;
+}
+
+#achievementsbg {
+	background-color: #6F85CF;
+}
+
+#followersbg {
+	background-color: #BC5680;
+}
+
+#followingbg {
+	background-color: #F9B250;
+}
+.count {
+	float: right;
+	color: #FFFFFF;
+	font-size: 12px;
+}
+
+.achievementsandfollowebyandfollowingbox {
+	position: relative;
+	padding: 10px;
+	height: 150px;
+}
+.allcontent {
+	margin-top: 50px;
+}
+.itemList {
+	float: left;
+	display: block;
+	overflow: hidden;
+	margin-right: 4px;
+}
+.contentheader {
+	position: absolute;
+	width: 100px;
+	height: 60px;
+	left: 295px;
+	color: white;
+	text-align: center;
+	line-height: 322%;
+	text-shadow: 0px 3px 8px #2a2a2a;
+}
+#gamebioheaderbg {
+	background-color: #E46F62;
+}
+#postsheaderbg {
+	background-color: #76A7F5;
+	top: 300px;
+}
+#activitesheaderbg {
+	background-color: #4DBFDB;
+	top: 680px;
+}
+.semiangle {
+	height: 0;
+	width: 0;
+	left: 395px;
+	border-right: 25px solid transparent;
+	position: absolute;
+}
+
+#gamebioangle {
+	border-top: 60px solid #E46F62;
+}
+#postsangle {
+	border-top: 60px solid #76A7F5;
+	top: 300px;
+}
+#activitesangle {
+	border-top: 60px solid #4DBFDB;
+	top: 680px;
+}
+.floatright {
+	float: right;
+}
+
+.userpost {
+	display: none;
+	width: 100%;
+	height: 100%;
+	padding:10px;
+}
+#createpost {
+	background-color: #76A7F5;
+	color: white;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 5px;
+	padding: 10px;
+}
+#postscontent{
+	padding:5px;
+	margin:70px 5px 20px 70px;
+}
+a {
+	text-decoration: none;
+}
 nav {
 	position: fixed;
 	bottom: 0;

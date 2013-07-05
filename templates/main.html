@@ -19,7 +19,7 @@ $def with (page)
 		<link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon1.ico">
 		<script src="/static/javascripts/jquery-1.9.0.min.js" type="text/javascript"></script>
 		<script src="/static/javascripts/simplemodal.js" type="text/javascript"></script>
-		<script src="/static/javascripts/tinymce/tinymce.min.js" type="text/javascript"></script>
+		<script src="/static/javascripts/editor.js"></script>		
 		<script src="/static/javascripts/jquery.ui.core.js" type="text/javascript"></script>
 		<script src="/static/javascripts/jquery.ui.widget.js" type="text/javascript"></script>
 		<script src="/static/javascripts/jquery.ui.tabs.js" type="text/javascript"></script>
@@ -35,7 +35,7 @@ $def with (page)
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="login" width='60' height='37' title="Login" style="display: none;"/>
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="logout" width='60' height='37' title="Logout" style="display: block;"/>
 						<div id="userdetailsbox">						
-							 <a href="#"><span>$session.username</span></a>							
+							 <a href="/profile/$session.userId"><span>$session.username</span></a>							
 						</div>					
 					$else:
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="login" width='60' height='37' title="Login" style="display: block;"/>
@@ -81,7 +81,7 @@ $def with (page)
 										<br />
 										<label> Email</label>
 										<br />
-										<input type="text" name="username" required="required"/>
+										<input type="text" name="email" required="required"/>
 										<br />
 										<br />
 										<label> Password</label>
@@ -91,7 +91,7 @@ $def with (page)
 										<br />
 									</div>
 									<br />
-									<input type="submit" name="signin" value="Signup"/>
+									<input type="submit" name="signup" value="Signup"/>
 								</form>
 						</div>
 						

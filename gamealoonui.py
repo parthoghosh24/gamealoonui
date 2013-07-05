@@ -1,5 +1,6 @@
 import web
 import urllib2
+import urllib
 import json
 
 
@@ -12,21 +13,18 @@ urls = (
         '/signup/','Signup',
         '/search/','SearchHome',
         '/searchSite/','Search',
+        '/post/create','CreateOrUpdatePost',        
         '/platform/(.*)','Platform',
         '/article/(.*)/','Article',
-        '/article/(.*)/(.*)','SingleArticle',
-        '/user/','User',        
+        '/article/(.*)/(.*)','SingleArticle',        
+        '/user/','User',
+        '/profile/(.*)','UserProfile',        
         '/(.*)','SingleUser'                
         )
 
 app = web.application(urls, globals())
 store=web.session.DiskStore('sessions')
-if web.config.get('_session') is None:
-    session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False})
-    web.config._session = session
-else:
-    session = web.config._session
-
+session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False})
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
 render = web.template.render('templates/', base='main', globals={'session':session})
 
@@ -66,7 +64,18 @@ class SingleArticle:
         response = urllib2.urlopen(url)
         article=json.load(response)
         return render.singlearticle(article)
-    
+
+class UserProfile:
+    def GET(self,userid):        
+        if session.userId == userid:
+            url="http://localhost:9000/user/"+userid+"/1"
+            response = urllib2.urlopen(url)
+            user=json.load(response)
+            return render.userprofile(user)
+        else:
+            return web.redirect("/") 
+        
+        
 class User: 
     def GET(self):
         url="http://localhost:9000/users"
@@ -76,11 +85,20 @@ class User:
     
 class SingleUser:
     def GET(self,username):
-        url="http://localhost:9000/user/"+username
+        url="http://localhost:9000/user/"+username+"/2"
         response = urllib2.urlopen(url)
         user=json.load(response)
         return render.singleuser(user)
-    
+
+class CreateOrUpdatePost:
+    def POST(self):
+        articleFormData = web.input()
+        print "Article Title: ", articleFormData.title    
+        print "Article SubTitle: ", articleFormData.subtitle
+        print "Article Body: ", articleFormData.editor
+        web.redirect("/profile/"+session.userId)
+        
+        
 class Login:
     def POST(self):
         sFormData = web.input()        
@@ -91,29 +109,34 @@ class Login:
         if user['available']:            
             session.username=user['username']
             session.userId=user['userid']
-            session.loggedIn=True
+            session.loggedIn=True  
                                         
         print "returning json dump"  
         print "Session username in login---->", session.username
         print "Session loggedIn in login---->", session.loggedIn
-        print "Session userId in login---->", session.userId     
+        print "Session userid in login---->", session.userId     
+        print"JSON", json.dumps(user)
         return json.dumps(user)    
         
 class Logout:
     def GET(self):
         session.username="Guest"
         session.userId="Guest"
-        session.loggedIn=False               
+        session.loggedIn=False   
+        session.kill()             
         return "done"
     
 class Signup:
     
     def POST(self):
         sFormData=web.input()
-        url="http://localhost:9000/register"
-        data={"username":sFormData.username, "password":sFormData.password, "email":sFormData.email}
-        response = urllib2.urlopen(url, data)
+        url="http://localhost:9000/user/register"
+        values={"username":sFormData.username, "password":sFormData.password, "email":sFormData.email}
+        data=urllib.urlencode(values)
+        request = urllib2.Request(url,data)
+        response = urllib2.urlopen(request)
         registrationStatus = json.load(response)
+        print "Registration status:-> ", registrationStatus
         return json.dumps(registrationStatus)                       
        
 class Search:

@@ -1,0 +1,246 @@
+$def with (user)
+$var title: My Gloon Profile
+
+
+<div id="profile_container">
+	<div id= "user_card">
+		<div id="user_profile_picture">
+			<img src="/static/images/avatar.jpg" width="200" height="200" alt="avatar" />
+		</div>		
+	    <div id="username" style="font-size: 20px; color:#005FB3;">
+	    	<a href="/$user['userUserName']" target="_blank"><strong>$user['userUserName']</strong></a>
+	    </div>
+	    <br/>
+	    <br/>
+	   	<div id="userdetailbox">
+	   		<div id="userdetailsemiheader">
+	   			<strong>Details</strong>
+	   		</div>	   		
+	   		<div id="userdetailangle"> </div>
+			<div id= "userdetail" class="shadow">
+				<div id="fullName" style="margin-top: 50px">
+					<div class="labeltext">
+						<strong>Name</strong>
+					</div>
+					<div id="firstName" class="userdetailstext" contenteditable="true">
+						$user['userFirstName']
+					</div>					
+					<div id="lastName" class="userdetailstext marginleft" contenteditable="true">
+						$user['userLastName']
+					</div>
+				</div>
+				<br/>
+				<div id="email" style="margin-top: 10px">
+					<div class="labeltext ">
+						<strong>Email</strong>
+					</div>
+					<div id="useremail" class="userdetailstext">
+						$user['userEmail']
+					</div>
+				</div>
+				<br/>
+				<div id="dateOfBirth" style="margin-top: 10px;">
+					<div class="labeltext">
+						<strong>Date of Birth</strong>
+					</div>
+					<input type="date" name="birthday" value="$user['userMonth']/$user['userDay']/$user['userYear']" id="birthday" style="margin-left: 10px;"/>
+					<!--
+					<div id="day" style="float: left;" contenteditable="true">
+					$user['userDay']/
+					</div>
+					<div id="month" style="float: left; margin-left: 2px;" contenteditable="true">
+					$user['userMonth']/
+					</div>
+					<div id="year" style="float: left; margin-left: 2px;" contenteditable="true">
+					$user['userYear']
+					</div>-->
+
+				</div>
+				<br/>
+				<div id="passwordbutton" style="margin-left: 10px;">
+					<button name="changepassword" id="changepassword" value="Change Password">
+						Change Password
+					</button>
+				</div>
+
+			</div>
+		</div>
+	   
+	  <br/>
+	  <div class="achievementsandfollowebyandfollowingbox shadow" id="achievementsbg">
+	  	<div id="achievementsemiheader">
+	   			<strong>Achievements</strong>
+	   		</div>	   		
+	   		<div id="achievementangle"> </div>
+	   		<a href="#" class="count"><strong>$user['userAchievementCount']</strong></a>
+	  	<div class="allcontent">
+	  		$for achievement in user['userAchievements']:									
+		 		<img src="/static/images/avatar.jpg" height="30" width="30" class="itemList" title="$achievement['title']"/>
+	  	</div>
+	  						  					
+	  </div>
+	  <br/>
+	  <div class="achievementsandfollowebyandfollowingbox shadow" id="followersbg">
+	  	<div id="followedbysemiheader">
+	   			<strong>Followers</strong>
+	   		</div>	   		
+	   		<div id="followedbyangle"> </div>
+	   		<a href="#" class="count"><strong>$user['totalFollowers']</strong></a>
+	  	<div class="allcontent shadow">
+	  		$for follower in user['userFollowedBy']:
+	  			<a href="/$follower['username']" class="itemList" title="$follower['username']" target="_blank"><img src="/static/images/avatar.jpg" height="30" width="30" /> </a>
+	  	</div>
+	  									
+	  </div>	  
+	  <br/>
+	  
+	  <div class="achievementsandfollowebyandfollowingbox shadow" id="followingbg">
+	  	<div id="followingsemiheader">
+	   			<strong>Following</strong>
+	   		</div>	   		
+	   		<div id="followingangle"> </div>
+	   		<a href="#" class="count"><strong>$user['totalFollowing']</strong></a>
+	  	<div class="allcontent shadow">
+	  		$for follower in user['userFollowingOthers']:
+				<a href="/$follower['username']" class="itemList" title="$follower['username']" target="_blank"><img src="/static/images/avatar.jpg" height="30" width="30" /> </a>
+	  	</div>	  														
+	  </div>
+		
+		
+	</div>
+	<div id ="gamebiocontainer">
+		<div class="contentheader" id="gamebioheaderbg">
+			<strong>Game-Bio</strong>
+		</div>
+		<div class="semiangle" id="gamebioangle">
+			
+		</div>
+		<div id="gamebiobox" class="shadow">
+			$user['userGameBio']
+		</div>
+	</div>
+	
+	<div id="postscontatiner">
+		<div class="contentheader" id="postsheaderbg">
+			<strong>Posts</strong>
+		</div>
+		<div class="semiangle" id="postsangle">
+			
+		</div>
+		
+		<div id="posts" class="shadow">
+			<input type="button" class="floatright" name="createpost" id="createpost" value="+create">
+			<div id="postscontent">
+				$for post in user['userPosts']:
+					<div>
+						$post['title']
+					</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div id="activitescontainer">
+		<div class="contentheader" id="activitesheaderbg">
+			<strong>Activites</strong>
+		</div>
+		<div class="semiangle" id="activitesangle">
+			
+		</div>
+		<div id="activites" class="shadow">
+			<div>
+				Activity 1
+			</div>
+			<div>
+				Activity 2
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div class="userpost" style="background-color: #76A7F5; padding: 20px;">	
+	 <form method="post" id="createOrEditUserPost" action="/post/create">
+	 	<h1 style="color: #FFFFFF;">Article</h1>
+	 	<div id="postbuttons" style="float: right; display: inline; padding: 5px;">
+	 		<input type="button" name="publishpost" id="publishpost" onclick="onPublish()" value="Publish" />
+	 		<input type="button" name="previewpost" id="previewpost" onclick="onPreview()" value="Preview" />
+	 		<input type="button" name="savepost" id="savepost" onclick="onSave()" value="Save" />	 	
+	 	</div>
+	 	
+		<br />
+		<br />	
+	 	<div id="left" style="float: left;">
+	 		<label for="title" style="color: #FFFFFF;">Title</label>
+	 		<br />
+	 		<br />
+		 	<input type="text" id="title" name="title" style="width: 600px"/>
+		 	<br/>
+		 	<br />	 	
+		 	<label for="subtitle" style="color: #FFFFFF">Sub-Title</label>
+		 	<br />
+		 	<br />
+		 	<input type="text" id="subtitle" name="subtitle" style="width: 600px"/>
+		 	<br/>
+		 	<br/>
+		 	<label for="editor" style="color: #FFFFFF">Editor</label>
+		 	<br />		 	
+		 	<div id="editorbuttons" style="display: inline">
+		 		<input type="button" name="bold" id="bold" onclick="onBold()" value="B"/>
+		 		<input type="button" name="underline" id="underline" onclick="onUnderline()" value="U"/>
+		 		<input type="button" name="italic" id="italic" onclick="onItalic()" value="I"/>
+		 		<input type="button" name="ulist" id="ulist" onclick="onUlist()" value="UL"/>
+		 		<input type="button" name="olist" id="olist" onclick="onOlist()" value="OL"/>
+		 		<input type="button" name="link" id="link"  onclick="onLink()" value="Link"/>
+		 		<input type="button" name="unlink" id="unlink"  onclick="onUnlink()" value="UnLink"/>
+		 		<input type="button" name="indent" id="indent"  onclick="onIndent()" value="Indent"/>
+		 		<input type="button" name="outdent" id="outdent"  onclick="onOutdent()" value="Outdent"/>
+		 		<input type="button" name="center" id="centerj"  onclick="onCenter()" value="Center"/>
+		 		<input type="button" name="leftj" id="leftj"  onclick="onLeft()" value="Left"/>
+		 		<input type="button" name="rightj" id="rightj"  onclick="onRight()" value="Right"/>
+		 		<input type="button" name="justify" id="justify"  onclick="onJustify()" value="Justify"/>		 		
+		 		<input type="button" name="insertimage" id= "insertimage" onclick="onInsertImage()" value="Image" />
+		 		<input type="button" name="undo" id= "undo" onclick="onUndo()" value="Undo" />
+		 		<input type="button" name="redo" id= "redo" onclick="onRedo()" value="Redo" />
+		 	</div>
+		 	<br />
+		 	<textarea cols="100" rows="14" id="editor" name="editor" style="width: 600px; display: none;"> </textarea>
+		 	<iframe name="richeditor" id="richeditor" style="width: 600px; height: 300px; border: none;background-color: #FFFFFF"> </iframe>
+	 	</div>
+	 	<div id="right" style="float: right">
+	 		<label for="Category" style="color: #FFFFFF">
+	 			Category
+	 		</label>
+	 		<br/>
+	 		<br/>
+	 		<select id="category" >
+	 			<option selected value="choose"> Choose </option>
+	 			<option id="review" value="review">Review</option>
+	 			<option id="feature" value="feature">Feature</option>
+	 			<option id="news" value="news">News</option>
+	 			<option id="gloonicle" value="gloonicle">Gloonicle</option>
+	 			<option id="video" value="video">Video</option>
+	 		</select>
+	 		<br />
+	 		<br />
+	 		<label for="Category" style="color: #FFFFFF"> 
+	 			Platform
+	 		</label>
+	 		<br/>
+	 		<br/>
+	 		<select id="platform" multiple="multiple">
+	 			<option selected value="choose"> Choose </option>
+	 			<option id="ps3" value="ps3">Playstation 3</option>
+	 			<option id="ps4" value="ps4">Playstation 4</option>
+	 			<option id="pc" value="pc">PC</option>
+	 			<option id="vita" value="vita">PS Vita</option>
+	 			<option id="x360" value="x360">Xbox 360</option>
+	 			<option id="xone" value="xone">Xbox One</option>
+	 			<option id="ios" value="ios">IOS</option>
+	 			<option id="android" value="android">Android</option>
+	 			<option id="3ds" value="3ds">N3DS</option>
+	 			<option id="wiiu" value="wiiu">WII U</option>
+	 		</select>
+	 	</div>
+	 </form>
+</div>

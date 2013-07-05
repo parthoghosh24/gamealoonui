@@ -36,7 +36,13 @@ $(function() {
 				
 				$("#userdetailsbox span").text("Guest");
 				$("#logout").css("display","none");
-				$("#login").css("display","block");				
+				$("#login").css("display","block");	
+				var currentUrl =$(location).attr('href');
+				if(currentUrl.indexOf("profile")!=-1)
+				{
+					window.location.href='/';
+				}
+					
 						
 			
 		});	
@@ -44,39 +50,34 @@ $(function() {
 		});	
 	
 
-	$(".basic").click(function(e) {
-		$("#container").modal({
-
-			onOpen : function(dialog) {
-				dialog.overlay.fadeIn('slow', function() {
-					dialog.container.slideDown('slow', function() {
-						dialog.data.fadeIn('slow');
+	
+	$("#createpost").click(function(e) {
+			$(".userpost").modal({
+	
+				onOpen : function(dialog) {
+					dialog.overlay.fadeIn('slow', function() {
+						dialog.container.slideDown('slow', function() {
+							dialog.data.fadeIn('slow');
+						});
 					});
-				});
-			},
-			onShow : function() {
-				tinymce.init({
-					selector : "textarea#content",
-					theme : "modern",
-					width : 800,
-					height : 400,
-					plugins : ["advlist autolink link image lists charmap preview hr anchor pagebreak spellchecker", "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking emoticons", "save contextmenu directionality emoticons template paste textcolor"],
-					toolbar1 : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-					toolbar2 : "preview media | forecolor emoticons",
-					content_css : "css/content.css"
-				});
-			}
+				},
+				onShow: function()
+				{
+					iFrameOn();
+				}
+			});
+	
+			return false;
 		});
-
-		return false;
-	});
-
+	
+	
 	$('#loginForm').unbind('submit').submit(function(e) {
 		$.post('/login/', $("#loginForm").serialize(), function(data) {
 			if (data.available) {
 				$.modal.close();
 				$("#userdetailsbox span").text("" + data.username + "");
-				$("#userdetailsbox span").wrap('<a href="#"></a>');				
+				var url="/profile/"+data.userid
+				$("#userdetailsbox span").wrap('<a href='+url+'></a>');				
 				$("#login").css("display","none");
 				$("#logout").css("display","block");
 
@@ -88,20 +89,17 @@ $(function() {
 		return false;
 	});
 	
-	$('#signupForm').unbind('submit').submit(function(e) {
-			$.post('/signup/', $("#signupForm").serialize(), function(data) {
-				if (data.available) {
-					$.modal.close();
-					$("#userdetailsbox span").text("" + data.username + "");
-					$("#userdetailsbox span").wrap('<a href="#"></a>');
 	
-				} else {
-					$("#errormessage").css("display", "block");
-				}
-			}, 'json');
+	$('#signupForm').unbind('submit').submit(function(e) {				
+				$.post('/signup/', $("#signupForm").serialize(), function(data) {
+					if (data.Success) {
+						$.modal.close();								
+					}
+				}, 'json');
+		
+				return false;
+			});
 	
-			return false;
-		});
 	
 
 });
