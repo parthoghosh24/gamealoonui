@@ -3,8 +3,8 @@
  */
 
 function iFrameOn()
-{	
-	richeditor.document.designMode='On';
+{		
+	richeditor.document.designMode='On';	
 }
 
 function onBold()
@@ -95,7 +95,8 @@ function onRedo()
 }
 function onSave()
 {	
-	$('#editor').val($('#richeditor').html());
+	var content =window.frames['richeditor'].document.body.innerHTML;	
+	$('#editor').val(content);	
 	$('#createOrEditUserPost').submit();
 }
 function onPublish()
@@ -104,5 +105,5 @@ function onPublish()
 }
 function onPreview()
 {
-	
+	window.open()
 }

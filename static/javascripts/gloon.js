@@ -18,25 +18,28 @@ $(function() {
 		}
 	});
 
-	/*
-	 * Something is screwed up... will check later.
-	 */	 
 	$("#login").click(function(e) {
 	
-			$(".signuplogin").modal();
+			$(".signuplogin").modal({
+				containerCss:{
+					width:800,
+					height:600,
+				}
+			});
 			return false;
 		});
 	$("#logout").click(function(e) {
 		 
 		    $.get('/logout/', function(data) {	
-		    	var spanTag=$("#userdetailsbox span")
+		    	var spanTag=$("#userdetailsbox span")		    	
 		    	if(spanTag.parent().is("a")){
 		    		$("#userdetailsbox span").unwrap();
 		    	}			    								    
 				
-				$("#userdetailsbox span").text("Guest");
+				$("#userdetailsbox span").text("Guest");				
 				$("#logout").css("display","none");
 				$("#login").css("display","block");	
+				$("#userAvatar").css("display","none");
 				var currentUrl =$(location).attr('href');
 				if(currentUrl.indexOf("profile")!=-1)
 				{
@@ -64,6 +67,10 @@ $(function() {
 				onShow: function()
 				{
 					iFrameOn();
+				},
+				containerCss:{
+					width:1280,
+					height:800,
 				}
 			});
 	
@@ -77,9 +84,11 @@ $(function() {
 				$.modal.close();
 				$("#userdetailsbox span").text("" + data.username + "");
 				var url="/profile/"+data.userid
-				$("#userdetailsbox span").wrap('<a href='+url+'></a>');				
+				$("#userdetailsbox span").wrap('<a href='+url+' class="colorWhite"></a>');		
+						
 				$("#login").css("display","none");
 				$("#logout").css("display","block");
+				$("#userAvatar").css("display","inline");
 
 			} else {
 				$("#errormessage").css("display", "block");

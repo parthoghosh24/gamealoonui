@@ -3,7 +3,6 @@ import urllib2
 import urllib
 import json
 
-
 web.config.debug=False
 
 urls = (
@@ -15,8 +14,9 @@ urls = (
         '/searchSite/','Search',
         '/post/create','CreateOrUpdatePost',        
         '/platform/(.*)','Platform',
+        '/article/article-preview','ArticlePreview',
         '/article/(.*)/','Article',
-        '/article/(.*)/(.*)','SingleArticle',        
+        '/article/(.*)/(.*)','SingleArticle',           
         '/user/','User',
         '/profile/(.*)','UserProfile',        
         '/(.*)','SingleUser'                
@@ -63,6 +63,7 @@ class SingleArticle:
         url="http://localhost:9000/article/"+username+"/"+title
         response = urllib2.urlopen(url)
         article=json.load(response)
+        print "article json",article
         return render.singlearticle(article)
 
 class UserProfile:
@@ -93,12 +94,28 @@ class SingleUser:
 class CreateOrUpdatePost:
     def POST(self):
         articleFormData = web.input()
-        print "Article Title: ", articleFormData.title    
+        multipleData= web.input(platform=[])
+        checkBoxData=web.input(isGame=[])
+        print "Article Title: ", articleFormData.title        
         print "Article SubTitle: ", articleFormData.subtitle
         print "Article Body: ", articleFormData.editor
+        print "Article Category: ",articleFormData.category
+        print "Article UserName: ",session.username
+        print "Article Platform: ",multipleData.platform
+        print "Is Game Selected: ",checkBoxData.isGame        
+        url="http://localhost:9000/article/save"
+        values={"articleTitle":articleFormData.title, "articleSubTitle":articleFormData.subtitle, "articleBody":articleFormData.editor, "articleCategory":articleFormData.category
+                , "articleUsername":session.username, "articlePlatform":json.dumps(multipleData.platform),"articleFeaturedImage":"featured image path","articleGame":"", "articleState":"1"}
+        data=urllib.urlencode(values)
+        request = urllib2.Request(url,data)
+        response = urllib2.urlopen(request)
+        print response
         web.redirect("/profile/"+session.userId)
         
-        
+class ArticlePreview:
+    def GET(self):
+        test="test"
+        return render.postpreview(test)        
 class Login:
     def POST(self):
         sFormData = web.input()        

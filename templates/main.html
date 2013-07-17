@@ -10,7 +10,6 @@ $def with (page)
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="description" content="" />
 	<meta name="author" content="Partho" />
-	<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 
 	<head>
 		<title>$page.title</title>
@@ -35,13 +34,17 @@ $def with (page)
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="login" width='60' height='37' title="Login" style="display: none;"/>
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="logout" width='60' height='37' title="Logout" style="display: block;"/>
 						<div id="userdetailsbox">						
-							 <a href="/profile/$session.userId"><span>$session.username</span></a>							
+							 <a href="/profile/$session.userId" class="colorWhite">
+							 	<span>$session.username</span>
+							 	<img id="userAvatar" src="/static/images/avatar.jpg" width="15" height="15" alt="avatar" title="$session.username" style="display: inline"/>	
+							 	</a>							
 						</div>					
 					$else:
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="login" width='60' height='37' title="Login" style="display: block;"/>
 						<input type="image" value="" src="/static/images/button.png" class="signin" id="logout" width='60' height='37' title="Logout" style="display: none;"/>
 						<div id="userdetailsbox">						
-							 <span>$session.username</span>							
+							 <span>$session.username</span>
+							 <img id="userAvatar" src="/static/images/avatar.jpg" width="15" height="15" alt="avatar" title="$session.username" style="display: none"/>								 					
 						</div>
 						
 					<div class='signuplogin'>
@@ -96,6 +99,12 @@ $def with (page)
 						</div>
 						
 					</div>					
+				</div>
+				<div id="searchdiv" style="position: absolute;margin-left: 230px; margin-top: 30px;">
+					<form method="get" action="/searchSite/">
+						<input type="text" name="searchbox" id="searchbox" style="width: 300px;padding-left: 20px;color:#005FB3; border-bottom-left-radius: 15px;border-top-left-radius: 15px;" placeholder="Search"/>
+						<input type="submit" name="search" id="search" value="Go" style="padding: 0.5px 10px; border-bottom-right-radius: 15px; border-top-right-radius: 15px; margin-left: -5px; background: -webkit-linear-gradient(top,#005FB3 0,#151515 120%);color: white;"/>
+					</form>
 				</div>	
 				<div id="logo">
 				<a href="/"><img alt="logo" src="/static/images/logo2.png"/></a>
@@ -117,12 +126,7 @@ $def with (page)
 					<a class="clearfix" href="/platform/pc" title=""> <span class="icon"> ` </span>
 					<br />
 					<span> Platform </span> </a>
-				</li>
-				<li>
-					<a class="clearfix" href="/search/" title=""> <span class="icon"> z </span>
-					<br />
-					<span> Search </span> </a>
-				</li>
+				</li>				
 				<li>
 					<a class="clearfix" href="#" title=""> <span class="icon"> N </span>
 					<br />

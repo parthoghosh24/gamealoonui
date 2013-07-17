@@ -25,8 +25,8 @@ ul {
 
 /* Container */
 #simplemodal-container {
-	height: 70%;
-	width: 60%;
+	height: 800px;
+	width: 1280px;
 	background-color: #FFFFFF;
 	border: 4px solid #444;
 	padding: 12px;
@@ -145,15 +145,21 @@ header {
 #subheader {
 	height: 80px;
 	border-bottom: 5px solid #005FB3;
-	background: -webkit-linear-gradient(top,#404040 0,#151515 100%);
-	background: -moz-linear-gradient(top,#404040 0,#151515 100%);
-	background: -o-linear-gradient(top,#404040 0,#151515 100%);
-	background: -ms-linear-gradient(top,#404040 0,#151515 100%);
-	background: linear-gradient(top,#404040 0,#151515 100%);
+	background: -webkit-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: -moz-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: -o-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: -ms-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: linear-gradient(top,#005FB3 0,#151515 120%);
 }
 body {
 	display: block;
-	background-color: #F4F4F4;
+	background: -webkit-linear-gradient(top,#000000 0,#FFFFFF 80%);
+	background: -moz-linear-gradient(top,#000000 0,#FFFFFF 80%);
+	background: -o-linear-gradient(top,#000000 0,#FFFFFF 80%);
+	background: -ms-linear-gradient(top,#000000 0,#FFFFFF 80%);
+	background: linear-gradient(top,#000000 0,#FFFFFF 80%);
+	/*background-image: url(/static/images/bg.png);*/
+	/*background-repeat:repeat-x;*/
 	color: #000000;
 	line-height: 150%;
 	font-family: 'Open Sans', Helvetica, Arial, san;
@@ -190,13 +196,21 @@ body {
 	margin-top: 50px;
 	margin-left: 10px;
 	float: left;
+	color:#FFFFFF;	
 }
-#userdetailsbox span {
-	color: #999;
+
+.colorWhite{
+	color: #FFF;
+}
+
+fieldset{
+	padding:0 5px 0 5px;
+}
+#userdetailsbox span {	
 	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
-	text-shadow: 0px 3px 8px #2a2a2a;
+	text-shadow: 0px 3px 8px #FFF;
 }
 #errormessage {
 	display: none;
@@ -244,6 +258,7 @@ form {
 }
 #container_layout {
 	width: 960px;
+	min-height:2500px;
 	margin: 0 auto;
 	padding-top: 20px;
 	padding-left: 25px;
@@ -735,7 +750,7 @@ img {
 }
 
 .bottommargin {
-	margin-bottom: 5px;
+	margin-bottom: 40px;
 }
 
 .bannerad {
@@ -769,6 +784,7 @@ img {
 	margin: 0 auto;
 	padding: 10px;
 	word-wrap: break-word;
+	background: -webkit-linear-gradient(top,#000000 0,#FAFAFA 200%);
 }
 #labeldiv {
 	position: absolute;
@@ -839,126 +855,34 @@ img {
 #fullName {
 	/*display: inline;*/
 }
-
-#userdetailsemiheader {
-	position: absolute;
-	color: #005FB3;
-	background-color: #FFFFFF;
-	width: 80px;
-	height: 40px;
-	top: 292px;
-	left: 20px;
+#username{
+	font-size: 20px;
+	border-style: solid;
+	border-color: white;
+	margin-top: 5px;
+	width: 200px;
 	text-align: center;
-	padding-left: 15px;
-	line-height: 190%;
-	font-size: 19px;
-}
-#userdetailangle {
-	position: absolute;
-	height: 0;
-	width: 0;
-	left: 100px;
-	border-top: 40px solid #FFFFFF;
-	border-right: 25px solid transparent;
 }
 
-#achievementsemiheader {
-	position: absolute;
-	color: #6F85CF;
-	background-color: #FFFFFF;
-	width: 150px;
-	height: 40px;
-	top: 0px;
-	left: -18px;
-	text-align: center;
-	padding-left: 15px;
-	line-height: 190%;
-	font-size: 18px;
-}
-
-#achievementangle {
-	position: absolute;
-	height: 0;
-	width: 0;
-	left: 132px;
-	top: 0px;
-	border-top: 40px solid #FFFFFF;
-	border-right: 25px solid transparent;
-}
-
-#followedbysemiheader {
-	position: absolute;
-	color: #bc5679;
-	background-color: #FFFFFF;
-	width: 120px;
-	height: 40px;
-	top: 0px;
-	left: 0px;
-	text-align: center;
-	padding-left: 15px;
-	line-height: 190%;
-	font-size: 19px;
-}
-#followedbyangle {
-	position: absolute;
-	height: 0;
-	width: 0;
-	left: 120px;
-	top: 0px;
-	border-top: 40px solid #FFFFFF;
-	border-right: 25px solid transparent;
-}
-
-#followingsemiheader {
-	position: absolute;
-	color: #f9b256;
-	background-color: #FFFFFF;
-	width: 120px;
-	height: 40px;
-	top: 0px;
-	left: 0px;
-	text-align: center;
-	padding-left: 15px;
-	line-height: 190%;
-	font-size: 19px;
-}
-#followingangle {
-	position: absolute;
-	height: 0;
-	width: 0;
-	left: 120px;
-	top: 0px;
-	border-top: 40px solid #FFFFFF;
-	border-right: 25px solid transparent;
-}
 
 .shadow {
 	box-shadow: 10px 10px 11px #888888;
 	-webkit-box-shadow: 10px 10px 11px #888888;
 	-moz-box-shadow: 10px 10px 11px #888888;
 }
-
+#userProfilePictureHolder{
+	background-color: #FF4500;
+	padding: 10px 10px 10px 15px;
+}
 #userdetailheader {
 	background-color: #005FB3;
 	height: 40px;
 }
 
 #userdetail {
-	padding: 25px;
-	background-color: #005FB3;
+	padding: 25px;	
 }
 
-#achievementsbg {
-	background-color: #6F85CF;
-}
-
-#followersbg {
-	background-color: #BC5680;
-}
-
-#followingbg {
-	background-color: #F9B250;
-}
 .count {
 	float: right;
 	color: #FFFFFF;
@@ -966,12 +890,15 @@ img {
 }
 
 .achievementsandfollowebyandfollowingbox {
-	position: relative;
-	padding: 10px;
+	position: relative;	
 	height: 150px;
 }
 .allcontent {
 	margin-top: 50px;
+}
+.paddingUserCard
+{
+	padding: 0 10px 5px 10px;
 }
 .itemList {
 	float: left;
@@ -1029,8 +956,12 @@ img {
 	height: 100%;
 	padding:10px;
 }
+.overflowHidden {
+	overflow: hidden;
+}
 #createpost {
 	background-color: #76A7F5;
+	border-color:#76A7F5;
 	color: white;
 	text-transform: uppercase;
 	font-size: 12px;
@@ -1050,7 +981,11 @@ nav {
 	bottom: 0;
 	height: 152px;
 	width: 820px;
-	background: #2f2f2f repeat 0 0;
+	background: -webkit-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: -moz-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: -o-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: -ms-linear-gradient(top,#005FB3 0,#151515 120%);
+	background: linear-gradient(top,#005FB3 0,#151515 120%);
 	margin-bottom: -100px;
 	margin-left: 28%;
 	-webkit-transition: margin-left .2s ease-out;
@@ -1073,8 +1008,7 @@ nav:hover {
 }
 
 nav ul li {
-	display: inline;
-	float: left;
+	display: inline;	
 }
 
 nav ul li a {
