@@ -60,26 +60,29 @@ $(function() {
 		});	
 	
 	$('#loginForm').unbind('submit').submit(function(e) {
-		$.post('/login/', $("#loginForm").serialize(), function(data) {			
-			if (data.status=="success") {
-				$.modal.close();
-				$("#userdetailsbox span").text("" + data.username + "");
-				var url="/profile/"+data.userid
-				$("#userdetailsbox span").wrap('<a href='+url+' class="colorWhite"></a>');		
-						
-				$("#login").css("display","none");
-				$("#logout").css("display","block");
-				$("#userAvatarImage").attr("src",data.userAvatar);
-				location.reload();
-
-			} else {
-				$("#errorMessage").css("display", "block");
-				$("#errorMessage").hide();
-				$("#errorMessage").fadeIn("slow");
-				
-			}
-		}, 'json');
-
+		var loginBotCatcher = $('#loginBotCatcher').val();
+		if(loginBotCatcher.length==0)
+		{
+				$.post('/login/', $("#loginForm").serialize(), function(data) {			
+				if (data.status=="success") {
+					$.modal.close();
+					$("#userdetailsbox span").text("" + data.username + "");
+					var url="/profile/"+data.userid
+					$("#userdetailsbox span").wrap('<a href='+url+' class="colorWhite"></a>');		
+							
+					$("#login").css("display","none");
+					$("#logout").css("display","block");
+					$("#userAvatarImage").attr("src",data.userAvatar);
+					location.reload();
+	
+				} else {
+					$("#errorMessage").css("display", "block");
+					$("#errorMessage").hide();
+					$("#errorMessage").fadeIn("slow");
+					
+				}
+			}, 'json');
+		}		
 		return false;
 	});
 	
@@ -167,8 +170,10 @@ $(function() {
 		       		       	
 	}
 	$('#signupForm').unbind('submit').submit(function(e) {	
-		       	
-		       		$.post('/signup/', $("#signupForm").serialize(), function(data) {					
+		       	   var registerBotCatcher =$('#registerBotCatcher').val();
+		       	   if(registerBotCatcher.length == 0)
+		       	   {
+		       	   		$.post('/signup/', $("#signupForm").serialize(), function(data) {					
 						if (data.status=='success') 
 						{
 							$('#signUpStatusMessage').addClass('success');
@@ -183,6 +188,8 @@ $(function() {
 						$('#signUpStatusMessage').hide();
 						$('#signUpStatusMessage').fadeIn("slow");
 					}, 'json');
+		       	   }
+		       		
 		
 				return false;
 			});
