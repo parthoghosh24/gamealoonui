@@ -2,259 +2,692 @@ $def with (user)
 $var title: My Gloon Profile
 
 
-<div id="profile_container">
-	<div id= "user_card">
-		<div id="userProfilePictureHolder">
-			<div id="user_profile_picture">
-				<img src="/static/images/avatar.jpg" width="200" height="200" alt="avatar" />
-			</div>		
-	    	<div id="username" style="font-size: 20px; color:#005FB3;">
-	    		<a href="/$user['userUserName']" target="_blank"><strong>$user['userUserName']</strong></a>
-	    	</div>
-		</div>
-		
-	    <br/>
-	    <br/>
-	   	<div id="userdetailbox">
-	   		<fieldset>
-	   			<legend class="colorWhite">
-	   				Details
-	   			</legend>
-	   			<div id= "userdetail">
-					<div id="fullName">
-						<div class="labeltext">
-							<strong>Name</strong>
-						</div>
-						<div id="firstName" class="userdetailstext" contenteditable="true">
-							$user['userFirstName']
-						</div>					
-						<div id="lastName" class="userdetailstext marginleft" contenteditable="true">
-							$user['userLastName']
-						</div>
-					</div>
-					<br/>
-					<div id="email" style="margin-top: 10px">
-						<div class="labeltext ">
-							<strong>Email</strong>
-						</div>
-						<div id="useremail" class="userdetailstext">
-							$user['userEmail']
-						</div>
-					</div>
-					<br/>
-					<div id="dateOfBirth" style="margin-top: 10px;">
-						<div class="labeltext">
-							<strong>Date of Birth</strong>
-						</div>
-						<input type="date" name="birthday" value="$user['userMonth']/$user['userDay']/$user['userYear']" id="birthday" style="margin-left: 10px;"/>
-						<!--
-						<div id="day" style="float: left;" contenteditable="true">
-						$user['userDay']/
-						</div>
-						<div id="month" style="float: left; margin-left: 2px;" contenteditable="true">
-						$user['userMonth']/
-						</div>
-						<div id="year" style="float: left; margin-left: 2px;" contenteditable="true">
-						$user['userYear']
-						</div>-->
-	
-					</div>
-					<br/>
-					<div id="passwordbutton" style="margin-left: 10px;">
-						<button name="changepassword" id="changepassword" value="Change Password">
-							Change Password
-						</button>
-					</div>
-	
+<div id="profile_container">	
+	<div id="userDetailsContainer" class="textureBg grayBoxShadow overflowHidden">
+  		<div id="userDetails" class="floatLeft overflowHidden">
+  			<div id="userAvatar" class="floatLeft height320">
+  				<a id="userAvatarImageUpload" href="javascript:;">
+  					<img id="userAvatarPic" class="grayBoxShadow" src="$user['userAvatar']" height="200">  					
+  				</a>
+  				<div id="userAvatarUploadBox" class="hiddenDiv textureBg">
+  					<form id="userAvatarUpload" method="post" enctype="multipart/form-data">
+  						<img id='selectedUserAvatar' class="grayBoxShadow" src="$user['userAvatar']" height="200">
+  						<br>
+  						<span id="userAvatarErrorMessage" class="font14 fontWeightBold textShadowBlack error"> </span>
+  						<br>
+  						<br>
+  						<input type="file" name="userAvatarFile" id="userAvatarFile" value="Upload Avatar" class="colorWhite"/>
+  						<span class="colorLightGray font12 fontWeightBold textShadowBlack">(Image upto 100 kb of preferably 200x200 dim)</span>
+  						<input type="button" id="upload" name="upload" class="imageAndVideoButtons applyBevan colorWhite" value="Upload Avatar" />
+  					</form>
+  				</div>
+  				<br>
+  				<br>
+  				<button id="passwordButton">
+  					<img src="/static/images/refresh.png" height="15"/>
+  					<span>Password</span>
+  				</button>
+  				<div id='changePasswordModal'>
+		                           <form class="colorWhite textCenter" id='resetPassword' action='' method='post'>
+		                           
+		                           <input type='password' name='current' id='current' placeholder="Current Password"/>
+		                           	<br>	                           
+		                           <input type='password' name='newPass' id='newPass' placeholder="New Password" class="marginTop10"/>
+									<br>	
+		                           <input type='password' name='confirm' id='confirm' placeholder=" Confirm Password" class="marginTop10"/>
+		                           
+		                           <p class="marginTop10"><input class="colorWhite resetPasswordButton" type='button' name='updatePass' id='updatePass' value='RESET'/></p>
+		                           </form>
+		  		</div>
+  			</div>
+  			<div id="userInformation" class="floatLeft height320">
+  				<div id="userNameDetails" class="applyBevan">
+  					<span id="userFirstName" class="userNameFont userProfileNameFont cursorPointer">$user['userFirstName']</span>
+  					<span id="userLastName" class="userNameFont userProfileNameFont cursorPointer">$user['userLastName']</span>
+  					<span id="aka" class="colorWhite applyBevan">aka</span>
+  					<span id="userName">
+  						<a href="/$user['userUserName']" target="_blank">$user['userUserName']</a>  						
+  					</span>
 				</div>
-	   			
-	   		</fieldset>	   			   		   		
-			
-		</div>
-	   
-	  <br/>
-	  <div class="achievementsandfollowebyandfollowingbox">
-	  	<fieldset>
-	  		<legend class="colorWhite"> 
-	  			Achievements
-	  		</legend>
-	  		<div id="achievementsContent" class="overflowHidden paddingUserCard">	  			
-	  			
-	  			$for achievement in user['userAchievements']:									
-		 			<img src="/static/images/avatar.jpg" height="30" width="30" class="itemList" title="$achievement['title']"/>	
-	  			
-	  		</div>
-	  	</fieldset>	  		   			  						  					
-	  </div>	  
-	  <br/>
-	  
-	  <div class="achievementsandfollowebyandfollowingbox">
-	  	<fieldset>
-	  		<legend class="colorWhite">
-	  			Followers
-	  		</legend>
-	  		<div id="followersContent" class="overflowHidden paddingUserCard">	  			
-	  		
-	  			$for follower in user['userFollowedBy']:
-	  				<a href="/$follower['username']" class="itemList" title="$follower['username']" target="_blank"><img src="/static/images/avatar.jpg" height="30" width="30" /> </a>
-	  		
-	  		</div>
-	  	</fieldset>	  		   			  								
-	  </div>	  
-	  <br/>
-	  
-	  <div class="achievementsandfollowebyandfollowingbox">
-	  	<fieldset>
-	  		<legend class="colorWhite">
-	  			Following
-	  		</legend>
-	  		<div id="followingContent" class="overflowHidden paddingUserCard">	  				  			
-	  			$for follower in user['userFollowingOthers']:
-					<a href="/$follower['username']" class="itemList" title="$follower['username']" target="_blank"><img src="/static/images/avatar.jpg" height="30" width="30" /> </a>	  			
-	  		</div>
-	  	</fieldset>	  	
-	   			  														
-	  </div>
-		
-		
-	</div>
-	<div id ="gamebiocontainer" class="overflowHidden">
-		<div class="contentheader" id="gamebioheaderbg">
-			<strong>Game-Bio</strong>
-		</div>
-		<div class="semiangle" id="gamebioangle">
-			
-		</div>
-		<div id="gamebiobox">
-			$user['userGameBio']
-		</div>
-	</div>
-	
-	<div id="postscontatiner" class="overflowHidden">
-		<div class="contentheader" id="postsheaderbg">
-			<strong>Posts</strong>
-		</div>
-		<div class="semiangle" id="postsangle">
-			
-		</div>
-		
-		<div id="posts">
-			<input type="button" class="floatright" name="createpost" id="createpost" value="+create">
-			<div id="postscontent">
-				$for post in user['userPosts']:
-					<div>
-						$post['title']
+  				<div id="userContact">
+  					<div id="contactDetails">
+  							<span id="email">
+  								<span id="emailLabel" class="colorGray textShadowBlack icon-mail-1 fontWeightBold">
+  									Email
+  								</span>
+  								<span id="emailId" class="userContactsFont">$user['userEmail']</span>
+  							</span>
+  							<span class="leftGap">
+  								
+  							</span>
+  							<span id="birthday">
+  								<span id="birthdayLabel" class="colorGray textShadowBlack icon-gift fontWeightBold">Born on</span>  								
+  								<span id="birthdayData" class="cursorPointer userContactsFont">$user['userMonth']/$user['userDay']/$user['userYear']</span>
+  								<span>
+  									$if user['userBirthdayVisibility'] == 2:
+  										<button id="visibility" class="public visibilityFont" title="Click to Make your birthday PRIVATE">PUBLIC</button>
+  									$else:
+  										<button id="visibility" class="private visibilityFont" title="Click to Make your birthday PUBLIC">PRIVATE</button>
+  								</span>
+  							</span>
+  
 					</div>
+  					<div id="place">
+  						<span id="placeLabel" class="colorGray textShadowBlack icon-location fontWeightBold">Country</span>
+  						<span id="placeData" class="cursorPointer userContactsFont">$user['userCountry']</span>
+					</div>  
+			</div> 
+ 				<div id="gameBio">
+  					<div id="gameBioHeader" class="colorGray textShadowBlack icon-rocket fontWeightBold">
+  						<span>Game-Bio</span>
+  					</div>
+  					<div id="gameBioContent" class="cursorPointer applyChunkFive">
+  						<span>"</span>
+  						<span id="userGameBio">$user['userGameBio']</span>
+  						<span>"</span>
+					</div>
+				</div>
 			</div>
-			
 		</div>
-	</div>
+		<div id="userInterests" class="floatLeft userProfileUserInterestsPadding userProfileUserInterestsWidth">
+  			<p id="interestHeading" class="colorGray textShadowBlack icon-joystick fontWeightBold">
+    			Gaming-Interests
+    		</p>
+    		<div id="platformInterests">
+  				<button id="platformsButton" class="userInterestButtons colorWhite">
+  					+ Platforms
+  				</button>
+  				<div id="platformList" class="overflowHidden userInterestLists blackBoxShadow">  					
+  					<h4>Choose Favorite(Max 5)</h4>
+  					<form id="platformListForm" name="plaformListForm">
+  						<div class="checkBoxFont divTable userInterestListBorderBottom">
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="ps3" class="platform" value="ps3" />Playstation 3</div>
+  								<div class="divCell"><input type="checkbox" id="x360" class="platform" value="xbox360" />Xbox 360</div>
+  								<div class="divCell"><input type="checkbox" id="ps4" class="platform" value="ps4" />Playstation 4</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="xone" class="platform" value="xboxOne" />Xbox One</div>
+  								<div class="divCell"><input type="checkbox" id="wiiu" class="platform" value="wiiu" />WII-U</div>
+  								<div class="divCell"><input type="checkbox" id="pc" class="platform" value="pc" />PC</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="vita" class="platform" value="vita" />PS VITA</div>
+  								<div class="divCell"><input type="checkbox" id="n3ds" class="platform" value="n3ds" />N3DS</div>
+  								<div class="divCell"><input type="checkbox" id="ios" class="platform" value="ios" />IOS</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="android" class="platform" value="android" />Android</div>  								
+  							</div>
+  							<div class="divRow divTableFooterHeight">  													
+  							</div>
+  						</div>	
+  						<div class="marginTop10">
+  							<button id="platformSet">Save &amp; Close</button>  							
+  						</div>
+  					</form>
+  				</div>
+  			<div id="platforms" class="padding20">
+  					$if len(user['userInterestedPlatforms']) == 0:
+  					
+	    				<span id="noPlatforms" class="noCarouselData">
+	    					No Platforms
+	    				</span>
+	    			
+    				<div id="allPlatformSet">
+    					$if len(user['userInterestedPlatforms']) > 0:	
+    						$for platform in user['userInterestedPlatforms']:
+    							<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" title="$platform['title']" target="_blank"><span  class="$platform['shortTitle'] marginLeft10 blackBoxShadow interestUserProfileFontSize">$platform['title']</span></a>	
+    				</div>
+  			</div>
+			</div>
+			<div id="genreInterests">
+  				<button id="genresButton" class="userInterestButtons colorWhite">
+  					+ Genres
+  				</button>
+  				<div id="genreList" class="overflowHidden userInterestLists blackBoxShadow">  					
+  					<h4>Choose Favorite(Max 5)</h4>
+  					<form id="genreListForm" name="plaformListForm">
+  						
+  						<div class="checkBoxFont divTable userInterestListBorderBottom">
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="Action" class="genre" value="Action"/>Action</div>
+  								<div class="divCell"><input type="checkbox" id="Adventure" class="genre" value="Adventure" />Adventure</div>
+  								<div class="divCell"><input type="checkbox" id="Rpg" class="genre" value="Rpg" />RPG</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="Fps" class="genre" value="Fps" />First Person Shooter</div>
+  								<div class="divCell"><input type="checkbox" id="SurvivalHorror" class="genre" value="SurvivalHorror" />Survival Horror</div>
+  								<div class="divCell"><input type="checkbox" id="Sports" class="genre" value="Sports" />Sports</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="Strategy" class="genre" value="Strategy" />Strategy</div>
+  								<div class="divCell"><input type="checkbox" id="Casual" class="genre" value="Casual" />Casual</div>
+  								<div class="divCell"><input type="checkbox" id="Puzzle" class="genre" value="Puzzle" />Puzzle</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input type="checkbox" id="Racing" class="genre" value="Racing" />Racing</div>
+  								<div class="divCell"><input type="checkbox" id="Simulation" class="genre" value="Simulation" />Simulation</div>  								
+  							</div>
+  							<div class="divRow divTableFooterHeight">  													
+  							</div>
+  						</div>	
+  						<div class="marginTop10">
+  							<button id="genreSet">Save &amp; Close</button>  							
+  						</div>			
+  						
+  					</form>
+  				</div>
+  			<div id="genres" class="padding20">
+  					$if len(user['userInterestedGenres']) == 0:
+	  					<span id="noGenres" class="noCarouselData">
+	  						No Genres
+	  					</span>	  				
+	  				<div id="allGenreSet">
+	  					$if len(user['userInterestedGenres']) > 0:
+	  						$for genre in user['userInterestedGenres']:
+	  							<span id="$genre['genreShortValue']" class="genreStyle marginLeft10 blackBoxShadow interestUserProfileFontSize">$genre['genreValue']</span>
+	  				</div>
+  			</div>
+  			</div>
+  		</div>
+  		
+  		<div id="userStats"  class="floatLeft userProfileStatsPadding userProfileStatsWidth">
+  			<p class="colorGray textShadowBlack icon-chart-pie fontWeightBold">
+  				User Stats
+  			</p>
+  			<input type="hidden" id="totalUsers" name="totalUsers" value="$user['userTotalCount']"/>
+  			<input type="hidden" id="userFollowers" name="userFollowers" value="$user['userFollowersCount']"/>
+  			<input type="hidden" id="userFollowing" name="userFollowing" value="$user['userFollowingCount']"/>
+  			<input type="hidden" id="totalAwards" name="totalAwards" value="$user['userTotalAchievements']"/>
+  			<input type="hidden" id="userAwards" name="userAwards" value="$user['userAchievementCount']"/>
+  			<input type="hidden" id="totalPublishedPosts" name="totalPublishedPosts" value="$user['userTotalPublishedArticles']"/>
+  			<input type="hidden" id="userPublishedPosts" name="userPublishedPosts" value="$user['userTotalArticlesPublishedByUser']"/>
+  			<input type="hidden" id="userTotalCoolScore" name="userTotalCoolScore" value="$user['userTotalCoolScore']"/>
+  			<input type="hidden" id="userNetworkTotalCoolScore" name="userNetworkTotalCoolScore" value="$user['userNetworkTotalCoolScore']"/>
+  			
+  			<div id="statsContent">
+  				<div id="mainStats1" class="overflowHidden">  					
+  						<div id="followerscontent" class="floatLeft">
+  							<div id="followerdonutholder" class="donutHolder donutHolderSize100">
+  								 <div id="followerdonut" class="donut">
+  								 	
+  								 </div>
+    							 <span id="followerdonutData" class="textShadowBlack donutData donutDataSmallSize">
+    							 	
+    							 </span>  
+  								
+  							</div>
+  							<span id="followerslabel" class="statsLabel colorWhite textShadowBlack">Followers</span>
+  							
+  						</div>  					
+  						<div id="followingscontent" class="floatLeft marginLeft50">
+  							<div id="followingdonutholder" class="donutHolder donutHolderSize100">
+  								 <div id="followingdonut" class="donut">
+  								 	
+  								 </div>
+    							 <span id="followingdonutData" class="textShadowBlack donutData donutDataSmallSize">
+    							 	
+    							 </span>  
+  								
+  							</div>
+  							<span id="followinglabel" class="statsLabel colorWhite textShadowBlack">Following</span>
+  							
+  						</div>
+  						
+  					
+  						<div id="publishedcontent" class="floatLeft marginLeft50">
+  							<div id="publisheddonutholder" class="donutHolder donutHolderSize100">
+  								 <div id="publisherdonut" class="donut">
+  								 	
+  								 </div>
+    							 <span id="publishdonutData" class="textShadowBlack donutData donutDataSmallSize">
+    							 	
+    							 </span>  
+  								
+  							</div>
+  							<span id="publishlabel" class="statsLabel colorWhite textShadowBlack">Published Articles</span>
+  							
+  						</div>  						  					
+  				</div>
+  				<div id="mainStats2" class="overflowHidden marginTop20"> 
+  					
+  					<div id="awardscontent" class="floatLeft marginLeft50">
+  							<div id="awardsdonutholder" class="donutHolder donutHolderSize100">
+  								 <div id="awardsdonut" class="donut">
+  								 	
+  								 </div>
+    							 <span id="awardsdonutData" class="textShadowBlack donutData donutDataSmallSize">
+    							 	
+    							 </span>  
+  								
+  							</div>
+  							<span id="awardslabel" class="statsLabel colorWhite textShadowBlack">Awards</span>
+  							
+  						</div>
+  						
+  					
+  						<div id="coolcontent" class="floatLeft marginLeft50">
+  							<div id="cooldonutholder" class="donutHolder donutHolderSize100">
+  								 <div id="cooldonut" class="donut">
+  								 	
+  								 </div>
+    							 <span id="cooldonutData" class="textShadowBlack donutData donutDataSmallSize">
+    							 	
+    							 </span>  
+  								
+  							</div>
+  							<span id="coollabel" class="statsLabel colorWhite textShadowBlack">Total Yeah Score Achieved</span>
+  							
+  						</div> 
+  					
+  				</div>
+  				<div id="moreButton" class="marginTop20">
+  					<span class="floatRight"><button class="colorWhite">MORE...</button></span>
+  				</div>
+  
+  			</div>
+		</div>
 	
-	<div id="activitescontainer" class="overflowHidden">
-		<div class="contentheader" id="activitesheaderbg">
-			<strong>Activites</strong>
-		</div>
-		<div class="semiangle" id="activitesangle">
-			
-		</div>
-		<div id="activites">
-			<div>
-				Activity 1
-			</div>
-			<div>
-				Activity 2
-			</div>
-		</div>
 	</div>
-	
-</div>
 
-<div class="userpost" style="background-color: #76A7F5; padding: 20px;">	
-	 <form method="post" id="createOrEditUserPost" action="/post/create" style="overflow: hidden;">
-	 	<h1 style="color: #FFFFFF;">Article</h1>
+    <div id="userActivityContent">    	
+    	<div id="tabs-min" class="tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+    		<ul id="allUserActivityTabs">
+    			<li>
+					<a href="#tabPosts">Posts</a>
+				</li>
+				<li>
+					<a href="#tabActivites">Activities</a>
+				</li>
+				<li>
+					<a href="#tabFollowers">Followers</a>
+				</li>
+				<li>
+					<a href="#tabFollowing">Following</a>
+				</li>
+				<li>
+					<a href="#tabGames">Games</a>
+				</li>
+				<li>
+					<a href="#tabAwards">Awards</a>
+				</li>
+				<li>
+					<a href="#tabStats">Stats</a>
+				</li>
+				<li class="hiddenDiv">
+					<a href="#tabConversation">Conversation</a>
+				</li>
+				<li>
+					<a href="#tabRecommendations">Recommendations</a>
+				</li>
+    		</ul>
+    		<div id="tabPosts">    		    			
+				<input type="button" class="floatRight" name="createPost" id="createPost" value="+create">
+				<div id="postsContent">
+					$if len(user['userPosts'])==0:
+							<div class="noData applyBevan">No Data</div>
+					$else:			
+							<table>
+								<thead>
+									<th scope="col" class="postTh"><span>Post</span></th>
+									<th scope="col" class="postTh"><span>Insert Time</span></th>
+									<th scope="col" class="postTh"><span>Update Time</span></th>
+									<th scope="col" class="postTh"><span>Publish Time</span></th>						
+								</thead>
+								<tbody id="postsBody">							
+									$for post in user['userPosts']:
+										<tr class="postTr">							
+											<td class="postTd">$post['articleStrippedTitle']</td>
+											<td class="postTd">$post['insertTimeFormatted']</td>
+											<td class="postTd">$post['updateTimeFormatted']</td>
+										$if post['articleState']==2:
+											<td class="postTd">$post['publishTimeFormatted']</td>
+										$else:
+											<td class="postTd">In Draft</td>	
+										<td class="postTd"><a href="javascript:;" class="editPost buttonIcons floatRight icon-edit font23" id="$post['articleId']" title="Edit"></a></td>
+										$if post['articleState']==2:
+											<td class="postTd"><a class="buttonIcons floatRight icon-eye-2 font23" href="/article/$user['userUserName']/$post['articleEncodedUrlTitle']" target="_blank" title="View"></a></td>																	
+										</tr>
+								</tbody>
+							</table>					
+				</div>							
+		</div>
+    		
+    		<div id="tabActivites">    			      			
+				  	<div id="activityContent">
+				  		$if len(user['userActivities'])==0:
+				  			<div class="noData applyBevan">No Activites</div>
+				  		$else:	
+							$for activity in user['userActivities']:
+								<div class="activityRow userProfileActivityRowWidth">
+								$if activity['activityType'] == 1:
+									$if activity['activityUserName'] == activity['activityOwnerUserName']:
+										<a href="/$activity['activityUserName']" target="_blank">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
+									$else:	
+										<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
+								$if activity['activityType'] == 2:
+									$if activity['activityUserName'] == activity['activityOwnerUserName']:
+										<a href="/$activity['activityUserName']" target="_blank">You</a>$activity['message']<a href="/$activity['followingUserName']" target="_blank"><strong>$activity['followingUserName']</strong></a> 
+									$elif activity['activityOwnerUserName'] == activity['followingUserName']:
+										<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/$activity['followingUserName']" target="_blank"><strong>You</strong></a>
+									$else:
+										<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/$activity['followingUserName']" target="_blank"><strong>$activity['followingUserName']</strong></a>							
+											
+								$if activity['activityType'] == 7:
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<strong>$activity['achievementTitle']</strong>
+								$if activity['activityType'] == 3:
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>	
+								$if activity['activityType'] == 8:
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/$activity['notFollowingUserName']" target="_blank"><strong>$activity['notFollowingUserName']</strong></a>
+								$if activity['activityType'] == 11:
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>
+								$if activity['activityType'] == 12:
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['notFollowingGame']</strong></a>
+								$if activity['activityType'] == 14:
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>			 	
+								</div>
+					</div>							
+    		</div>
+    		<div id="tabFollowers" class="overflowHidden tabWidth">    			
+    			<br>
+    			$if len(user['userFollowedBy']) == 0:
+    				<span id="noFollowers" class="noData applyBevan">No Followers</span>
+    			$else:
+    			    $for follower in user['userFollowedBy']:
+		    			  <div id="$follower['buddyUsername']" class="floatLeft overflowHidden tabGrid">		    			 	    
+		    			    	<a href ="/$follower['buddyUsername']"><img src="$follower['buddyUserAvatar']" alt="$follower['buddyUsername']" title="$follower['buddyUsername']" width="100" height="100"/></a>
+		    			 </div> 	
+    		</div>
+    		<div id="tabFollowing" class="overflowHidden tabWidth">    			
+    			<br>
+    			$if len(user['userFollowingOthers']) == 0:
+    				<span id="noFollowing" class="noData applyBevan">No Following</span>
+    			$else:
+    			    $for following in user['userFollowingOthers']:
+		    			<div id="$following['buddyUsername']" class="floatLeft overflowHidden tabGrid" >		    			 		
+		    			    	<a href ="/$following['buddyUsername']"><img src="$following['buddyUserAvatar']" alt="$following['buddyUsername']" title="$following['buddyUsername']" width="100" height="100"/></a>
+		    			 </div> 			    		
+    		</div>
+    		<div id='tabGames'>
+				$if len(user['userInterestedGames']) == 0:
+    				<div class="noData applyBevan">No Games</div>
+    			$else:
+    			    $for game in user['userInterestedGames']:
+		    			 <div id="$game['interestedGameId']" class="floatLeft overflowHidden tabGrid" >		    			 		
+		    			    	<a href ="/game/$game['interestedGameURL']"><img src="$game['interestedGameBoxShot']" alt="$game['interestedGameTitle']" title="$game['interestedGameTitle']" height="125"/></a>
+		    			 </div>  
+			</div>
+    		<div id="tabAwards">    			
+    			<br>
+    			$if len(user['userAchievements']) == 0:
+    				<span id="noAwards" class="noData applyBevan">No Awards</span>
+    			$else:
+    				$for award in user['userAchievements']:
+    					<div id="$award['imagePath']"  class="floatLeft overflowHidden tabGrid">
+		    			    	<img src="http://192.168.0.103:9000/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
+		    			 </div>	
+    		</div>
+    		<div id="tabStats">
+
+    		</div>
+    		<div id="tabConversation">
+    			
+    			<div id="conversationBox">
+    				<div id="conversationButtons" class="overflowHidden">
+    					<div id="allButtons" class="floatRight displayInline">
+    						<button id="commentButton">Comments</button>
+    						$if session.username == "-1":
+    							<button id="discussionButton" style="display: none;">Discussions</button>    							
+    						<button id="chatButton">Talks</button>
+    					</div>
+    				</div>
+    				<div id="comments" class="conversationDiv" style="display: block;">
+    					<h2>All Comments</h2>
+    				</div>
+    				$if session.username == "-1":
+		    				<div id="discussions" class="conversationDiv" style="display: none">
+		    					<div id="discussionsHeader" style="overflow: hidden">
+		    					<h2 class="floatLeft">All Discussions</h2>
+		    					<button class="floatRight">+New Discussion</button>	
+		    					</div>
+		    					
+		    				</div>
+    				<div id="talks" class="conversationDiv" style="display: none;">
+    					<h2>All Talks</h2>
+    				</div>
+    			</div>
+    		</div>
+    		<div id="tabRecommendations">    		
+    			<div class="fontSize30 colorGray applyBevan marginTop20">No Recommendations for you right now</div>	    			
+    		</div>
+    		
+    	</div>
+    </div> 
+ </div>
+	
+
+<div class="userPost textureBg">	
+	 <form method="post" id="createOrEditUserPost" action="/post/save" class="overflowHidden">
+	 	<h1 class="colorWhite textShadowBlack">Article</h1>
 	 	<input type="hidden" name="articleId" id="articleId" value=""/>
-	 	<div id="postbuttons" style="float: right; display: inline; padding: 5px;">
-	 		<input type="button" name="publishpost" id="publishpost" onclick="onPublish()" value="Publish" />
-	 		<input type="button" name="previewpost" id="previewpost" onclick="onPreview()" value="Preview" />
-	 		<input type="button" name="savepost" id="savepost" onclick="onSave()" value="Save" />	 	
-	 	</div>
-	 	
-		<br />
-		<br />	
-	 	<div id="left" style="float: left;">
-	 		<label for="title" style="color: #FFFFFF;">Title</label>
-	 		<br />
-	 		<br />
-		 	<input type="text" id="title" name="title" style="width: 600px" maxlength=""/>
-		 	<br/>
-		 	<br />	 	
-		 	<label for="subtitle" style="color: #FFFFFF">Sub-Title</label>
-		 	<br />
-		 	<br />
-		 	<input type="text" id="subtitle" name="subtitle" style="width: 600px"/>
-		 	<br/>
-		 	<br/>
-		 	<label for="editor" style="color: #FFFFFF">Editor</label>
-		 	<br />		 	
-		 	<div id="editorbuttons" style="display: inline">
-		 		<input type="button" name="bold" id="bold" onclick="onBold()" value="B"/>
-		 		<input type="button" name="underline" id="underline" onclick="onUnderline()" value="U"/>
-		 		<input type="button" name="italic" id="italic" onclick="onItalic()" value="I"/>
-		 		<input type="button" name="ulist" id="ulist" onclick="onUlist()" value="UL"/>
-		 		<input type="button" name="olist" id="olist" onclick="onOlist()" value="OL"/>
-		 		<input type="button" name="link" id="link"  onclick="onLink()" value="Link"/>
-		 		<input type="button" name="unlink" id="unlink"  onclick="onUnlink()" value="UnLink"/>
-		 		<input type="button" name="indent" id="indent"  onclick="onIndent()" value="Indent"/>
-		 		<input type="button" name="outdent" id="outdent"  onclick="onOutdent()" value="Outdent"/>
-		 		<input type="button" name="center" id="centerj"  onclick="onCenter()" value="Center"/>
-		 		<input type="button" name="leftj" id="leftj"  onclick="onLeft()" value="Left"/>
-		 		<input type="button" name="rightj" id="rightj"  onclick="onRight()" value="Right"/>
-		 		<input type="button" name="justify" id="justify"  onclick="onJustify()" value="Justify"/>		 		
-		 		<input type="button" name="insertimage" id= "insertimage" onclick="onInsertImage()" value="Image" />
-		 		<input type="button" name="undo" id= "undo" onclick="onUndo()" value="Undo" />
-		 		<input type="button" name="redo" id= "redo" onclick="onRedo()" value="Redo" />
-		 	</div>
-		 	<br />
-		 	<textarea cols="100" rows="14" id="editor" name="editor" style="width: 600px; display: none;"> </textarea>
-		 	<iframe name="richeditor" id="richeditor" style="width: 600px; height: 300px; border: none;background-color: #FFFFFF"> </iframe>
-	 	</div>
-	 	<div id="right" style="float: right">
-	 		<label for="Category" style="color: #FFFFFF">
-	 			Category
-	 		</label>
-	 		<br/>
-	 		<br/>
-	 		<select name="category" id="category" >
-	 			<option selected value="choose"> Choose </option>
-	 			<option id="review" value="review">Review</option>
-	 			<option id="feature" value="feature">Feature</option>
-	 			<option id="news" value="news">News</option>
-	 			<option id="gloonicle" value="gloonicle">Gloonicle</option>
-	 			<option id="video" value="video">Video</option>
-	 		</select>
-	 		<br />
-	 		<br />
-	 		<label for="Category" style="color: #FFFFFF"> 
-	 			Platform
-	 		</label>
-	 		<br/>
-	 		<br/>
-	 		<select  name="platform" id="platform" multiple="multiple">
-	 			<option selected value="choose"> Choose </option>
-	 			<option id="ps3" value="ps3">Playstation 3</option>
-	 			<option id="ps4" value="ps4">Playstation 4</option>
-	 			<option id="pc" value="pc">PC</option>
-	 			<option id="vita" value="vita">PS Vita</option>
-	 			<option id="x360" value="x360">Xbox 360</option>
-	 			<option id="xone" value="xone">Xbox One</option>
-	 			<option id="ios" value="ios">IOS</option>
-	 			<option id="android" value="android">Android</option>
-	 			<option id="3ds" value="3ds">N3DS</option>
-	 			<option id="wiiu" value="wiiu">WII U</option>
-	 		</select>
-	 		<br />
-	 		<br />
-	 		<input type="checkbox" id="isGame" name="isGame" value="on"/> <span style="color: #FFFFFF">Game</span>	 		
-	 		
+	 	<input type="hidden" name="articleState" id="articleState" value="1"/>	 		 		 	
+	 	<div id="postButtons" class="floatRight">
+	 		<input class="editorButtons floatRight colorWhite marginLeft10 fontWeightBold textShadowBlack" type="button" name="closeEditor" id="closeEditor" onclick="onClose()" value="Close" />
+	 		<input class="editorButtons floatRight colorWhite marginLeft10 fontWeightBold textShadowBlack" type="button" name="previewpost" id="previewpost" onclick="onPreview()" value="Preview" />
+	 		<input class="editorButtons floatRight colorWhite marginLeft10 fontWeightBold textShadowBlack" type="button" name="publishpost" id="publishpost" onclick="onPublish()" value="Publish" />	 		
+	 		<input class="editorButtons floatRight colorWhite fontWeightBold textShadowBlack" type="button" name="savepost" id="savepost" onclick="onSave()" value="Save" />	 			 	
+	 	</div>	 	
+	 	<div id="articleFormContent" class="overflowHidden">	 	 	
+	 		<div id="articleFields" class="floatLeft">
+		 		<input type="text" id="title" name="title" maxlength="60" placeholder="Title (Max characters 60)"/>
+			 	<br/>
+			 	<br />	 			 	
+			 	<input type="text" id="subTitle" name="subTitle" maxlength="70" placeholder="Sub Title (Max Characters 70)"/>
+			 	<br/>
+			 	<br/>
+			 	<label for="editor" class="colorWhite">Editor</label>
+			 	<br />		 	
+			 	<div id="editorButtons" class="displayInline">
+			 		<a href="javascript:;" id="bold" onclick="onBold()"><span class="icon-bold colorBlack" title="Bold"></span></a>
+				    <a href="javascript:;" id="underline" onclick="onUnderline()"><span class="icon-underline colorBlack" title="Underline"></span></a>
+				    <a href="javascript:;" id="italic" onclick="onItalic()"><span class="icon-italic colorBlack" title="Italic"></span></a>  
+				    <a href="javascript:;" id="ulist" onclick="onUlist()"><span class="icon-list-bullet colorBlack" title="Unorderd List"></span></a>
+				    <a href="javascript:;" id="olist" onclick="onOlist()"><span class="icon-list-numbered colorBlack" title="Ordered List"></span></a>
+				    <a href="javascript:;" id="link" onclick="onLink()"><span class="icon-link colorBlack" title="Insert Link"></span></a>
+				    <a href="javascript:;" id="unlink" onclick="onUnlink()"><span class="icon-unlink colorBlack" title="Remove Link"></span></a>
+				    <a href="javascript:;" id="outdent" onclick="onOutdent()"><span class="icon-indent-left colorBlack" title="Left Indent"></span></a>
+				    <a href="javascript:;" id="indent" onclick="onIndent()"><span class="icon-indent-right colorBlack" title="Right Indent"></span></a>			     
+				    <a href="javascript:;" id="leftj" onclick="onLeft()"><span class="icon-align-left colorBlack" title="Left"></span></a>
+				    <a href="javascript:;" id="centerj" onclick="onCenter()"><span class="icon-align-center colorBlack" title="Center"></span></a>
+				    <a href="javascript:;" id="rightj" onclick="onRight()"><span class="icon-align-right colorBlack" title="Right"></span></a>
+				    <a href="javascript:;" id="justify" onclick="onJustify()"><span class="icon-align-justify colorBlack" title="Justify"></span></a>
+				    <a href="javascript:;" id="insertimage" onclick="onInsertImage()"><span class="icon-picture-3 colorBlack" title="Insert Image"></span></a>
+				    <a href="javascript:;" id="embedYoutbeVideo" onclick="onEmbedYoutubeVideo()"><span class="icon-youtube-squared colorBlack" title="Embed Youtube Video"></span></a>
+				    <a href="javascript:;" id="undo" onclick="onUndo()"><span class="icon-reply colorBlack" title="Undo"></span></a>
+				    <a href="javascript:;" id="redo" onclick="onRedo()"><span class="icon-forward colorBlack" title="Redo"></span></a>
+				    
+					 
+			 	</div>
+			 	<br />
+			 	<textarea cols="100" rows="14" id="editor" name="editor"></textarea>
+			 	<iframe name="richEditor" id="richEditor"> </iframe>
+		   </div>
+		   <div id="articleFormOtherControls" class="floatLeft marginLeft20">
+		   	   <div id="articleCategory" class="floatLeft">
+			   	   	<label for="Category" class="colorGray textShadowBlack fontWeightBold icon-th-list">
+		 			Category
+		 			</label>
+		 			<br/>
+		 			<br/>
+		 			<div class="divTable">
+		 				<div class="divRow">
+		 					<div class="divCell">
+		 						<input type="radio" id="review" name="category" value="review"><span class="textCapitalization icon-thumbs-up-1 review fontWeightBold font11 colorWhite">review</span>
+		 					</div>
+		 					<div class="divCell">
+		 						<input type="radio" id="feature" name="category" value="feature"><span class="textCapitalization icon-star feature fontWeightBold font11 colorWhite">feature</span>
+		 					</div>
+		 					<div class="divCell">
+		 						<input type="radio" id="gloonicle" name="category" value="gloonicle"><span class="textCapitalization icon-user gloonicle fontWeightBold font11 colorWhite">gloonicle</span>
+		 					</div>
+		 				</div>
+		 				<div class="divRow">
+		 					<div class="divCell">
+		 						<input type="radio" id="news" name="category" value="news"><span class="textCapitalization icon-signal-2 news fontWeightBold font11 colorWhite">news</span>
+		 					</div>
+		 					<div class="divCell">
+		 						<input type="radio" id="video" name="category" value="video"><span class="textCapitalization icon-play-3 video fontWeightBold font11 colorWhite">video</span>
+		 					</div>
+		 				</div>
+		 			</div>		 			
+		   	   </div>
+		   	   <div id="articleGame" class="floatLeft marginTop20 ui-widget">
+		   	   			<input type="checkbox" id="isGame" name="isGame" value="on"/> <span class="colorGray textShadowBlack fontWeightBold">Game</span>
+		   	   			<br>
+		   	   			<input type="text"  id="gameSearchBox" name="gameSearchBox" placeholder="Search Game" disabled/>		   	   
+		   	   			<div id="selectedGame" class="overflowHidden marginTop10">
+		   	   				<div id="gameBoxShot" class="floatLeft">
+		   	   					<img src="" height="90"/>
+		   	   				</div>
+		   	   				<div id="gameTitle" class="font16 colorWhite">
+		   	   					
+		   	   				</div>
+		   	   				<div id="gameGenre"  class="font12 colorGray">
+		   	   					
+		   	   				</div>
+		   	   				<div id="gamePlatforms"  class="font10 colorWhite fontWeightBold">
+		   	   					
+		   	   				</div>
+		   	   				<input type="hidden" id="gameId" name="gameId" value="empty"/>
+		   	   			</div>			
+		   	   	</div>
+		   	   <div id="articlePlatform" class="floatLeft marginTop20 colorWhite">
+		   	   			<label for="Platform" class="colorGray textShadowBlack fontWeightBold icon-gamepad"> 
+	 						Platform
+	 					</label>
+	 					<br/>
+	 					<br/>
+	 					<div class="checkBoxFont divTable">
+  							<div class="divRow">
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="ps3" class="eplatform" value="ps3" />PS3</div>
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="x360" class="eplatform" value="xbox360" />Xbox 360</div>
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="ps4" class="eplatform" value="ps4" />PS4</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="xone" class="eplatform" value="xboxOne" />Xbox One</div>
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="wiiu" class="eplatform" value="wiiu" />WII-U</div>
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="pc" class="eplatform" value="pc" />PC</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="vita" class="eplatform" value="vita" />PS VITA</div>
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="n3ds" class="eplatform" value="n3ds" />N3DS</div>
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="ios" class="eplatform" value="ios" />IOS</div>
+  							</div>
+  							<div class="divRow">
+  								<div class="divCell"><input name="eplatform" type="checkbox" id="android" class="platform" value="android" />Android</div>  								
+  							</div>  							
+  						</div>					 		
+		   	   </div>
+		   	   <div id="articleFeaturedImage" class="floatLeft marginTop20">
+			   		<label for="FeaturedImage" class="colorGray textShadowBlack fontWeightBold icon-picture">
+			   			Featured Image
+			   		</label>
+			   		<br>
+			   		<br>
+			   		<a href="javascript:;" id="ariticleFeaturedImageSelector"><img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="320" height="240"></a>		   		
+		   		</div>
+		   	   <div id="articleReviewScorer" class="floatLeft marginTop20">
+			   		<label for="Review Scorer" class="colorGray textShadowBlack fontWeightBold icon-thumbs-up-2">
+			   			Review Scorer
+			   		</label>
+			   		<br>
+			   		<br>
+			   		<input class="knob" data-width="200" data-angleOffset=1 data-angleArc=360 data-linecap=round data-min="0" data-displayPrevious=true data-max="100" data-step="1" value="0" data-fgColor="#00B9F4" data-thickness=".2">
+		   		</div>
+		   		
+		   	  
+		   </div>			   
+	 	</div>	 		 	
 	 </form>
+	 <div id="imageUploader" class="imageUploaderBox">
+		   			<div class="imageUploaderOverlay"> </div>
+			   			<div class="imageUploaderContainer">
+			   				<div class="imageUploaderSidePane floatLeft">
+			   					<div class="sidePaneItem">
+			   						<a id="uploadImageSelector" href="javascript:;"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold">Upload</span></a>
+			   					</div>
+			   					<div class="sidePaneItem">
+			   						<a id="imageBrowserSelector" href="javascript:;"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold">Browse</span></a>
+			   					</div>
+			   					<div id="closeButton">
+			   					 	<button id="closeWindow" class="colorWhite fontWeightBold">CLOSE</button>
+			   					</div>
+			   				</div>		
+			   				<div id="uploadFormBox" class="padding20 uploadBrowserBox floatLeft">
+			   					<div id="imagePreview">			   						
+			   						<div id="imagePreviewHolder" class="overflowHidden">
+			   							<img id="preview"/>
+			   							<span id="noImage" class="applyBevan">No Image</span>
+			   						</div>			
+			   						<span id="imageErrorMessage" class="font14 fontWeightBold textShadowBlack error"> </span>   						
+			   					</div>
+			   					<div id="imageUploadForm">
+			   						<form method="post" enctype="multipart/form-data">
+			   							<input type="file" id="previewFile" name="previewFile" class="colorWhite"/>
+			   							<span class="colorLightGray font12 fontWeightBold textShadowBlack">(4:3 Image of size less than 1 mb)</span>
+			   							<input type="button" id="uploadImage" class="colorWhite applyBevan" name="uploadImage" value="UPLOAD">
+			   						</form>
+			   					</div>
+			   				</div>
+			   				<div id="imageBrowser" class="padding20 uploadBrowserBox floatLeft">
+			   					<input type="hidden" id="photoLastUpdated" name="photoLastUpdated" value="0">
+			   					<input type="hidden" id="hasPhotos" name="hasPhotos" value="0">
+			   				</div>	   							   				
+			   			</div>		   			
+	   </div>
+	   <div id="imageSelectorForEditor" class="imageUploaderBox">
+					 	<div class="imageUploaderOverlay"> </div>		
+					 	<div id="editorImageSelector">
+					 		<div id="imageSection">
+					 			<div id="imageHolder">
+					 				<img src="" width="400" height="300" class="cursorPointer"/>
+					 				<span id="imageCaption" class="font14" contenteditable="true"><i>Click to set caption</i></span>
+					 			</div>
+					 		</div>
+					 		<div id="buttonSection">
+					 			<button id="editorImageSet" class="applyBevan imageAndVideoButtons colorWhite" onclick="onSetImage()">SET</button>
+					 			<button id="editorImageClose" class="applyBevan imageAndVideoButtons colorWhite" onclick="editorImageClose()">CANCEL</button>
+					 		</div>	
+					 	</div>			 	
+					 </div>
+	<div id="videoSelectorForEditor" class="imageUploaderBox">
+					 	<div class="imageUploaderOverlay"> </div>		
+					 	<div id="editorVideoSelector">
+					 		<div id="urlInput">
+					 			<input type="text" id="videoUrl" name="videoUrl" placeholder="Insert Youtube Video URL" />
+					 		</div>
+					 		
+					 		<div id="videoButtonSection">
+					 			<button id="videoSet" class="applyBevan imageAndVideoButtons colorWhite" onclick="onSetVideo()">SET</button>
+					 			<button id="vdieoClose" class="applyBevan imageAndVideoButtons colorWhite" onclick="editorVideoClose()">CANCEL</button>
+					 		</div>		
+					 	</div>			 	
+					 </div>
+	<form id="previewForm" action="/article/article-preview" target="_blank" method="post">
+		<input type='hidden' id='ptitle' name='ptitle' value="">
+		<input type='hidden' id='psubTitle' name='psubTitle' value="">
+		<input type='hidden' id='pbody' name='pbody' value="">
+		<input type='hidden' id='pfeaturedImageUrl' name='pfeaturedImageUrl' value="">
+		<input type='hidden' id='pcategory' name='pcategory' value="">
+		<input type='hidden' id='puserName' name='puserName' value="">
+		<input type='hidden' id='puserGameBio' name='puserGameBio' value="">
+		<input type='hidden' id='pGame' name='pGame' value="">
+		<input type='hidden' id='pGameScore' name='pGameScore' value="">
+		<input type='hidden' id='pGameBoxShot' name='pGameBoxShot' value="">
+	</form>
+					 
 </div>
+<script src="/static/javascripts/user_profile.js" type="text/javascript"></script>
+<script src="/static/javascripts/editor.js"></script>
+<script src="/static/javascripts/jquery.knob.js"></script>

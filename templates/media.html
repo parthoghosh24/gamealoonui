@@ -1,0 +1,42 @@
+$def with (videos)
+$var title: All video games media at Gamealoon!
+
+	<div id='video'>
+				$if len(videos)==0:
+						<div class="noData applyBevan">No Data</div>
+				$else:	
+						<div class="noData applyBevan hiddenDiv">No Data</div>
+				<div class="videoList">					
+						$for video in videos:
+							<div class="recentArticleDiv" id="$video['articleTimestamp']">
+								<div class='articleContentHeader'>																	
+									<span class="textCapitalization icon-play-3 video marginRight10 fontWeightBold font11 colorWhite">video</span>										
+									<a href="/article/$video['articleAuthor']/$video['articleEncodedUrlTitle']"><span class="applyMontserratBold font13 colorBlack">$video['articleTitle']</span></a>
+									<a href="/$video['articleAuthor']"><span class="floatRight icon-user-2 colorWhite articleUsernameBox">$video['articleAuthor']</span></a>
+								</div>
+								<div class='articleContentPreview' style="background-image: url($video['articleFeaturedImage']);background-size: 570px;">
+									<div class="articleContentPreviewData">
+										<p>
+											<span class="applyJura colorWhite font12">1 minute ago - </span>
+											<span class="colorWhite applyFranklinGothicRegular font13">$video['articleSubTitle']</span>
+											<a href="/article/$video['articleAuthor']/$video['articleEncodedUrlTitle']"><i class="icon-ellipsis colorWhite moreLink"></i></a>
+											
+										</p>
+									</div>
+								</div>
+								<div class='articleContentFooter'>
+									<span class="icon-gamepad floatLeft fontWeightBold">
+										$for platform in video['articlePlatforms']:
+											<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" target="_blank"><span class="$platform['shortTitle'] interestUserProfileFontSize" >$platform['title']</span></a>														
+									</span>
+									<span class="floatRight fontWeightBold font10">
+										<span><i class="font13 icon-users"></i>$video['articleCommentCount']</span>
+										<span><i class="font13 icon-smile"></i>$video['articleCoolScore']</span>
+										<span><i class="font13 icon-frown"></i>$video['articleNotCoolScore']</span>
+									</span>
+								</div>
+								
+							</div>
+				</div>
+							
+	</div>

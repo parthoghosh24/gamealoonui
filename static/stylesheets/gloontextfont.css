@@ -1,0 +1,113 @@
+@font-face{
+	font-family: 'chunkfive';
+	src: url('../font/chunkfive.otf');
+}
+
+@font-face{
+	font-family: 'stalemate';
+	src: url('../font/Stalemate-Regular.ttf');
+}
+
+@font-face{
+	font-family: 'amaranth';
+	src: url('../font/Amaranth-Regular.ttf');
+}
+
+@font-face{
+	font-family: 'robotoslab';
+	src: url('../font/RobotoSlab-Regular.ttf');
+}
+
+@font-face{
+	font-family: 'jura';
+	src: url('../font/Jura-Regular.ttf');
+}
+
+@font-face{
+	font-family: 'bevan';
+	src: url('../font/Bevan.ttf');
+}
+
+@font-face{
+	font-family: 'leaguegothic';
+	src: url('../font/LeagueGothic-Regular.otf');
+}
+
+@font-face{
+	font-family: 'franklinGothic';
+	src: url('../font/franklin_gothic_extra_c.ttf');
+}
+@font-face{
+	font-family: 'franklinGothicRegular';
+	src: url('../font/franklin_gothic_regular.ttf');
+}
+@font-face{
+	font-family: 'montserratBold';
+	src: url('../font/Montserrat-Bold.ttf');
+}
+@font-face{
+	font-family: 'helveticaNeue';
+	src: url('../font/HelveticaNeue.ttf');
+}
+@font-face{
+	font-family: 'fjordoneRegular';
+	src: url('../font/FjordOne-Regular.ttf');
+}
+@font-face{
+	font-family:'ostrichSansBlack';
+	src:url('../font/OstrichSans-Black.otf');
+}
+.applyOstrichSansBlack
+{
+	font-family:'ostrichSansBlack';
+}
+.applyFjordOneRegular
+{
+	font-family: 'fjordoneRegular';
+}
+.applyHelveticaNeue
+{
+	font-family: 'helveticaNeue';
+}
+.applyMontserratBold
+{
+	font-family: 'montserratBold';
+}
+.applyAmaranth
+{
+	font-family: 'amaranth';
+}
+.applyBevan
+{
+	font-family: 'bevan';
+}
+
+.applyChunkFive
+{
+	font-family: 'chunkfive';
+}
+
+.applyRobotSlab
+{
+	font-family:'robotslab'
+}
+
+.applyJura
+{
+	font-family:'jura';
+}
+
+.applyLeagueGothic
+{
+	font-family:'leaguegothic';
+}
+
+.applyFranklinGothic
+{
+	font-family: 'franklinGothic';
+}
+
+.applyFranklinGothicRegular
+{
+	font-family: 'franklinGothicRegular';
+}

@@ -1,222 +1,261 @@
 $def with (jsonData)
 $ carouselData = jsonData['carouselArticles']
-$ top10Articles=jsonData['top10Articles']
+$ recentNArticles=jsonData['recentNArticles']
 $ platformValue = jsonData['platform']
-$var title:Welcome to gamealoon Beta
-   $if platformValue != 'all':
-		<div id="platformFilter" style="float: right">
-			$var title:Gamealoon Platforms- All PC, PS3, PS4, Xbox one, 3DS, PS-Vita, IOS, Android, Xbox 360 source
-			<select class="platformSelector" onchange="if(this.value) window.location.href='/platform/'+this.value">
-				<option selected value="choose">Choose</option>
-				<option value="pc"> PC </option>
-				<option value="ps3"> Playstation 3 </option>
-				<option value="ps4"> Playstation 4 </option>
-				<option value="xbox360"> Xbox 360 </option>
-				<option value="wiiu"> WII-U </option>
-				<option value="3ds"> 3DS </option>
-				<option value="vita"> PS Vita </option>
-				<option value="ios"> IOS </option>
-				<option value="android"> Android </option>
-			</select>
-		</div>
+$ platformMessageMap ={"ps3":"Latest Playstation 3 Articles","all":"Latest All Articles","ps4":"Latest Playstation 4 Articles","xbox360":"Latest Xbox 360 Articles","xboxOne":"Latest Xbox One Articles", "pc":"Latest PC Articles", "n3ds":"Latest Nintendo 3DS Articles", "vita":"Latest Playstation Vita Articles","wiiu":"Latest Nintendo Wii-U Articles","ios":"Latest IOS Articles","android":"Latest Android Articles"}
+$if platformValue == 'all':
+	$var title:Welcome to gamealoon Beta- Find all gamer generated reviews, features, gloonicles, videos, news and more at Gamealoon	
+$elif platformValue == 'ps3':
+	$var title:Playstation 3 @ gamealoon- Find all gamer generated Playstation 3 reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'ps4':
+	$var title:Playstation 4 @ gamealoon- Find all gamer generated Playstation 4 reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'xbox360':
+	$var title:Xbox 360 @ gamealoon- Find all gamer generated Xbox 360 reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'xboxOne':
+	$var title:Xbox One @ gamealoon- Find all gamer generated Xbox One reviews, features, gloonicles, videos, news and more at Gamealoon	
+$elif platformValue == 'pc':
+	$var title:PC @ gamealoon- Find all gamer generated PC reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'n3ds':
+	$var title:Nintendo 3DS @ gamealoon- Find all gamer generated Nintendo 3DS reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'vita':
+	$var title:PS Vita @ gamealoon- Find all gamer generated PS Vita reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'wiiu':
+	$var title:Nintendo WII-U @ gamealoon- Find all gamer generated Nintendo WII-U reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'ios':
+	$var title:Apple IOS @ gamealoon- Find all gamer generated IOS reviews, features, gloonicles, videos, news and more at Gamealoon
+$elif platformValue == 'android':
+	$var title:Android @ gamealoon- Find all gamer generated Android reviews, features, gloonicles, videos, news and more at Gamealoon								    
 		
+$if platformValue != 'all':
+		<ul class="platformMenu">	
+$else:	
+		<ul class="platformMenu hiddenDiv">			
+<a href="/platform/ps3/all"><li class="floatLeft ps3 font10 marginLeft5">Playstation 3</li></a>
+<a href="/platform/ps4/all"><li class='floatLeft ps4 font10 marginLeft5'>Playstation 4</li></a>
+<a href="/platform/vita/all"<li class="floatLeft vita font10 marginLeft5">PS Vita</li></a>
+<a href="/platform/xbox360/all"<li class="floatLeft xbox360 font10 marginLeft5">Xbox 360</li></a>
+<a href="/platform/xboxOne/all"<li class="floatLeft xboxOne font10 marginLeft5">Xbox One</li></a>
+<a href="/platform/pc/all"<li class="floatLeft pc font10 marginLeft5">PC</li></a>
+<a href="/platform/wiiu/all"<li class="floatLeft wiiu font10 marginLeft5">Wii-u</li></a>
+<a href="/platform/n3ds/all"<li class="floatLeft n3ds font10 marginLeft5">N3DS</li></a>
+<a href="/platform/android/all"<li class="floatLeft android font10 marginLeft5">Android</li></a>
+<a href="/platform/ios/all"<li  class="floatLeft ios font10 marginLeft5">IOS</li></a>
+</ul>		
 <div id="carousel">
-	<div id="videobox">
-		<div id='vtopTab'>
-			<div class="tfirst">
-				VIDEOS
+	<div id="videoBox" class="width300 height260">
+		
+		$if len(carouselData['carouselVideos']) == 0:
+			<div id='vTopTab' class="z500 width300 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+				<span class="applyMontserratBold icon-play-3 video font15 colorWhite">VIDEO</span>
+				<span class="applyFranklinGothic font23 colorLightGray">No Videos</span>				
 			</div>
-			<div class="tsecond">
-
+	
+			<div class="width300 height260 overflowHidden">
+				<img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="300" height="260" />			
 			</div>
-			<div class="tthird">
-
+			<div id='vBottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">				
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i>No Comments</span>
+					<span class="icon-user-2 colorWhite articleUsernameBox">gamealoon</span>
+				</span>
 			</div>
-		</div>
-		<div id ='play'>
-
-		</div>
-		<div id="cVideos" class="slider" data-value="10">
-			<img class ="videoCaption" src="/static/images/far_cry3.jpg" width="300" height="260" class="stretch"/>
-			<img class ="videoCaption" src="/static/images/max_payne3.jpeg" width="300" height="260" class="stretch"/>
-			<img class ="videoCaption" src="/static/images/mgsr.jpg" width="300" height="260" class="stretch"/>
-			<img class ="videoCaption" src="/static/images/guacamelee.jpg" width="300" height="260" class="stretch"/>
-			<img class ="videoCaption" src="/static/images/blc_2005.jpg" width="300" height="260" class="stretch"/>
-		</div>
-		<div id='vbottomTab'>
-			<div class="bfirst">
-
+		
+		$else:
+			<div id='vtopTab' class="z500 width300 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-play-3 video font15 colorWhite">VIDEO</span>					
+					<a id='vArticleTitle' href="/article/$carouselData['carouselVideos'][0]['articleAuthor']/$carouselData['carouselVideos'][0]['articleEncodedUrlTitle']"><span class="applyFranklinGothic font23 colorLightGray">$carouselData['carouselVideos'][0]['articleTitle']</span></a>
 			</div>
-			<div class="bsecond">
-
+		
+			<div id="cVideos" class="slider width300 height260 overflowHidden">
+				$for article in carouselData['carouselVideos']:
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="300" height="260"/></a>
 			</div>
-			<div class="bthird">
-
+			<div id='vBottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatLeft">
+					<span class="marginRight10">
+						<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorBlack'></i></a>
+					</span>
+					<span id='vCarouselNav'>
+						$for article in carouselData['carouselVideos']:							
+								<span><a href='javascript:;'><i class="icon-circle font7 colorBlack"></i></a></span>								
+					</span>
+				</span>
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i><span id="videoCommentCount">$carouselData['carouselVideos'][0]['articleCommentCount']</span></span>
+					<a id='vArticleAuthor' href="/$carouselData['carouselVideos'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$carouselData['carouselVideos'][0]['articleAuthor']</span></a>
+				</span>
 			</div>
-		</div>
 	</div>
-	<div id="newsbox">
-		<div id='ntopTab'>
-			<div class="tfirst">
-				NEWS
+	<div id="newsBox" class="width300 height260">
+		$if len(carouselData['carouselNews']) == 0:
+			<div id='nTopTab' class="z500 width300 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">			
+				<span class="applyMontserratBold icon-signal-2 news font15 colorWhite">NEWS</span>
+				<span class="applyFranklinGothic font23 colorLightGray">No News</span>	
 			</div>
-			<div class="tsecond">
-
+			<div class="slider width300 height260 overflowHidden">
+				<img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="300" height="260" />	
 			</div>
-			<div class="tthird">
-
+			<div id='nBottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i>No Comments</span>
+					<span class="icon-user-2 colorWhite articleUsernameBox">gamealoon</span>
+				</span>	
 			</div>
-		</div>
-		<div id="cNews" class="slider" data-value="1000">
-			<img src="/static/images/far_cry3.jpg" class="stretch"/>
-			<img src="/static/images/max_payne3.jpeg" class="stretch"/>
-			<img src="/static/images/mgsr.jpg" class="stretch"/>
-			<img src="/static/images/guacamelee.jpg" class="stretch"/>
-			<img src="/static/images/blc_2005.jpg" class="stretch"/>
-			<!--
-			<ul id='carouselNews'>
-			$for article in carouselData['carouselNews']:
-				<li>
-				<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</li>
-			</ul>-->
-
-		</div>
-		<div id='nbottomTab'>
-			<div class="bfirst">
-
+		
+		$else:
+			<div id='nTopTab' class="z500 width300 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">			
+					<span class="applyMontserratBold icon-signal-2 news font15 colorWhite">NEWS</span>
+					<a id='nArticleTitle' href="/article/$carouselData['carouselNews'][0]['articleAuthor']/$carouselData['carouselNews'][0]['articleEncodedUrlTitle']"><span class="applyFranklinGothic font23 colorLightGray">$carouselData['carouselNews'][0]['articleTitle']</span></a>
 			</div>
-			<div class="bsecond">
-
+			<div id="cNews" class="slider width300 height260 overflowHidden">
+				
+				$for article in carouselData['carouselNews']:
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="300" height="260"/></a>				
+				
 			</div>
-			<div class="bthird">
-
+			<div id='nBottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatLeft">
+					<span class="marginRight10">
+						<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorBlack'></i></a>
+					</span>
+					<span id='nCarouselNav'>
+						$for article in carouselData['carouselNews']:						       							
+								<span><a href='javascript:;'><i class="icon-circle font7 colorBlack"></i></a></span>								
+					</span>
+				</span>
+				<span class="floatRight">
+					<span id='nArticleTotalComments' class="font10"><i class="font13 icon-users"></i><span id="newsCommentCount">$carouselData['carouselNews'][0]['articleCommentCount']</span></span>
+					<a id='nArticleAuthor' href="/$carouselData['carouselNews'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$carouselData['carouselNews'][0]['articleAuthor']</span></a>
+				</span>
 			</div>
-		</div>
-	</div>
-
-	<div id="featurebox">
-		<div id='ftopTab'>
-			<div class="tfirst">
-				FEATURES
-			</div>
-			<div class="tsecond">
-
-			</div>
-			<div class="tthird">
-
-			</div>
-		</div>
-		<div id="cFeatures" class="slider" data-value="3000">
-			<img src="/static/images/far_cry3.jpg" class="stretch"/>
-			<img src="/static/images/max_payne3.jpeg" class="stretch"/>
-			<img src="/static/images/mgsr.jpg" class="stretch"/>
-			<img src="/static/images/guacamelee.jpg" class="stretch"/>
-			<img src="/static/images/blc_2005.jpg" class="stretch"/>
-			<!--
-			<ul id='carouselFeatures'>
-			$for article in carouselData['carouselFeatures']:
-				<li>
-				<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</li>
-
-			</ul>-->
-
-		</div>
-		<div id='fbottomTab'>
-			<div class="bfirst">
-
-			</div>
-			<div class="bsecond">
-
-			</div>
-			<div class="bthird">
-
-			</div>
-		</div>
 	</div>
 
-	<div id='reviewBox'>
-		<div id='rtopTab'>
-
-			<div class="rtfirst">
-				REVIEWS
+	<div id="featureBox" class="width300 height260">
+		
+		$if len(carouselData['carouselFeatures']) == 0:
+			<div id='fTopTab' class="z500 width300 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-star feature font15 colorWhite">FEATURE</span>
+					<span class="applyFranklinGothic font23 colorLightGray">No Feature</span>	
 			</div>
-			<div class="rtsecond"></div>
-			<div class="rtthird"></div>
-
-		</div>
-		<div id="cReview" class="slider" data-value="4000">
-			<img src="/static/images/far_cry3.jpg" class="stretch"/>
-			<img src="/static/images/max_payne3.jpeg" class="stretch"/>
-			<img src="/static/images/mgsr.jpg" class="stretch"/>
-			<img src="/static/images/guacamelee.jpg" class="stretch"/>
-			<img src="/static/images/blc_2005.jpg" class="stretch"/>
-			<!--
-			<ul id='carouselReviews'>
-			$for article in carouselData['carouselReviews']:
-				<li>
-				<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</li>
-
-			</ul>-->
-
-		</div>
-		<div id='rbottomTab'>
-
-			<div class="rbfirst">
-
+			<div class="slider width300 height260 overflowHidden">
+				<img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="300" height="260" />
+	
 			</div>
-			<div class="rbsecond">
-
+			<div id='fBottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i>No Comments</span>
+					<span class="icon-user-2 colorWhite articleUsernameBox">gamealoon</span>
+				</span>					
 			</div>
-			<div class="rbthird">
-
+		$else:
+			<div id='fTopTab' class="z500 width300 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-star feature font15 colorWhite">FEATURE</span>
+					<a id='fArticleTitle' href="/article/$carouselData['carouselFeatures'][0]['articleAuthor']/$carouselData['carouselFeatures'][0]['articleEncodedUrlTitle']"><span class="applyFranklinGothic font23 colorLightGray">$carouselData['carouselFeatures'][0]['articleTitle']</span></a>
 			</div>
+			<div id="cFeatures" class="slider width300 height260 overflowHidden">
+				$for article in carouselData['carouselFeatures']:
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="300" height="260"/></a>				
+	
+			</div>
+			<div id='fBottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatLeft">
+					<span class="marginRight10">
+						<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorBlack'></i></a>
+					</span>
+					<span id='fCarouselNav'>
+						$for article in carouselData['carouselFeatures']:						       							
+								<span><a href='javascript:;'><i class="icon-circle font7 colorBlack"></i></a></span>								
+					</span>
+				</span>
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i><span id="featureCommentCount">$carouselData['carouselFeatures'][0]['articleCommentCount']</span></span>
+					<a id='fArticleAuthor' href="/$carouselData['carouselFeatures'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$carouselData['carouselFeatures'][0]['articleAuthor']</span></a>
+				</span>
+			</div>
+	</div>
 
-		</div>
+	<div id='reviewBox' class="width500 height260">
+		$if len(carouselData['carouselReviews']) == 0:
+			<div id='rTopTab' class="z500 width500 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-thumbs-up-1 review font15 colorWhite">REVIEW</span>
+					<span class="applyFranklinGothic font23 colorLightGray">No Review</span>	
+			</div>
+			<div class="slider width500 height260 overflowHidden">
+				<img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="500" height="375" />	
+			</div>
+			<div id='rBottomTab' class="z500 width500 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i>No Comments</span>
+					<span class="icon-user-2 colorWhite articleUsernameBox">gamealoon</span>
+				</span>	
+			</div>
+		$else:
+			<div id='rTopTab' class="z500 width500 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-thumbs-up-1 review font15 colorWhite">REVIEW</span>
+					<a id='rArticleTitle' href="/article/$carouselData['carouselReviews'][0]['articleAuthor']/$carouselData['carouselReviews'][0]['articleEncodedUrlTitle']"><span class="applyFranklinGothic font23 colorLightGray">$carouselData['carouselReviews'][0]['articleTitle']</span></a>
+			</div>
+			<div id="cReviews" class="slider width500 height260 overflowHidden">
+				$for article in carouselData['carouselReviews']:
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="500" height="375"/></a>				
+	
+			</div>
+			<div id='rBottomTab' class="z500 width500 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatLeft">
+					<span class="marginRight10">
+						<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorBlack'></i></a>
+					</span>
+					<span id='rCarouselNav'>
+						$for article in carouselData['carouselReviews']:						       							
+								<span><a href='javascript:;'><i class="icon-circle font7 colorBlack"></i></a></span>								
+					</span>
+				</span>
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i><span id="reviewCommentCount">$carouselData['carouselReviews'][0]['articleCommentCount']</span></span>
+					<a id='rArticleAuthor' href="/$carouselData['carouselReviews'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$carouselData['carouselReviews'][0]['articleAuthor']</span></a>
+				</span>
+			</div>
 
 	</div>
 
-	<div id="glooniclebox">
-		<div id='gtopTab'>
-			<div class="gtfirst">
-				GLOONICLES
+	<div id="gloonicleBox" class="width400 height260">
+		$if len(carouselData['carouselGloonicles']) == 0:
+			<div id='gTopTab' class="z500 width400 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-user gloonicle font15 colorWhite">GLOONICLE</span>
+					<span class="applyFranklinGothic font23 colorLightGray">No Gloonicle</span>
 			</div>
-			<div class="gtsecond">
-
+			<div class="slider width400 height260 overflowHidden">
+				<img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="400" height="300" />
 			</div>
-			<div class="gtthird">
-
+			<div id='gBottomTab' class="z500 width400 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i>No Comments</span>
+					<span class="icon-user-2 colorWhite articleUsernameBox">gamealoon</span>
+				</span>	
 			</div>
-		</div>
-		<div id="cGloonicles" class="slider" data-value="-1000">
-			<img src="/static/images/far_cry3.jpg"  class="stretch"/>
-			<img src="/static/images/max_payne3.jpeg" class="stretch"/>
-			<img src="/static/images/mgsr.jpg" class="stretch"/>
-			<img src="/static/images/guacamelee.jpg" class="stretch"/>
-			<img src="/static/images/blc_2005.jpg" class="stretch"/>
-			<!--
-			<ul id='carouselGloonicles'>
-			$for article in carouselData['carouselGloonicles']:
-				<li>
-				<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</li>
-
-			</ul>-->
-
-		</div>
-		<div id='gbottomTab'>
-			<div class="gbfirst">
-
+		$else:
+			<div id='gTopTab' class="z500 width400 height60 positionAbsolute carousalHeader carouselHeaderFooterPadding">
+					<span class="applyMontserratBold icon-user gloonicle font15 colorWhite">GLOONICLE</span>
+					<a id='gArticleTitle' href="/article/$carouselData['carouselGloonicles'][0]['articleAuthor']/$carouselData['carouselGloonicles'][0]['articleEncodedUrlTitle']"><span class="applyFranklinGothic font23 colorLightGray">$carouselData['carouselGloonicles'][0]['articleTitle']</span></a>
 			</div>
-			<div class="gbsecond">
-
+			<div id="cGloonicles" class="slider width400 height260 overflowHidden">
+				$for article in carouselData['carouselGloonicles']:
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="400" height="300"/></a>				
 			</div>
-			<div class="gbthird">
-
+			<div id='gBottomTab' class="z500 width400 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
+				<span class="floatLeft">
+					<span class="marginRight10">
+						<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorBlack'></i></a>
+					</span>
+					<span id='gCarouselNav'>
+						$for article in carouselData['carouselGloonicles']:						       							
+								<span><a href='javascript:;'><i class="icon-circle font7 colorBlack"></i></a></span>							
+					</span>
+				</span>
+				<span class="floatRight">
+					<span class="font10"><i class="font13 icon-users"></i><span id="gloonicleCommentCount">$carouselData['carouselGloonicles'][0]['articleCommentCount']</span></span>
+					<a id='gArticleAuthor' href="/$carouselData['carouselGloonicles'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$carouselData['carouselGloonicles'][0]['articleAuthor']</span></a>
+				</span>
 			</div>
-		</div>
 
 	</div>
 
@@ -225,95 +264,163 @@ $var title:Welcome to gamealoon Beta
 <div id='divider'></div>
 
 <div id="restcontent">
-	<div id="recentArticles">
-		<div id="tabs">
+	<div id="recentArticles">		
+			<div id="$platformValue" class="$platformValue applyFranklinGothic platormHeading colorWhite">$platformMessageMap[platformValue]</div>		
+		<div id="tabs-min" class="tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<ul id='top10articles'>
 
 				<li>
-					<a href="#tab-1">All</a>
+					<a href="#all">All</a>
 				</li>
 				<li>
-					<a href="#tab-2">Reviews</a>
+					<a href="#review">Reviews</a>
 				</li>
 				<li>
-					<a href="#tab-3">Features</a>
+					<a href="#feature">Features</a>
 				</li>
 				<li>
-					<a href="#tab-4">News</a>
+					<a href="#news">News</a>
 				</li>
 				<li>
-					<a href="#tab-5">Gloonicles</a>
+					<a href="#gloonicle">Gloonicles</a>
+				</li>
+				<li>
+					<a href="#video">Videos</a>
 				</li>
 			</ul>
-			<div id='tab-1'>
-				$for article in top10Articles['recentAllArticles']:
-				<div class="recentarticlediv">
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
+			<div id='all'>
+				$if len(recentNArticles)==0:
+						<div class="noData applyBevan">No Data</div>
+				$else:	
+						<div class="noData applyBevan hiddenDiv">No Data</div>
+				<div class="allList">					
+						$for article in recentNArticles:
+						<div class="recentArticleDiv" id="$article['articleTimestamp']">
+							<div class='articleContentHeader'>
+								$if article['articleCategory'] == 'news':
+										<span class="textCapitalization icon-signal-2 $article['articleCategory'] marginRight10 fontWeightBold font11 colorWhite">$article['articleCategory']</span>
+								$elif article['articleCategory'] == 'review':
+										<span class="textCapitalization icon-thumbs-up-1 $article['articleCategory'] marginRight10 fontWeightBold font11 colorWhite">$article['articleCategory']</span>
+								$elif article['articleCategory'] == 'feature':		
+										<span class="textCapitalization icon-star $article['articleCategory'] marginRight10 fontWeightBold font11 colorWhite">$article['articleCategory']</span>
+								$elif article['articleCategory'] == 'gloonicle':		
+										<span class="textCapitalization icon-user $article['articleCategory'] marginRight10 fontWeightBold font11 colorWhite">$article['articleCategory']</span>
+								$elif article['articleCategory'] == 'video':		
+										<span class="textCapitalization icon-play-3 $article['articleCategory'] marginRight10 fontWeightBold font11 colorWhite">$article['articleCategory']</span>
+										
+								<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']"><span class="applyMontserratBold font13 colorBlack">$article['articleTitle']</span></a>
+								<a href="/$article['articleAuthor']"><span class="floatRight icon-user-2 colorWhite articleUsernameBox">$article['articleAuthor']</span></a>
+							</div>
+							<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 570px;">
+								<div class="articleContentPreviewData">
+									<p>
+										<span class="applyJura colorWhite font12">$article['articleTimeSpentFromPublish'] - </span>
+										<span class="colorWhite applyFranklinGothicRegular font13">$article['articleSubTitle']</span>
+										<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']"><i class="icon-ellipsis colorWhite moreLink"></i></a>
+										
+									</p>
+								</div>
+							</div>
+							<div class='articleContentFooter'>
+								<span class="icon-gamepad floatLeft fontWeightBold">
+									$for platform in article['articlePlatforms']:
+										<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" target="_blank"><span class="$platform['shortTitle'] interestUserProfileFontSize" >$platform['title']</span></a>														
+								</span>
+								<span class="floatRight fontWeightBold font10">
+									<span><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
+									<span><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>
+									<span><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
+								</span>
+							</div>
+							
+						</div>
 				</div>
+			$if len(recentNArticles)>0:
+				  <button class="loadMore">Fetch More</button>
+			$else:
+				  <button class="loadMore hiddenDiv">Fetch More</button>					
 			</div>
-			<div id='tab-2'>
-				$for article in top10Articles['recentReviews']:
-				<div class="recentarticlediv">
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</div>
+			<div id='review'>
+				<div class="noData applyBevan">No Data</div>
+				<div class="reviewList"></div>
+				<button class="loadMore hiddenDiv">Fetch More</button>	
 			</div>
-			<div id='tab-3'>
-				$for article in top10Articles['recentFeatures']:
-				<div class="recentarticlediv">
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</div>
+			<div id='feature'>
+				<div class="noData applyBevan">No Data</div>
+				<div class="featureList"></div>
+				<button class="loadMore hiddenDiv">Fetch More</button>	
 			</div>
-			<div id='tab-4'>
-				$for article in top10Articles['recentNews']:
-				<div class="recentarticlediv">
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</div>
+			<div id='news'>
+				<div class="noData applyBevan">No Data</div>
+				<div class="newsList"></div>
+				<button class="loadMore hiddenDiv">Fetch More</button>	
 			</div>
-			<div id='tab-5'>
-				$for article in top10Articles['recentGloonicles']:
-				<div class="recentarticlediv">
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">$article['articleTitle']</a>
-				</div>
+			<div id='gloonicle'>
+				<div class="noData applyBevan">No Data</div>
+				<div class="gloonicleList"></div>
+				<button class="loadMore hiddenDiv">Fetch More</button>	
+			</div>
+			<div id='video'>
+				<div class="noData applyBevan">No Data</div>
+				<div class="videoList"></div>
+				<button class="loadMore hiddenDiv">Fetch More</button>	
 			</div>
 
 		</div>
 	</div>
 
-	<div id='rightboxrestcontent'>
+	<div id='rightBoxRestContent'>
 		<div id="adbox1" class="bottommargin">
 			Ad box 1
 		</div>
 		<div id="topUsers" class="bottommargin">
-			<div class="header">
-				<span class="subheader"> <h2>Top Users</h2> </span>
+			<div class="sideBarHeader">
+				<span class="sideBarSubHeader"> <span>Top Users</span> </span>
 			</div>		
+			$if len(jsonData['top5Users'])==0:
+				<span class="colorGray font14 fontWeightBold">No Top Users</span>
 			$for user in jsonData['top5Users']:
-				<div class="topuserdiv">
-					<div class="userdetailtable">
-						<div class="userdetailtabledata">
-							<a href="/$user['userUserName']" style="font-size: 12px; font-weight: bold; text-decoration: none">$user['userUserName']</a>
+				<div class="topUserDiv">
+					<div class="userDetailTable">
+						<div class="userDetailTableData">
+							<a href="/$user['userUserName']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$user['userUserName']</a>
 						</div>												
 					</div>
-					<a href="/$user['userUserName']" style="width: 30px; height: 30px; background-color:#0088CC; float: right;margin: 0 5px 0 5px; display: block; "><img src="/static/images/avatar.jpg" height="30" width="30" /> </a>
+					<a href="/$user['userUserName']" class="floatRight"><img src="$user['userAvatar']" height="30" width="30" /> </a>
 				</div>	
 									
 			
 
 		</div>
-		<div id="topGames" class="bottommargin">
-			<div class="header">
-				<span class="subheader"> <h2>Top Games</h2> </span>
+		<div id="recentGames" class="bottommargin">
+			<div class="sideBarHeader">
+				<span class="sideBarSubHeader"> <span>Recent Games</span> </span>
 			</div>		
-			$for game in jsonData['top10Games']:
-				<div class="topuserdiv">
-					<div class="userdetailtable">
-						<div class="userdetailtabledata">
-							<a href="#" style="font-size: 12px; font-weight: bold; text-decoration: none">$game['gameTitle']</a>
+			$for game in jsonData['recent5Games']:
+				<div class="topAndRecentVideoDiv">
+					<div class="userDetailTable">
+						<div class="userDetailTableData">
+							<a href="/game/$game['gameEncodedUrl']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$game['gameTitle']</a>
 						</div>												
 					</div>
-					<a href="#" style="width: 30px; height: 30px; background-color:#0088CC; float: right;margin: 0 5px 0 5px; display: block; "> </a>
+					<a href="/game/$game['gameEncodedUrl']" class="floatRight"><img src="$game['gameBoxShot']" width="40" height="60"/></a>
 				</div>			
 		</div>
+		<div id="topGames" class="bottommargin">
+			<div class="sideBarHeader">
+				<span class="sideBarSubHeader"> <span>Top Games</span> </span>
+			</div>		
+			$for game in jsonData['top5Games']:
+				<div class="topAndRecentVideoDiv">
+					<div class="userDetailTable">
+						<div class="userDetailTableData">
+							<a href="/game/$game['gameEncodedUrl']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$game['gameTitle']</a>
+						</div>												
+					</div>
+					<a href="/game/$game['gameEncodedUrl']" class="floatRight"><img src="$game['gameBoxShot']" width="40" height="60"/></a>
+				</div>			
+		</div>
+		
 		<div id="adbox2" class="bottommargin">
 			Ad box 2
 		</div>
@@ -321,4 +428,4 @@ $var title:Welcome to gamealoon Beta
 	</div>
 
 </div>
-<script src="/static/javascripts/gloon.js" type="text/javascript"></script>
+<script src="/static/javascripts/platform.js" type="text/javascript"></script>
