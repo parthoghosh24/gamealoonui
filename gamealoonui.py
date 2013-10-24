@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import web
 import urllib2
 import urllib
