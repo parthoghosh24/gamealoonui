@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python2.7
 
 import web
 import urllib2
@@ -47,8 +47,6 @@ store=web.session.DiskStore('sessions')
 session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'userAvatar':'http://192.168.0.103:9000/assets/images/default/avatar.png'})
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
 render = web.template.render('templates/', base='main', globals={'session':session})
-
-
 
 class Index:
     def GET(self):       
