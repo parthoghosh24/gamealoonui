@@ -425,7 +425,7 @@ $var title: My Gloon Profile
     			$else:
     				$for award in user['userAchievements']:
     					<div id="$award['imagePath']"  class="floatLeft overflowHidden tabGrid">
-		    			    	<img src="http://192.168.0.103:9000/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
+		    			    	<img src="$session:baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
 		    			 </div>	
     		</div>
     		<div id="tabStats">
@@ -595,7 +595,7 @@ $var title: My Gloon Profile
 			   		</label>
 			   		<br>
 			   		<br>
-			   		<a href="javascript:;" id="ariticleFeaturedImageSelector"><img src="http://192.168.0.103:9000/assets/images/default/featuredBg.png" width="320" height="240"></a>		   		
+			   		<a href="javascript:;" id="ariticleFeaturedImageSelector"><img src="http://$session:baseUrl/assets/images/default/featuredBg.png" width="320" height="240"></a>		   		
 		   		</div>
 		   	   <div id="articleReviewScorer" class="floatLeft marginTop20">
 			   		<label for="Review Scorer" class="colorGray textShadowBlack fontWeightBold icon-thumbs-up-2">

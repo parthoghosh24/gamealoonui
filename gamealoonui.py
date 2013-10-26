@@ -48,7 +48,7 @@ urls = (
 
 app = web.application(urls, globals())
 store=web.session.DiskStore('sessions')
-session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'userAvatar':'http://192.168.0.103:9000/assets/images/default/avatar.png'})
+session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'baseUrl':'192.168.0.103','userAvatar':''})
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
 render = web.template.render('templates/', base='main', globals={'session':session})
 
@@ -57,10 +57,13 @@ class Index:
         print "Session username---->", session.username
         print "Session loggedIn---->", session.loggedIn
         print "Session userId---->", session.userId
-        print "Session userAvatar---->", session.userAvatar                                     
+        print "Session userAvatar---->", session.userAvatar     
+        print "Session baseUrl---->", session.baseUrl                                        
         url="http://localhost:9000/platform/all/all"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)        
+        session.baseUrl=jsonData['baseUrl']
+        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
         return render.index(jsonData)
 
 
