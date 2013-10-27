@@ -237,7 +237,7 @@ $var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName
 					<span class="applyFranklinGothic fontSize30 colorLightGray">No Featured</span>	
 			</div>
 			<div class="slider overflowHidden">
-				<img src="http://$session.baseUrl/assets/images/default/featuredBg.png" width="610" height="480" />	
+				<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="610" height="480" />	
 			</div>
 			<div id='featuredBottomTab' class="z500 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
 				<span class="floatRight">
@@ -279,7 +279,7 @@ $var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName
 					<span class="applyFranklinGothic font23 colorLightGray">No Articles in this category</span>	
 			</div>
 			<div class="slider overflowHidden">
-				<img src="http://$session.baseUrl/assets/images/default/featuredBg.png" width="305" height="225" />
+				<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="305" height="225" />
 	
 			</div>
 			<div id='notFeatured1BottomTab' class="z500 width305 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -321,7 +321,7 @@ $var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName
 					<span class="applyFranklinGothic font23 colorLightGray">No Articles in this category</span>	
 			</div>
 			<div class="slider overflowHidden">
-				<img src="http://$session.baseUrl/assets/images/default/featuredBg.png" width="300" height="225" />
+				<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="300" height="225" />
 	
 			</div>
 			<div id='notFeatured2BottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -363,7 +363,7 @@ $var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName
 					<span class="applyFranklinGothic font23 colorLightGray">No Articles in this category</span>	
 			</div>
 			<div class="slider overflowHidden">
-				<img src="http://$session.baseUrl/assets/images/default/featuredBg.png" width="305" height="225" />
+				<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="305" height="225" />
 	
 			</div>
 			<div id='notFeatured3BottomTab' class="z500 width305 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -405,7 +405,7 @@ $var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName
 					<span class="applyFranklinGothic font23 colorLightGray">No Articles in this category</span>	
 			</div>
 			<div class="slider overflowHidden">
-				<img src="http://$session.baseUrl/assets/images/default/featuredBg.png" width="300" height="225" />
+				<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="300" height="225" />
 	
 			</div>
 			<div id='notFeatured4BottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -607,7 +607,7 @@ $var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName
     			$else:
     				$for award in user['userAchievements']:
     					<div id="$award['imagePath']"  class="floatLeft overflowHidden tabGrid">
-		    			    	<img src="http://$session.baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
+		    			    	<img src="$session.baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
 		    			 </div>	
 			</div>
 		</div>
