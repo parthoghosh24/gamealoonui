@@ -669,8 +669,8 @@ $(function() {
 					});
 				},						
 				containerCss:{				
-					width:1280,	
-					height:960
+					width:1024,	
+					height:768
 				},	
 				onShow: function(dlg)
 				{					
@@ -791,8 +791,8 @@ $(function() {
 					});
 				},						
 				containerCss:{				
-					width:1280,	
-					height:960
+					width:1024,	
+					height:768
 				},	
 				onShow: function(dlg)
 				{					
