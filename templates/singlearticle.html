@@ -190,7 +190,7 @@ $var title: $:article['articleTitle']- $author['articleAuthorUsername']
 								 					<span>
 								 						$comment['ownerName']
 								 					</span>
-								 				</a>
+								 				</a>								 				
 								 				<div class="commentVoteControl">
 								 					<div class="upArrow">
 								 						<a href="javascript:;" title="yay" class="colorGray">
@@ -214,7 +214,7 @@ $var title: $:article['articleTitle']- $author['articleAuthorUsername']
 								 			</div>
 								 		</header>
 								 		<span class="commentBody applyJura">
-								 			$:comment['message']
+								 			<span class="colorGray font12"> $comment['converstationTimeFormatted']- </span>$:comment['message']
 								 		</span>  
 								 </div>		
 	 					 			

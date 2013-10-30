@@ -7,11 +7,11 @@ $var title: My Gloon Profile
   		<div id="userDetails" class="floatLeft overflowHidden">
   			<div id="userAvatar" class="floatLeft height320">
   				<a id="userAvatarImageUpload" href="javascript:;">
-  					<img id="userAvatarPic" class="grayBoxShadow" src="$user['userAvatar']" height="200">  					
+  					<img id="$user['userAvatarId']" class="grayBoxShadow selectAvatar" src="$user['userAvatarUrl']" height="200">  					
   				</a>
   				<div id="userAvatarUploadBox" class="hiddenDiv textureBg">
   					<form id="userAvatarUpload" method="post" enctype="multipart/form-data">
-  						<img id='selectedUserAvatar' class="grayBoxShadow" src="$user['userAvatar']" height="200">
+  						<img id='selectedUserAvatar' class="grayBoxShadow" src="$user['userAvatarUrl']" height="200">
   						<br>
   						<span id="userAvatarErrorMessage" class="font14 fontWeightBold textShadowBlack error"> </span>
   						<br>
@@ -283,7 +283,7 @@ $var title: My Gloon Profile
   					
   				</div>
   				<div id="moreButton" class="marginTop20">
-  					<span class="floatRight"><button class="colorWhite">MORE...</button></span>
+  					<span class="floatRight"><button class="colorWhite disableOpacity" disabled="disabled">MORE...</button></span>
   				</div>
   
   			</div>
@@ -312,9 +312,11 @@ $var title: My Gloon Profile
 				<li>
 					<a href="#tabAwards">Awards</a>
 				</li>
+				<!--
 				<li>
-					<a href="#tabStats">Stats</a>
-				</li>
+									<a href="#tabStats">Stats</a>
+								</li>-->
+				
 				<li class="hiddenDiv">
 					<a href="#tabConversation">Conversation</a>
 				</li>
@@ -377,7 +379,9 @@ $var title: My Gloon Profile
 								$if activity['activityType'] == 7:
 									<a href="/$activity['activityUserName']">You</a>$activity['message']<strong>$activity['achievementTitle']</strong>
 								$if activity['activityType'] == 3:
-									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>	
+									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
+								$if activity['activityType'] == 4:								
+									<a href="/$activity['activityUserName']" target="_blank">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank"><strong>$activity['articleTitle']</strong>, &nbsp;&nbsp;<strong><i class="colorGray">"$activity['activityComment']..."</i></strong></a>		
 								$if activity['activityType'] == 8:
 									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/$activity['notFollowingUserName']" target="_blank"><strong>$activity['notFollowingUserName']</strong></a>
 								$if activity['activityType'] == 11:
@@ -424,13 +428,14 @@ $var title: My Gloon Profile
     				<span id="noAwards" class="noData applyBevan">No Awards</span>
     			$else:
     				$for award in user['userAchievements']:
-    					<div id="$award['imagePath']"  class="floatLeft overflowHidden tabGrid">
-		    			    	<img src="$session:baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
+    					<div id="$award['achievementImage']"  class="floatLeft overflowHidden tabGrid">
+		    			    	<img src="$session.baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
 		    			 </div>	
     		</div>
-    		<div id="tabStats">
-
-    		</div>
+    		<!--
+			<div id="tabStats">
+									  </div>-->
+			
     		<div id="tabConversation">
     			
     			<div id="conversationBox">
@@ -595,7 +600,7 @@ $var title: My Gloon Profile
 			   		</label>
 			   		<br>
 			   		<br>
-			   		<a href="javascript:;" id="ariticleFeaturedImageSelector"><img src="$session.baseUrl/assets/images/default/featuredBg.png" width="320" height="240"></a>		   		
+			   		<a href="javascript:;" id="ariticleFeaturedImageSelector"><img id="default" src="$session.baseUrl/assets/images/default/featuredBg.png" width="320" height="240"></a>		   		
 		   		</div>
 		   	   <div id="articleReviewScorer" class="floatLeft marginTop20">
 			   		<label for="Review Scorer" class="colorGray textShadowBlack fontWeightBold icon-thumbs-up-2">
@@ -651,7 +656,7 @@ $var title: My Gloon Profile
 					 	<div id="editorImageSelector">
 					 		<div id="imageSection">
 					 			<div id="imageHolder">
-					 				<img src="" width="400" height="300" class="cursorPointer"/>
+					 				<img id="none" src="" width="400" height="300" class="cursorPointer"/>
 					 				<span id="imageCaption" class="font14" contenteditable="true"><i>Click to set caption</i></span>
 					 			</div>
 					 		</div>

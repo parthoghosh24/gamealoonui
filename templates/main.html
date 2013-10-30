@@ -38,7 +38,7 @@ $def with (page)
 						<input type="image" value="" src="/static/images/button.png" class="signin hiddenDiv" id="login" width='60' height='37' title="Login"/>
 						<input type="image" value="" src="/static/images/button.png" class="signin showDivBlock" id="logout" width='60' height='37' title="Logout"/>
 						<div id="userdetailsbox">						
-							 <a href="/profile/$session.userId" class="colorWhite">
+							 <a href="/profile/$session.userId" rel="nofollow" class="colorWhite">
 							 	<span>$session.username</span>
 							 	<img id="userAvatarImage"src="$session.userAvatar" width="15" height="15" alt="avatar" title="$session.username" class="displayInline"/>	
 							 	</a>							
@@ -68,7 +68,9 @@ $def with (page)
 										<input id='loginBotCatcher' name="botCatcher" type="text" class="hiddenDiv"/>
 									</div>
 									<br />
-									<button id='signIn' class="icon-login signInButton applyBevan">Sign in</button>									
+									<button id='signIn' class="icon-login signInButton applyBevan">Sign in</button>			
+									<br/>
+									<span id="signInStatusMessage" class="fontWeightBold textShadowBlack font12"> </span>						
 								</form>
 
 							</div>
@@ -82,10 +84,10 @@ $def with (page)
 										<input type="text" name="last" required="required" placeholder="Last(Max 8 chars)" maxlength="8"/>
 										<br />
 										<br />										
-										<input type="text" id='signupUsername' name="username" required="required" placeholder="Username(Max 12 chars)" maxlength="12"/><span id="usernameErrorMessage" class="fontWeightBold textShadowBlack error font12"> </span>
+										<input type="text" id='signupUsername' name="username" required="required" placeholder="Username(Max 12 chars)" maxlength="12"/><span id="usernameErrorMessage" class="fontWeightBold textShadowBlack font12"> </span>
 										<br />
 										<br />										
-										<input type="text" id='email' name="email" required="required" placeholder="Email"/><span id="emailErrorMessage" class="fontWeightBold textShadowBlack error font12"> </span>	
+										<input type="text" id='email' name="email" required="required" placeholder="Email"/><span id="emailErrorMessage" class="fontWeightBold textShadowBlack font12"> </span>	
 										<br />
 										<br />										
 										<input name="password" type="password" required="required" placeholder="Password"/>

@@ -98,19 +98,18 @@ $(function(){
 			}
 			$.get('/user/getImages',{'timestamp':timestamp},function(data)
 			{				
-				var imageUrls = data.images;
+				var images = data.images;
 				
-				if(imageUrls.length>0)
+				if(images.length>0)
 				{
-					for(var i =0; i<imageUrls.length; ++i)
-					{
-							var imageHtml = "<img src='"+imageUrls[i].url+"' width='240' height='180' class='fade browserImage marginLeft25 marginTop10 blackBoxShadow cursorPointer'/>";
-							var imageEl=$(imageHtml);
-							imageEl.hide();
-							$('#imageBrowser').prepend(imageEl);
-							imageEl.fadeIn();
-					}
-					var lastTimestamp=imageUrls[0].timeStamp;
+					$.each(images, function(index,image) {
+					  var imageHtml = "<img id='"+image.mediaId+"' src='"+image.mediaUrl+"' width='240' height='180' class='fade browserImage marginLeft25 marginTop10 blackBoxShadow cursorPointer'/>";
+					  var imageEl=$(imageHtml);
+					  imageEl.hide();
+					   $('#imageBrowser').prepend(imageEl);
+					   imageEl.fadeIn();
+					});					
+					var lastTimestamp=images[0].timeStamp;
 					$('#photoLastUpdated').val(lastTimestamp);		
 					$('#hasPhotos').val("1");								
 				}
@@ -118,7 +117,7 @@ $(function(){
 				{
 					if($('#hasPhotos').val()=="0")
 					{
-						$('#imageBrowser').html("<span id='emptyImageList' class='colorGray'>No Images. Upload Some.</span>");
+						$('#imageBrowser').html("<span id='emptyImageList' class='colorGray applyBevan textShadowBlack'>No Images. Upload Some.</span>");
 					}					  
 						
 				}
@@ -137,18 +136,34 @@ $(function(){
 		},"img.fade");
 		
 		$('#imageBrowser').on('click','img.browserImage',function (){						
-			var targetSrc=$(this).attr('src');
+			var targetSrc=$(this).attr('src');			
+			var targetId=$(this).attr('id');
 			if(replaceImage == 0) //request came from featured Image
 			{
 				$('#ariticleFeaturedImageSelector img').attr('src',targetSrc);
+				$('#ariticleFeaturedImageSelector img').attr('id',targetId);						
 			}
 			else if(replaceImage == 1) //request came from editor
 			{
 				$('#imageHolder img').attr('src',targetSrc);
+				$('#imageHolder img').attr('id',targetId);
 			}
 			uploaderClose();
 		});
 		
+		$(document).ajaxStart(function(){
+				 		console.log('ajax started');
+				 		$('#noImage').text("Loading...");
+	            		$('#noImage').show();	
+	            		$('#uploadImage').prop('disabled',true);
+	            		$('#uploadImage').addClass('disableOpacity');
+				 	});
+				 	
+		$(document).ajaxStop(function() {
+		  			 $('#uploadImage').prop('disabled',false);
+	            	 $('#uploadImage').removeClass('disableOpacity');
+		});
+				 	
 		$('#uploadImage').click(function() {			    
 			    var image=$('#previewFile').get(0).files[0];
 			    if(image.type.indexOf("image") == 0 && image.size < 1000000)
@@ -156,8 +171,9 @@ $(function(){
 			    	var userName=$('span#userName a').text();
 				    var formdata = new FormData();
 				 	formdata.append('previewFile',image);			
+				 	
 			     	$.ajax({          
-			     		url: "http://localhost:9000/media/uploadImage/"+userName, 		
+			     		url: "http://localhost:9000/media/uploadImage/"+userName+"/none/user", 		
 	        			type: "POST",          		
 	        			data: formdata,      
 	        			dataType:'json',   		
@@ -167,7 +183,7 @@ $(function(){
 	        				if(data.status="success")
 	        				{
 	        					$('#noImage').text("Uploaded");
-	            				$('#noImage').show();
+	            				$('#noImage').show();	            				
 	        				}        				 
 	        				else
 	        				{
@@ -352,9 +368,10 @@ function onInsertImage()
 function onSetImage()
 {
 		var url=$('#imageHolder img').attr('src');		
+		var imgId=$('#imageHolder img').attr('id');
 		var caption = $('#imageCaption i').text();
 		
-			var imageHtml='<img style="border-style:solid; border-width:15px;border-color:#FCEEE2"src="'+url+'" width="400" height="300"/><p style="text-align;"><span style="font-size:14px;"><i>'+caption+'</i></span></p>'		
+			var imageHtml='<img id="'+imgId+'"style="border-style:solid; border-width:15px;border-color:#FCEEE2"src="'+url+'" width="400" height="300"/><p style="text-align;"><span style="font-size:14px;"><i>'+caption+'</i></span></p>'		
 			if(navigator.appName=="Microsoft Internet Explorer")
 			{				
 				document.getElementsByName("richEditor")[0].contentWindow.focus();
@@ -416,7 +433,7 @@ function onSave()
 	var title=$('#title').val();
 	var subTitle=$('#subTitle').val();
 	var body=window.frames['richEditor'].document.body.innerHTML;
-	var featuredImageUrl=$('#ariticleFeaturedImageSelector img').attr('src');
+	var featuredImage=$('#ariticleFeaturedImageSelector img').attr('id');
 	var category=$('input[name="category"]:checked').val();
 	var userName=$('#userName a').text();
 	var userGameBio=$('#userGameBio').text();
@@ -446,7 +463,7 @@ function onSave()
 	articleJson["title"]=title;
 	articleJson["subTitle"]=subTitle;
 	articleJson["body"]=body;
-	articleJson["featuredImageUrl"]=featuredImageUrl;
+	articleJson["featuredImage"]=featuredImage;
 	articleJson["category"]=category;		
 	articleJson["gameId"]=gameId;
 	articleJson["platforms"]=platforms;

@@ -16,10 +16,73 @@ function openLoginModal()
 			});
   }
 
+function ajaxStartProcess(processMode)
+{
+	switch(processMode)
+	{
+     	
+     	case 0:
+     	        $('#signUpStatusMessage').addClass('colorWhite icon-spin1 animate-spin');
+				$('#signUpStatusMessage').text('Please wait...');				
+			    $('signUp').prop('disabled',true);
+			    $('signUp').addClass('disableOpacity');
+     			break;
+     	case 1:
+     	        $('#usernameErrorMessage').text('Please Wait...');
+				$('#usernameErrorMessage').addClass('colorWhite icon-spin1 animate-spin');
+     			break;
+     	case 2: 
+     			$('#emailErrorMessage').text('Please Wait...');
+				$('#emailErrorMessage').addClass('colorWhite icon-spin1 animate-spin');				
+     			break;
+     	case 3:
+     	        $('#signInStatusMessage').addClass('colorWhite icon-spin1 animate-spin');
+     	        $('#signInStatusMessage').text('Signing in...');							    
+     	        $('signIn').prop('disabled',true);
+			    $('signIn').addClass('disableOpacity');
+     			break;						
+     	
+     }
+}
 
+function ajaxStopProcess(processMode)
+{
+	switch(processMode)
+	 {
+     	 
+     	case 0:
+                $('#signUpStatusMessage').removeClass('colorWhite icon-spin1 animate-spin');	                				
+                $('signUp').prop('disabled',false);
+			    $('signUp').removeClass('disableOpacity');					
+     			break;
+     	case 1:     	 		
+				$('#usernameErrorMessage').removeClass('colorWhite icon-spin1 animate-spin');
+     			break;
+     	case 2:     	        
+				$('#emailErrorMessage').removeClass('colorWhite icon-spin1 animate-spin');
+     			break;
+     	case 3:
+     			$('#signInStatusMessage').removeClass('colorWhite icon-spin1 animate-spin');
+     	        $('#signInStatusMessage').text('');				
+				$('signIn').prop('disabled',false);
+			    $('signIn').removeClass('disableOpacity');
+     			break;
+     }
+}
  
 $(function() {			
    
+   var processMode=0; //0 : Registration, 1: username validation, 2: email validation, 3: Signin
+   
+   $(document).ajaxStart(function() {
+        
+             ajaxStartProcess(processMode);
+   });
+   $(document).ajaxStop(function() {
+         
+     		ajaxStopProcess(processMode);   	
+   });
+    
    $('#platform').click(function() {
    		$('.platformMenu').removeClass('hiddenDiv');
    		$('.platformMenu').hide();
@@ -63,6 +126,7 @@ $(function() {
 		var loginBotCatcher = $('#loginBotCatcher').val();
 		if(loginBotCatcher.length==0)
 		{
+			    processMode=3;
 				$.post('/login/', $("#loginForm").serialize(), function(data) {			
 				if (data.status=="success") {
 					$.modal.close();
@@ -91,19 +155,23 @@ $(function() {
 	{
 		if(isValidEmailAddress(email))
 		{
+			processMode=2;
 			$('#emailErrorMessage').text('');
 			$('#emailErrorMessage').removeClass('validationFailed');
+			$('#emailErrorMessage').removeClass('error');
 			
 			$.get('/user/validateEmail',{'email':email}, function(data){
 				if(data.status =='fail')
 				{
 					$('#emailErrorMessage').text('Email exists!');
 					$('#emailErrorMessage').addClass('validationFailed');
+					$('#emailErrorMessage').addClass('error');	
 				}
 				else
 				{
 					$('#emailErrorMessage').text('');
 					$('#emailErrorMessage').removeClass('validationFailed');
+					$('#emailErrorMessage').removeClass('error');	
 				}
 				disableSignUpButtonOnError();
 			},'json');
@@ -112,22 +180,26 @@ $(function() {
 		{
 			$('#emailErrorMessage').text('Not a valid email!');
 			$('#emailErrorMessage').addClass('validationFailed');
+			$('#emailErrorMessage').addClass('error');	
 		}
 		disableSignUpButtonOnError();		
 	}
 	
 	function validateUsername(username)
 	{
+		processMode=1;
 		$.get('/user/validateUsername',{'username':username},function(data){
 			if(data.status =='fail')
 			{				
 				$('#usernameErrorMessage').text('Username exists!');
-				$('#usernameErrorMessage').addClass('validationFailed');				
+				$('#usernameErrorMessage').addClass('validationFailed');
+				$('#usernameErrorMessage').addClass('error');				
 			}
 			else
 			{
 				$('#usernameErrorMessage').text('');
 				$('#usernameErrorMessage').removeClass('validationFailed');
+				$('#usernameErrorMessage').removeClass('error');
 			}
 			disableSignUpButtonOnError();
 		},'json');
@@ -173,6 +245,7 @@ $(function() {
 		       	   var registerBotCatcher =$('#registerBotCatcher').val();
 		       	   if(registerBotCatcher.length == 0)
 		       	   {
+		       	   	    processMode=0;
 		       	   		$.post('/signup/', $("#signupForm").serialize(), function(data) {					
 						if (data.status=='success') 
 						{

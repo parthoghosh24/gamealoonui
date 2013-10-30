@@ -487,7 +487,7 @@ $(function(){
 			}	
 			
 		 	var followersInfo=[{label:"Followers", data:userFollowers, color:"#FF4500"},
-							{label:"Total", data:totalUsers, color:"#EAEAEA"}];
+							{label:"Total", data:totalUsers-userFollowers, color:"#EAEAEA"}];
 	
 				$.plot($("#followerdonut"), followersInfo,
 			    {
@@ -502,12 +502,12 @@ $(function(){
 			    });
     
     
-    			$("#followerdonutData").text((followersInfo[0].data/followersInfo[1].data*100).toFixed(1)+"%");
+    			$("#followerdonutData").text(((userFollowers/totalUsers)*100).toFixed(1)+"%");
     
     
     
 		    var followingInfo=[{label:"Following", data:userFollowing, color:"#FF4500"},
-		        {label:"Total", data:totalUsers, color:"#EAEAEA"}];
+		        {label:"Total", data:totalUsers-userFollowing, color:"#EAEAEA"}];
 		                        
 		        $.plot($("#followingdonut"), followingInfo,
 		        {
@@ -521,11 +521,11 @@ $(function(){
 		            legend: { show: false }
 		        });
 		        
-		        $("#followingdonutData").text((followingInfo[0].data/followingInfo[1].data*100).toFixed(1)+"%");
+		        $("#followingdonutData").text(((userFollowing/totalUsers)*100).toFixed(1)+"%");
     
     
 			var publishedInfo=[{label:"Published", data:userPublishedPosts, color:"#FF4500"},
-			{label:"Total", data:totalPublishedPosts, color:"#EAEAEA"}];
+			{label:"Total", data:totalPublishedPosts-userPublishedPosts, color:"#EAEAEA"}];
 				
 				$.plot($("#publisherdonut"), publishedInfo,
 			    {
@@ -539,10 +539,10 @@ $(function(){
 			        legend: { show: false }
 			    });
 			    
-			    $("#publishdonutData").text((publishedInfo[0].data/publishedInfo[1].data*100).toFixed(1)+"%");
+			    $("#publishdonutData").text(((userPublishedPosts/totalPublishedPosts)*100).toFixed(1)+"%");
 			    
 			 var awardsInfo=[{label:"Awards", data:userAwards, color:"#FF4500"},
-				{label:"Total", data:totalAwards, color:"#EAEAEA"}];
+				{label:"Total", data:totalAwards-userAwards, color:"#EAEAEA"}];
 				
 				$.plot($("#awardsdonut"), awardsInfo,
 			    {
@@ -556,10 +556,10 @@ $(function(){
 			        legend: { show: false }
 			    });
 			    
-			    $("#awardsdonutData").text((awardsInfo[0].data/awardsInfo[1].data*100).toFixed(1)+"%");
+			    $("#awardsdonutData").text(((userAwards/totalAwards)*100).toFixed(1)+"%");
 			    
 			    var coolInfo=[{label:"Cool", data:userTotalCoolScore, color:"#FF4500"},
-				{label:"Total", data:networkTotalCoolScore, color:"#EAEAEA"}];
+				{label:"Total", data:networkTotalCoolScore-userTotalCoolScore, color:"#EAEAEA"}];
 				
 				$.plot($("#cooldonut"), coolInfo,
 			    {
@@ -573,7 +573,7 @@ $(function(){
 			        legend: { show: false }
 			    });
 			    
-			    $("#cooldonutData").text((coolInfo[0].data/coolInfo[1].data*100).toFixed(1)+"%");
+			    $("#cooldonutData").text(((userTotalCoolScore/networkTotalCoolScore)*100).toFixed(1)+"%");
 
 	
 });

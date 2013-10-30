@@ -43,7 +43,7 @@ function generateComment(data)
 							 						"</div>"+
 							 					"</header>"+
 							 					"<span class=\"commentBody applyJura\">"+
-							 						data.message+
+							 						"<span class=\"colorGray font12\">"+data.converstationTimeFormatted+"- </span>"+data.message+
 							 					"</span>"+  
 				                  			"</div>"
 				                  			
@@ -61,7 +61,7 @@ function generateComment(data)
 			}
 
 function pollForComments()
-	{
+	{ 		
 		var articleId = $('.articleBody').attr('id');		
 		var lastTimeStamp = $('#commentList div:first-child #conversationTimestamp').val();				 
 		if(lastTimeStamp != undefined)
@@ -156,6 +156,7 @@ $(function(){
 				var userName =$('#userdetailsbox span').text()
 				var commentScore = 0.0;
 				var spamScore = 0.0;
+				var lastTimeStamp = $('#commentList div:first-child #conversationTimestamp').val();
 				
 				commentJson['articleId']=articleId;
 				commentJson['message']=message;
@@ -168,7 +169,11 @@ $(function(){
 					if(data.status === "success")
 					{					
 						console.log('success');
-						
+						if(lastTimeStamp == undefined)
+						{
+							generateComment(data);
+							$('#noComments').hide();
+						}
 					}
 					else
 					{
@@ -225,7 +230,7 @@ $(function(){
 				if(!isNaN(networkScore) && !isNaN(userGameScore))
 				{
 					var networkScoreInfo=[{label:"Network Score", data:networkScore, color:"#76A7F5"},
-								{label:"Total", data:10, color:"#EAEAEA"}];
+								{label:"Total", data:10-networkScore, color:"#EAEAEA"}];
 		
 						$.plot($("#networkScoreDonut"), networkScoreInfo,
 					    {
@@ -252,7 +257,7 @@ $(function(){
 		    
 		    
 				    var userGameScoreInfo=[{label:"User Score", data:userGameScore, color:"#FF4500"},
-				        {label:"Total", data:10, color:"#EAEAEA"}];
+				        {label:"Total", data:10-userGameScore, color:"#EAEAEA"}];
 				                        
 				        $.plot($("#userScoreDonut"), userGameScoreInfo,
 				        {

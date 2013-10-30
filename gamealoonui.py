@@ -63,7 +63,8 @@ class Index:
         response = urllib2.urlopen(url)
         jsonData=json.load(response)        
         session.baseUrl=jsonData['baseUrl']
-        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
+        if  not session.userAvatar:
+            session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
         return render.index(jsonData)
 
 
@@ -190,12 +191,12 @@ class CreateOrUpdatePost:
         print "Article UserName: ",session.username
         print "Article Platforms: ",articleFormData.platforms
         print "Article State: ",articleFormData.articleState
-        print "Article featured image url: ",articleFormData.featuredImageUrl
+        print "Article featured image url: ",articleFormData.featuredImage
         print "Article game score: ",articleFormData.gameScore
         print "Article game Id: ",articleFormData.gameId
         url="http://localhost:9000/article/save"                                            
         values={"gameScore":articleFormData.gameScore,"articleId":articleId,"articleTitle":articleFormData.title, "articleSubTitle":articleFormData.subTitle, "articleBody":articleFormData.body, "articleCategory":articleFormData.category
-                , "articleUsername":session.username, "articlePlatforms":articleFormData.platforms,"articleFeaturedImage":articleFormData.featuredImageUrl,"articleGameId":articleFormData.gameId, "articleState":articleFormData.articleState}
+                , "articleUsername":session.username, "articlePlatforms":articleFormData.platforms,"articleFeaturedImage":articleFormData.featuredImage,"articleGameId":articleFormData.gameId, "articleState":articleFormData.articleState}
         data=urllib.urlencode(values)
         request = urllib2.Request(url,data)
         response = urllib2.urlopen(request)
@@ -335,7 +336,8 @@ class Login:
         print "returning json dump"  
         print "Session username in login---->", session.username
         print "Session loggedIn in login---->", session.loggedIn
-        print "Session userid in login---->", session.userId     
+        print "Session userid in login---->", session.userId
+        print "Session useravatar in login---->", session.userAvatar          
         print"JSON", json.dumps(user)
         return json.dumps(user)    
         
@@ -344,6 +346,7 @@ class Logout:
         session.username="Guest"
         session.userId="Guest"
         session.loggedIn=False   
+        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
         session.kill()             
         return "done"
     
