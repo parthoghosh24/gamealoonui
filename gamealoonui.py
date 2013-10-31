@@ -1,5 +1,6 @@
 #!/usr/local/bin/python2.7
 
+import os
 import web
 import urllib2
 import urllib
@@ -8,7 +9,7 @@ import time
 from datetime import datetime
 
 web.config.debug=False
-
+curPath = os.path.dirname(__file__) 
 urls = (
         '/','Index',
         '/login/','Login',
@@ -45,7 +46,7 @@ urls = (
         )
 
 app = web.application(urls, globals())
-store=web.session.DiskStore('sessions')
+store=web.session.DiskStore(curPath+'/sessions')
 session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'baseUrl':'http://162.144.38.150:9000','userAvatar':''})
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
 render = web.template.render('templates/', base='main', globals={'session':session})
