@@ -4,10 +4,10 @@ $var description:All PS3, PS4, Xbox 360, Xbox One, Wii u, Vita, 3DS, Android, IO
 
 <div id='games'>
 				$if len(games) == 0:
-    				<span id="noGames" class="noData applyBevan">No Games</span>
+    				<div id="noGames" class="noData applyBevan">No Games</div>
     			$else:
     				$for game in games:    		
-    				    <div class="floatLeft textCenter">
+    				    <div class="floatLeft textCenter width100">
     				    	<div id="$game['gameId']" class="overflowHidden tabGrid" >		    			 		
 		    			    	<a href ="/game/$game['gameEncodedUrl']"><img src="$game['gameBoxShot']" alt="$game['gameTitle']" title="$game['gameTitle']" height="125"/></a>
 		    			    </div>
