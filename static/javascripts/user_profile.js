@@ -1025,7 +1025,7 @@ $(function() {
 			    $("#publishdonutData").text(((userPublishedPosts/totalPublishedPosts)*100).toFixed(1)+"%");
 			    
 			 var awardsInfo=[{label:"Awards", data:userAwards, color:"#FF4500"},
-				{label:"Total", data:totalAwards, color:"#EAEAEA"}];
+				{label:"Total", data:totalAwards-userAwards, color:"#EAEAEA"}];
 				
 				$.plot($("#awardsdonut"), awardsInfo,
 			    {
@@ -1039,7 +1039,7 @@ $(function() {
 			        legend: { show: false }
 			    });
 			    
-			    $("#awardsdonutData").text((awardsInfo[0].data/awardsInfo[1].data*100).toFixed(1)+"%");
+			    $("#awardsdonutData").text(((userAwards/totalAwards)*100).toFixed(1)+"%");
 			    
 			    var coolInfo=[{label:"Cool", data:userTotalCoolScore, color:"#FF4500"},
 				{label:"Total", data:networkTotalCoolScore-userTotalCoolScore, color:"#EAEAEA"}];

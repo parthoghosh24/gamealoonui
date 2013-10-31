@@ -541,7 +541,7 @@ function validateEditor()
 	var subTitle=$('#subTitle').val();
 	var body=window.frames['richEditor'].document.body.innerHTML;
 	var category=$('input[name="category"]:checked').val();
-	
+	var videoCheckerString ="http://www.youtube."
 	var isGame=0;
 	if($('#isGame').is(':checked'))
 	{
@@ -550,7 +550,7 @@ function validateEditor()
 	}
 	var platformCount =$('input.eplatform:checked').length;
 	
-	if(title.length==0 || subTitle.length==0 || body.length==0 || category==undefined || (isGame ==1 && gameId == "empty") || platformCount==0)
+	if(title.length==0 || subTitle.length==0 || body.length==0 || category==undefined || category=="video" && body.indexOf(videoCheckerString)==-1 || (isGame ==1 && gameId == "empty") || platformCount==0)
 	{
 		return false;
 	}

@@ -1,0 +1,16 @@
+$def with (users)
+$var title: All Users at Gamealoon
+$var description: All Game lovers at Gamealoon
+
+<div id='users'>
+				$if len(users) == 0:
+    				<span id="noUsers" class="noData applyBevan">No Users</span>
+    			$else:
+    				$for user in users:  
+    				     <div class="floatLeft textCenter">  				    					
+			    			 <div id="$user['userUserName']" class="overflowHidden tabGrid">		    			 	    
+			    			    	<a href ="/$user['userUserName']"><img src="$user['userAvatar']" alt="$user['userUserName']" title="$user['userUserName']"width="100" height="100"/></a>
+			    			 </div>
+			    			 <a href ="/$user['userUserName']"><span class="applyBevan colorGray">$user['userUserName']</span></a>
+		    			 </div>
+</div>

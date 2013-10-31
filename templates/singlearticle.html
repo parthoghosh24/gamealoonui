@@ -3,7 +3,7 @@ $ platforms = article['articlePlatforms']
 $ author = article['articleAuthor']
 $ categoryInLower = article['articleCategory'].lower()
 $var title: $:article['articleTitle']- $author['articleAuthorUsername'] 
-
+$var description: $:article['articleSubTitle']- Gamealoon
 	<div id="coverSection">		
 		<div id="coverSectionHead" class="applyFranklinGothic coverSectionHeaderFooter">
 			$if article['articleCategory']=='news':						
@@ -101,7 +101,7 @@ $var title: $:article['articleTitle']- $author['articleAuthorUsername']
 				 $if article['articleGame']:
 				 		<input type="hidden" id="networkScore" name="networkScore" value="$article['articleGame']['gameScore']">
 				 		<input type="hidden" id="userScore" name="userScore" value="$article['articleGameUserScore']">
-				 		<div id="networkScoreContent" class="floatLeft">
+				 		<div id="networkScoreContent" class="floatLeft" title="This is the generated gamealoon network score or true score. Please note that this score will vary from time to time when and as more users will review this game. This is totally algorithmically generated">
   							<div id="networkScoreDonutHolder" class="donutHolder donutHolderSize150">
   								 <div id="networkScoreDonut" class="donut">
   								 	
@@ -127,7 +127,7 @@ $var title: $:article['articleTitle']- $author['articleAuthorUsername']
   							</div>
   							
   						</div>  					
-  						<div id="userScoreContent" class="floatLeft">
+  						<div id="userScoreContent" class="floatLeft" title="$author['articleAuthorUsername']'s score">
   							<div id="userScoreDonutHolder" class="donutHolder donutHolderSize100">
   								 <div id="userScoreDonut" class="donut">
   								 	

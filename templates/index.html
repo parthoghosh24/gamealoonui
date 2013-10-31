@@ -5,26 +5,37 @@ $ platformValue = jsonData['platform']
 $ platformMessageMap ={"ps3":"Latest Playstation 3 Articles","all":"Latest All Articles","ps4":"Latest Playstation 4 Articles","xbox360":"Latest Xbox 360 Articles","xboxOne":"Latest Xbox One Articles", "pc":"Latest PC Articles", "n3ds":"Latest Nintendo 3DS Articles", "vita":"Latest Playstation Vita Articles","wiiu":"Latest Nintendo Wii-U Articles","ios":"Latest IOS Articles","android":"Latest Android Articles"}
 $if platformValue == 'all':
 	$var title:Welcome to gamealoon Beta- Find all gamer generated reviews, features, gloonicles, videos, news and more at Gamealoon	
+	$var description: Gamealoon is world's first totally video gamer centric video game entertainment and media website and also a social network. Gamealoon is a platform which lets video gamers from all around the world come, make a network, collaborate and generate reviews, videos, news, gloonicles and features for their favorite video games and platforms such as PS3, PS4, Vita, Xbox 360, Xbox one ,Wii u, 3ds, Android, PC and iOS or video games in general. 
 $elif platformValue == 'ps3':
 	$var title:Playstation 3 @ gamealoon- Find all gamer generated Playstation 3 reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Playstation 3 gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'ps4':
 	$var title:Playstation 4 @ gamealoon- Find all gamer generated Playstation 4 reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Playstation 4 gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'xbox360':
 	$var title:Xbox 360 @ gamealoon- Find all gamer generated Xbox 360 reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Xbox 360 gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'xboxOne':
-	$var title:Xbox One @ gamealoon- Find all gamer generated Xbox One reviews, features, gloonicles, videos, news and more at Gamealoon	
+	$var title:Xbox One @ gamealoon- Find all gamer generated Xbox One reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Xbox One gamer generated reviews, features, gloonicles, videos and news at Gamealoon	
 $elif platformValue == 'pc':
 	$var title:PC @ gamealoon- Find all gamer generated PC reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all PC gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'n3ds':
 	$var title:Nintendo 3DS @ gamealoon- Find all gamer generated Nintendo 3DS reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Nintendo 3DS gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'vita':
-	$var title:PS Vita @ gamealoon- Find all gamer generated PS Vita reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var title:Playstation Vita @ gamealoon- Find all gamer generated Playstation Vita reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Playstation Vita gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'wiiu':
 	$var title:Nintendo WII-U @ gamealoon- Find all gamer generated Nintendo WII-U reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all Nintendo Wii-U gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'ios':
 	$var title:Apple IOS @ gamealoon- Find all gamer generated IOS reviews, features, gloonicles, videos, news and more at Gamealoon
+	$var description: Find all iOS gamer generated reviews, features, gloonicles, videos and news at Gamealoon
 $elif platformValue == 'android':
-	$var title:Android @ gamealoon- Find all gamer generated Android reviews, features, gloonicles, videos, news and more at Gamealoon								    
+	$var title:Android @ gamealoon- Find all gamer generated Android reviews, features, gloonicles, videos, news and more at Gamealoon	
+	$var description: Find all Android gamer generated reviews, features, gloonicles, videos and news at Gamealoon							    
 		
 $if platformValue != 'all':
 		<ul class="platformMenu">	

@@ -22,6 +22,8 @@ urls = (
         '/searchSite/','Search',
         '/media','Media',
         '/about','About',
+        '/users','Users',
+        '/games','Games',
         '/post/save','CreateOrUpdatePost',        
         '/platform/(.+)/(.+)','Platform',
         '/article/article-preview','ArticlePreview',
@@ -409,7 +411,23 @@ class Media:
         request = urllib2.Request(url)        
         response = urllib2.urlopen(request)
         videos=json.load(response)        
-        return render.media(videos)   
+        return render.media(videos)
+
+class Users:
+    def GET(self):                         
+        url="http://localhost:9000/users"               
+        request = urllib2.Request(url)        
+        response = urllib2.urlopen(request)
+        users=json.load(response)        
+        return render.users(users)
+    
+class Games:
+    def GET(self):                         
+        url="http://localhost:9000/games"               
+        request = urllib2.Request(url)        
+        response = urllib2.urlopen(request)
+        games=json.load(response)        
+        return render.games(games)           
 
 class ValidateEmail:
     def GET(self):
