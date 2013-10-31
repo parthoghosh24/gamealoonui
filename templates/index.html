@@ -403,38 +403,40 @@ $else:
 			
 
 		</div>
+		<!--
 		<div id="recentGames" class="bottommargin">
-			<div class="sideBarHeader">
-				<span class="sideBarSubHeader"> <span>Recent Games</span> </span>
-			</div>
-			$if len(jsonData['recent5Games'])==0:
-				<span class="colorGray font14 fontWeightBold">No Top Games</span>		
-			$for game in jsonData['recent5Games']:
-				<div class="topAndRecentVideoDiv">
-					<div class="userDetailTable">
-						<div class="userDetailTableData">
-							<a href="/game/$game['gameEncodedUrl']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$game['gameTitle']</a>
-						</div>												
+					<div class="sideBarHeader">
+						<span class="sideBarSubHeader"> <span>Recent Games</span> </span>
 					</div>
-					<a href="/game/$game['gameEncodedUrl']" class="floatRight"><img src="$game['gameBoxShot']" width="40" height="60"/></a>
-				</div>			
-		</div>
-		<div id="topGames" class="bottommargin">
-			<div class="sideBarHeader">
-				<span class="sideBarSubHeader"> <span>Top Games</span> </span>
-			</div>
-			$if len(jsonData['recent5Games'])==0:
-				<span class="colorGray font14 fontWeightBold">No Recent Games</span>			
-			$for game in jsonData['top5Games']:
-				<div class="topAndRecentVideoDiv">
-					<div class="userDetailTable">
-						<div class="userDetailTableData">
-							<a href="/game/$game['gameEncodedUrl']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$game['gameTitle']</a>
-						</div>												
+					$if len(jsonData['recent5Games'])==0:
+						<span class="colorGray font14 fontWeightBold">No Top Games</span>		
+					$for game in jsonData['recent5Games']:
+						<div class="topAndRecentVideoDiv">
+							<div class="userDetailTable">
+								<div class="userDetailTableData">
+									<a href="/game/$game['gameEncodedUrl']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$game['gameTitle']</a>
+								</div>												
+							</div>
+							<a href="/game/$game['gameEncodedUrl']" class="floatRight"><img src="$game['gameBoxShot']" width="40" height="60"/></a>
+						</div>			
+				</div>
+				<div id="topGames" class="bottommargin">
+					<div class="sideBarHeader">
+						<span class="sideBarSubHeader"> <span>Top Games</span> </span>
 					</div>
-					<a href="/game/$game['gameEncodedUrl']" class="floatRight"><img src="$game['gameBoxShot']" width="40" height="60"/></a>
-				</div>			
-		</div>
+					$if len(jsonData['recent5Games'])==0:
+						<span class="colorGray font14 fontWeightBold">No Recent Games</span>			
+					$for game in jsonData['top5Games']:
+						<div class="topAndRecentVideoDiv">
+							<div class="userDetailTable">
+								<div class="userDetailTableData">
+									<a href="/game/$game['gameEncodedUrl']" class="font12 fontWeightBold textDecorationNone colorSideBarText">$game['gameTitle']</a>
+								</div>												
+							</div>
+							<a href="/game/$game['gameEncodedUrl']" class="floatRight"><img src="$game['gameBoxShot']" width="40" height="60"/></a>
+						</div>			
+				</div>-->
+		
 		
 		<div id="adbox2" class="bottommargin">
 			Ad box 2
