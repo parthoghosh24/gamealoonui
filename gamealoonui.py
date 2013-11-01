@@ -49,10 +49,11 @@ app = web.application(urls, globals())
 store=web.session.DiskStore(curPath+'/sessions')
 session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'baseUrl':'http://162.144.38.150:9000','userAvatar':''})
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
-render = web.template.render(curPath+'/templates/', base='main', globals={'session':session})
+render = web.template.render('templates', base='main', globals={'session':session})
 
 class Index:
     def GET(self):       
+        print "cur path---->", curPath
         print "Session username---->", session.username
         print "Session loggedIn---->", session.loggedIn
         print "Session userId---->", session.userId
