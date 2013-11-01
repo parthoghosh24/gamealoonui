@@ -65,6 +65,7 @@ class Index:
         session.baseUrl=jsonData['baseUrl']
         if  not session.userAvatar:
             session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.index(jsonData)
 
 
@@ -75,6 +76,7 @@ class Platform:
         url="http://localhost:9000/platform/"+platform+"/"+category        
         response = urllib2.urlopen(url)
         jsonData=json.load(response)                
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.index(jsonData)   
 
 
@@ -83,6 +85,7 @@ class Article:
         url="http://localhost:9000/articles/"+category+"/totalScore"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.article(jsonData)
     
 class SingleArticle:
@@ -97,6 +100,7 @@ class SingleArticle:
             print"Dumped JSON: ",json.dumps(article)
             return json.dumps(article) 
         else:
+            web.header('Content-Type','text/html;charset=utf-8')
             return render.singlearticle(article)
         
 class ArticleList:
@@ -137,6 +141,7 @@ class SingleGame:
         url="http://localhost:9000/game/"+gameUrlOrId+"/"+session.username       
         response = urllib2.urlopen(url)
         gameJson=json.load(response)
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.singlegame(gameJson)
     
 class UserProfile:
@@ -146,6 +151,7 @@ class UserProfile:
             response = urllib2.urlopen(url)
             user=json.load(response)
             print "USERPROFILE JSON", user
+            web.header('Content-Type','text/html;charset=utf-8')
             return render.userprofile(user)
         else:
             return web.redirect("/") 
@@ -156,6 +162,7 @@ class User:
         url="http://localhost:9000/users"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.user(jsonData)
             
 class FetchImages:
@@ -173,6 +180,7 @@ class SingleUser:
         url="http://localhost:9000/user/"+username+"/2/"+session.username
         response = urllib2.urlopen(url)
         user=json.load(response)
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.singleuser(user)
 
 class UserStats:
@@ -299,6 +307,7 @@ class ArticlePreview:
         print "gameScore ",previewData.pGameScore       
         score= float(previewData.pGameScore)/10   
         previewPage={"title":previewData.ptitle, "subTitle":previewData.psubTitle, "body":previewData.pbody, "featuredImage":previewData.pfeaturedImageUrl, "category":previewData.pcategory,"gameBio":previewData.puserGameBio,"username":previewData.puserName,"articleGame":previewData.pGame, "articleGameBoxShot":previewData.pGameBoxShot,"gameScore":score}
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.postpreview(previewPage)        
 
 class ArticleUpdateAverageTimeSpent:
@@ -369,7 +378,8 @@ class Search:
         query=web.input()            
         url="http://localhost:9000/search/q="+query.searchbox        
         response = urllib2.urlopen(url)        
-        responseQuery=json.load(response)        
+        responseQuery=json.load(response)       
+        web.header('Content-Type','text/html;charset=utf-8') 
         return render.search(responseQuery)            
 
 
@@ -408,7 +418,8 @@ class Media:
         url="http://localhost:9000/articles/all/video/"+str(timestamp*1000)+"/1"               
         request = urllib2.Request(url)        
         response = urllib2.urlopen(request)
-        videos=json.load(response)        
+        videos=json.load(response)    
+        web.header('Content-Type','text/html;charset=utf-8')    
         return render.media(videos)
 
 class Users:
@@ -416,7 +427,8 @@ class Users:
         url="http://localhost:9000/users"               
         request = urllib2.Request(url)        
         response = urllib2.urlopen(request)
-        users=json.load(response)        
+        users=json.load(response) 
+        web.header('Content-Type','text/html;charset=utf-8')       
         return render.users(users)
     
 class Games:
@@ -424,7 +436,8 @@ class Games:
         url="http://localhost:9000/games"               
         request = urllib2.Request(url)        
         response = urllib2.urlopen(request)
-        games=json.load(response)        
+        games=json.load(response)  
+        web.header('Content-Type','text/html;charset=utf-8')      
         return render.games(games)           
 
 class ValidateEmail:
@@ -447,6 +460,7 @@ class ValidateUsername:
         
 class About:    
     def GET(self):
+        web.header('Content-Type','text/html;charset=utf-8')
         return render.about()
         
 if __name__ == "__main__":        
