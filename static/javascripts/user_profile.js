@@ -894,7 +894,11 @@ $(function() {
 						$('#userAvatarErrorMessage').text('Something Wrong happened. Please try again!');
 						$('#userAvatarErrorMessage').fadeIn("Slow");
             		}
-        		}  
+        		},
+        		error: function (xhr, ajaxOptions, thrownError) {
+       				   console.log("Error while uploading image "+xhr.status);
+        			   console.log("Error while uploading image "+thrownError);
+                 }  
     		}); 
     		$('#userAvatarErrorMessage').hide();
     	}	

@@ -193,7 +193,11 @@ $(function(){
 	        				}           			            			
 	            				
 	            			  
-	        			}          			
+	        			},
+	        			error: function (xhr, ajaxOptions, thrownError) {
+		       				   console.log("Error while uploading image "+xhr.status);
+		        			   console.log("Error while uploading image "+thrownError);
+                 			}          			
 	    			});
 	    			$('#imageErrorMessage').hide();
 			    }
