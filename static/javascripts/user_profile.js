@@ -731,7 +731,8 @@ $(function() {
 						$('#title').val(data.articleTitle);
 						
 						$('#subTitle').val(data.articleSubTitle);
-												 $('#ariticleFeaturedImageSelector img').attr('src',data.articleFeaturedImage);						
+												 $('#ariticleFeaturedImageSelector img').attr('src',data.articleFeaturedImage);
+												 $('#ariticleFeaturedImageSelector img').attr('id',data.articleFeaturedImageId);															 			
 												window.frames['richEditor'].document.body.innerHTML=data.articleBody;
 												if(data.articleState === 2)
 												{
