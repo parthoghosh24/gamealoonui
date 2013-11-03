@@ -157,11 +157,13 @@ $(function(){
 	            		$('#noImage').show();	
 	            		$('#uploadImage').prop('disabled',true);
 	            		$('#uploadImage').addClass('disableOpacity');
+	            		$('#preview').addClass('disableOpacity');
 				 	});
 				 	
 		$(document).ajaxStop(function() {
 		  			 $('#uploadImage').prop('disabled',false);
 	            	 $('#uploadImage').removeClass('disableOpacity');
+	            	 $('#preview').removeClass('disableOpacity');
 		});
 				 	
 		$('#uploadImage').click(function() {			    
@@ -170,8 +172,7 @@ $(function(){
 			    {
 			    	var userName=$('span#userName a').text();
 				    var formdata = new FormData();
-				 	formdata.append('previewFile',image);			
-				 	
+				 	formdata.append('previewFile',image);							 	
 			     	$.ajax({          
 			     		url: "http://www.gamealoon.com:9000/media/uploadImage/"+userName+"/none/user", 		
 	        			type: "POST",          		

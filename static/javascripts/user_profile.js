@@ -866,6 +866,17 @@ $(function() {
 			});
 		});
 	
+	$.(document).ajaxStart(function() {
+	  $('#selectedUserAvatar').addClass('disableOpacity');
+	  $('#upload').prop('disabled',true);
+	  $('#upload').addClass('disableOpacity');
+	});
+	$.(document).ajaxStop(function() {
+	  $('#selectedUserAvatar').removeClass('disableOpacity');
+	  $('#upload').removeClass('disableOpacity');
+	  $('#upload').prop('disabled',false);
+	});
+	
 	$('#upload').click(function() {		
 		var avatarImage = $('#userAvatarFile').get(0).files[0];				
 		var userName=$('span#userName a').text(); 		
