@@ -22,7 +22,7 @@ function ajaxStartProcess(processMode)
 	{
      	
      	case 0:
-     	        $('.spinner').addClass('icon-spin1 animate-spin');
+     	        $('#signupSpinner').addClass('icon-spin1 animate-spin');
      	        $('#signUpStatusMessage').addClass('colorWhite');
 				$('#signUpStatusMessage').text('Please wait...');				
 			    $('signUp').prop('disabled',true);
@@ -30,17 +30,17 @@ function ajaxStartProcess(processMode)
      			break;
      	case 1:
      	        $('#usernameErrorMessage').text('Please Wait...');
-     	        $('.spinner').addClass('icon-spin1 animate-spin');
+     	        $('#usernameSpinner').addClass('icon-spin1 animate-spin');
 				$('#usernameErrorMessage').addClass('colorWhite');
      			break;
      	case 2: 
      			$('#emailErrorMessage').text('Please Wait...');
-     			$('.spinner').addClass('icon-spin1 animate-spin');
+     			$('#emailSpinner').addClass('icon-spin1 animate-spin');
 				$('#emailErrorMessage').addClass('colorWhite');				
      			break;
      	case 3:
      	        $('#signInStatusMessage').addClass('colorWhite');
-     	        $('.spinner').addClass('icon-spin1 animate-spin');
+     	        $('#signInSpinner').addClass('icon-spin1 animate-spin');
      	        $('#signInStatusMessage').text('Signing in...');							    
      	        $('signIn').prop('disabled',true);
 			    $('signIn').addClass('disableOpacity');
@@ -56,21 +56,21 @@ function ajaxStopProcess(processMode)
      	 
      	case 0:
                 $('#signUpStatusMessage').removeClass('colorWhite');	            
-                $('.spinner').removeClass('icon-spin1 animate-spin');    				
+                $('#signupSpinner').removeClass('icon-spin1 animate-spin');    				
                 $('signUp').prop('disabled',false);
 			    $('signUp').removeClass('disableOpacity');					
      			break;
      	case 1: 
      	    	 		
-     	        $('.spinner').removeClass('icon-spin1 animate-spin');
+     	        $('#usernameSpinner').removeClass('icon-spin1 animate-spin');
 				$('#usernameErrorMessage').removeClass('colorWhite');
      			break;
      	case 2:     	        
-     			$('.spinner').removeClass('icon-spin1 animate-spin');
+     			$('#emailSpinner').removeClass('icon-spin1 animate-spin');
 				$('#emailErrorMessage').removeClass('colorWhite');
      			break;
      	case 3:
-     			$('.spinner').removeClass('icon-spin1 animate-spin');
+     			$('#signInSpinner').removeClass('icon-spin1 animate-spin');
      			$('#signInStatusMessage').removeClass('colorWhite');
      	        $('#signInStatusMessage').text('');				
 				$('signIn').prop('disabled',false);

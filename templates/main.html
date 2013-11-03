@@ -73,7 +73,7 @@ $def with (page)
 									<br />
 									<button id='signIn' class="icon-login signInButton applyBevan">Sign in</button>			
 									<br/>
-									<span id="signInStatusMessage" class="fontWeightBold textShadowBlack font12"> </span><i class="spinner"></i>						
+									<span id="signInStatusMessage" class="fontWeightBold textShadowBlack font12"> </span><i id="signInSpinner" class="spinner fontWeightBold textShadowBlack font12 colorWhite"></i>						
 								</form>
 
 							</div>
@@ -87,10 +87,10 @@ $def with (page)
 										<input type="text" name="last" required="required" placeholder="Last(Max 8 chars)" maxlength="8"/>
 										<br />
 										<br />										
-										<input type="text" id='signupUsername' name="username" required="required" placeholder="Username(Max 12 chars)" maxlength="12"/><span id="usernameErrorMessage" class="fontWeightBold textShadowBlack font12"> </span><i class="spinner fontWeightBold textShadowBlack font12 colorWhite"></i>
+										<input type="text" id='signupUsername' name="username" required="required" placeholder="Username(Max 12 chars)" maxlength="12"/><span id="usernameErrorMessage" class="fontWeightBold textShadowBlack font12"> </span><i id="usernameSpinner" fontWeightBold textShadowBlack font12 colorWhite"></i>
 										<br />
 										<br />										
-										<input type="text" id='email' name="email" required="required" placeholder="Email"/><span id="emailErrorMessage" class="fontWeightBold textShadowBlack font12"> </span>	<i class="spinner fontWeightBold textShadowBlack font12 colorWhite"></i>
+										<input type="text" id='email' name="email" required="required" placeholder="Email"/><span id="emailErrorMessage" class="fontWeightBold textShadowBlack font12"> </span>	<i id="emailSpinner" class="spinner fontWeightBold textShadowBlack font12 colorWhite"></i>
 										<br />
 										<br />										
 										<input name="password" type="password" required="required" placeholder="Password"/>
@@ -101,7 +101,7 @@ $def with (page)
 									<br />
 									<button id='signUp' class="icon-rocket signInButton applyBevan">Sign up</button>			
 									<br>
-									<span id="signUpStatusMessage" class="fontWeightBold textShadowBlack font12"> </span><i class="spinner fontWeightBold textShadowBlack font12 colorWhite"></i>						
+									<span id="signUpStatusMessage" class="fontWeightBold textShadowBlack font12"> </span><i id="signupSpinner" class="spinner fontWeightBold textShadowBlack font12 colorWhite"></i>						
 								</form>
 						</div>
 						
