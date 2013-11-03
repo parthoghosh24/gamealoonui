@@ -866,12 +866,14 @@ $(function() {
 			});
 		});
 	
-	$.(document).ajaxStart(function() {
+	$(document).ajaxStart(function() {
 	  $('#selectedUserAvatar').addClass('disableOpacity');
-	  $('#upload').prop('disabled',true);
 	  $('#upload').addClass('disableOpacity');
+	  $('#upload').prop('disabled',true);
+	  
 	});
-	$.(document).ajaxStop(function() {
+	
+	$(document).ajaxStop(function() {
 	  $('#selectedUserAvatar').removeClass('disableOpacity');
 	  $('#upload').removeClass('disableOpacity');
 	  $('#upload').prop('disabled',false);
