@@ -875,7 +875,7 @@ $(function() {
 			 var userAvatarId=$('.selectAvatar').attr('id');
 			 formdata.append('userAvatarFile',avatarImage);			
 		     $.ajax({          
-		     	url: "http://localhost:9000/user/saveOrUpdateUserAvatar/"+userName+"/"+userAvatarId, 		
+		     	url: "http://www.gamealoon.com:9000/user/saveOrUpdateUserAvatar/"+userName+"/"+userAvatarId, 		
         		type: "POST",        
         		dataType:'json',  		
         		data: formdata,         		

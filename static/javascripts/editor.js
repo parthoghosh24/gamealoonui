@@ -173,7 +173,7 @@ $(function(){
 				 	formdata.append('previewFile',image);			
 				 	
 			     	$.ajax({          
-			     		url: "http://localhost:9000/media/uploadImage/"+userName+"/none/user", 		
+			     		url: "http://www.gamealoon.com:9000/media/uploadImage/"+userName+"/none/user", 		
 	        			type: "POST",          		
 	        			data: formdata,      
 	        			dataType:'json',   		
