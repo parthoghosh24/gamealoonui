@@ -22,22 +22,22 @@ function generateComment(data)
 							 							"</a>"+				 							
 							 							"<div class=\"commentVoteControl\">"+
 							 								"<div class=\"upArrow\">"+
-							 									"<a href=\"javascript:;\" title=\"yay\">"+
-							 										"^"+
+							 									"<a href=\"javascript:;\" title=\"yay\" class=\"colorGray\">"+
+							 										"<i class=\"icon-up-dir\"></i>"+
 							 									"</a>"+
 							 								"</div>"+
 							 								"<div class=\"val\">"+
 							 									"0"+
 							 								"</div>"+
 							 								"<div class=\"downArrow\">"+
-							 									"<a href=\"javascript:;\" title=\"nay\">"+
-							 										"v"+
+							 									"<a href=\"javascript:;\" title=\"nay\" class=\"colorGray\">"+
+							 										"<i class=\"icon-down-dir\"></i>"+
 							 									"</a>"+
 							 								"</div>"+
 							 							"</div>"+
 							 							"<div class=\"commentFlag\">"+
-							 								"<a href=\"javascript:;\" title=\"flag as inappropriate\">"+
-							 									"<img src=\"/static/images/icon_flag_new.jpg\">"+
+							 								"<a href=\"javascript:;\" title=\"flag as inappropriate\" class=\"colorGray\">"+
+							 									"<i class='icon-flag'></i>"+
 							 								"</a>"+
 							 							"</div>"+
 							 						"</div>"+
@@ -174,6 +174,7 @@ $(function(){
 							generateComment(data);
 							$('#noComments').hide();
 						}
+						$('#commentBody').val("");
 					}
 					else
 					{

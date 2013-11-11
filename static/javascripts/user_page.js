@@ -370,6 +370,15 @@ $(function(){
     
 			$("#tabs-min").tabs();
 	
+	$(document).ajaxStart(function() {
+	  $('#socialInteraction').addClass('disableOpacity');
+	  $('#socialInteraction').prop("disabled",true);
+	});
+	$(document).ajaxStop(function() {
+	  $('#socialInteraction').removeClass('disableOpacity');
+	  $('#socialInteraction').prop("disabled",false);
+	});
+	
     $('.loadMore').click(function() {
     	var username=$('#userName span').text();	    	
     	var category=$(this).parents('div').attr('id');
@@ -387,7 +396,7 @@ $(function(){
 			 	   	  	{
 			 	   	  		$('#socialInteraction').removeClass('follow');
 			 	   	  		$('#socialInteraction').addClass('unfollow');   
-			 	   	  		$('#socialInteraction').text('- Unfollow');
+			 	   	  		$('#socialInteraction').text('- Unfollow');			 	   	  		
 			 	   	  	}
 			 	   	  	
 			 	   	  },'json');
@@ -401,7 +410,7 @@ $(function(){
 			 	   	  	{
 			 	   	  		$('#socialInteraction').removeClass('unfollow');
 			 	   	  		$('#socialInteraction').addClass('follow');
-			 	   	  		$('#socialInteraction').text('+ Follow');
+			 	   	  		$('#socialInteraction').text('+ Follow');			 	   	  		
 			 	   	  	}
 			 	   	  	   
 			 	   	  },'json');

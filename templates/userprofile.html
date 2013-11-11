@@ -379,13 +379,22 @@ $var description: My Gloon Profile
 								$if activity['activityType'] == 7:
 									<a href="/$activity['activityUserName']">You</a>$activity['message']<strong>$activity['achievementTitle']</strong>
 								$if activity['activityType'] == 3:
-									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-								$if activity['activityType'] == 4:								
-									<a href="/$activity['activityUserName']" target="_blank">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank"><strong>$activity['articleTitle']</strong>, &nbsp;&nbsp;<strong><i class="colorGray">"$activity['activityComment']..."</i></strong></a>		
+									$if activity['activityUserName'] == activity['activityOwnerUserName']:
+										<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
+									$else:
+										<a href="/$activity['activityUserName']">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>	
+								$if activity['activityType'] == 4:
+									$if activity['activityUserName'] == activity['activityOwnerUserName']:								
+										<a href="/$activity['activityUserName']" target="_blank">You</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank"><strong>$activity['articleTitle']</strong>, &nbsp;&nbsp;<strong><i class="colorGray">"$activity['activityComment']..."</i></strong></a>
+									$else:
+										<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank"><strong>$activity['articleTitle']</strong>, &nbsp;&nbsp;<strong><i class="colorGray">"$activity['activityComment']..."</i></strong></a>		
 								$if activity['activityType'] == 8:
 									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/$activity['notFollowingUserName']" target="_blank"><strong>$activity['notFollowingUserName']</strong></a>
 								$if activity['activityType'] == 11:
-									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>
+									$if activity['activityUserName'] == activity['activityOwnerUserName']:								
+										<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>
+									$else:
+										<a href="/$activity['activityUserName']">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>
 								$if activity['activityType'] == 12:
 									<a href="/$activity['activityUserName']">You</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['notFollowingGame']</strong></a>
 								$if activity['activityType'] == 14:

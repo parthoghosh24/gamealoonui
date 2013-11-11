@@ -42,7 +42,7 @@ $(function() {
 	          //First Name
 	          $('#userNameDetails').on('click','#userFirstName', function() {	          	  
 	          	  var firstName = $('#userFirstName').text();
-	          	  var firstNameElement = "<input type ='text' name='firstName' id='firstName' value='"+firstName+"' maxlength='8' placeholder='FirstName(Max 8 chars)'/>";
+	          	  var firstNameElement = "<input type ='text' name='firstName' id='firstName' value='"+firstName+"' maxlength='10' placeholder='FirstName(Max 10 chars)'/>";
 	          	  console.log(firstNameElement);	          	  	          	 
 	          	  $('#userFirstName').replaceWith(firstNameElement);
 	          	  $('#firstName').focus();
@@ -68,7 +68,7 @@ $(function() {
 			//Last Name	  	
 			 $('#userNameDetails').on('click','#userLastName', function() {	          	  
 	          	  var lastName = $('#userLastName').text();
-	          	  var lastNameElement = "<input type ='text' name='lastName' id='lastName' value='"+lastName+"' maxlength='8' placeholder='LastName(Max 8 chars)'/>";
+	          	  var lastNameElement = "<input type ='text' name='lastName' id='lastName' value='"+lastName+"' maxlength='10' placeholder='LastName(Max 10 chars)'/>";
 	          	  console.log(lastNameElement);	          	  	          	 
 	          	  $('#userLastName').replaceWith(lastNameElement);
 	          	  $('#lastName').focus();
