@@ -389,33 +389,41 @@ $(function(){
 	
 	//Follow Unfollow
 			 $('#socialInteraction').click(function() {
-			 	   if($('#socialInteraction').hasClass('follow'))
-			 	   {
-			 	   	  $.post('/user/followOrUnfollow',{"buddyUsername":$('#userName span').text(),"type":0},function(data){
-			 	   	  	if(data.status == "success")
-			 	   	  	{
-			 	   	  		$('#socialInteraction').removeClass('follow');
-			 	   	  		$('#socialInteraction').addClass('unfollow');   
-			 	   	  		$('#socialInteraction').text('- Unfollow');			 	   	  		
-			 	   	  	}
-			 	   	  	
-			 	   	  },'json');
-			 	   	  
-			 	   	  
-			 	   }
-			 	   if($('#socialInteraction').hasClass('unfollow'))
-			 	   {			 	   	
-			 	   	$.post('/user/followOrUnfollow',{"buddyUsername":$('#userName span').text(),"type":1},function(data){
-			 	   		if(data.status == "success")
-			 	   	  	{
-			 	   	  		$('#socialInteraction').removeClass('unfollow');
-			 	   	  		$('#socialInteraction').addClass('follow');
-			 	   	  		$('#socialInteraction').text('+ Follow');			 	   	  		
-			 	   	  	}
-			 	   	  	   
-			 	   	  },'json');
-			 	   	  	
-			 	   }			 	   
+			 	   if("Guest"==$("div#userdetailsbox span").text())
+		 		   {
+		 				openLoginModal();
+		 		   }
+		 		   else
+		 		   {
+			 		   	if($('#socialInteraction').hasClass('follow'))
+				 	   	{
+				 	   	  $.post('/user/followOrUnfollow',{"buddyUsername":$('#userName span').text(),"type":0},function(data){
+				 	   	  	if(data.status == "success")
+				 	   	  	{
+				 	   	  		$('#socialInteraction').removeClass('follow');
+				 	   	  		$('#socialInteraction').addClass('unfollow');   
+				 	   	  		$('#socialInteraction').text('- Unfollow');			 	   	  		
+				 	   	  	}
+				 	   	  	
+				 	   	  },'json');
+				 	   	  
+				 	   	  
+				 	   }
+				 	   if($('#socialInteraction').hasClass('unfollow'))
+				 	   {			 	   	
+				 	   	$.post('/user/followOrUnfollow',{"buddyUsername":$('#userName span').text(),"type":1},function(data){
+				 	   		if(data.status == "success")
+				 	   	  	{
+				 	   	  		$('#socialInteraction').removeClass('unfollow');
+				 	   	  		$('#socialInteraction').addClass('follow');
+				 	   	  		$('#socialInteraction').text('+ Follow');			 	   	  		
+				 	   	  	}
+				 	   	  	   
+				 	   	  },'json');
+				 	   	  	
+				 	   }
+		 		   }
+			 	   			 	   
 				 });
 				 
 	//Block Unblock			 

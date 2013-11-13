@@ -133,16 +133,23 @@ $(function(){
 	
 
 	startTime=new Date().getTime();
-	
+	$('.notActiveButton').click(function() {
+		if("Guest"==$("div#userdetailsbox span").text())
+		 {
+		 	openLoginModal();
+		 }
+		});
 	$('.activeButton').click(function() {
-		 var articleId = $('.articleBody').attr('id');
+		 var articleId = $('.articleBody').attr('id');		 		
 		 ($(this).attr('id')=="yeah")?updateCoolState(articleId):updateNotCoolState(articleId);
+		 
+		 
 		 
 		 
 		});
 	pollForComments();
 	$('#postContent').click(function() {
-		if($('#userdetailsbox span').text() == "Guest")
+		if($('div#userdetailsbox span').text() == "Guest")
 		{
 			openLoginModal();
 		}

@@ -408,7 +408,7 @@ $var description: My Gloon Profile
     				<span id="noFollowers" class="noData applyBevan">No Followers</span>
     			$else:
     			    $for follower in user['userFollowedBy']:
-		    			  <div id="$follower['buddyUsername']" class="floatLeft overflowHidden tabGrid">		    			 	    
+		    			  <div id="$follower['buddyUsername']" class="floatLeft overflowHidden tabGrid otherGridDim">		    			 	    
 		    			    	<a href ="/$follower['buddyUsername']"><img src="$follower['buddyUserAvatar']" alt="$follower['buddyUsername']" title="$follower['buddyUsername']" width="100" height="100"/></a>
 		    			 </div> 	
     		</div>
@@ -418,7 +418,7 @@ $var description: My Gloon Profile
     				<span id="noFollowing" class="noData applyBevan">No Following</span>
     			$else:
     			    $for following in user['userFollowingOthers']:
-		    			<div id="$following['buddyUsername']" class="floatLeft overflowHidden tabGrid" >		    			 		
+		    			<div id="$following['buddyUsername']" class="floatLeft overflowHidden tabGrid otherGridDim" >		    			 		
 		    			    	<a href ="/$following['buddyUsername']"><img src="$following['buddyUserAvatar']" alt="$following['buddyUsername']" title="$following['buddyUsername']" width="100" height="100"/></a>
 		    			 </div> 			    		
     		</div>
@@ -427,7 +427,7 @@ $var description: My Gloon Profile
     				<div class="noData applyBevan">No Games</div>
     			$else:
     			    $for game in user['userInterestedGames']:
-		    			 <div id="$game['interestedGameId']" class="floatLeft overflowHidden tabGrid" >		    			 		
+		    			 <div id="$game['interestedGameId']" class="floatLeft overflowHidden tabGrid otherGridDim" >		    			 		
 		    			    	<a href ="/game/$game['interestedGameURL']"><img src="$game['interestedGameBoxShot']" alt="$game['interestedGameTitle']" title="$game['interestedGameTitle']" height="125"/></a>
 		    			 </div>  
 			</div>
@@ -437,7 +437,7 @@ $var description: My Gloon Profile
     				<span id="noAwards" class="noData applyBevan">No Awards</span>
     			$else:
     				$for award in user['userAchievements']:
-    					<div id="$award['achievementImage']"  class="floatLeft overflowHidden tabGrid">
+    					<div id="$award['achievementImage']"  class="floatLeft overflowHidden tabGrid otherGridDim">
 		    			    	<img src="$session.baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
 		    			 </div>	
     		</div>

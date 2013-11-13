@@ -34,8 +34,10 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 		        			</div>
 		        		</div>	
 		        		<div class="divRow">
-		        			<div class="divCell">Genre</div>
-		        			<div class="divCell">$game['gameGenere']</div>
+		        			<div class="divCell">Genre</div>		        			
+		        			<div class="divCell">
+		        				<span class="genreStyle blackBoxShadow interestUserProfileFontSize">$game['gameGenere']</span>		        				
+		        			</div>
 		        		</div>	
 		        		<div class="divRow">
 		        			<div class="divCell">Rating</div>
@@ -378,7 +380,7 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
     				<div class="noData applyBevan">No Users</div>
     			$else:
     			    $for user in game['gameInterestedUsers']:
-		    			 <div id="$user['interestedUserUserName']" class="floatLeft overflowHidden tabGrid">		    			 	    
+		    			 <div id="$user['interestedUserUserName']" class="floatLeft overflowHidden tabGrid otherGridDim">		    			 	    
 		    			    	<a href ="/$user['interestedUserUserName']"><img src="$user['interestedAvatarPath']" alt="$user['interestedUserUserName']" title="$user['interestedUserUserName']"width="100" height="100"/></a>
 		    			 </div> 
 			</div>			

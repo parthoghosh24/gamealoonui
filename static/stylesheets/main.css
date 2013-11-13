@@ -528,9 +528,11 @@ body {
 
 #editorButtons
 {
+	position:fixed;
 	width:600px;
 	background-color: #fff;
 	font-size:19px;
+	opacity: 0.9;
 }
 .singleUserStatsWidth
 {
@@ -999,6 +1001,16 @@ img {
 }
 
 /*---News--*/
+.gridDim
+{
+	width:110px;
+	min-height: 200px;
+}
+.otherGridDim
+{
+	width:100px;
+	height: 100px;
+}
 .height260
 {
 	height: 260px;
@@ -2283,6 +2295,7 @@ img.fade
 	border-spacing: 12px;
 	color: #1059C7;
 	margin-left: -10px;
+	background-color: #f8f8f8;
 }
 
 
