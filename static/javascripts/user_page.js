@@ -9,10 +9,12 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var commentCount=$(this).data('commentcount');
 			$('a#featuredArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#featuredArticleTitle span').text(title);
 			$('a#featuredArticleAuthor').attr('href','/'+username);
-			$('a#featuredArticleAuthor span').text(username);	        
+			$('a#featuredArticleAuthor span').text(username);	  
+			$('#featuredCommentCount').text(commentCount);      
 		}		
 		
 		function onNotFeatured1After()
@@ -23,7 +25,8 @@ $(window).load(function() {
 			$('a#notFeatured1ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#notFeatured1ArticleTitle span').text(title);
 			$('a#notFeatured1ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured1ArticleAuthor span').text(username);	        
+			$('a#notFeatured1ArticleAuthor span').text(username);
+			$('#notFeatured1CommentCount').text(commentCount);	        
 		}
 		
 		function onNotFeatured2After()
@@ -31,10 +34,12 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var commentCount=$(this).data('commentcount');
 			$('a#notFeatured2ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#notFeatured2ArticleTitle span').text(title);
 			$('a#notFeatured2ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured2ArticleAuthor span').text(username);	        
+			$('a#notFeatured2ArticleAuthor span').text(username);
+			$('#notFeatured2CommentCount').text(commentCount);	        
 		}
 		
 		function onNotFeatured3After()
@@ -42,10 +47,12 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var commentCount=$(this).data('commentcount');
 			$('a#notFeatured3ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#notFeatured3ArticleTitle span').text(title);
 			$('a#notFeatured3ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured3ArticleAuthor span').text(username);	        
+			$('a#notFeatured3ArticleAuthor span').text(username);
+			$('#notFeatured3CommentCount').text(commentCount);	        
 		}
 		
 		function onNotFeatured4After()
@@ -53,10 +60,12 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var commentCount=$(this).data('commentcount');
 			$('a#notFeatured4ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#notFeatured4ArticleTitle span').text(title);
 			$('a#notFeatured4ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured4ArticleAuthor span').text(username);	        
+			$('a#notFeatured4ArticleAuthor span').text(username);
+			$('#notFeatured4CommentCount').text(commentCount);	        
 		}
 		
 		
@@ -253,9 +262,9 @@ $(window).load(function() {
 							});
 							articleHtml+='</span>'+	
 							'<span class="floatRight fontWeightBold font10">'+							
-							'<span><i class="font13 icon-users"></i>5k</span>'+
-							'<span><i class="font13 icon-smile"></i>500</span>'+	
-							'<span><i class="font13 icon-frown"></i>70</span>'+		
+							'<span><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+							'<span><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+	
+							'<span><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+		
 							'</span>'+		
 							'</div>'+		
 							'</div>';	

@@ -198,7 +198,7 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 			</div>
 			<div id="cAll" class="slider overflowHidden">
 				$for article in game['gameCarousel']['all']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img src="$article['articleFeaturedImage']" width="570" height="430"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="570" height="430"/></a>				
 	
 			</div>
 			<div id='allBottomTab' class="z500 width570 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -212,7 +212,7 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="allCommentCount">$game['gameCarousel']['all'][0]['articleCommentCount']</span></span>
 					<a id='allArticleAuthor' href="/$game['gameCarousel']['all'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$game['gameCarousel']['all'][0]['articleAuthor']</span></a>
 				</span>
 			</div>	
@@ -239,7 +239,7 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 			</div>
 			<div id="cVideo" class="slider overflowHidden">
 				$for article in game['gameCarousel']['videos']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img src="$article['articleFeaturedImage']" width="370" height="278"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="370" height="278"/></a>				
 	
 			</div>
 			<div id='videosBottomTab' class="z500 width370 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -253,7 +253,7 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="videoCommentCount">$game['gameCarousel']['videos'][0]['articleCommentCount']</span></span>
 					<a id='videoArticleAuthor' href="/$game['gameCarousel']['videos'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$game['gameCarousel']['videos'][0]['articleAuthor']</span></a>
 				</span>
 			</div>	
@@ -357,9 +357,9 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 										<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" target="_blank"><span class="$platform['shortTitle'] interestUserProfileFontSize" >$platform['title']</span></a>														
 								</span>
 								<span class="floatRight fontWeightBold font10">
-									<span><i class="font13 icon-users"></i>5k</span>
-									<span><i class="font13 icon-smile"></i>500</span>
-									<span><i class="font13 icon-frown"></i>70</span>
+									<span><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
+									<span><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>
+									<span><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 								</span>
 							</div>
 							

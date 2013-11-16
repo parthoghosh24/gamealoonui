@@ -9,10 +9,12 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var commentCount=$(this).data('commentcount');
 			$('a#allArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#allArticleTitle span').text(title);
 			$('a#allArticleAuthor').attr('href','/'+username);
-			$('a#allArticleAuthor span').text(username);	        
+			$('a#allArticleAuthor span').text(username);	     
+			$('#allCommentCount').text(commentCount);   
 		}		
 		
 		function onVideosAfter()
@@ -20,10 +22,12 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var commentCount=$(this).data('commentcount');
 			$('a#videoArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#videoArticleTitle span').text(title);
 			$('a#videoArticleAuthor').attr('href','/'+username);
-			$('a#videoArticleAuthor span').text(username);	        
+			$('a#videoArticleAuthor span').text(username);
+			$('#videoCommentCount').text(commentCount);   	        
 		}				
 		
 		
@@ -164,9 +168,9 @@ function getData(gameId, category, timestampVal)
 						});
 						articleHtml+='</span>'+	
 						'<span class="floatRight fontWeightBold font10">'+							
-						'<span><i class="font13 icon-users"></i>5k</span>'+
-						'<span><i class="font13 icon-smile"></i>500</span>'+	
-						'<span><i class="font13 icon-frown"></i>70</span>'+		
+						'<span><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+						'<span><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+	
+						'<span><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+		
 						'</span>'+		
 						'</div>'+		
 						'</div>';	

@@ -253,7 +253,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 			</div>
 			<div id="cFeatured" class="slider overflowHidden">
 				$for article in user['userCarouselArticles']['featured']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img src="$article['articleFeaturedImage']" width="610" height="480"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="610" height="480"/></a>				
 	
 			</div>
 			<div id='featuredBottomTab' class="z500 width500 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -267,7 +267,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="featuredCommentCount">$user['userCarouselArticles']['featured'][0]['articleCommentCount']</span></span>
 					<a id='featuredArticleAuthor' href="/$user['userCarouselArticles']['featured'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$user['userCarouselArticles']['featured'][0]['articleAuthor']</span></a>
 				</span>
 			</div>		
@@ -296,7 +296,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 			</div>
 			<div id="cNotFeatured1" class="slider overflowHidden">
 				$for article in user['userCarouselArticles']['notFeatured']['1']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img  src="$article['articleFeaturedImage']" width="305" height="225"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img  src="$article['articleFeaturedImage']" width="305" height="225"/></a>				
 	
 			</div>
 			<div id='notFeatured1BottomTab' class="z500 width305 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -310,7 +310,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="notFeatured1CommentCount">$user['userCarouselArticles']['featured'][0]['articleCommentCount']</span></span>
 					<a id='notFeatured1ArticleAuthor' href="/$user['userCarouselArticles']['notFeatured']['1'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$user['userCarouselArticles']['notFeatured']['1'][0]['articleAuthor']</span></a>
 				</span>
 			</div>
@@ -338,7 +338,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 			</div>
 			<div id="cNotFeatured2" class="slider overflowHidden">
 				$for article in user['userCarouselArticles']['notFeatured']['2']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img  src="$article['articleFeaturedImage']" width="300" height="225"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img  src="$article['articleFeaturedImage']" width="300" height="225"/></a>				
 	
 			</div>
 			<div id='notFeatured2BottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -352,7 +352,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="notFeatured2CommentCount">$user['userCarouselArticles']['featured'][0]['articleCommentCount']</span></span>
 					<a id='notFeatured2ArticleAuthor' href="/$user['userCarouselArticles']['notFeatured']['2'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$user['userCarouselArticles']['notFeatured']['2'][0]['articleAuthor']</span></a>
 				</span>
 			</div>
@@ -380,7 +380,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 			</div>
 			<div id="cNotFeatured3" class="slider overflowHidden">
 				$for article in user['userCarouselArticles']['notFeatured']['3']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img src="$article['articleFeaturedImage']" width="305" height="225"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="305" height="225"/></a>				
 	
 			</div>
 			<div id='notFeatured3BottomTab' class="z500 width305 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -394,7 +394,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="notFeatured3CommentCount">$user['userCarouselArticles']['featured'][0]['articleCommentCount']</span></span>
 					<a id='notFeatured3ArticleAuthor' href="/$user['userCarouselArticles']['notFeatured']['3'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$user['userCarouselArticles']['notFeatured']['3'][0]['articleAuthor']</span></a>
 				</span>
 			</div>
@@ -422,7 +422,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 			</div>
 			<div id="cNotFeatured4" class="slider overflowHidden">
 				$for article in user['userCarouselArticles']['notFeatured']['4']:
-					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']"><img  src="$article['articleFeaturedImage']" width="300" height="225"/></a>				
+					<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img  src="$article['articleFeaturedImage']" width="300" height="225"/></a>				
 	
 			</div>
 			<div id='notFeatured4BottomTab' class="z500 width300 height40 positionAbsolute marginTopMinus40 carousalFooter carouselHeaderFooterPadding">
@@ -436,7 +436,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 					</span>
 				</span>
 				<span class="floatRight">
-					<span class="font10"><i class="font13 icon-users"></i>0</span>
+					<span class="font10"><i class="font13 icon-users"></i><span id="notFeatured4CommentCount">$user['userCarouselArticles']['featured'][0]['articleCommentCount']</span></span>
 					<a id='notFeatured4ArticleAuthor' href="/$user['userCarouselArticles']['notFeatured']['4'][0]['articleAuthor']"><span class="icon-user-2 colorWhite articleUsernameBox">$user['userCarouselArticles']['notFeatured']['4'][0]['articleAuthor']</span></a>
 				</span>
 			</div>
@@ -516,9 +516,9 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 										<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" target="_blank"><span class="$platform['shortTitle'] interestUserProfileFontSize" >$platform['title']</span></a>														
 								</span>
 								<span class="floatRight fontWeightBold font10">
-									<span><i class="font13 icon-users"></i>5k</span>
-									<span><i class="font13 icon-smile"></i>500</span>
-									<span><i class="font13 icon-frown"></i>70</span>
+									<span><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
+									<span><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>
+									<span><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 								</span>
 							</div>
 							
