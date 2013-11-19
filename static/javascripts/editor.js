@@ -445,10 +445,9 @@ function onSave()
 	var gameId= "";
 	var articleId=$('#articleId').val();
 	var articleState=$('#articleState').val();
-	var platforms = $('input.eplatform:checked').map(function(index, elem) {
+	var platforms = $('input.eplatform:checked').map(function(index, elem) {		
 	    return $(this).val();
-	}).get().join();
-	
+	}).get().join();	
 	if($('#isGame').is(':checked'))
 	{		
 		gameId= $('#gameId').val();
