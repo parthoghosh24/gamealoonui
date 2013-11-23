@@ -738,11 +738,16 @@ $(function() {
 												{
 													$('#publishpost').addClass('disableOpacity');
 													$('#publishpost').attr('disabled','disabled');
-												}		
-												console.log('Category '+data.articleCategory);
-												$("input[name=category][value="+data.articleCategory+"]").prop('checked',true);																													
-												$.each(data.articlePlatforms, function(index, platform) {
-												  console.log(platform.platformShortTitle);	
+												}														
+												$("input[name=category][value="+data.articleCategory+"]").prop('checked',true);			
+												if("review"==data.articleCategory)
+												{
+													console.log("Category is review");
+													$('.knob').trigger('configure',{
+														"readOnly":false
+													});
+												}																										
+												$.each(data.articlePlatforms, function(index, platform) {												  
 												   $("input.eplatform[value="+platform.platformShortTitle+"]").prop('checked',true);												  												  					 
 												});																								
 												if(data.articleGame!="")
