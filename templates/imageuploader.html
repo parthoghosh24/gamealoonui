@@ -1,0 +1,34 @@
+<div id="imageUploader">		   						   			
+			   				<div class="imageUploaderSidePane floatLeft">
+			   					<div class="sidePaneItem">
+			   						<a id="uploadImageSelector" href="javascript:;"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold icon-upload">Upload</span></a>
+			   					</div>
+			   					<div class="sidePaneItem">
+			   						<a id="imageBrowserSelector" href="javascript:;"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold icon-layout">Browse</span></a>
+			   					</div>
+			   					<div id="closeButton">
+			   					 	<button id="closeWindow" class="colorWhite fontWeightBold">CLOSE</button>
+			   					</div>
+			   				</div>		
+			   				<div id="uploadFormBox" class="padding20 uploadBrowserBox floatLeft">
+			   					<div id="imagePreview">			   						
+			   						<div id="imagePreviewHolder" class="overflowHidden">
+			   							<img id="preview"/>
+			   							<span id="noImage" class="applyBevan">No Image</span>
+			   						</div>			
+			   						<span id="imageErrorMessage" class="font14 fontWeightBold textShadowBlack error"> </span>   						
+			   					</div>
+			   					<div id="imageUploadForm">
+			   						<form method="post" enctype="multipart/form-data">
+			   							<input type="file" id="previewFile" name="previewFile" class="colorWhite"/>
+			   							<span class="colorLightGray font12 fontWeightBold textShadowBlack">(4:3 Image of size less than 1 mb)</span>
+			   							<input type="button" id="uploadImage" class="colorWhite applyBevan" name="uploadImage" value="UPLOAD">
+			   						</form>
+			   					</div>
+			   				</div>
+			   				<div id="imageBrowser" class="padding20 uploadBrowserBox floatLeft">
+			   					<input type="hidden" id="photoLastUpdated" name="photoLastUpdated" value="0">
+			   					<input type="hidden" id="hasPhotos" name="hasPhotos" value="0">
+			   				</div>	   							   							   			
+</div>
+<script src="/static/javascripts/imageUploader.js"></script>

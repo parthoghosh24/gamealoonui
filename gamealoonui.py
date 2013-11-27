@@ -39,6 +39,8 @@ urls = (
         '/user/gameInterestedOrNot','InterestedInorNotInGame',
         '/user/interest','CreateOrUpdateUserInterest',
         '/user/password/reset','ResetPassword',        
+        '/media/imageUploader','InitImageUploader',
+        '/game/gameCreator','InitGameCreator',
         '/game/(.+)','SingleGame',
         '/user/userstats','UserStats',
         '/profile/(.+)','UserProfile',        
@@ -50,6 +52,7 @@ store=web.session.DiskStore(curPath+'/sessions')
 session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'baseUrl':'http://162.144.38.150:9000','userAvatar':''})
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
 render = web.template.render(curPath+'/templates/', base='main', globals={'session':session})
+iframeTemplate = web.template.render(curPath+'/templates/', base='iframetemplate',globals={'session':session})
 
 class Index:
     def GET(self):       
@@ -135,7 +138,21 @@ class FetchGames:
         games=json.load(response)        
         return json.dumps(games)        
         
-        
+
+class InitImageUploader:
+    def GET(self):
+        if session.userId == "Guest":
+            return web.redirect("/") 
+        else:
+            return iframeTemplate.imageuploader();
+    
+class InitGameCreator:
+    def GET(self):
+        if session.userId == "Guest":
+            return web.redirect("/") 
+        else:
+            return iframeTemplate.gamecreateform();
+            
 class SingleGame:
     def GET(self, gameUrlOrId):
         url="http://localhost:9000/game/"+gameUrlOrId+"/"+session.username       

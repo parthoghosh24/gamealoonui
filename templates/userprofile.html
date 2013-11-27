@@ -558,6 +558,7 @@ $var description: My Gloon Profile
 		   	   </div>
 		   	   <div id="articleGame" class="floatLeft marginTop20 ui-widget">
 		   	   			<input type="checkbox" id="isGame" name="isGame" value="on"/> <span class="colorGray textShadowBlack fontWeightBold">Game</span>
+		   	   			<button id="addGame" class="marginLeft50 colorWhite disableOpacity" disabled="disabled" title="Click to add game. You can then use the search bar to add the game for article.">+Add Game</button>
 		   	   			<br>
 		   	   			<input type="text"  id="gameSearchBox" name="gameSearchBox" placeholder="Search Game" disabled/>		   	   
 		   	   			<div id="selectedGame" class="overflowHidden marginTop10">
@@ -623,44 +624,8 @@ $var description: My Gloon Profile
 		   	  
 		   </div>			   
 	 	</div>	 		 	
-	 </form>
-	 <div id="imageUploader" class="imageUploaderBox">
-		   			<div class="imageUploaderOverlay"> </div>
-			   			<div class="imageUploaderContainer">
-			   				<div class="imageUploaderSidePane floatLeft">
-			   					<div class="sidePaneItem">
-			   						<a id="uploadImageSelector" href="javascript:;"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold">Upload</span></a>
-			   					</div>
-			   					<div class="sidePaneItem">
-			   						<a id="imageBrowserSelector" href="javascript:;"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold">Browse</span></a>
-			   					</div>
-			   					<div id="closeButton">
-			   					 	<button id="closeWindow" class="colorWhite fontWeightBold">CLOSE</button>
-			   					</div>
-			   				</div>		
-			   				<div id="uploadFormBox" class="padding20 uploadBrowserBox floatLeft">
-			   					<div id="imagePreview">			   						
-			   						<div id="imagePreviewHolder" class="overflowHidden">
-			   							<img id="preview"/>
-			   							<span id="noImage" class="applyBevan">No Image</span>
-			   						</div>			
-			   						<span id="imageErrorMessage" class="font14 fontWeightBold textShadowBlack error"> </span>   						
-			   					</div>
-			   					<div id="imageUploadForm">
-			   						<form method="post" enctype="multipart/form-data">
-			   							<input type="file" id="previewFile" name="previewFile" class="colorWhite"/>
-			   							<span class="colorLightGray font12 fontWeightBold textShadowBlack">(4:3 Image of size less than 1 mb)</span>
-			   							<input type="button" id="uploadImage" class="colorWhite applyBevan" name="uploadImage" value="UPLOAD">
-			   						</form>
-			   					</div>
-			   				</div>
-			   				<div id="imageBrowser" class="padding20 uploadBrowserBox floatLeft">
-			   					<input type="hidden" id="photoLastUpdated" name="photoLastUpdated" value="0">
-			   					<input type="hidden" id="hasPhotos" name="hasPhotos" value="0">
-			   				</div>	   							   				
-			   			</div>		   			
-	   </div>
-	   <div id="imageSelectorForEditor" class="imageUploaderBox">
+	 </form>	 
+	   <div id="imageSelectorForEditor" class="selectorBox">
 					 	<div class="imageUploaderOverlay"> </div>		
 					 	<div id="editorImageSelector">
 					 		<div id="imageSection">
@@ -675,7 +640,7 @@ $var description: My Gloon Profile
 					 		</div>	
 					 	</div>			 	
 					 </div>
-	<div id="videoSelectorForEditor" class="imageUploaderBox">
+	<div id="videoSelectorForEditor" class="selectorBox">
 					 	<div class="imageUploaderOverlay"> </div>		
 					 	<div id="editorVideoSelector">
 					 		<div id="urlInput">

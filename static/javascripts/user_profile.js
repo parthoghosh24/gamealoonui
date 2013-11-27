@@ -1086,7 +1086,11 @@ $(function() {
 	 		*/
 		 
 
-	
+	    /*User add game begins*/
+	   $('#addGame').click(function(){
+	   	 return false;
+	   });
+	   /*User add game end*/
 	
     
     
