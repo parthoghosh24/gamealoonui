@@ -206,27 +206,28 @@ $(function(){
 		
 		if($('#previewOverlay').length==0)
 	    {
-	    	window.onbeforeunload=function()
-			{
-				endTime=new Date().getTime(); 
-				var elapsedTime=endTime-startTime; //in ms
-				var articleId = $('.articleBody').attr('id');
-				var TWO_MINUTES = 2*60*1000;			
-				if(elapsedTime>=TWO_MINUTES)
-				{
-					elapsedTime = elapsedTime/(60.0*1000.0);
-					console.log(elapsedTime);
-					 $.ajaxSetup({async: false});
-					$.post('/article/updateATS',{"elapsedTime":elapsedTime, "articleId":articleId}, function(data){
-						if(data.status=='success')
+	    	/*
+			window.onbeforeunload=function()
 						{
-							console.log('success');
-						}
-						
-					},'json');
-					 $.ajaxSetup({async: true});
-				}	
-			}
+							endTime=new Date().getTime(); 
+							var elapsedTime=endTime-startTime; //in ms
+							var articleId = $('.articleBody').attr('id');
+							var TWO_MINUTES = 2*60*1000;			
+							if(elapsedTime>=TWO_MINUTES)
+							{
+								elapsedTime = elapsedTime/(60.0*1000.0);
+								console.log(elapsedTime);
+								 $.ajaxSetup({async: false});
+								$.post('/article/updateATS',{"elapsedTime":elapsedTime, "articleId":articleId}, function(data){
+									if(data.status=='success')
+									{
+										console.log('success');
+									}
+																	 },'json');
+								 $.ajaxSetup({async: true});
+							}	
+						}*/
+			
 	    }
 		
 		

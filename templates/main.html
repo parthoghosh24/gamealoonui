@@ -38,21 +38,9 @@ $def with (page)
 				<div id='headerBox'>				
 				<div id='box'>
 					$if session.loggedIn:
-						<input type="image" value="" src="/static/images/button.png" class="signin hiddenDiv" id="login" width='60' height='37' title="Login"/>
-						<input type="image" value="" src="/static/images/button.png" class="signin showDivBlock" id="logout" width='60' height='37' title="Logout"/>
-						<div id="userdetailsbox">						
-							 <a href="/profile/$session.userId" rel="nofollow" class="colorWhite">
-							 	<span>$session.username</span>
-							 	<img id="userAvatarImage"src="$session.userAvatar" width="15" height="15" alt="avatar" title="$session.username" class="displayInline"/>	
-							 	</a>							
-						</div>					
+						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i>$session.username</a>																					
 					$else:
-						<input type="image" value="" src="/static/images/button.png" class="signin showDivBlock" id="login" width='60' height='37' title="Login" />
-						<input type="image" value="" src="/static/images/button.png" class="signin hiddenDiv" id="logout" width='60' height='37' title="Logout"/>
-						<div id="userdetailsbox">						
-							 <span>$session.username</span>
-							 <img id="userAvatarImage" src="$session.userAvatar" width="15" height="15" alt="avatar" title="$session.username" class="displayInline"/>								 					
-						</div>
+						<a id="login" href="javascript:;" class="colorWhite marginTop30 textShadowBlack font12" style=" position: absolute;"><i class="icon-off font20"></i>Signin</a>												
 						
 					<div class='signupOrLogin textureBg'>
 						<div id='signInBox'>
@@ -114,7 +102,7 @@ $def with (page)
 						<input type="submit" name="search" id="search" value="Go" class="colorWhite"/>
 					</form>
 				</div>					
-				<div id="logo" class="marginTop20">
+				<div id="logo">
 					<a href="/"><img width="234" height="94" alt="Gamealoon" src="/static/images/logo.png" title="Gamealoon"/></a>
 					<span id="logoBeta" class="font11 fontWeightBold colorWhite">BETA</span>
 				</div>

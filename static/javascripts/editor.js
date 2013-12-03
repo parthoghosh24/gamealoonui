@@ -3,6 +3,7 @@
  */
 
 var gameScore=0;
+var count=400;
 
 $(function(){
 	/**
@@ -13,7 +14,9 @@ $(function(){
 	 * Will work on it more to make it better.
 	 * 
 	 */
+
 	var replaceImage=0; 
+	
 	
 	
 	$('#isGame').change(function()
@@ -82,8 +85,14 @@ $(function(){
 			initUploader(replaceImage);
 		});			
 		
+	
 });
 
+function countCharInEditor(charCount)
+{	
+	$('#editorCharLimit').text(charCount);
+	console.log("count"+ charCount);	
+}
 function initUploader(replaceImage)
 		{
 			var browserIframe=$('<iframe id="browser" class="selectorBox" data-replaceimage="'+replaceImage+'"/>');
@@ -108,7 +117,54 @@ function iFrameOn()
 						change:function(value){							
 							gameScore=value;
 						}
-					});		
+					});
+					console.log('This is called');
+							
+		count=400;					
+		$(document.getElementById("richEditor").contentWindow.document).keydown(function(event){
+			console.log("keycode: "+event.keyCode);
+			if ((event.keyCode >=65 && event.keyCode<= 90) || 
+			    (event.keyCode>=48 && event.keyCode<= 57)  || 
+			    (event.keyCode>= 96 && event.keyCode<= 105)||
+			    event.keyCode==32  ||
+			    event.keyCode==8  || 
+			    event.keyCode==46 ||
+			    (event.keyCode>=186 && event.keyCode<= 192) ||
+			    (event.keyCode>=219 && event.keyCode<= 222) ||
+			    event.keyCode==106  || 
+			    event.keyCode==109 ||
+			    event.keyCode==111   )
+			{
+					if(count==0 && (event.keyCode!=8 || event.keyCode!=46))
+					{
+						return false;
+					}
+					if(event.keyCode==8 || event.keyCode==46)
+					{				
+						if(count<400)
+						{
+							++count;
+						}
+											
+						
+					}	
+					else
+					{
+						if(count>0)
+						{
+							--count;
+						}
+						
+					}		
+					
+					countCharInEditor(count);
+			}
+			else
+			{
+				return false;
+			}
+		});
+				
 	    },10);
 
 }
