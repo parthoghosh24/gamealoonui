@@ -92,7 +92,7 @@ header {
 	height: 60px;
 	display: block;
 	margin-bottom: 20px;
-	z-index: 30000;
+	z-index: 900;
 }
 
 footer{
@@ -712,6 +712,10 @@ footer{
 	margin-left: 50px;
 }
 
+.marginLeft70
+{
+	margin-left: 70px;
+}
 #moreButton
 {
 	width: 100%;  

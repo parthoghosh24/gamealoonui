@@ -38,9 +38,9 @@ $def with (page)
 				<div id='headerBox'>				
 				<div id='box'>
 					$if session.loggedIn:
-						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i>$session.username<img src="" alt="$session.username"/></a>																					
+						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i></a><a class="colorWhite marginTop30 textShadowWhite font12" >$session.username<img class="marginTop30 marginLeft70" src="$session.userAvatar" alt="$session.username" title="$session.username" height="20"/></a>																					
 					$else:
-						<a id="login" href="javascript:;" class="colorWhite marginTop30 textShadowBlack font12" style=" position: absolute;"><i class="icon-off font20"></i>Signin</a>												
+						<a id="login" href="javascript:;" class="colorWhite marginTop30 textShadowBlack font12" style=" position: absolute;"><i class="icon-off font20"></i>Signin</a><img class="marginTop30 marginLeft70" src="$session.userAvatar" alt="Signin" title="No one logged in" height="20"/>												
 						
 					<div class='signupOrLogin textureBg'>
 						<div id='signInBox'>
