@@ -38,7 +38,7 @@ $def with (page)
 				<div id='headerBox'>				
 				<div id='box'>
 					$if session.loggedIn:
-						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i>$session.username</a>																					
+						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i>$session.username<img src="" alt="$session.username"/></a>																					
 					$else:
 						<a id="login" href="javascript:;" class="colorWhite marginTop30 textShadowBlack font12" style=" position: absolute;"><i class="icon-off font20"></i>Signin</a>												
 						
