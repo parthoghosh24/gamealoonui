@@ -486,9 +486,13 @@ footer{
 	text-shadow: 0px 3px 8px #000;
 }
 
+#userSettings:hover
+{
+	text-shadow: 0px 0px 8px #fff;
+}
 .textShadowWhite
 {
-	text-shadow: 0px 3px 8px #fff;
+	text-shadow: 0px 0px 8px #fff;
 }
 .textShadowOrange
 {

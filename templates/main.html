@@ -38,7 +38,7 @@ $def with (page)
 				<div id='headerBox'>				
 				<div id='box'>
 					$if session.loggedIn:
-						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i></a><a href="/profile/$session.userId" rel="nofollow" class="textShadowBlack colorWhite marginTop30 font12 marginLeft30" >$session.username<img class="marginTop30 marginLeft5 textShadowBlack" src="$session.userAvatar" alt="$session.username" title="$session.username" height="20"/></a><a href="javascript:;" class="colorWhite marginLeft10" title="User Settings"><i class="icon-cog-2"></i></a>																					
+						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i></a><a href="/$session.username" rel="nofollow" class="textShadowBlack colorWhite marginTop30 font12 marginLeft30" >$session.username<img class="marginTop30 marginLeft5 textShadowBlack" src="$session.userAvatar" alt="$session.username" title="$session.username" height="20"/></a><a id="userSettings" href="/profile/$session.userId" class="colorWhite marginLeft10" title="User Settings"><i class="icon-cog-2"></i></a>																					
 					$else:
 						<a id="login" href="javascript:;" class="colorWhite marginTop30 textShadowBlack font12" style=" position: absolute;"><i class="icon-off font20"></i>Signin</a><img class="marginTop30 marginLeft70 textShadowBlack" src="$session.userAvatar" alt="Signin" title="Not Logged in" height="20"/>												
 						
