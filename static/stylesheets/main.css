@@ -955,10 +955,11 @@ form {
 	background: linear-gradient(top,#005FB3 0,#151515 120%);	
 }
 #container_layout {		
-	margin: 0 auto;
-	padding-top: 20px;
-	padding-left: 25px;
+	margin: 0 auto;	
+	padding-left: 15px;
+	padding-right: 15px;
 	padding-bottom: 20px;
+	min-height: 1080px;
 }
 
 #carousel {
@@ -1516,7 +1517,7 @@ img {
 }
 #gameSearchBox
 {
-	width: 300px;
+	width: 100%;
 }
 #createOrEditUserPost
 {
@@ -1689,10 +1690,45 @@ a {
 	background-color: #A83E68;  
 	padding: 2px;
 }
+.news:before
+{
+  font-family: "gloonfont";
+  font-style: normal;
+  font-weight: normal;
+  speak: none; 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;     
+  font-variant: normal;
+  text-transform: none;      
+  line-height: 1em;
+  margin-left: .2em;
+  content: '\eb11';
+}
 .review
 {
 	background-color: #AC4EB4;  
 	padding: 2px;
+	
+}
+.review:before
+{
+  font-family: "gloonfont";
+  font-style: normal;
+  font-weight: normal;
+  speak: none; 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;     
+  font-variant: normal;
+  text-transform: none;      
+  line-height: 1em;
+  margin-left: .2em;
+  content: '\e9b5';
 }
 .feature
 {
@@ -1704,10 +1740,44 @@ a {
 	background-color: #34B3BE;  
 	padding: 2px;
 }
+.gloonicle:before
+{
+  font-family: "gloonfont";
+  font-style: normal;
+  font-weight: normal;
+  speak: none; 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;     
+  font-variant: normal;
+  text-transform: none;      
+  line-height: 1em;
+  margin-left: .2em;
+  content: '\e82d';
+}
 .video
 {
 	background-color: #EC660C;  
 	padding: 2px;
+}
+.video:before
+{
+  font-family: "gloonfont";
+  font-style: normal;
+  font-weight: normal;
+  speak: none; 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;     
+  font-variant: normal;
+  text-transform: none;      
+  line-height: 1em;
+  margin-left: .2em;
+  content: '\eaab';
 }
 .genreStyle
 {
@@ -1726,7 +1796,7 @@ a {
 
 .selectorBox
 {
-	display: none;
+	/*display: none;*/
 	width: 100%; 
 	height: 100%;
 	top:0px;
@@ -1757,7 +1827,7 @@ a {
 #imageUploader
 {
 	z-index: 30001;
-}
+} 
 .imageUploaderSidePane
 {
 	width: 20%;
@@ -2157,33 +2227,7 @@ img.fade
 	
 }
 /*Single article css begin*/
-#coverSection
-{
-	height: 480px;	
-}
-.coverSectionHeaderFooter
-{
-	position: absolute;
-	width: 640px;
-	opacity: 0.9;
-}
-#coverSectionHead
-{
-	
-	height: 120px;
-	background-color: #0f1115;	
-	font-size: 35px;
-	padding-left: 30px;
-	line-height: 1.5;
-	color: #005FB3;
-}
-#coverSectionFoot
-{	
-	height: 60px;
-	background-color: #fff;		
-	margin-top: 420px;
-	padding: 5px;
-}
+
 #voteButtons
 {
 	color:#005FB3;
@@ -2621,11 +2665,305 @@ img.fade
 {
 	height: 400px;
 }
+.topSpacer
+{
+	height: 200px;
+}
+.coverContainer
+{
+	margin: 0 auto;
+	width: 100%;
+	max-width: 960px;
+}
 /*About ends*/
+
+/*Post Creator/Article start*/
+#postContainer
+{
+	min-height: 200px;
+	background-color: #11151d;
+	border-top-style: solid;
+	border-top-width: 5px;
+	border-top-color: #00A3FF;
+	border-bottom-style: solid;
+	border-bottom-width: 5px;
+	border-bottom-color: #00A3FF;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-bottom: 40px;
+}
+
+.editButton
+{
+   
+    background-color: #f1f1f1;
+    color: #000;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.coverSection
+{
+	width:950px;
+	height: 500px;		
+	box-shadow: 0px 0px 8px #000;
+	background-image: url('http://192.168.0.103:9000/assets/images/default/featuredBg.png');
+	background-size: 960px 720px;
+}
+.coverSectionHeaderFooter
+{
+	position: absolute;
+	width: 950px;
+	opacity: 0.9;
+}
+#coverSectionHead
+{
+	
+	height: 120px;
+	background-color: #0f1115;	
+	font-size: 35px;
+	padding-left: 30px;
+	line-height: 1.5;
+	color: #005FB3;
+}
+#coverSectionFoot
+{	
+	height: 60px;
+	background-color: #fff;
+	margin-top: 440px;
+	padding: 5px;
+}
+#postCreatorCategorySelector
+{
+	position: absolute;
+	padding: 5px;
+	width: 170px;
+	background-color: #f1f1f1;
+	display: none;
+}
+
+.doneEditiingButton
+{
+	background-color: #00A3FF;
+	color: #fff;
+	border-radius: 50%;
+}
+#author
+{
+	float: right;
+	margin-top: -78px;
+}
+#gameRow
+{
+	margin-top: -70px;
+	width: 600px;
+	float: left;
+}
+#gameBoxArt
+{
+	float: left;
+	margin-right: 5px;
+}
+#outerBox
+{
+	width: 160px;
+	height: 160px;
+	border-style: dotted;
+	border-color: #fff;
+	border-width: 2px;
+	border-radius: 50%;
+}
+#innerBox
+{
+	text-align: center;
+	border-style: solid;
+	border-color: #00A3FF;
+	border-width: 5px;
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+	overflow: hidden;
+	margin-left: 3px;
+	margin-top: 3px;
+}
+#innerBox a
+{
+	margin-left: -4px;
+}
+#contentRow
+{
+	margin-top: 130px;
+}
+#postData
+{
+	width: 560px;
+}
+#setGame
+{
+	padding: 5px;
+	font-size: 20px;
+	background-color: #0077B3;
+	border-color: #0077B3;
+}
+/*Review start*/
+#platformOptions
+{
+	display:none; 
+	position: absolute; 
+	width: 0px; 
+	height: 0px; 
+	background-color: #fff;
+	z-index: 10;	
+	border-style: solid;
+	border-width: 5px;	
+	margin-left: 255px;
+}
+
+#score
+{
+	width: 290px;
+	height: 100%;
+}
+#authorScore
+{
+	height: 117px;
+	margin-left: 58px;
+}
+#authorScore div
+{
+	width: 115px;
+	height: 115px;	
+	padding-left: 2px;
+	padding-top: 4px;
+}
+.dottedScoreBorder
+{
+	border-style: dotted;
+	border-color: #fff;
+	border-radius: 50%;
+}
+
+#lineSegment1
+{
+	height: 100px;
+}
+#lineSegment1 div
+{
+	position: absolute;
+	height: 150px;
+	margin-top: -47px;
+}
+#lineSegment2
+{
+	height: 50px;
+}
+#lineSegment2 div
+{
+	height: 50px;
+}
+.reviewLine
+{
+	width: 0.5px;
+	border-style: dotted;
+	border-color: #fff;
+	border-width: 2px;
+	margin-left: 115px;
+}
+#reviewGamePlayedOn
+{
+	line-height: 2;
+}
+.sweetIcon
+{
+	border-style: dotted;
+	border-radius: 50%;
+	border-color: #00A3FF;
+	color: #00A3FF;
+	margin-right: 5px;
+}
+.stinkIcon
+{
+	 border-style: dotted;
+     border-radius: 50%;
+     border-color: #F84747;
+     color: #F84747;
+     margin-right: 5px;
+}
+.reviewPointWidth
+{
+	width: 50%;
+}
+.divider
+{
+	height: 80px;
+}
+.reviewPointButtons
+{
+	color: #fff;
+	font-size: 15px;
+	margin-left: 10px;
+	padding: 5px;
+	font-weight: bold;
+}
+.reviewPointDd
+{
+	margin-bottom: 5px;
+	font-size: 13px;
+}
+.noReviewPoints
+{
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 0px 0px 8px;
+}
+#sweet dt
+{
+	margin-bottom: 1rem;
+	color: #00A3FF;
+}
+#stink dt
+{
+	margin-bottom: 1rem;
+	color: #F84747;
+}
+#noSweetPoint
+{
+	color: #00A3FF;
+}
+#noStinkPoint
+{
+	color: #F84747;
+}
+#sweetButton
+{
+	background-color: #00A3FF;
+}
+#stinkButton
+{
+	background-color: #F84747;
+}
+#gameScore
+{
+	height: 270px;	
+}
+#gameScoreDonutContainer
+{
+	width: 160px;
+	height: 160px;
+	margin-left: 35px;
+}
+
+/*Review end*/
+/*News start */
+/*News end */
+/*Video start */
+/*Video end */
+/*Gloonicle start */
+/*Gloonicle end */
+/*Post Creator/Article end*/	
 nav {
 	
 	height: 152px;
-	width: 825px;	
+	width: 650px;	
 	margin: 0 auto -100px;
 	background: -webkit-linear-gradient(top,#003869 0,#151515 120%);
 	background: -moz-linear-gradient(top,#003869 0,#151515 120%);

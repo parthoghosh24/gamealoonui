@@ -658,7 +658,11 @@ $(function() {
 		
 		});		
 		
-	$("#createPost").click(function(e) {
+		$("#createPost").click(function(e) {
+			window.location.href="/post/create";
+		});
+		
+	/*$("#createPost").click(function(e) {
 		$(".userPost").modal({
 	
 				onOpen : function(dialog) {
@@ -719,7 +723,7 @@ $(function() {
 			});
 	
 			return false;
-		});
+		});*/
 		
 		
 	$(".editPost").click(function(e){

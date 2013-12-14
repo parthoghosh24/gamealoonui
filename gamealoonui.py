@@ -20,7 +20,8 @@ urls = (
         '/media','Media',
         '/about','About',
         '/users','Users',
-        '/games','Games',
+        '/games','Games',        
+        '/post/create','InitCreatePost',
         '/post/save','CreateOrUpdatePost',        
         '/platform/(.+)/(.+)','Platform',
         '/article/article-preview','ArticlePreview',
@@ -50,7 +51,7 @@ urls = (
 app = web.application(urls, globals())
 store=web.session.DiskStore(curPath+'/sessions')
 session = web.session.Session(app, store, initializer={'username':'Guest','userId':'Guest','loggedIn':False,'baseUrl':'http://162.144.38.150:9000','userAvatar':''})
-web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout="60")    
+web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout=86400)    
 render = web.template.render(curPath+'/templates/', base='main', globals={'session':session})
 iframeTemplate = web.template.render(curPath+'/templates/', base='iframetemplate',globals={'session':session})
 
@@ -61,7 +62,7 @@ class Index:
         print "Session loggedIn---->", session.loggedIn
         print "Session userId---->", session.userId
         print "Session userAvatar---->", session.userAvatar     
-        print "Session baseUrl---->", session.baseUrl                                        
+        print "Session baseUrl---->", session.baseUrl                                      
         url="http://localhost:9000/platform/all/all"
         response = urllib2.urlopen(url)
         jsonData=json.load(response)        
@@ -151,7 +152,7 @@ class InitGameCreator:
         if session.userId == "Guest":
             return web.redirect("/") 
         else:
-            return iframeTemplate.gamecreateform();
+            return iframeTemplate.gameselector();
             
 class SingleGame:
     def GET(self, gameUrlOrId):
@@ -203,7 +204,14 @@ class SingleUser:
 class UserStats:
     def GET(self):
         return "success"
-    
+
+class InitCreatePost:
+    def GET(self): 
+        if session.userId == "Guest":
+            return web.redirect("/") 
+        else:
+            return render.postcreator()
+       
 class CreateOrUpdatePost:
     def POST(self):
         articleFormData = web.input()                
@@ -373,7 +381,7 @@ class Logout:
         session.userId="Guest"
         session.loggedIn=False   
         session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
-        session.kill()             
+        session.kill()                  
         return "done"
     
 class Signup:

@@ -42,8 +42,9 @@
      * k.o.call(this);
      * </code>
      */
-    k.o = function () {    	
-        var s = this;        
+    k.o = function () {
+        var s = this;
+
         this.o = null; // array of options
         this.$ = null; // jQuery wrapped element
         this.i = null; // mixed HTMLInputElement or array of HTMLInputElement
@@ -78,7 +79,6 @@
                 }
                 s.init();
                 s._configure()
-                 ._listen()	
                  ._draw();
             };
 
@@ -395,7 +395,7 @@
 
         this._listen = function () {
 
-            if (!this.o.readOnly) {            	
+            if (!this.o.readOnly) {
                 this.$c
                     .bind(
                         "mousedown"
@@ -422,9 +422,6 @@
 
                 this.listen();
             } else {
-            	this.$c.unbind("mousedown");
-        		this.$c.unbind("touchstart");
-        		this.i.unbind("keydown");
                 this.$.attr('readonly', 'readonly');
             }
 
@@ -666,9 +663,9 @@
                 && this.i.css({
                         'width' : ((this.w / 2 + 4) >> 0) + 'px'
                         ,'height' : ((this.w / 3) >> 0) + 'px'
-                        
+                        ,'position' : 'absolute'
                         ,'vertical-align' : 'middle'
-                        ,'margin-top' : '-194px'
+                        ,'margin-top' : ((this.w / 3) >> 0) + 'px'
                         ,'margin-left' : '-' + ((this.w * 3 / 4 + 2) >> 0) + 'px'
                         ,'border' : 0
                         ,'background' : 'none'

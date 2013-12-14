@@ -27,10 +27,12 @@ function showImage()
 			
 		}
 		
+
 function uploaderClose()
 		{
-			parent.uploaderClose();			
+			parent.$.modal.close();			
 		}
+
 				
 				
 $(function(){
@@ -42,8 +44,8 @@ $(function(){
 			var targetId=$(this).attr('id');
 			if(replaceImage == 0) //request came from featured Image
 			{
-				parent.$('#ariticleFeaturedImageSelector img').attr('src',targetSrc);
-				parent.$('#ariticleFeaturedImageSelector img').attr('id',targetId);						
+				parent.$('.coverSection').css('background-image','url('+targetSrc+')');
+				parent.$('.coverSection').attr('id',targetId);						
 			}
 			else if(replaceImage == 1) //request came from editor
 			{
@@ -139,38 +141,38 @@ $(function(){
 			    var image=$('#previewFile').get(0).files[0];
 			    if(image.type.indexOf("image") == 0 && image.size < 1000000)
 			    {
-			    	var userName=parent.$('span#userName a').text();
-				    var formdata = new FormData();
-				 	formdata.append('previewFile',image);		
-				 	uploading=true;					 	
-			     	$.ajax({          
-			     		url: "http://www.gamealoon.com:9000/media/uploadImage/"+userName+"/none/user", 					     		
-	        			type: "POST",          		
-	        			data: formdata,      
-	        			dataType:'json',   		
-	        			processData: false,  
-	        			contentType: false,        			
-	        			success: function (data) {  
-	        				if(data.status="success")
-	        				{
-	        					$('#noImage').text("Uploaded");
-	            				$('#noImage').show();	            				
-	        				}        				 
-	        				else
-	        				{
-	        					$('#imageErrorMessage').hide();
-								$('#userAvatarErrorMessage').text('Something Wrong happened. Please try again!');
-								$('#imageErrorMessage').fadeIn("Slow");
-	        				}           			            			
-	            				
-	            			  
-	        			},
-	        			error: function (xhr, ajaxOptions, thrownError) {
-		       				   console.log("Error while uploading image "+xhr.status);
-		        			   console.log("Error while uploading image "+thrownError);
-                 			}          			
-	    			});
-	    			$('#imageErrorMessage').hide();
+			    	var userName=parent.$('#box a#user').text();			    					    
+					var formdata = new FormData();
+										 formdata.append('previewFile',image);		
+										 uploading=true;					 	
+										 $.ajax({          
+											 url: "http://localhost:9000/media/uploadImage/"+userName+"/none/user", 					     		
+											type: "POST",          		
+											data: formdata,      
+											dataType:'json',   		
+											processData: false,  
+											contentType: false,        			
+											success: function (data) {  
+												if(data.status="success")
+												{
+													$('#noImage').text("Uploaded");
+													$('#noImage').show();	  
+													$('#imageBrowserSelector').click();          				
+												}        				 
+												else
+												{
+													$('#imageErrorMessage').hide();
+													$('#userAvatarErrorMessage').text('Something Wrong happened. Please try again!');
+													$('#imageErrorMessage').fadeIn("Slow");
+												}           			            			
+																																					},
+											error: function (xhr, ajaxOptions, thrownError) {
+													  console.log("Error while uploading image "+xhr.status);
+												   console.log("Error while uploading image "+thrownError);
+												 }          			
+										});
+										$('#imageErrorMessage').hide();
+					
 			    }
 			    else
 			    {
@@ -181,11 +183,5 @@ $(function(){
 			     
 				return false;
 			});
-	
-	$('#closeWindow').click(function()
-		{
-			uploaderClose();
-			return false;
-		});		
 			
 });

@@ -5,302 +5,413 @@ $ categoryInLower = article['articleCategory'].lower()
 $var title: $:article['articleTitle']- $author['articleAuthorUsername'] 
 $var description: $:article['articleSubTitle']- Gamealoon
 
+<div class="mainContainer">
+	<div id="container_layout">
+		<div class="divider"> </div>
+		<div id="default" class="coverSection">		
+			<div id="coverSectionHead" class="applyFranklinGothic coverSectionHeaderFooter">						
+					<span id="selectedCategory" class="textCapitalization colorWhite $categoryInLower">
+						$categoryInLower
+					</span>			
+					
+				<span id="postTitle" class="colorWhite textShadowOrange">
+						- <span id="postTitleText">$article['articleTitle']</span>						
+				</span>				
+			</div>		
+			<div id="coverSectionFoot" class="coverSectionHeaderFooter">		
+				$if session.username=="Guest": 
+					<div id="voteButtons" class="floatLeft applyChunkFive">
+						<span id="yeah" class="icon-smile cursorPointer notSelected notActiveButton">Yeah!</span>
+						<span id="meh" class="icon-frown cursorPointer notSelected notActiveButton">Meh!</span>				
+					</div>
+				$else:		
+					<div id="voteButtons" class="floatLeft applyChunkFive">
+						$if article['articleUserCoolState'] == 1:
+							<span id="yeah" class="icon-smile cursorPointer selected activeButton">Yeah!</span>
+						$else:
+							<span id="yeah" class="icon-smile cursorPointer notSelected activeButton">Yeah!</span>
+							
+						$if article['articleUserNotCoolState'] == 1:					
+							<span id="meh" class="icon-frown cursorPointer selected activeButton">Meh!</span>
+						$else:
+							<span id="meh" class="icon-frown cursorPointer notSelected activeButton">Meh!</span>				
+					</div>			
+				<div id="moreInformation" class="floatRight fontWeightBold" >
+					<span class="icon-fire-1">Yet to ignite</span>
+					<span class="icon-smile">$article['articleCoolScore']</span>
+					<span class="icon-frown">$article['articleNotCoolScore']</span>
+					<span class="icon-users">$article['articleCommentCount']</span>
+				</div>
+			</div>		       			
+		</div>
+		<div class="divider"> </div>
+                <div id="postContainer" style="">
+                	<div id="initRow" class="positionAbsolute">
+                		<div id="gameRow">
+                			<div id="gameBoxArt">                				
+                					<img id="nothing" src="http://192.168.0.103:9000/assets/images/default/boxShot.png" height="150">                				                				
+                			</div>
+                			$if categoryInLower == "review":
+                			
+	                				<h3 id="reviewGamePlayedOn">
+	                					 played on                 					 
+	                					 	<span id="selectedGamePlatform" class="ps3">
+	                					 		Playstation 3
+	                					 	</span>                					                 					
+	                				</h3>
+                				
+                		</div>
+                		<div id="author">
+                			<div id="outerBox">
+                				<div id="innerBox">
+                					<a href="/$session.username"><img src="$session.userAvatar" alt="$session.username" title="$session.username" width="150" height="150"></a>
+                				</div>
+                			</div>
+                		</div>    
+                	</div>
+                	<div id="contentRow" class="overflowHidden">
+                		<div id="postData" class="floatLeft">
+                			<div id="snippetText">
+                				$if categoryInLower == "review":
+                					<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
+                				$elif categoryInLower == "news":
+                					<i id="snippetTextTitle" class="icon-signal-2 colorWhite font20">Bulletin</i>
+                				$elif categoryInLower == "video":
+                					<i id="snippetTextTitle" class="icon-play-3  colorWhite font20">Caption</i>
+                				$else:
+                				    <i id="snippetTextTitle" class="icon-user colorWhite font20">$session.username thinks...</i>            				
+                				<p class="colorGray marginTop10 font14">Your microverdict for game</p>                				                				
+                			</div>
+                			$if categoryInLower == "review":
+	                			<div id="reviewPoints" class="overflowHidden marginTop30">
+	                				<dl id="sweet" class="floatLeft reviewPointWidth">
+	                					<dt class="icon-emo-grin">
+	                						<i>Sweet</i>                						
+	                					</dt>
+	                					<p id="noSweetPoint" class="noReviewPoints">No Sweet points</p>                					
+	                				</dl>
+	                				
+	                				<dl id="stink" class="floatLeft reviewPointWidth">
+	                					<dt class="icon-emo-angry">
+	                						<i>Stinks</i>                						
+	                					</dt>
+	                					<p id="noStinkPoint" class="noReviewPoints">No Stink points</p>                					
+	                				</dl>
+	                			</div>
+	                	$if categoryInLower == "news":		
+	                		<div id="newsSource" class="marginTop20 hiddenDiv">
+	                			<i class="icon-link-ext-alt colorWhite font20">Source Link</i>	                			
+	                		</div>
+                	</div>
+                	<div id="score" class="floatLeft">
+                		<input type="hidden" id="networkScore" name="networkScore" value="$article['articleGame']['gameScore']">
+						<input type="hidden" id="userScore" name="userScore" value="$article['articleGameUserScore']">
+                		<div id="lineSegment1">
+                			<div class="reviewLine"> </div>
+                		</div>
+                		<div id="authorScore">
+                			<div class="dottedScoreBorder">                				                			
+								
+                			</div>
+                		</div>  
+                		<div id="lineSegment2">
+                			<div class="reviewLine"> </div>
+                		</div> 
+                		<div id="gameScore">                			
+                			<div id="gameScoreDonutContainer" class="dottedScoreBorder">
+                				<div id="networkScoreDonutHolder" class="donutHolder donutHolderSize150">
+									   <div id="networkScoreDonut" class="donut">
+																					</div>
+									 <span id="networkScoreDonutData" class="textShadowBlack donutData donutDataMediumSize">
+																				</span>  
+																		  </div>
+                				<!--<div id="gameScoreDonut" style="width: 150px;height: 150px;border-style: solid;border-width: 20px;border-color: #76A7F5;text-align: center;line-height: 1.5;font-size: 60px;font-weight: bold;margin-left: 2px;margin-top: 2px;  color: #fff;border-radius: 50%;">
+                					9.2                				
+                				</div>-->
+                			</div>
+                			<div id="scoreTrophy" style="width: 160px;height: 100px;overflow: hidden;margin-left: 36px;">
+                				<div id="trophyRank">
+                					<span class="statsLabel colorWhite textShadowOrange">Gloontastic :O</span>
+                				</div>                                                          
+                				<div id="trophyBase" class="applyBevan">
+                					<span>
+                						<i class="icon-star-2"></i>Network Score<i class="icon-star-2"></i>
+                					</span>
+                					<br>
+                					<span class="font12">(2)</span>
+                               </div>
+                           </div>
+                       </div>
+                  </div>
+               </div>
+         </div>
+   </div>
+</div>		
+	<!--
 	<div id="share-wrapper">
-	    <ul class="share-inner-wrp">
-	        <!-- Facebook -->
-	        <li class="facebook button-wrap"><a href="#">Facebook</a></li>
-	        
-	        <!-- Twitter -->
-	        <li class="twitter button-wrap"><a href="#">Tweet</a></li>
-	        
-	         <!-- Digg -->
-	        <li class="digg button-wrap"><a href="#">Digg it</a></li>
-	        
-	        <!-- Stumbleupon -->
-	        <li class="stumbleupon button-wrap"><a href="#">Stumbleupon</a></li>
-	      
-	         <!-- Delicious -->
-	        <li class="delicious button-wrap"><a href="#">Delicious</a></li>
-	        
-	        <!-- Reddit -->
-	        <li class="reddit button-wrap"><a href="#">Reddit</a></li>
-	        
-	        <!-- Google -->
-	        <li class="google button-wrap"><a href="#">+Plus</a></li>
-	        
-	        <!-- Email -->
-	        <li class="email button-wrap"><a href="#">Email</a></li>
-	    </ul>
-	</div>
-	
-	<div id="coverSection">		
-		<div id="coverSectionHead" class="applyFranklinGothic coverSectionHeaderFooter">
-			$if article['articleCategory']=='news':						
-				<span class="textCapitalization icon-signal-2 colorWhite $article['articleCategory']">
-					$article['articleCategory']
-				</span>
-			$elif article['articleCategory']=='review':						
-				<span class="textCapitalization icon-thumbs-up-1 colorWhite $article['articleCategory']">
-					$article['articleCategory']
-				</span>
-			$elif article['articleCategory']=='gloonicle':						
-				<span class="textCapitalization icon-user colorWhite $article['articleCategory']">
-					$article['articleCategory']
-				</span>
-			$elif article['articleCategory']=='feature':						
-				<span class="textCapitalization icon-star colorWhite $article['articleCategory']">
-					$article['articleCategory']
-				</span>
-			$else:						
-				<span class="textCapitalization icon-play-3 colorWhite $article['articleCategory']">								
-					$article['articleCategory']
-				</span>
+			<ul class="share-inner-wrp">
 				
-			<span class="colorWhite textShadowOrange">
-					- $article['articleTitle']
-			</span>
-		</div>
-		<div id="coverImage" class="floatLeft">
-			<img src="$article['articleFeaturedImage']" width="640" height="480"/>
-		</div>
-		<div id="coverSectionFoot" class="coverSectionHeaderFooter">
-			$if session.username=="Guest": 
-				<div id="voteButtons" class="floatLeft applyChunkFive">
-					<span id="yeah" class="icon-smile cursorPointer notSelected notActiveButton">Yeah!</span>
-					<span id="meh" class="icon-frown cursorPointer notSelected notActiveButton">Meh!</span>				
-				</div>
-			$else:		
-				<div id="voteButtons" class="floatLeft applyChunkFive">
-					$if article['articleUserCoolState'] == 1:
-						<span id="yeah" class="icon-smile cursorPointer selected activeButton">Yeah!</span>
-					$else:
-						<span id="yeah" class="icon-smile cursorPointer notSelected activeButton">Yeah!</span>
-						
-					$if article['articleUserNotCoolState'] == 1:					
-						<span id="meh" class="icon-frown cursorPointer selected activeButton">Meh!</span>
-					$else:
-						<span id="meh" class="icon-frown cursorPointer notSelected activeButton">Meh!</span>				
-				</div>		
-			<div id="moreInformation" class="floatRight fontWeightBold" >
-				<span class="icon-smile">$article['articleCoolScore']</span>
-				<span class="icon-frown">$article['articleNotCoolScore']</span>
-				<span class="icon-users">$article['articleCommentCount']</span>
-			</div>
-		</div>
-		<div id="userInfoAndReview" class="floatLeft textureBg"> 
-			
-			
-			<div id="userInfoBox" class="floatLeft">
-                        <div id="userInfoUsername" class="colorWhite">
-                                <span class="colorOrange textShadowOrange fontWeightBold font14">by:</span>
-                                <a href="/$author['articleAuthorUsername']">
-                                   <span class="colorOrange textShadowOrange fontWeightBold font20 marginLeft10">$author['articleAuthorUsername']</span>
-                                   <img src="$author['articleAuthorAvatarPath']" height="25">
-                                </a>
-                        </div>
-                        <div id="userInfoData" class="divTable colorOrange textShadowOrange font12 fontWeightBold marginLeft40 marginTop20">
-                        	   <div class="divRow">
-	                        	   	<div class="divCell">
-	                        	   		Followed By:<span class="colorWhite marginLeft5">$author['articleAuthorTotalFollowers']</span>
-	                        	   	</div>
-	                        	   	<div class="divCell">
-	                        	   		Achievements:<span class="colorWhite marginLeft5">$author['articleAuthorTotalAchievements']</span>
-	                        	   		
-	                        	   	</div>
-                        	   </div>
-                        	   <div class="divRow">
-	                        	   	<div class="divCell">
-	                        	   		Articles Published:<span class="colorWhite marginLeft5">$author['articleTotalArticlesPublished']</span>
-	                        	   	</div>
-                        	   </div>
-                                                                   
-                                
-                        </div>
-                        
-                        <div class="colorWhite font12 marginLeft40 fontWeightBold marginRight30">
-                        	<br>
-                        	<i>
-								<span >"</span>
-								<span>$author['articleAuthorGameBio']</span>
-								<span>"</span>
-							</i>	
-						</div>                                               
-           </div>
-           <div id="reviewScoreBox" class="floatLeft overflowHidden">           	
-				 $if article['articleGame']:
-				 		<input type="hidden" id="networkScore" name="networkScore" value="$article['articleGame']['gameScore']">
-				 		<input type="hidden" id="userScore" name="userScore" value="$article['articleGameUserScore']">
-				 		<div id="networkScoreContent" class="floatLeft" title="This is the generated gamealoon network score or true score. Please note that this score will vary from time to time when and as more users will review this game. This is totally algorithmically generated">
-  							<div id="networkScoreDonutHolder" class="donutHolder donutHolderSize150">
-  								 <div id="networkScoreDonut" class="donut">
-  								 	
-  								 </div>
-    							 <span id="networkScoreDonutData" class="textShadowBlack donutData donutDataMediumSize">
-    							 	
-    							 </span>  
-  								
-  							</div>
-  							<div id="scoreTrophy">
-  								<div id="trophyRank">
-  									$if article['articleGame']['totalUsersWhoScoredGame']==0:
-	  									<span class="statsLabel colorWhite textShadowOrange">NR</span>
-	  								$else:
-	  									<span class="statsLabel colorWhite textShadowOrange">$article['articleGame']['gameNetworkScale']</span>
-  								</div>  							
-  								<div id="trophyBase" class="applyBevan">
-  									<span><i class="icon-star-2"></i>Network Score<i class="icon-star-2"></i></span>
-  									<br>
-  									
-	  								<span class="font12">($article['articleGame']['totalUsersWhoScoredGame'])</span>
-  								</div>
-  							</div>
-  							
-  						</div>  					
-  						<div id="userScoreContent" class="floatLeft" title="$author['articleAuthorUsername']'s score">
-  							<div id="userScoreDonutHolder" class="donutHolder donutHolderSize100">
-  								 <div id="userScoreDonut" class="donut">
-  								 	
-  								 </div>
-    							 <span id="userScoreDonutData" class="textShadowBlack donutData donutDataSmallSize">
-    							 	
-    							 </span>  
-  								
-  							</div>    												
-  							
-  						</div>	
-			            
-		     
-      
-      
-			</div>	
-			
+				<li class="facebook button-wrap"><a href="#">Facebook</a></li>
+				
+				<li class="twitter button-wrap"><a href="#">Tweet</a></li>
+				
+				<li class="digg button-wrap"><a href="#">Digg it</a></li>
+				
+				<li class="stumbleupon button-wrap"><a href="#">Stumbleupon</a></li>
+				
+				<li class="delicious button-wrap"><a href="#">Delicious</a></li>
+				
+				<li class="reddit button-wrap"><a href="#">Reddit</a></li>
+				
+				<li class="google button-wrap"><a href="#">+Plus</a></li>
+				
+				<li class="email button-wrap"><a href="#">Email</a></li>
+			</ul>
 		</div>
 		
-        
-        
-                
-			
-	</div>			
-	
-		
-	<div id="articleBodyContainer" class="marginTop20 overflowHidden">
-		<div id="quoteBox" class="applyFranklinGothic">
-			<p><i class="icon-quote-left"></i></p>
-			<blockquote class="marginLeft50"><i>$article['articleSubTitle']</i></blockquote>
-		</div>
-		<div id="articleAndCommentBox" class="floatLeft marginLeft50">
-			<div id="$article['articleId']" class="articleBody applyFjordOneRegular">
-				<span class="colorGray">$article['articlePublishDate'] </span>
-				$:article['articleBody']							
-	 		</div>
-	 		<div id="commentsBox">
-	 			<h2 class="marginLeft10">Comments</h2>	 			
-	 			<div id="commentForm">	 				
-	 				<form id="commentFormInput" method="get" class="overflowHidden">
-	 					<textarea id="commentBody"  name="commentBody" cols="60" rows="10"></textarea>
-	 					<button id="postContent" class="colorWhite blackBoxShadow icon-comment-1">Post Comment</button>	 					
-	 				</form>
-	 			</div>
-	 			<div id="commentList">
-	 			$if len(article['articleComments']) == 0:
-	 					<span id="noComments">Hey! No comments. Add one.</span>
-	 			$else:
-		 				$for comment in article['articleComments']:
-						 			<div id="$comment['conversationId']" class="commentData">
-						 				<input type="hidden" id="conversationTimestamp" name="conversationTimestamp" value="$comment['conversationTimeStamp']" />
-						 				<header class="commentUserBox">
-								 			<div class="commentuserAvatarCircle">
-								 				<a href="/$comment['ownerName']" target="_blank">
-								 					<img src="$comment['ownerAvatarImage']" height="25" alt="avatar">
-								 				</a>				 							
-								 			</div>
-								 			<div class="commentUserName">
-								 				<a href="/$comment['ownerName']" target="_blank">
-								 					<span>
-								 						$comment['ownerName']
-								 					</span>
-								 				</a>								 				
-								 				<div class="commentVoteControl">
-								 					<div class="upArrow">
-								 						<a href="javascript:;" title="yay" class="colorGray">
-								 							<i class="icon-up-dir"></i>
-								 						</a>
-								 					</div>
-								 					<div class="val">
-								 							0
-								 					</div>
-								 					<div class="downArrow">
-								 						<a href="javascript:;" title="nay" class="colorGray">
-								 							<i class="icon-down-dir"></i>
-								 						</a>
-								 					</div>
-								 				</div>
-								 				<div class="commentFlag">
-								 					<a href="javascript:;" title="flag as inappropriate" class="colorGray">
-								 						<i class='icon-flag'></i>
-								 					</a>
-								 				</div>
-								 			</div>
-								 		</header>
-								 		<span class="commentBody applyJura">
-								 			<span class="colorGray font12"> $comment['converstationTimeFormatted']- </span>$:comment['message']
-								 		</span>  
-								 </div>		
-	 					 			
-	 		</div>
-	 	</div>
-			
-	</div>
-		
-	<div id="sidePanel" class="floatRight">    	
-        $if article['articleGame']:                 	
-			<div id="gameInformationBox">
-				<div id="gameDetailHeader" class="colorWhite font13">
-					<span>
-						Game Details
+		<div id="coverSection">		
+			<div id="coverSectionHead" class="applyFranklinGothic coverSectionHeaderFooter">
+				$if article['articleCategory']=='news':						
+					<span class="textCapitalization icon-signal-2 colorWhite $article['articleCategory']">
+						$article['articleCategory']
 					</span>
-		        </div>
-		        <div class="marginTop5">
-		        	<a href="/game/$article['articleGame']['gameEncodedUrl']"><img src="$article['articleGame']['boxshotPath']" height="300" width="250"/></a>		
-		        	<div id="gameInformationTable" class="divTable font12 fontWeightBold">
-		        		<div class="divRow">
-		        			<div class="divCell">Published By</div>
-		        			<div class="divCell">$article['articleGame']['publisher']</div>
-		        		</div>
-		        		<div class="divRow">
-		        			<div class="divCell">Developed By</div>
-		        			<div class="divCell">$article['articleGame']['developer']</div>
-		        		</div>
-		        		<div class="divRow">
-		        			<div class="divCell">Releasing Date</div>
-		        			<div class="divCell">$article['articleGame']['releaseDate']</div>
-		        		</div>
-		        		<div class="divRow">
-		        			<div class="divCell">Platforms</div>
-		        			<div class="divCell">
-		        				$for platform in article['articleGame']['gamePlatforms']:
-		        					<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" title="$platform['title']" target="_blank"><span  class="$platform['shortTitle'] blackBoxShadow interestUserProfileFontSize">$platform['title']</span></a><br>
-		        			</div>
-		        		</div>	
-		        		<div class="divRow">
-		        			<div class="divCell">Genre</div>		        			
-		        			<div class="divCell">
-		        				<span class="genreStyle blackBoxShadow interestUserProfileFontSize">$article['articleGame']['genre']</span>
-		        			</div>
-		        		</div>	
-		        		<div class="divRow">
-		        			<div class="divCell">Rating</div>
-		        			<div class="divCell" ><div id="$article['articleGame']['rating']" class="ratingDimension"></div></div>
-		        		</div>			        			        	
-		        	</div>				
+				$elif article['articleCategory']=='review':						
+					<span class="textCapitalization icon-thumbs-up-1 colorWhite $article['articleCategory']">
+						$article['articleCategory']
+					</span>
+				$elif article['articleCategory']=='gloonicle':						
+					<span class="textCapitalization icon-user colorWhite $article['articleCategory']">
+						$article['articleCategory']
+					</span>
+				$elif article['articleCategory']=='feature':						
+					<span class="textCapitalization icon-star colorWhite $article['articleCategory']">
+						$article['articleCategory']
+					</span>
+				$else:						
+					<span class="textCapitalization icon-play-3 colorWhite $article['articleCategory']">								
+						$article['articleCategory']
+					</span>
+					
+				<span class="colorWhite textShadowOrange">
+						- $article['articleTitle']
+				</span>
+			</div>
+			<div id="coverImage" class="floatLeft">
+				<img src="$article['articleFeaturedImage']" width="640" height="480"/>
+			</div>
+			<div id="coverSectionFoot" class="coverSectionHeaderFooter">
+				$if session.username=="Guest": 
+					<div id="voteButtons" class="floatLeft applyChunkFive">
+						<span id="yeah" class="icon-smile cursorPointer notSelected notActiveButton">Yeah!</span>
+						<span id="meh" class="icon-frown cursorPointer notSelected notActiveButton">Meh!</span>				
+					</div>
+				$else:		
+					<div id="voteButtons" class="floatLeft applyChunkFive">
+						$if article['articleUserCoolState'] == 1:
+							<span id="yeah" class="icon-smile cursorPointer selected activeButton">Yeah!</span>
+						$else:
+							<span id="yeah" class="icon-smile cursorPointer notSelected activeButton">Yeah!</span>
+							
+						$if article['articleUserNotCoolState'] == 1:					
+							<span id="meh" class="icon-frown cursorPointer selected activeButton">Meh!</span>
+						$else:
+							<span id="meh" class="icon-frown cursorPointer notSelected activeButton">Meh!</span>				
+					</div>		
+				<div id="moreInformation" class="floatRight fontWeightBold" >
+					<span class="icon-smile">$article['articleCoolScore']</span>
+					<span class="icon-frown">$article['articleNotCoolScore']</span>
+					<span class="icon-users">$article['articleCommentCount']</span>
 				</div>
+			</div>
+			<div id="userInfoAndReview" class="floatLeft textureBg"> 
+				
+				
+				<div id="userInfoBox" class="floatLeft">
+							<div id="userInfoUsername" class="colorWhite">
+									<span class="colorOrange textShadowOrange fontWeightBold font14">by:</span>
+									<a href="/$author['articleAuthorUsername']">
+									   <span class="colorOrange textShadowOrange fontWeightBold font20 marginLeft10">$author['articleAuthorUsername']</span>
+									   <img src="$author['articleAuthorAvatarPath']" height="25">
+									</a>
+							</div>
+							<div id="userInfoData" class="divTable colorOrange textShadowOrange font12 fontWeightBold marginLeft40 marginTop20">
+								   <div class="divRow">
+										   <div class="divCell">
+											   Followed By:<span class="colorWhite marginLeft5">$author['articleAuthorTotalFollowers']</span>
+										   </div>
+										   <div class="divCell">
+											   Achievements:<span class="colorWhite marginLeft5">$author['articleAuthorTotalAchievements']</span>
+																							</div>
+								   </div>
+								   <div class="divRow">
+										   <div class="divCell">
+											   Articles Published:<span class="colorWhite marginLeft5">$author['articleTotalArticlesPublished']</span>
+										   </div>
+								   </div>
+																																		   </div>
+														  <div class="colorWhite font12 marginLeft40 fontWeightBold marginRight30">
+								<br>
+								<i>
+									<span >"</span>
+									<span>$author['articleAuthorGameBio']</span>
+									<span>"</span>
+								</i>	
+							</div>                                               
+			   </div>
+			   <div id="reviewScoreBox" class="floatLeft overflowHidden">           	
+					 $if article['articleGame']:
+							 <input type="hidden" id="networkScore" name="networkScore" value="$article['articleGame']['gameScore']">
+							 <input type="hidden" id="userScore" name="userScore" value="$article['articleGameUserScore']">
+							 <div id="networkScoreContent" class="floatLeft" title="This is the generated gamealoon network score or true score. Please note that this score will vary from time to time when and as more users will review this game. This is totally algorithmically generated">
+								  <div id="networkScoreDonutHolder" class="donutHolder donutHolderSize150">
+									   <div id="networkScoreDonut" class="donut">
+																					</div>
+									 <span id="networkScoreDonutData" class="textShadowBlack donutData donutDataMediumSize">
+																				</span>  
+																		  </div>
+								  <div id="scoreTrophy">
+									  <div id="trophyRank">
+										  $if article['articleGame']['totalUsersWhoScoredGame']==0:
+											  <span class="statsLabel colorWhite textShadowOrange">NR</span>
+										  $else:
+											  <span class="statsLabel colorWhite textShadowOrange">$article['articleGame']['gameNetworkScale']</span>
+									  </div>  							
+									  <div id="trophyBase" class="applyBevan">
+										  <span><i class="icon-star-2"></i>Network Score<i class="icon-star-2"></i></span>
+										  <br>
+																					  <span class="font12">($article['articleGame']['totalUsersWhoScoredGame'])</span>
+									  </div>
+								  </div>
+																  </div>  					
+							  <div id="userScoreContent" class="floatLeft" title="$author['articleAuthorUsername']'s score">
+								  <div id="userScoreDonutHolder" class="donutHolder donutHolderSize100">
+									   <div id="userScoreDonut" class="donut">
+																					</div>
+									 <span id="userScoreDonutData" class="textShadowBlack donutData donutDataSmallSize">
+																				</span>  
+																		  </div>    												
+																  </div>	
+																						 </div>	
+				
+			</div>
+																						  </div>			
 		
-			</div>     
-<!--<div style="width: 100%;height: 300px;border-style: solid;">
-		Ad Box 1
-     </div>-->	
-    </div>
-</div>
+			
+		<div id="articleBodyContainer" class="marginTop20 overflowHidden">
+			<div id="quoteBox" class="applyFranklinGothic">
+				<p><i class="icon-quote-left"></i></p>
+				<blockquote class="marginLeft50"><i>$article['articleSubTitle']</i></blockquote>
+			</div>
+			<div id="articleAndCommentBox" class="floatLeft marginLeft50">
+				<div id="$article['articleId']" class="articleBody applyFjordOneRegular">
+					<span class="colorGray">$article['articlePublishDate'] </span>
+					$:article['articleBody']							
+				 </div>
+				 <div id="commentsBox">
+					 <h2 class="marginLeft10">Comments</h2>	 			
+					 <div id="commentForm">	 				
+						 <form id="commentFormInput" method="get" class="overflowHidden">
+							 <textarea id="commentBody"  name="commentBody" cols="60" rows="10"></textarea>
+							 <button id="postContent" class="colorWhite blackBoxShadow icon-comment-1">Post Comment</button>	 					
+						 </form>
+					 </div>
+					 <div id="commentList">
+					 $if len(article['articleComments']) == 0:
+							 <span id="noComments">Hey! No comments. Add one.</span>
+					 $else:
+							 $for comment in article['articleComments']:
+										 <div id="$comment['conversationId']" class="commentData">
+											 <input type="hidden" id="conversationTimestamp" name="conversationTimestamp" value="$comment['conversationTimeStamp']" />
+											 <header class="commentUserBox">
+												 <div class="commentuserAvatarCircle">
+													 <a href="/$comment['ownerName']" target="_blank">
+														 <img src="$comment['ownerAvatarImage']" height="25" alt="avatar">
+													 </a>				 							
+												 </div>
+												 <div class="commentUserName">
+													 <a href="/$comment['ownerName']" target="_blank">
+														 <span>
+															 $comment['ownerName']
+														 </span>
+													 </a>								 				
+													 <div class="commentVoteControl">
+														 <div class="upArrow">
+															 <a href="javascript:;" title="yay" class="colorGray">
+																 <i class="icon-up-dir"></i>
+															 </a>
+														 </div>
+														 <div class="val">
+																 0
+														 </div>
+														 <div class="downArrow">
+															 <a href="javascript:;" title="nay" class="colorGray">
+																 <i class="icon-down-dir"></i>
+															 </a>
+														 </div>
+													 </div>
+													 <div class="commentFlag">
+														 <a href="javascript:;" title="flag as inappropriate" class="colorGray">
+															 <i class='icon-flag'></i>
+														 </a>
+													 </div>
+												 </div>
+											 </header>
+											 <span class="commentBody applyJura">
+												 <span class="colorGray font12"> $comment['converstationTimeFormatted']- </span>$:comment['message']
+											 </span>  
+									 </div>		
+															 </div>
+			 </div>
+				
+		</div>
+			
+		<div id="sidePanel" class="floatRight">    	
+			$if article['articleGame']:                 	
+				<div id="gameInformationBox">
+					<div id="gameDetailHeader" class="colorWhite font13">
+						<span>
+							Game Details
+						</span>
+					</div>
+					<div class="marginTop5">
+						<a href="/game/$article['articleGame']['gameEncodedUrl']"><img src="$article['articleGame']['boxshotPath']" height="300" width="250"/></a>		
+						<div id="gameInformationTable" class="divTable font12 fontWeightBold">
+							<div class="divRow">
+								<div class="divCell">Published By</div>
+								<div class="divCell">$article['articleGame']['publisher']</div>
+							</div>
+							<div class="divRow">
+								<div class="divCell">Developed By</div>
+								<div class="divCell">$article['articleGame']['developer']</div>
+							</div>
+							<div class="divRow">
+								<div class="divCell">Releasing Date</div>
+								<div class="divCell">$article['articleGame']['releaseDate']</div>
+							</div>
+							<div class="divRow">
+								<div class="divCell">Platforms</div>
+								<div class="divCell">
+									$for platform in article['articleGame']['gamePlatforms']:
+										<a id="$platform['shortTitle']" href="/platform/$platform['shortTitle']/all" title="$platform['title']" target="_blank"><span  class="$platform['shortTitle'] blackBoxShadow interestUserProfileFontSize">$platform['title']</span></a><br>
+								</div>
+							</div>	
+							<div class="divRow">
+								<div class="divCell">Genre</div>		        			
+								<div class="divCell">
+									<span class="genreStyle blackBoxShadow interestUserProfileFontSize">$article['articleGame']['genre']</span>
+								</div>
+							</div>	
+							<div class="divRow">
+								<div class="divCell">Rating</div>
+								<div class="divCell" ><div id="$article['articleGame']['rating']" class="ratingDimension"></div></div>
+							</div>			        			        	
+						</div>				
+					</div>
+			
+				</div>     
+		</div>
+	</div>-->
+	
 	
 
 <script type="text/javascript" src="/static/javascripts/single_article.js"></script>

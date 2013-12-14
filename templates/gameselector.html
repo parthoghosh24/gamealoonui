@@ -1,0 +1,40 @@
+<div id="gameSelectorContainer">		   						   			
+			   				<div class="imageUploaderSidePane floatLeft">
+			   					<div class="sidePaneItem">
+			   						<a id="gameSearcher" href="javascript:;" title="Search and select game"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold icon-search">Search Game</span></a>
+			   					</div>
+			   					<div class="sidePaneItem">
+			   						<a id="gameAdder" href="javascript:;" title="Coming soon"><span class="colorWhite textUpperCase textShadowBlack fontWeightBold icon-joystick">Contribute</span></a>
+			   					</div>			   													   
+			   				</div>		
+			   				<div id="gameSearchContainer" class="padding20 uploadBrowserBox floatLeft">
+			   					<div id="imagePreview">			   						
+			   						<input type="text"  id="gameSearchBox" name="gameSearchBox" placeholder="Type to search Game"/>
+			   						<br>
+			   						<div id="selectedGame" class="overflowHidden marginTop10">
+						   	   				<div id="gameBoxShot" class="floatLeft">
+						   	   					<img src="" height="90"/>
+						   	   				</div>
+						   	   				<div id="gameTitle" class="font16 colorWhite">
+						   	   					
+						   	   				</div>
+						   	   				<div id="gameGenre"  class="font12 colorGray">
+						   	   					
+						   	   				</div>
+						   	   				<div id="gamePlatforms"  class="font10 colorWhite fontWeightBold">
+						   	   					
+						   	   				</div>
+						   	   				<input type="hidden" id="gameId" name="gameId" value="empty"/>
+		   	   					   </div>			
+			   						<span id="imageErrorMessage" class="font14 fontWeightBold textShadowBlack error"> </span>   						
+			   					</div>
+			   					<div id="imageUploadForm">
+			   						<button id="setGame" class="colorWhite applyBevan disableOpacity" disabled="disabled">SET GAME</button>			   						
+			   					</div>
+			   				</div>
+			   				<div id="gameContributeContainer" class="padding20 uploadBrowserBox floatLeft">
+			   					<input type="hidden" id="photoLastUpdated" name="photoLastUpdated" value="0">
+			   					<input type="hidden" id="hasPhotos" name="hasPhotos" value="0">
+			   				</div>	   							   							   			
+</div>
+<script src="/static/javascripts/gameContributor.js"></script>

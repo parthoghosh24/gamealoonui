@@ -36,22 +36,38 @@ $elif platformValue == 'ios':
 $elif platformValue == 'android':
 	$var title:Android @ gamealoon- Find all gamer generated Android reviews, features, gloonicles, videos, news and more at Gamealoon	
 	$var description: Find all Android gamer generated reviews, features, gloonicles, videos and news at Gamealoon							    
-		
-$if platformValue != 'all':
-		<ul class="platformMenu">	
-$else:	
-		<ul class="platformMenu hiddenDiv">			
-<a href="/platform/ps3/all"><li class="floatLeft ps3 font10 marginLeft5">Playstation 3</li></a>
-<a href="/platform/ps4/all"><li class='floatLeft ps4 font10 marginLeft5'>Playstation 4</li></a>
-<a href="/platform/vita/all"<li class="floatLeft vita font10 marginLeft5">PS Vita</li></a>
-<a href="/platform/xbox360/all"<li class="floatLeft xbox360 font10 marginLeft5">Xbox 360</li></a>
-<a href="/platform/xboxOne/all"<li class="floatLeft xboxOne font10 marginLeft5">Xbox One</li></a>
-<a href="/platform/pc/all"<li class="floatLeft pc font10 marginLeft5">PC</li></a>
-<a href="/platform/wiiu/all"<li class="floatLeft wiiu font10 marginLeft5">Wii-u</li></a>
-<a href="/platform/n3ds/all"<li class="floatLeft n3ds font10 marginLeft5">N3DS</li></a>
-<a href="/platform/android/all"<li class="floatLeft android font10 marginLeft5">Android</li></a>
-<a href="/platform/ios/all"<li  class="floatLeft ios font10 marginLeft5">IOS</li></a>
-</ul>		
+<div class="topSpacer">
+	
+</div>		
+<div class="mainContainer">
+			<div id="container_layout">		
+				<ul class="platformMenu hiddenDiv">			
+					<a href="/platform/ps3/all"><li class="floatLeft ps3 font10 marginLeft5">Playstation 3</li></a>
+					<a href="/platform/ps4/all"><li class='floatLeft ps4 font10 marginLeft5'>Playstation 4</li></a>
+					<a href="/platform/vita/all"<li class="floatLeft vita font10 marginLeft5">PS Vita</li></a>
+					<a href="/platform/xbox360/all"<li class="floatLeft xbox360 font10 marginLeft5">Xbox 360</li></a>
+					<a href="/platform/xboxOne/all"<li class="floatLeft xboxOne font10 marginLeft5">Xbox One</li></a>
+					<a href="/platform/pc/all"<li class="floatLeft pc font10 marginLeft5">PC</li></a>
+					<a href="/platform/wiiu/all"<li class="floatLeft wiiu font10 marginLeft5">Wii-u</li></a>
+					<a href="/platform/n3ds/all"<li class="floatLeft n3ds font10 marginLeft5">N3DS</li></a>
+					<a href="/platform/android/all"<li class="floatLeft android font10 marginLeft5">Android</li></a>
+					<a href="/platform/ios/all"<li  class="floatLeft ios font10 marginLeft5">IOS</li></a>
+				</ul>			
+				$if platformValue != 'all':
+					<ul class="platformMenu">	
+				$else:	
+						<ul class="platformMenu hiddenDiv">			
+						<a href="/platform/ps3/all"><li class="floatLeft ps3 font10 marginLeft5">Playstation 3</li></a>
+						<a href="/platform/ps4/all"><li class='floatLeft ps4 font10 marginLeft5'>Playstation 4</li></a>
+						<a href="/platform/vita/all"<li class="floatLeft vita font10 marginLeft5">PS Vita</li></a>
+						<a href="/platform/xbox360/all"<li class="floatLeft xbox360 font10 marginLeft5">Xbox 360</li></a>
+						<a href="/platform/xboxOne/all"<li class="floatLeft xboxOne font10 marginLeft5">Xbox One</li></a>
+						<a href="/platform/pc/all"<li class="floatLeft pc font10 marginLeft5">PC</li></a>
+						<a href="/platform/wiiu/all"<li class="floatLeft wiiu font10 marginLeft5">Wii-u</li></a>
+						<a href="/platform/n3ds/all"<li class="floatLeft n3ds font10 marginLeft5">N3DS</li></a>
+						<a href="/platform/android/all"<li class="floatLeft android font10 marginLeft5">Android</li></a>
+						<a href="/platform/ios/all"<li  class="floatLeft ios font10 marginLeft5">IOS</li></a>
+						</ul>		
 <div id="carousel">
 	<div id="videoBox" class="width300 height260">
 		
@@ -443,4 +459,8 @@ $else:
 	</div>
 
 </div>
+			</div>
+		</div>	
+				
+
 <script src="/static/javascripts/platform.js" type="text/javascript"></script>

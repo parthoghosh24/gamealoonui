@@ -1,0 +1,162 @@
+$var title: Post Creator
+$var description: Create post from here
+<div class="mainContainer">
+	<div id="container_layout">
+		<div class="divider"> </div>
+		<div id="default" class="coverSection">		
+			<div id="coverSectionHead" class="applyFranklinGothic coverSectionHeaderFooter">						
+					<span id="selectedCategory" class="cursorPointer textCapitalization colorWhite review" title="Click to choose and select category">
+						review
+					</span>			
+					<ul id="postCreatorCategorySelector">
+						<li>
+							<span id="review" class="option cursorPointer textCapitalization colorWhite review">
+								review
+							</span>
+						</li>
+						<li>
+							<span id="news" class="option cursorPointer textCapitalization colorWhite news">
+								news
+							</span>
+						</li>
+						<li>
+							<span id="video" class="option cursorPointer textCapitalization colorWhite video">
+								video
+							</span>
+						</li>
+						<li>
+							<span id="gloonicle" class="option cursorPointer textCapitalization colorWhite gloonicle">
+								gloonicle
+							</span>
+						</li>
+					</ul>
+				<span id="postTitle" class="colorWhite textShadowOrange">
+						- <span id="postTitleText">My Post Title</span>
+						<span id="postTitleEdit" class="hiddenDiv">
+							<input class="width300" id="postTitleInput" name="postTitle" type="text" placeholder="Upto 60 characters"/>
+							<a href="javascript:;" class="font16 doneEditiingButton" title="Update Title"><i class="icon-ok"></i></a>	
+						</span>
+						
+				</span>
+				<a id="changeTitle" href="javascript:;" title="Change Title of this Post"><i class="icon-pencil-1 editButton"> </i></a>
+				<a id="imageUploader" href="javascript:;" title="Change Featured Cover image of Post"><i class="icon-picture-3 editButton"> </i></a>
+				<a id="videoForm" href="javascript:;" title="Add a video to the post"><i class="icon-video editButton"> </i></a>
+			</div>		
+			<div id="coverSectionFoot" class="coverSectionHeaderFooter">				
+				<div id="moreInformation" class="floatRight fontWeightBold" >
+					<span class="icon-fire-1">Yet to ignite</span>
+					<span class="icon-smile">0</span>
+					<span class="icon-frown">0</span>
+					<span class="icon-users">0</span>
+				</div>
+			</div>		       			
+		</div>
+		<div class="divider"> </div>
+                <div id="postContainer" style="">
+                	<div id="initRow" class="positionAbsolute">
+                		<div id="gameRow">
+                			<div id="gameBoxArt">
+                				<a id="gameSelector" href="javascript:;" title="Add a game">
+                					<img id="nothing" src="http://192.168.0.103:9000/assets/images/default/boxShot.png" height="150">
+                				</a>
+                				
+                			</div>
+                				<h3 id="reviewGamePlayedOn">
+                					 played on 
+                					 <a id="playedOn" href="javascript:;">
+                					 	<span id="selectedGamePlatform" class="ps3">
+                					 		Playstation 3
+                					 	</span>
+                					 </a>
+                					 <div id="platformOptions" class="overflowHidden blackBoxShadow">  					
+					  					<h4>Choose Platfom</h4>
+					  					<form id="platformListForm" name="plaformListForm">
+					  						<div class="checkBoxFont divTable userInterestListBorderBottom">
+					  							<div class="divRow">
+					  								<div class="divCell"><input type="radio" id="ps3" name="playedOn" class="platform" value="ps3" />Playstation 3</div>
+					  								<div class="divCell"><input type="radio" id="x360" name="playedOn" class="platform" value="xbox360" />Xbox 360</div>
+					  								<div class="divCell"><input type="radio" id="ps4" name="playedOn" class="platform" value="ps4" />Playstation 4</div>
+					  							</div>
+					  							<div class="divRow">
+					  								<div class="divCell"><input type="radio" id="xone" name="playedOn" class="platform" value="xboxOne" />Xbox One</div>
+					  								<div class="divCell"><input type="radio" id="wiiu" name="playedOn" class="platform" value="wiiu" />WII-U</div>
+					  								<div class="divCell"><input type="radio" id="pc" name="playedOn" class="platform" value="pc" />PC</div>
+					  							</div>
+					  							<div class="divRow">
+					  								<div class="divCell"><input type="radio" id="vita" name="playedOn" class="platform" value="vita" />PS VITA</div>
+					  								<div class="divCell"><input type="radio" id="n3ds" name="playedOn" class="platform" value="n3ds" />N3DS</div>
+					  								<div class="divCell"><input type="radio" id="ios" name="playedOn" class="platform" value="ios" />IOS</div>
+					  							</div>
+					  							<div class="divRow">
+					  								<div class="divCell"><input type="radio" id="android" name="playedOn" class="platform" value="android" />Android</div>  								
+					  							</div>
+					  							<div class="divRow divTableFooterHeight">  													
+					  							</div>
+					  						</div>	
+					  						<div class="marginTop10">
+					  							<button id="platformSet">Close</button>  							
+					  						</div>
+					  					</form>
+		  							</div>
+                				</h3>
+                				
+                		</div>
+                		<div id="author">
+                			<div id="outerBox">
+                				<div id="innerBox">
+                					<a href="/$session.username"><img src="$session.userAvatar" alt="$session.username" title="$session.username" width="150" height="150"></a>
+                				</div>
+                			</div>
+                		</div>    
+                	</div>
+                	<div id="contentRow" class="overflowHidden">
+                		<div id="postData" class="floatLeft">
+                			<div id="snippetText">
+                				<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
+                				<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>
+                				<p class="colorGray marginTop10 font14">Add your verdict</p>
+                				<div id="postSnippet" class="hiddenDiv">
+                					<span class="colorWhite font14">Limit(<span id="charMaxLimit">200</span>)</span><a href="javascript:;" class="doneEditiingButton floatRight font16" style="margin-right: 61px;"><i class="icon-ok"></i></a><br>
+                					<textarea id="snippetTextInput" cols="60" rows="5"></textarea>
+                				</div>
+                				
+                			</div>
+                			<div id="reviewPoints" class="overflowHidden marginTop30">
+                				<dl id="sweet" class="floatLeft reviewPointWidth">
+                					<dt class="icon-emo-grin">
+                						<i>Sweet</i>
+                						<a id="sweetButton" href="javascript:;" class="reviewPointButtons"><i class="icon-plus"></i>Max 5 Sweets</a>
+                					</dt>
+                					<p id="noSweetPoint" class="noReviewPoints">No Sweet points</p>                					
+                				</dl>
+                				
+                				<dl id="stink" class="floatLeft reviewPointWidth">
+                					<dt class="icon-emo-angry">
+                						<i>Stinks</i>
+                						<a id="stinkButton" href="javascript:;" class="reviewPointButtons"><i class="icon-plus" ></i>Max 5 Stinks</a>
+                					</dt>
+                					<p id="noStinkPoint" class="noReviewPoints">No Stink points</p>                					
+                				</dl>
+                		</div>
+                		<div id="newsSource" class="marginTop20 hiddenDiv">
+                			<i class="icon-link-ext-alt colorWhite font20">Source Link</i>
+                			<a href="javascript:;"><i title="add News Source" class="icon-pencil-1 editButton"></i></a>
+                		</div>
+                	</div>
+                	<div id="score" class="floatLeft">
+                		<div id="lineSegment1">
+                			<div class="reviewLine"> </div>
+                		</div>
+                		<div id="authorScore">
+                			<div class="dottedScoreBorder">
+                				<input class="knob" data-width="100" data-angleOffset=1 data-angleArc=360 data-linecap=round data-min="0" data-displayPrevious=true data-max="100" data-step="1" value="0" data-fgColor="#FF4500" data-thickness=".2">                				
+								
+                			</div>
+                		</div>                  		
+                     </div>
+               </div>
+         </div>
+   </div>
+</div>		
+<script src="/static/javascripts/post_creator.js"></script>
+<script src="/static/javascripts/jquery.knob.js"></script>
