@@ -23,6 +23,7 @@ urls = (
         '/games','Games',        
         '/post/create','InitCreatePost',
         '/post/save','CreateOrUpdatePost',        
+        '/post/scrapeLink','GetLinkData',
         '/platform/(.+)/(.+)','Platform',
         '/article/article-preview','ArticlePreview',
         '/article/updateATS','ArticleUpdateAverageTimeSpent',
@@ -211,7 +212,19 @@ class InitCreatePost:
             return web.redirect("/") 
         else:
             return render.postcreator()
-       
+
+class GetLinkData:
+    def POST(self):
+        newsLinkData = web.input()
+        newsLink = newsLinkData.newsLink
+        url="http://localhost:9000/search/pageScraper"
+        values={"link":newsLink}  
+        data=urllib.urlencode(values);
+        request = urllib2.Request(url,data)
+        response = urllib2.urlopen(request)
+        scrapeStatus = json.load(response)
+        return json.dumps(scrapeStatus)
+               
 class CreateOrUpdatePost:
     def POST(self):
         articleFormData = web.input()                

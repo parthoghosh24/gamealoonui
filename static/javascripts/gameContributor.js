@@ -53,6 +53,8 @@ function setGameInfo()
 	var gameBoxshotSrc= $('#gameBoxShot img').attr('src');
 	parent.$('#gameSelector img').attr('id',gameId);
 	parent.$('#gameSelector img').attr('src',gameBoxshotSrc);
+	parent.$('#playedOn').attr("href","javascript:;");
+	parent.$('#playedOn').attr("title","Select a platform on which you have played this game");
 }
 
 $(function(){

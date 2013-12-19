@@ -1683,6 +1683,7 @@ a {
 .all
 {
 	background-color: #4E4EB4;
+	color: #fff;
 	padding: 2px;
 }
 .news
@@ -2013,13 +2014,15 @@ a {
 {
 	width: 100px;
     height: 100px;    
-    line-height: 100px;
+    line-height: 100px;    
 }
 .donutHolderSize150
 {
 	width: 150px;
     height: 150px;    
     line-height: 150px;     
+    margin-left: 2px;
+	margin-top: 2px;
 }
 .donutHolderSize200
 {
@@ -2034,6 +2037,10 @@ a {
     height: 100%;
 }
 
+.padding2
+{
+	padding: 2px;
+}
 .donutData
 {
 	position: absolute;
@@ -2047,13 +2054,13 @@ a {
 .donutDataMediumSize
 {
 	font-size: 50px;    
-    color: #76A7F5;
+    color: #fff;
 }
 
 .donutDataSmallSize
 {
-	font-size: 20px;    
-    color: #FF4500;
+	font-size: 30px;
+	color: #fff;
 }
 .donutDataSmallerSize
 {
@@ -2767,9 +2774,9 @@ img.fade
 {
 	width: 160px;
 	height: 160px;
-	border-style: dotted;
+	border-style: dashed;
 	border-color: #fff;
-	border-width: 2px;
+	border-width: 1px;
 	border-radius: 50%;
 }
 #innerBox
@@ -2804,6 +2811,15 @@ img.fade
 	background-color: #0077B3;
 	border-color: #0077B3;
 }
+#postCreatorButtons
+{
+	position: fixed;
+	top: 133px;
+	margin-left: 560px;
+	background-color: #0a0a0a;
+	padding: 20px;
+	opacity: 0.8;
+}
 /*Review start*/
 #platformOptions
 {
@@ -2828,16 +2844,9 @@ img.fade
 	height: 117px;
 	margin-left: 58px;
 }
-#authorScore div
-{
-	width: 115px;
-	height: 115px;	
-	padding-left: 2px;
-	padding-top: 4px;
-}
 .dottedScoreBorder
 {
-	border-style: dotted;
+	border-style: dashed;
 	border-color: #fff;
 	border-radius: 50%;
 }
@@ -2863,9 +2872,9 @@ img.fade
 .reviewLine
 {
 	width: 0.5px;
-	border-style: dotted;
+	border-style: dashed;
 	border-color: #fff;
-	border-width: 2px;
+	border-width: 1px;
 	margin-left: 115px;
 }
 #reviewGamePlayedOn
@@ -2952,8 +2961,29 @@ img.fade
 	margin-left: 35px;
 }
 
+#userScoreDonutContainer
+{
+	width: 115px;
+	height: 115px;
+	padding-top: 4px;
+	padding-left: 4px;
+}
 /*Review end*/
 /*News start */
+.newsLink
+{
+	color:#00A4EF;
+}
+.linkDesign
+{
+	width: 800px;
+	min-height: 300px;
+	border-style: dashed;
+	border-color: #f4f4f4;
+	border-width: 1px;
+	padding-top: 20px;
+	padding-left: 20px;
+}
 /*News end */
 /*Video start */
 /*Video end */

@@ -63,9 +63,9 @@ $var description: Create post from here
                 			</div>
                 				<h3 id="reviewGamePlayedOn">
                 					 played on 
-                					 <a id="playedOn" href="javascript:;">
-                					 	<span id="selectedGamePlatform" class="ps3">
-                					 		Playstation 3
+                					 <a id="playedOn" title="Please select a game before selecting platform">
+                					 	<span id="selectedGamePlatform" class="all">
+                					 		Select Platform
                 					 	</span>
                 					 </a>
                 					 <div id="platformOptions" class="overflowHidden blackBoxShadow">  					
@@ -114,10 +114,11 @@ $var description: Create post from here
                 			<div id="snippetText">
                 				<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
                 				<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>
-                				<p class="colorGray marginTop10 font14">Add your verdict</p>
+                				<p class="colorGray marginTop10 font14">Add your micro verdict.</p>
                 				<div id="postSnippet" class="hiddenDiv">
                 					<span class="colorWhite font14">Limit(<span id="charMaxLimit">200</span>)</span><a href="javascript:;" class="doneEditiingButton floatRight font16" style="margin-right: 61px;"><i class="icon-ok"></i></a><br>
                 					<textarea id="snippetTextInput" cols="60" rows="5"></textarea>
+                					<iframe name="richEditor" id="richEditor"> </iframe>
                 				</div>
                 				
                 			</div>
@@ -131,7 +132,7 @@ $var description: Create post from here
                 				</dl>
                 				
                 				<dl id="stink" class="floatLeft reviewPointWidth">
-                					<dt class="icon-emo-angry">
+                					<dt class="icon-emo-angry"> 
                 						<i>Stinks</i>
                 						<a id="stinkButton" href="javascript:;" class="reviewPointButtons"><i class="icon-plus" ></i>Max 5 Stinks</a>
                 					</dt>
@@ -140,7 +141,21 @@ $var description: Create post from here
                 		</div>
                 		<div id="newsSource" class="marginTop20 hiddenDiv">
                 			<i class="icon-link-ext-alt colorWhite font20">Source Link</i>
-                			<a href="javascript:;"><i title="add News Source" class="icon-pencil-1 editButton"></i></a>
+                			<a id="newsSourceLinkButton" href="javascript:;"><i title="add News Source" class="icon-link editButton"> </i></a>
+                			<p id="linkDefaultData" class="font14 marginTop30"><a class="newsLink" target="_blank">Add news source link</a></p>
+                			<div id="newsLinkContainer" class="hiddenDiv marginTop30">                					
+                					<input type="text" name="newsLink" id="newsLink" class="width300">
+                					<a href="javascript:;" class="doneEditiingButton font16"><i class="icon-ok"></i></a><br>                					                					                			
+                			</div>
+                			<span id="parseError" class="hiddenDiv error">Unable to parse link</span>
+                			<div id="linkContent" class="marginTop20 overflowHidden">
+                				<p id="loadingIcon" class="hiddenDiv textCenter font23 colorLightGray"><i class="icon-spin5 animate-spin"></i></p>
+                				 </div>
+                		</div>
+                		<div id="postCreatorButtons" class="marginTop30">
+                			<button class="cursorPointer padding2"><span class="icon-doc-inv">Save</span></button>
+                			<button class="cursorPointer padding2"><span class="icon-publish">Publish</span></button>
+                			<button class="cursorPointer padding2"><span class=" icon-cancel-circled-1">Close</span></button>
                 		</div>
                 	</div>
                 	<div id="score" class="floatLeft">
@@ -148,7 +163,7 @@ $var description: Create post from here
                 			<div class="reviewLine"> </div>
                 		</div>
                 		<div id="authorScore">
-                			<div class="dottedScoreBorder">
+                			<div id="userScoreDonutContainer" class="dottedScoreBorder cursorPointer">
                 				<input class="knob" data-width="100" data-angleOffset=1 data-angleArc=360 data-linecap=round data-min="0" data-displayPrevious=true data-max="100" data-step="1" value="0" data-fgColor="#FF4500" data-thickness=".2">                				
 								
                 			</div>

@@ -70,39 +70,39 @@ $var description: $:article['articleSubTitle']- Gamealoon
                 		</div>    
                 	</div>
                 	<div id="contentRow" class="overflowHidden">
-                		<div id="postData" class="floatLeft">
-                			<div id="snippetText">
-                				$if categoryInLower == "review":
-                					<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
-                				$elif categoryInLower == "news":
-                					<i id="snippetTextTitle" class="icon-signal-2 colorWhite font20">Bulletin</i>
-                				$elif categoryInLower == "video":
-                					<i id="snippetTextTitle" class="icon-play-3  colorWhite font20">Caption</i>
-                				$else:
-                				    <i id="snippetTextTitle" class="icon-user colorWhite font20">$session.username thinks...</i>            				
-                				<p class="colorGray marginTop10 font14">Your microverdict for game</p>                				                				
-                			</div>
-                			$if categoryInLower == "review":
-	                			<div id="reviewPoints" class="overflowHidden marginTop30">
-	                				<dl id="sweet" class="floatLeft reviewPointWidth">
-	                					<dt class="icon-emo-grin">
-	                						<i>Sweet</i>                						
-	                					</dt>
-	                					<p id="noSweetPoint" class="noReviewPoints">No Sweet points</p>                					
-	                				</dl>
-	                				
-	                				<dl id="stink" class="floatLeft reviewPointWidth">
-	                					<dt class="icon-emo-angry">
-	                						<i>Stinks</i>                						
-	                					</dt>
-	                					<p id="noStinkPoint" class="noReviewPoints">No Stink points</p>                					
-	                				</dl>
-	                			</div>
-	                	$if categoryInLower == "news":		
-	                		<div id="newsSource" class="marginTop20 hiddenDiv">
-	                			<i class="icon-link-ext-alt colorWhite font20">Source Link</i>	                			
-	                		</div>
-                	</div>
+			                		<div id="postData" class="floatLeft">
+			                			<div id="snippetText">
+			                				$if categoryInLower == "review":
+			                					<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
+			                				$elif categoryInLower == "news":
+			                					<i id="snippetTextTitle" class="icon-signal-2 colorWhite font20">Bulletin</i>
+			                				$elif categoryInLower == "video":
+			                					<i id="snippetTextTitle" class="icon-play-3  colorWhite font20">Caption</i>
+			                				$else:
+			                				    <i id="snippetTextTitle" class="icon-user colorWhite font20">$session.username thinks...</i>            				
+			                				<p class="colorGray marginTop10 font14">Your microverdict for game</p>                				                				
+			                			</div>
+			                			$if categoryInLower == "review":
+				                			<div id="reviewPoints" class="overflowHidden marginTop30">
+				                				<dl id="sweet" class="floatLeft reviewPointWidth">
+				                					<dt class="icon-emo-grin">
+				                						<i>Sweet</i>                						
+				                					</dt>
+				                					<p id="noSweetPoint" class="noReviewPoints">No Sweet points</p>                					
+				                				</dl>
+				                				
+				                				<dl id="stink" class="floatLeft reviewPointWidth">
+				                					<dt class="icon-emo-angry">
+				                						<i>Stinks</i>                						
+				                					</dt>
+				                					<p id="noStinkPoint" class="noReviewPoints">No Stink points</p>                					
+				                				</dl>
+				                			</div>
+				                		$elif categoryInLower == "news":		
+					                		<div id="newsSource" class="marginTop20 hiddenDiv">
+					                			<i class="icon-link-ext-alt colorWhite font20">Source Link</i>	                			
+					                		</div>
+			                	</div>
                 	<div id="score" class="floatLeft">
                 		<input type="hidden" id="networkScore" name="networkScore" value="$article['articleGame']['gameScore']">
 						<input type="hidden" id="userScore" name="userScore" value="$article['articleGameUserScore']">
@@ -110,8 +110,11 @@ $var description: $:article['articleSubTitle']- Gamealoon
                 			<div class="reviewLine"> </div>
                 		</div>
                 		<div id="authorScore">
-                			<div class="dottedScoreBorder">                				                			
-								
+                			<div id="userScoreDonutContainer" class="dottedScoreBorder">                				                			
+								<div id="userScoreDonutHolder" class="donutHolder donutHolderSize100">
+									   <div id="userScoreDonut" class="donut"> </div>
+									 <span id="userScoreDonutData" class="textShadowBlack donutData donutDataSmallSize"> </span>  
+								  </div>  
                 			</div>
                 		</div>  
                 		<div id="lineSegment2">
@@ -119,26 +122,26 @@ $var description: $:article['articleSubTitle']- Gamealoon
                 		</div> 
                 		<div id="gameScore">                			
                 			<div id="gameScoreDonutContainer" class="dottedScoreBorder">
-                				<div id="networkScoreDonutHolder" class="donutHolder donutHolderSize150">
+                				<div id="networkScoreDonutHolder" class="donutHolder donutHolderSize150" title="This is the generated gamealoon network score or true score. Please note that this score will vary from time to time when and as more users will review this game. This is totally algorithmically generated">
 									   <div id="networkScoreDonut" class="donut">
 																					</div>
 									 <span id="networkScoreDonutData" class="textShadowBlack donutData donutDataMediumSize">
 																				</span>  
-																		  </div>
-                				<!--<div id="gameScoreDonut" style="width: 150px;height: 150px;border-style: solid;border-width: 20px;border-color: #76A7F5;text-align: center;line-height: 1.5;font-size: 60px;font-weight: bold;margin-left: 2px;margin-top: 2px;  color: #fff;border-radius: 50%;">
-                					9.2                				
-                				</div>-->
+																		  </div>                				
                 			</div>
                 			<div id="scoreTrophy" style="width: 160px;height: 100px;overflow: hidden;margin-left: 36px;">
                 				<div id="trophyRank">
-                					<span class="statsLabel colorWhite textShadowOrange">Gloontastic :O</span>
+$if article['articleGame']['totalUsersWhoScoredGame']==0:
+	<span class="statsLabel colorWhite textShadowOrange">NR</span>
+$else:
+	<span class="statsLabel colorWhite textShadowOrange">$article['articleGame']['gameNetworkScale']</span>                					
                 				</div>                                                          
                 				<div id="trophyBase" class="applyBevan">
                 					<span>
                 						<i class="icon-star-2"></i>Network Score<i class="icon-star-2"></i>
                 					</span>
-                					<br>
-                					<span class="font12">(2)</span>
+                					<br>			
+                					<span class="font12">($article['articleGame']['totalUsersWhoScoredGame'])</span>	                             				
                                </div>
                            </div>
                        </div>
@@ -285,11 +288,9 @@ $var description: $:article['articleSubTitle']- Gamealoon
 																  </div>  					
 							  <div id="userScoreContent" class="floatLeft" title="$author['articleAuthorUsername']'s score">
 								  <div id="userScoreDonutHolder" class="donutHolder donutHolderSize100">
-									   <div id="userScoreDonut" class="donut">
-																					</div>
-									 <span id="userScoreDonutData" class="textShadowBlack donutData donutDataSmallSize">
-																				</span>  
-																		  </div>    												
+									   <div id="userScoreDonut" class="donut"></div>
+									 <span id="userScoreDonutData" class="textShadowBlack donutData donutDataSmallSize"></span>  
+								  </div>    												
 																  </div>	
 																						 </div>	
 				
