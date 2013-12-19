@@ -464,7 +464,7 @@ function charCountCheck(maxChars)
 	
 		var text=window.frames['richEditor'].document.body.innerText;
 		var currentCharCount = text.length;
-		if(currentCharCount>=200 && ())
+		if(currentCharCount>=200 && (event.keyCode!=8 || event.keyCode!=46))
 		{
 				event.preventDefault();
 				return false;
