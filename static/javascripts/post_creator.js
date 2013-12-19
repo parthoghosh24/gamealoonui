@@ -2,6 +2,145 @@
  *@author Partho 
  */
 
+/**
+ *Editor begins
+ *  
+ */
+function onBold()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('bold',false,null);
+}
+
+function onUnderline()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('underline',false,null);
+}
+function onItalic()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('italic',false,null);
+}
+function onUlist()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('insertUnorderedList',false,null);
+}
+function onOlist()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('insertOrderedList',false,null);
+}
+function onLink()
+{
+	var link = prompt("Enter an url");
+	if(link!=null)
+	{
+		document.getElementsByName("richEditor")[0].contentWindow.focus();
+		richEditor.document.execCommand('createLink',false,link);
+	}
+	else
+	{
+		document.getElementsByName("richEditor")[0].contentWindow.focus();
+		richEditor.document.execCommand('createLink',false,"#");
+	}
+	
+}
+function onUnlink()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('unlink',false,null);
+}
+function onIndent()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('indent',false,null);
+}
+function onOutdent()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('outdent',false,null);
+}
+function onCenter()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('justifyCenter',false,null);
+}
+function onLeft()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('justifyLeft',false,null);
+}
+function onRight()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('justifyRight',false,null);
+}
+function onJustify()
+{
+	document.getElementsByName("richEditor")[0].contentWindow.focus();
+	richEditor.document.execCommand('justifyFull',false,null);
+}
+
+function iFrameOn()
+{
+		
+		richEditor.document.designMode="on";			    
+	    		    
+	    	/*						
+		count=400;					
+		$(document.getElementById("richEditor").contentWindow.document).keydown(function(event){
+			console.log("keycode: "+event.keyCode);
+			if ((event.keyCode >=65 && event.keyCode<= 90) || 
+			    (event.keyCode>=48 && event.keyCode<= 57)  || 
+			    (event.keyCode>= 96 && event.keyCode<= 105)||
+			    event.keyCode==32  ||
+			    event.keyCode==8  || 
+			    event.keyCode==46 ||
+			    (event.keyCode>=186 && event.keyCode<= 192) ||
+			    (event.keyCode>=219 && event.keyCode<= 222) ||
+			    event.keyCode==106  || 
+			    event.keyCode==109 ||
+			    event.keyCode==111   )
+			{
+					if(count==0 && (event.keyCode!=8 || event.keyCode!=46))
+					{
+						return false;
+					}
+					if(event.keyCode==8 || event.keyCode==46)
+					{				
+						if(count<400)
+						{
+							++count;
+						}
+											
+						
+					}	
+					else
+					{
+						if(count>0)
+						{
+							--count;
+						}
+						
+					}		
+					
+					countCharInEditor(count);
+			}
+			else
+			{
+				return false;
+			}
+		});*/
+					    
+
+}
+
+/**
+ *Editor ends
+ *  
+ */
 function selectedCategoryClick()
 {
 	$('#selectedCategory').click(function() {
@@ -312,18 +451,67 @@ function doneEditingTitle()
 	$('#postTitleText').show();
 	$('#postTitleEdit').hide();
 }
+function countCharInEditor(charCount)
+{	
+	$('#charMaxLimit').text(charCount);
+	console.log("count"+ charCount);	
+}
+
+function charCountCheck(maxChars)
+{
+	var count=maxChars;
+	$(document.getElementById("richEditor").contentWindow.document).keydown(function(event){
+	
+		var text=window.frames['richEditor'].document.body.innerText;
+		var currentCharCount = text.length;
+		if(currentCharCount>=200 && ())
+		{
+				event.preventDefault();
+				return false;
+		}
+	});
+	$(document.getElementById("richEditor").contentWindow.document).keyup(function(event){				
+			var text=window.frames['richEditor'].document.body.innerText;
+			var currentCharCount = text.length;
+			if(currentCharCount>200)
+			{
+				return false;
+			}			
+			console.log("char count: "+currentCharCount);				
+			var charsLeft=maxChars-currentCharCount;	
+			console.log("char count left: "+charsLeft);		
+			countCharInEditor(charsLeft);
+			
+			
+		});
+}
 
 function addSnippetText()
 {
+	iFrameOn();
 	$('#snippetText p').hide();
 	$('#postSnippet').show();	
+	if($('#selectedCategory').hasClass('gloonicle'))
+	{		
+	    $('.nonGloonicleEditButtons').hide();
+	    $('.gloonicleEditButtons').show();
+	}
+	else
+	{
+		charCountCheck(200);
+	    $('.nonGloonicleEditButtons').show();
+	    $('.gloonicleEditButtons').hide();
+	}
+	
 } 
 
 function doneEditingSnippet()
 {
-	if($('#snippetTextInput').val().length>0)
+	var text=window.frames['richEditor'].document.body.innerHTML;
+	console.log(text);
+	if(text.length>0)
 	{
-		$('#snippetText p').text($('#snippetTextInput').val());
+		$('#snippetText p').html(text);
 	}
 	$('#snippetText p').show();
 	$('#postSnippet').hide();
@@ -407,7 +595,7 @@ function doneAddingLink()
 						var htmlContent="<a href='"+link+"' target='_blank'>"+
 						"<div class='floatLeft' style='width:400px;'>"+
 						"<p class='colorWhite'>"+title+"</p>"+
-						"<p class='colorLightGray font11'>"+domain+"</p>"+
+						"<p class='linkColor font11'>"+domain+"</p>"+
 						"<p class='colorGray font13'>"+description+"</p>"+
 						"</div><img height='200' src='"+imgUrl+"'>"+
 						"</a>"
@@ -466,7 +654,7 @@ $(function(){
 		addSnippetText();
 	});	
 	
-	$('#postSnippet a').click(function() {
+	$('#postSnippet a.doneEditiingButton').click(function() {
 		hasBeenEdited=true;
 		doneEditingSnippet();
 	});
@@ -516,6 +704,7 @@ $(function(){
 			initNewsLinkScraper();	
 		});	
 	$('#newsLinkContainer a.doneEditiingButton').click(function() {
+		 hasBeenEdited=true;
 		 doneAddingLink();
 		});	
 });

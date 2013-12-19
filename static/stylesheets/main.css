@@ -545,14 +545,7 @@ footer{
 	width: 500px;
 }
 
-#editorButtons
-{
-	position:fixed;
-	width:600px;
-	background-color: #fff;
-	font-size:19px;
-	opacity: 0.9;
-}
+
 .singleUserStatsWidth
 {
 	width: 552px;
@@ -793,13 +786,7 @@ footer{
 {
 	display: block;
 }
-#richEditor
-{
-	width: 600px; 
-	height: 800px; 
-	border: none;
-	background-color: #FFFFFF
-}
+
 #editor
 {
 	width: 600px; 
@@ -2021,8 +2008,8 @@ a {
 	width: 150px;
     height: 150px;    
     line-height: 150px;     
-    margin-left: 2px;
-	margin-top: 2px;
+    margin-left: 3px;
+	margin-top: 3px;
 }
 .donutHolderSize200
 {
@@ -2685,6 +2672,22 @@ img.fade
 /*About ends*/
 
 /*Post Creator/Article start*/
+.editorButtons
+{	
+	width:500px;
+	background-color: #fff;
+	font-size:19px;
+	opacity: 0.9;
+}
+
+#richEditor
+{
+	width: 500px; 
+	height: 80px; 
+	border: none;
+	background-color: #FFFFFF
+}
+
 #postContainer
 {
 	min-height: 200px;
@@ -2847,6 +2850,7 @@ img.fade
 .dottedScoreBorder
 {
 	border-style: dashed;
+	border-width:2px;
 	border-color: #fff;
 	border-radius: 50%;
 }
@@ -2965,8 +2969,8 @@ img.fade
 {
 	width: 115px;
 	height: 115px;
-	padding-top: 4px;
-	padding-left: 4px;
+	padding-top: 5px;
+	padding-left: 6px;
 }
 /*Review end*/
 /*News start */
@@ -2983,6 +2987,10 @@ img.fade
 	border-width: 1px;
 	padding-top: 20px;
 	padding-left: 20px;
+}
+.linkColor
+{
+	color: #81C4F8;
 }
 /*News end */
 /*Video start */

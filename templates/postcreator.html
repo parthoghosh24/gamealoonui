@@ -116,8 +116,32 @@ $var description: Create post from here
                 				<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>
                 				<p class="colorGray marginTop10 font14">Add your micro verdict.</p>
                 				<div id="postSnippet" class="hiddenDiv">
-                					<span class="colorWhite font14">Limit(<span id="charMaxLimit">200</span>)</span><a href="javascript:;" class="doneEditiingButton floatRight font16" style="margin-right: 61px;"><i class="icon-ok"></i></a><br>
-                					<textarea id="snippetTextInput" cols="60" rows="5"></textarea>
+                					<span class="colorWhite font14" style="margin-left: 400px;">Limit(<span id="charMaxLimit">200</span>)</span><a href="javascript:;" class="doneEditiingButton floatRight font16" style="margin-right: 61px;"><i class="icon-ok"></i></a><br>
+                					<textarea id="snippetTextInput" cols="60" rows="5" class="hiddenDiv"></textarea>
+                					<div class="editorButtons displayInline nonGloonicleEditButtons">
+									 		<a href="javascript:;" onclick="onBold()"><span class="icon-bold colorBlack" title="Bold"></span></a>
+										    <a href="javascript:;" onclick="onUnderline()"><span class="icon-underline colorBlack" title="Underline"></span></a>										     										    										    										    
+							 		</div>
+                					<div class="editorButtons displayInline gloonicleEditButtons hiddenDiv">
+									 		<a href="javascript:;" onclick="onBold()"><span class="icon-bold colorBlack" title="Bold"></span></a>
+										    <a href="javascript:;" onclick="onUnderline()"><span class="icon-underline colorBlack" title="Underline"></span></a>
+										    <a href="javascript:;" onclick="onItalic()"><span class="icon-italic colorBlack" title="Italic"></span></a>  
+										    <a href="javascript:;" onclick="onUlist()"><span class="icon-list-bullet colorBlack" title="Unorderd List"></span></a>
+										    <a href="javascript:;" onclick="onOlist()"><span class="icon-list-numbered colorBlack" title="Ordered List"></span></a>
+										    <a href="javascript:;" onclick="onLink()"><span class="icon-link colorBlack" title="Insert Link"></span></a>
+										    <a href="javascript:;" onclick="onUnlink()"><span class="icon-unlink colorBlack" title="Remove Link"></span></a>
+										    <a href="javascript:;" onclick="onOutdent()"><span class="icon-indent-left colorBlack" title="Left Indent"></span></a>
+										    <a href="javascript:;" onclick="onIndent()"><span class="icon-indent-right colorBlack" title="Right Indent"></span></a>			     
+										    <a href="javascript:;" onclick="onLeft()"><span class="icon-align-left colorBlack" title="Left"></span></a>
+										    <a href="javascript:;" onclick="onCenter()"><span class="icon-align-center colorBlack" title="Center"></span></a>
+										    <a href="javascript:;" onclick="onRight()"><span class="icon-align-right colorBlack" title="Right"></span></a>
+										    <a href="javascript:;" onclick="onJustify()"><span class="icon-align-justify colorBlack" title="Justify"></span></a>
+										    <a href="javascript:;" onclick="onInsertImage()"><span class="icon-picture-3 colorBlack" title="Insert Image"></span></a>
+										    <a href="javascript:;" onclick="onEmbedYoutubeVideo()"><span class="icon-youtube-squared colorBlack" title="Embed Youtube Video"></span></a>
+										    <a href="javascript:;" onclick="onUndo()"><span class="icon-reply colorBlack" title="Undo"></span></a>
+										    <a href="javascript:;" onclick="onRedo()"><span class="icon-forward colorBlack" title="Redo"></span></a>
+							 		</div>
+			 						<br />
                 					<iframe name="richEditor" id="richEditor"> </iframe>
                 				</div>
                 				
