@@ -26,20 +26,7 @@ $(window).load(function() {
 			$('a#nArticleAuthor').attr('href','/'+username);
 			$('a#nArticleAuthor span').text(username);	  
 			$('#newsCommentCount').text(commentCount);      
-		}
-		
-		function onFeatureAfter()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#fArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#fArticleTitle span').text(title);
-			$('a#fArticleAuthor').attr('href','/'+username);
-			$('a#fArticleAuthor span').text(username);	      
-			$('#featureCommentCount').text(commentCount);  
-		}
+		}		
 		
 		function onReviewAfter()
 		{
@@ -48,9 +35,9 @@ $(window).load(function() {
 			var username=$(this).data('username');
 			var commentCount=$(this).data('commentcount');
 			$('a#rArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#rArticleTitle span').text(title);
+			$('a#rArticleTitle p').text(title);
 			$('a#rArticleAuthor').attr('href','/'+username);
-			$('a#rArticleAuthor span').text(username);	   
+			$('a#rArticleAuthor img').attr('title',username);	   
 			$('#reviewCommentCount').text(commentCount);     
 		}
 		
@@ -66,6 +53,17 @@ $(window).load(function() {
 			$('a#gArticleAuthor span').text(username);	   
 			$('#gloonicleCommentCount').text(commentCount);     
 		}
+		
+		$('#carouselContent').cycle({
+			fx : 'fade',
+			timeout : 0,	
+			pager:'#carouselNav',
+			pagerAnchorBuilder:function(idx, slide) { 
+        		// return selector string for existing anchor 
+        		    console.log('#carouselNav li:eq(' + idx + ')');
+        			return '#carouselNav li:eq(' + idx + ')'; 
+    }
+		});
 		
 		$("#cVideos").cycle({
 			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
@@ -96,19 +94,6 @@ $(window).load(function() {
     }
 		});	
 		
-		$("#cFeatures").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 1000,
-			pager:'#fCarouselNav',
-			after: onFeatureAfter,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        			return '#fCarouselNav span:eq(' + idx + ') a'; 
-    }
-		});	
 		
 		$("#cReviews").cycle({
 			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
@@ -177,25 +162,8 @@ $(window).load(function() {
 		  }
 		});
 		
-	//features	
-	$('#fBottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cFeatures").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cFeatures").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-		
 	//reviews	
-	$('#rBottomTab span span a.playPause').click(function() {
+	$('#rTopTab span span a.playPause').click(function() {
 		  if($(this).children('i').hasClass('icon-pause-3'))
 		  {
 		  	$("#cReviews").cycle('pause');
@@ -229,54 +197,113 @@ $(window).load(function() {
 		});				
  } 
 
- 
-$(function() {			
-	
-	
-	 applyPauseResumeToCarousel();
-	 
-    function getData(platform, category, timestampVal)
-    {    	    	
+ function getData(platform, category, timestampVal)
+    {    	    	    	
     	$.get('/articles/'+platform+'/'+category+'/1',{"timestamp":timestampVal},function(data){
     		if(data.length>0)
     		{
     			$.each(data, function(index, item) {
     				var categoryIconMap ={};
-    				categoryIconMap["news"]="icon-signal-2";
-    				categoryIconMap["review"]="icon-thumbs-up-1";
-    				categoryIconMap["feature"]="icon-star";
-    				categoryIconMap["gloonicle"]="icon-user";
-    				categoryIconMap["video"]="icon-play-3";
+    				categoryIconMap["news"]=["icon-signal-2","News- user shared news"];
+    				categoryIconMap["review"]=["icon-thumbs-up-1","Review- user generated crisp and micro reviews"];    				
+    				categoryIconMap["gloonicle"]=["icon-user","Gloonicle- user video game blogs"];
+    				categoryIconMap["video"]=["icon-play-3","Video- user created and shared videos"];
     				
-    				var articleHtml='<div class="recentArticleDiv" id="'+item.articleTimestamp+'">'+
-						'<div class="articleContentHeader">'+							
-						'<span class="textCapitalization '+categoryIconMap[item.articleCategory.toLowerCase()]+' '+item.articleCategory.toLowerCase()+' marginRight10 fontWeightBold font11 colorWhite">'+item.articleCategory+'</span>'+
-						'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'"><span class="applyMontserratBold font13 colorBlack">'+item.articleTitle+'</span></a>'+	
-						'<a href="/'+item.articleAuthor+'"><span class="floatRight icon-user-2 colorWhite articleUsernameBox">'+item.articleAuthor+'</span></a>'+			
-						'</div>'+	
-						'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 570px;">'+	
-						'<div class="articleContentPreviewData">'+
-						'<p>'+
-						'<span class="applyJura colorWhite font12">'+item.articleTimeSpentFromPublish+' - </span>'+	
-						'<span class="colorWhite applyFranklinGothicRegular font13">'+item.articleSubTitle+'</span>'+		
-						'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'"><i class="icon-ellipsis colorWhite moreLink"></i></a>'+			
-						'</p>'+			
-						'</div>'+			
-						'</div>'+			
-						'<div class="articleContentFooter">'+		
-						'<span class="icon-gamepad floatLeft fontWeightBold">';
-						$.each(item.articlePlatforms, function(index, platform)
-						{
-							articleHtml+='<a id="'+platform.shortTitle+'" href="/platform/'+platform.shortTitle+'/all" target="_blank"><span class="'+platform.shortTitle+' marginLeft5 interestUserProfileFontSize" >'+platform.title+'</span></a>';
-						});
-						articleHtml+='</span>'+	
-						'<span class="floatRight fontWeightBold font10">'+							
-						'<span><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
-						'<span><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+	
-						'<span><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+		
-						'</span>'+		
-						'</div>'+		
-						'</div>';	
+    				var articleHtml="";
+    				console.log(index);
+    				   if(index == 1 || index == 6)
+    				   {
+    				   		articleHtml+='<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 620px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 620px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   }
+    				   else if(index == 3 || index ==4 || index ==8 || index ==9)
+    				   {
+    				   		articleHtml+='<div class="recentArticleDiv smallPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   }
+    				   else
+    				   {
+    				   			articleHtml+='<div class="recentArticleDiv smallPostDiv floatLeft" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'								    				   			
+    				   }
+    				   	
 						
 					var articleElement = $(articleHtml);	
 					articleElement.hide();					
@@ -291,28 +318,25 @@ $(function() {
     		
     	},'json');  
     }
+    
+$(function() {			
+	
+	
+	applyPauseResumeToCarousel();
 
 	$("#tabs-min").tabs({		
 		beforeActivate: function(event, ui){						 
 			var timestamp=new Date().getTime();
-			var platform=$('.platormHeading').attr('id');
+			var platform="all";
 			if(ui.newPanel.index()== 2)
 			{	
 				if($('.reviewList').is(':empty'))
-				{
+				{					
 					getData(platform,"review", timestamp);					
 				}												
 				
-			}
+			}			
 			else if(ui.newPanel.index()== 3)
-			{
-				if($('.featureList').is(':empty'))
-				{
-					getData(platform,"feature", timestamp);
-					
-				}								
-			}
-			else if(ui.newPanel.index()== 4)
 			{				
 				if($('.newsList').is(':empty'))
 				{
@@ -322,7 +346,7 @@ $(function() {
 				
 				
 			}
-			else if(ui.newPanel.index()== 5)
+			else if(ui.newPanel.index()== 4)
 			{				
 				if($('.gloonicleList').is(':empty'))
 				{
@@ -332,7 +356,7 @@ $(function() {
 				
 				
 			}
-			else if(ui.newPanel.index()== 6)
+			else if(ui.newPanel.index()== 5)
 			{				
 				if($('.videoList').is(':empty'))
 				{
@@ -362,6 +386,15 @@ $(function() {
     	var timestampVal = $('div.'+categoryList+' div.recentArticleDiv:last-child').attr('id');    	    	
     	getData(platform, category, timestampVal);
        });
+	
+	$(document).on({
+	    mouseenter: function () {
+	        $(this).children('.postTop').slideDown("slow");
+	    },
+	    mouseleave: function () {
+	        $(this).children('.postTop').slideUp(150);
+	    }
+	},".articleContentPreview");
 	
 
 });
