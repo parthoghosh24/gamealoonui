@@ -659,7 +659,8 @@ $(function() {
 		});		
 		
 		$("#createPost").click(function(e) {
-			window.location.href="/post/create";
+			var userid=$(this).data('userid');						
+			window.location.href="/post/"+userid+"/create";
 		});
 		
 	/*$("#createPost").click(function(e) {

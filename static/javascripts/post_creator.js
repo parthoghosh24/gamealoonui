@@ -84,57 +84,8 @@ function onJustify()
 }
 
 function iFrameOn()
-{
-		
+{		
 		richEditor.document.designMode="on";			    
-	    		    
-	    	/*						
-		count=400;					
-		$(document.getElementById("richEditor").contentWindow.document).keydown(function(event){
-			console.log("keycode: "+event.keyCode);
-			if ((event.keyCode >=65 && event.keyCode<= 90) || 
-			    (event.keyCode>=48 && event.keyCode<= 57)  || 
-			    (event.keyCode>= 96 && event.keyCode<= 105)||
-			    event.keyCode==32  ||
-			    event.keyCode==8  || 
-			    event.keyCode==46 ||
-			    (event.keyCode>=186 && event.keyCode<= 192) ||
-			    (event.keyCode>=219 && event.keyCode<= 222) ||
-			    event.keyCode==106  || 
-			    event.keyCode==109 ||
-			    event.keyCode==111   )
-			{
-					if(count==0 && (event.keyCode!=8 || event.keyCode!=46))
-					{
-						return false;
-					}
-					if(event.keyCode==8 || event.keyCode==46)
-					{				
-						if(count<400)
-						{
-							++count;
-						}
-											
-						
-					}	
-					else
-					{
-						if(count>0)
-						{
-							--count;
-						}
-						
-					}		
-					
-					countCharInEditor(count);
-			}
-			else
-			{
-				return false;
-			}
-		});*/
-					    
-
 }
 
 /**
@@ -171,8 +122,10 @@ function videoSelected()
 	$('#snippetText i#snippetTextTitle').addClass('icon-play-3');
 	$('#snippetText i#snippetTextTitle').text('Caption');
 	$('#snippetText p').text('Add a caption to video.');
+	$('#richEditor').addClass('nonGlooniclePostSnippet');
+	$('#richEditor').removeClass('glooniclePostSnippet');
 	$('#gameBoxArt').show();
-	$('#data').css('width','660px');
+	
 }
 
 function reviewSelected()
@@ -193,11 +146,13 @@ function reviewSelected()
 	$('#snippetText i#snippetTextTitle').addClass('icon-thumbs-up-1');
 	$('#snippetText i#snippetTextTitle').text('Microverdict');
 	$('#snippetText p').text('Add your micro verdict.');
+	$('#richEditor').addClass('nonGlooniclePostSnippet');
+	$('#richEditor').removeClass('glooniclePostSnippet');
 	$('#reviewPoints').show();
 	$('#score').show();
 	$('#gameBoxArt').show();
 	$('#reviewGamePlayedOn').show();
-	$('#data').css('width','560px');
+	
 }
 
 function newsSelected()
@@ -220,9 +175,11 @@ function newsSelected()
 	$('#snippetText i#snippetTextTitle').addClass('icon-signal-2');
 	$('#snippetText i#snippetTextTitle').text('Bulletin');
 	$('#snippetText p').text('Share hot bulletin.');
+	$('#richEditor').addClass('nonGlooniclePostSnippet');
+	$('#richEditor').removeClass('glooniclePostSnippet');
 	$('#newsSource').show();
 	$('#gameBoxArt').show();
-	$('#data').css('width','660px');
+	
 }
 
 function gloonicleSelected()
@@ -244,7 +201,10 @@ function gloonicleSelected()
 	{
 		$('#snippetText i#snippetTextTitle').removeClass('icon-play-3');
 	}
-	$('#data').css('width','800px');
+	$('#postSnippet').css('width','800px');
+	$('#postSnippet a.doneEditiingButton').removeClass('marginRight61');	
+	$('#richEditor').removeClass('nonGlooniclePostSnippet');
+	$('#richEditor').addClass('glooniclePostSnippet');
 	$('#gameBoxArt').hide();
 	$('#reviewGamePlayedOn').hide();
 	$('#snippetText i#snippetTextTitle').addClass('icon-user');
@@ -274,8 +234,7 @@ function selectCategory()
 				}
 				if($('#selectedCategory').hasClass('gloonicle'))
 				{
-					resetOtherCategories("Blog your gaming adventures and thoughts.");
-					resetGloonicle();
+					resetOtherCategories("Blog your gaming adventures and thoughts.");					
 				}
 				if($('#selectedCategory').hasClass('video'))
 				{
@@ -284,8 +243,9 @@ function selectCategory()
 				}
 				if($('#selectedCategory').hasClass('news'))
 				{
-					resetOtherCategories('Share hot bulletin.');					
-					resetNews();
+					resetOtherCategories('Share hot bulletin.');
+					resetNewsLinkInfo();
+					resetGameData();										
 				}	
 			}
 		}
@@ -352,13 +312,14 @@ function resetCommonData()
 	$('#postTitleInput').val("");
 	$('.coverSection').css('background-image',"url('http://192.168.0.103:9000/assets/images/default/featuredBg.png')");
 	$('.coverSection').attr('id','default');
+	$('#charMaxLimit').text('200');
 }
 
 function resetReview()
 {
 	$('#selectedGamePlatform').attr('class','all');
-	$('#selectedGamePlatform').text('Select Platform');
-	$('#snippetTextInput').val("");
+	$('#selectedGamePlatform').text('Select Platform');	
+	window.frames['richEditor'].document.body.innerHTML="";
 	$('#snippetText p').text("Add your micro verdict.");
 	$('dd.reviewPointDd').remove();
 	$('#noSweetPoint').show();
@@ -366,9 +327,16 @@ function resetReview()
 	$('.knob').val(0).trigger('change');
 }
 
-function resetOtherCategories(defaultText)
+function resetNewsLinkInfo()
 {
-	$('#snippetTextInput').val("");
+	$('#linkContent').empty();
+	$('#linkContent').removeClass('linkDesign');	
+	$('a.newsLink').text('Add news source link');
+	$('a.newsLink').removeAttr('href');
+}
+function resetOtherCategories(defaultText)
+{	
+	window.frames['richEditor'].document.body.innerHTML="";
 	$('#snippetText p').text(defaultText);
 }
 
@@ -457,51 +425,53 @@ function countCharInEditor(charCount)
 	console.log("count"+ charCount);	
 }
 
-function charCountCheck(maxChars)
+function charCountCheck()
 {
-	var count=maxChars;
-	$(document.getElementById("richEditor").contentWindow.document).keydown(function(event){
-	
-		var text=window.frames['richEditor'].document.body.innerText;
-		var currentCharCount = text.length;
-		if(currentCharCount>=200 && (event.keyCode!=8 || event.keyCode!=46))
+	var maxChars=parseInt($('#charMaxLimit').text());	
+
+	$(document.getElementById("richEditor").contentWindow.document).keyup(function(event){			
+		if(!$('#selectedCategory').hasClass('gloonicle'))
 		{
-				event.preventDefault();
-				return false;
-		}
-	});
-	$(document.getElementById("richEditor").contentWindow.document).keyup(function(event){				
 			var text=window.frames['richEditor'].document.body.innerText;
-			var currentCharCount = text.length;
-			if(currentCharCount>200)
-			{
-				return false;
-			}			
+			var currentCharCount = text.length;								
 			console.log("char count: "+currentCharCount);				
 			var charsLeft=maxChars-currentCharCount;	
 			console.log("char count left: "+charsLeft);		
 			countCharInEditor(charsLeft);
-			
-			
-		});
+			if(charsLeft<=0)
+			{
+				$('#postSnippet a.doneEditiingButton').addClass('disableOpacity');
+				$('#postSnippet a.doneEditiingButton').removeAttr('href');
+			}
+			else
+			{
+				$('#postSnippet a.doneEditiingButton').removeClass('disableOpacity');
+				$('#postSnippet a.doneEditiingButton').attr('href','javascript:;');
+			}
+		}							
+	});
 }
 
 function addSnippetText()
 {
 	iFrameOn();
 	$('#snippetText p').hide();
-	$('#postSnippet').show();	
-	if($('#selectedCategory').hasClass('gloonicle'))
-	{		
-	    $('.nonGloonicleEditButtons').hide();
-	    $('.gloonicleEditButtons').show();
+	$('#postSnippet').show();		
+	charCountCheck();
+	if(!$('#selectedCategory').hasClass('gloonicle'))
+	{
+		$('#maxCharLimitContainer').show();
+		$('.nonGloonicleEditButtons').show();
+		$('.gloonicleEditButtons').hide();
 	}
 	else
 	{
-		charCountCheck(200);
-	    $('.nonGloonicleEditButtons').show();
-	    $('.gloonicleEditButtons').hide();
-	}
+		$('#maxCharLimitContainer').hide();
+		$('.nonGloonicleEditButtons').hide();
+		$('.gloonicleEditButtons').show();
+	}	
+	
+
 	
 } 
 
@@ -614,6 +584,46 @@ function doneAddingLink()
 	}
 	$('#linkDefaultData').show();
 }
+
+function initVideoEmbedder()
+{
+	 $('#addVideoUrl').show();
+}
+
+function doneAddingVideo()
+{
+	var src=$('#videoUrlInput').val(); 	
+	$('#addVideoUrl').hide();
+}
+
+function playVideo()
+{
+	var src=$('#videoUrlInput').val();
+	console.log("Src "+src);
+	if(src.length>0 && src.indexOf("www.youtube.com")!=-1)
+	{
+		var processedUrl = src.replace("watch?v=","embed/");   
+		$.modal('<iframe width="853" height="480" src="'+processedUrl+'" frameborder="0" allowfullscreen></iframe>', {
+    			
+    			onOpen : function(dialog) {
+					dialog.overlay.fadeIn('slow', function() {
+						dialog.container.slideDown('slow', function() {
+							dialog.data.fadeIn('slow');
+						});
+					});
+				},
+			    containerCss:{
+			        backgroundColor:"#fff",
+			        borderColor:"#fff",
+			        height:490,
+			        padding:0,
+			        width:860
+			    },
+			    overlayClose:true
+		});
+	}
+	
+}
 var hasBeenEdited=false
 
 $(function(){
@@ -655,8 +665,14 @@ $(function(){
 	});	
 	
 	$('#postSnippet a.doneEditiingButton').click(function() {
-		hasBeenEdited=true;
-		doneEditingSnippet();
+		var attrVal = $(this).attr('href');
+		console.log("attrVal: "+attrVal);
+		if(attrVal!== undefined)
+		{
+			hasBeenEdited=true;
+			doneEditingSnippet();
+		}
+		
 	});
 	
 	$('#sweet').on('click','.sweetEditButton',function() {
@@ -676,9 +692,13 @@ $(function(){
 	});
 		
 	$('#playedOn').click(function() {
-		$('#platformOptions').show();
-		 $('#platformOptions').animate({
-			 width:"400", height:"300"}, 500);			
+		if($(this).attr('href')!=undefined)
+		{
+			$('#platformOptions').show();
+		 	$('#platformOptions').animate({
+				 width:"400", height:"300"}, 500);
+		}
+					
 	});
 	
 	$('#platformSet').click(function() {
@@ -699,12 +719,26 @@ $(function(){
 	
 	$('#gameSelector').click(function() {
 			initGameCreator();
-		});
+	});
+	
 	$('#newsSourceLinkButton').click(function() {
 			initNewsLinkScraper();	
-		});	
+	});	
+		
 	$('#newsLinkContainer a.doneEditiingButton').click(function() {
 		 hasBeenEdited=true;
 		 doneAddingLink();
-		});	
+	});
+		
+	$('#videoForm').click(function() {
+		initVideoEmbedder();
+	});
+	
+	$('#addVideoUrl a.doneEditiingButton').click(function() {
+		doneAddingVideo();
+	});
+		
+	$('.videoPlayButton').click(function() {
+		playVideo();
+	});	
 });

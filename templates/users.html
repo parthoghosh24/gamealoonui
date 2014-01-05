@@ -1,16 +1,81 @@
 $def with (users)
 $var title: All Users at Gamealoon
 $var description: All Game lovers at Gamealoon
-
+<div class="mainContainer">
+			<div id="container_layout">			
+				<div class="divider"> </div>
+				<div style="width: 950px; height: 350px;background-image: url(/static/images/diagmonds.png); box-shadow: 0 0 8px #000;-webkit-box-shadow: 0 0 8px #000;-moz-box-shadow: 0 0 8px #000; padding-top: 5px;">
+			        <div style="overflow: hidden;margin-left: 220px;margin-top: 30px;">
+			                <div style="float: left;">
+			                        <div class="outerBox" style="width: 110px;height: 110px;margin-left: 20px;">
+			                                <div class="innerBox" style="width: 100px;height: 100px;">
+			                                        <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="100" height="100" style="margin-left: -4px;">
+			                                </div>
+			                        </div>
+			                        <div id="scoreTrophy" style="width: 153px;overflow: hidden;">
+			                                <div style="min-width: 152px;text-align: center;padding: 5px;margin-top: 5px;">
+			                                        <span class="statsLabel colorWhite textShadowOrange" style="font-size: 35px;">#2</span>                                                 
+			                                </div>                                                          
+			                                <div id="trophyBase" class="applyBevan" style="font-size: 12px;">
+			                                        <span>
+			                                                <i class="icon-award-1 font13"></i>500 XP<i class="icon-award-1 font13"></i>
+			                                        </span>                                                                                                                  
+			                </div>
+			                        </div>
+			                </div>
+			                <div style="float: left;margin-left: 30px;">
+			                        <div class="outerBox" style="width: 130px;height: 130px;margin-left: 10px;">
+			                                <div class="innerBox" style="height: 120px;width: 120px;">
+			                                        <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="120" height="120" style="margin-left: -4px;">
+			                                </div>
+			                        </div>
+			                        <div id="scoreTrophy" style="width: 160px;overflow: hidden;">
+			                                <div style="padding-top: 10px;min-width: 152px;text-align: center;padding: 5px;margin-top: 5px;">
+			                                        <span class="statsLabel colorWhite textShadowOrange" style="font-size: 50px;">#1</span>                                                 
+			                                </div>                                                          
+			                                <div id="trophyBase" class="applyBevan">
+			                                        <span>
+			                                                <i class="icon-award-1 font13"></i>1000 XP<i class="icon-award-1 font13"></i>
+			                                        </span>                                                                                                                    
+			                                </div>
+			                        </div>
+			                </div>
+			                <div style="float: left;margin-left: 20px;">
+			                        <div class="outerBox" style="width: 90px;height: 90px;margin-left: 30px;">
+			                                <div class="innerBox" style="width: 80px;height: 80px;">
+			                                        <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="80" height="80" style="margin-left: -4px;">
+			                                </div>
+			                        </div>
+			                        <div id="scoreTrophy" style="width: 152px;overflow: hidden;">
+			                                <div style="padding-top: 10px;min-width: 152px;text-align: center;padding: 5px;margin-top: 5px;">
+			                                        <span class="statsLabel colorWhite textShadowOrange" style="font-size: 27px;">#3</span>                                                 
+			                                </div>                                                          
+			                                <div id="trophyBase" class="applyBevan" style="font-size: 13px;">
+			                                        <span>
+			                                                <i class="icon-award-1 font13"></i>210 XP<i class="icon-award-1 font13"></i>
+			                                        </span>                                                                                                                  
+			                                </div>
+			                        </div>
+			                </div> 
+			        </div>
+        <div style="width: 720px;height: 240px;text-align: center;margin-top: -153px;margin-left: 100px;border-style: dashed;border-color: #fff;border-width: 2px;padding-top: 179px;">
+                <span style="color: #fff;font-size: 50px;" class="applyBevan">
+                        <i class="icon-crown" style="color: #FF4500;"></i>Gloon Champs<i class="icon-crown" style="color: #FF4500;"></i>
+                </span>
+        </div>
+</div>
 <div id='users'>
 				$if len(users) == 0:
     				<div id="noUsers" class="noData applyBevan">No Users</div>
     			$else:
     				$for user in users:  
-    				     <div class="floatLeft textCenter gridDim">  				    					
-			    			 <div id="$user['userUserName']" class="overflowHidden tabGrid">		    			 	    
+    				     <div class="textCenter gridDim overflowHidden">  		
+    				     	 <span class="floatLeft">#$loop.index</span>		    					
+			    			 <div id="$user['userUserName']" class="overflowHidden tabGrid floatLeft">		    			 	    
 			    			    	<a href ="/$user['userUserName']"><img src="$user['userAvatar']" alt="$user['userUserName']" title="$user['userUserName']"width="100" height="100"/></a>
 			    			 </div>
 			    			 <a href ="/$user['userUserName']"><span class="applyBevan colorGray">$user['userUserName']</span></a>
 		    			 </div>
 </div>
+			</div>	
+		</div>

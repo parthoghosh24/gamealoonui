@@ -329,7 +329,7 @@ $var description: My Gloon Profile
 						</li>
 		    		</ul>
 		    		<div id="tabPosts">    		    			
-						<input type="button" class="floatRight" name="createPost" id="createPost" value="+create">
+						<input type="button" class="floatRight" name="createPost" id="createPost" value="+create" data-userid="$session.userId">
 						<div id="postsContent">
 							$if len(user['userPosts'])==0:
 									<div class="noData applyBevan">No Data</div>

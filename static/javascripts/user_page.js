@@ -145,51 +145,57 @@ $(window).load(function() {
  function onArticleClick()
  {
  	var timestamp=new Date().getTime();
-	var username=$('#userName span').text();	
-	var selectedPanel = $("#tabs div.ui-tabs-panel:visible");
+	var username=$('#userPostAndCreatorInnerCircle img').attr('title');		
 	 
 	$('#allTab').click(function() {
 				if($('.allList').is(':empty'))
 				{
 					getData(username,"all", timestamp);					
 				}	
-				$('#all').removeClass('hiddenDiv');
+				$(this).addClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				
+				$('#all').removeClass('hiddenDiv');				
 				$('#review').addClass('hiddenDiv');
 				$('#feature').addClass('hiddenDiv');
 				$('#news').addClass('hiddenDiv');
 				$('#gloonicle').addClass('hiddenDiv');
 				$('#video').addClass('hiddenDiv');
 		});
-	$('#reviewTab').click(function() {
+	$('#reviewTab').click(function() {				
+				console.log($('.reviewList').is(':empty'));
 				if($('.reviewList').is(':empty'))
 				{
+					console.log("Getting review");
 					getData(username,"review", timestamp);					
 				}	
+				$(this).addClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');
+				
 				$('#all').addClass('hiddenDiv');
 				$('#review').removeClass('hiddenDiv');
 				$('#feature').addClass('hiddenDiv');
 				$('#news').addClass('hiddenDiv');
 				$('#gloonicle').addClass('hiddenDiv');
 				$('#video').addClass('hiddenDiv');
-		});
-	$('#featureTab').click(function() {
-		
-				if($('.featureList').is(':empty'))
-				{
-					getData(username,"feature", timestamp);					
-				}	
-				$('#all').addClass('hiddenDiv');
-				$('#review').addClass('hiddenDiv');
-				$('#feature').removeClass('hiddenDiv');
-				$('#news').addClass('hiddenDiv');
-				$('#gloonicle').addClass('hiddenDiv');
-				$('#video').addClass('hiddenDiv');
-		});
+		});	
 	$('#newsTab').click(function() {
 				if($('.newsList').is(':empty'))
 				{
 					getData(username,"news", timestamp);					
 				}	
+				$(this).addClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');
+				
 				$('#all').addClass('hiddenDiv');
 				$('#review').addClass('hiddenDiv');
 				$('#feature').addClass('hiddenDiv');
@@ -203,6 +209,12 @@ $(window).load(function() {
 				{
 					getData(username,"gloonicle", timestamp);					
 				}	
+				$(this).addClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');
+				
 				$('#all').addClass('hiddenDiv');
 				$('#review').addClass('hiddenDiv');
 				$('#feature').addClass('hiddenDiv');
@@ -216,6 +228,12 @@ $(window).load(function() {
 				{
 					getData(username,"video", timestamp);					
 				}	
+				$(this).addClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');				
+				
 				$('#all').addClass('hiddenDiv');
 				$('#review').addClass('hiddenDiv');
 				$('#feature').addClass('hiddenDiv');
@@ -227,61 +245,125 @@ $(window).load(function() {
  } 
  
  function getData(username, category, timestampVal)
-    		{    	    	
-    			$.get('/articles/'+username+'/'+category+'/2',{"timestamp":timestampVal},function(data){
-	    		if(data.length>0)
-	    		{
-	    			$.each(data, function(index, item) {
-	    				var categoryIconMap ={};
-	    				categoryIconMap["news"]="icon-signal-2";
-	    				categoryIconMap["review"]="icon-thumbs-up-1";
-	    				categoryIconMap["feature"]="icon-star";
-	    				categoryIconMap["gloonicle"]="icon-user";
-	    				categoryIconMap["video"]="icon-play-3";
-	    				
-	    				var articleHtml='<div class="recentArticleDiv" id="'+item.articleTimestamp+'">'+
-							'<div class="articleContentHeader">'+							
-							'<span class="textCapitalization '+categoryIconMap[item.articleCategory.toLowerCase()]+' '+item.articleCategory.toLowerCase()+' marginRight10 fontWeightBold font11 colorWhite">'+item.articleCategory+'</span>'+
-							'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'"><span class="applyMontserratBold font13 colorBlack">'+item.articleTitle+'</span></a>'+	
-							'<a href="/'+item.articleAuthor+'"><span class="floatRight icon-user-2 colorWhite articleUsernameBox">'+item.articleAuthor+'</span></a>'+			
-							'</div>'+	
-							'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 570px;">'+	
-							'<div class="articleContentPreviewData">'+
-							'<p>'+
-							'<span class="applyJura colorWhite font12">'+item.articleTimeSpentFromPublish+' - </span>'+	
-							'<span class="colorWhite applyFranklinGothicRegular font13">'+item.articleSubTitle+'</span>'+		
-							'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'"><i class="icon-ellipsis colorWhite moreLink"></i></a>'+			
-							'</p>'+			
-							'</div>'+			
-							'</div>'+			
-							'<div class="articleContentFooter">'+		
-							'<span class="icon-gamepad floatLeft fontWeightBold">';
-							$.each(item.articlePlatforms, function(index, platform)
-							{
-								articleHtml+='<a id="'+platform.shortTitle+'" href="/platform/'+platform.shortTitle+'/all" target="_blank"><span class="'+platform.shortTitle+' marginLeft5 interestUserProfileFontSize" >'+platform.title+'</span></a>';
-							});
-							articleHtml+='</span>'+	
-							'<span class="floatRight fontWeightBold font10">'+							
-							'<span><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
-							'<span><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+	
-							'<span><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+		
-							'</span>'+		
-							'</div>'+		
-							'</div>';	
-							
-						var articleElement = $(articleHtml);	
-						articleElement.hide();					
-						var articles =$("."+category+"List");  
-					    articles.append(articleElement);
-					    articleElement.fadeIn();
+    {    	    	    	
+    	$.get('/articles/'+username+'/'+category+'/2',{"timestamp":timestampVal},function(data){
+    		if(data.length>0)
+    		{
+    			$.each(data, function(index, item) {
+    				var categoryIconMap ={};
+    				categoryIconMap["news"]=["icon-signal-2","News- user shared news"];
+    				categoryIconMap["review"]=["icon-thumbs-up-1","Review- user generated crisp and micro reviews"];    				
+    				categoryIconMap["gloonicle"]=["icon-user","Gloonicle- user video game blogs"];
+    				categoryIconMap["video"]=["icon-play-3","Video- user created and shared videos"];
+    				
+    				var articleHtml="";    				
+    				   if(index == 1 || index == 6)
+    				   {
+    				   		articleHtml+='<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 620px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 620px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   }
+    				   else if(index == 3 || index ==4 || index ==8 || index ==9)
+    				   {
+    				   		articleHtml+='<div class="recentArticleDiv smallPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   }
+    				   else
+    				   {
+    				   			articleHtml+='<div class="recentArticleDiv smallPostDiv floatLeft" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'								    				   			
+    				   }
+    				   	
 						
-					});
-					$("#"+category+" button.loadMore").removeClass('hiddenDiv');
-					$("#"+category+" div.noData").addClass('hiddenDiv');
-	    		}
-	    		
-	    	},'json');  
-    	}
+					var articleElement = $(articleHtml);	
+					articleElement.hide();					
+					var articles =$("."+category+"List");  
+				    articles.append(articleElement);
+				    articleElement.fadeIn();
+					
+				});
+				$("#"+category+" button.loadMore").removeClass('hiddenDiv');
+				$("#"+category+" div.noData").addClass('hiddenDiv');
+    		}
+    		
+    	},'json');  
+    }
     	
  function  applyPauseResumeToCarousel()
  {
@@ -378,6 +460,15 @@ $(function(){
 			
     
 			$("#tabs-min").tabs();
+	
+	$(document).on({
+	    mouseenter: function () {
+	        $(this).children('.postTop').slideDown("slow");
+	    },
+	    mouseleave: function () {
+	        $(this).children('.postTop').slideUp(150);
+	    }
+	},".articleContentPreview");
 	
 	$(document).ajaxStart(function() {
 	  $('#socialInteraction').addClass('disableOpacity');
@@ -483,123 +574,7 @@ $(function(){
 		}
 		
 		
-	});
-	
-			var userFollowers =parseFloat($('#userFollowers').val());
-			var userFollowing =parseFloat($('#userFollowing').val());			
-			var userAwards =parseFloat($('#userAwards').val());			
-			var userPublishedPosts =parseFloat($('#userPublishedPosts').val());
-			var userTotalCoolScore = parseFloat($('#userTotalCoolScore').val());
-			
-			var totalPublishedPosts =parseFloat($('#totalPublishedPosts').val());
-			if(totalPublishedPosts == 0)
-			{
-				totalPublishedPosts=1;
-			}			
-			var totalAwards =parseFloat($('#totalAwards').val());
-			if(totalAwards == 0)
-			{
-				totalAwards=1;
-			}	
-			var totalUsers=parseFloat($('#totalUsers').val());
-			if(totalUsers == 0)
-			{
-				totalUsers=1;
-			}	
-			var networkTotalCoolScore = parseFloat($('#userNetworkTotalCoolScore').val());
-			if(networkTotalCoolScore == 0)
-			{
-				networkTotalCoolScore=1;
-			}	
-			
-		 	var followersInfo=[{label:"Followers", data:userFollowers, color:"#FF4500"},
-							{label:"Total", data:totalUsers-userFollowers, color:"#EAEAEA"}];
-	
-				$.plot($("#followerdonut"), followersInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-    
-    
-    			$("#followerdonutData").text(((userFollowers/totalUsers)*100).toFixed(1)+"%");
-    
-    
-    
-		    var followingInfo=[{label:"Following", data:userFollowing, color:"#FF4500"},
-		        {label:"Total", data:totalUsers-userFollowing, color:"#EAEAEA"}];
-		                        
-		        $.plot($("#followingdonut"), followingInfo,
-		        {
-		            series: {
-		                pie: {
-		                    innerRadius: 0.7,
-		                    show: true,
-		                    label: { show: false }
-		                }
-		            },
-		            legend: { show: false }
-		        });
-		        
-		        $("#followingdonutData").text(((userFollowing/totalUsers)*100).toFixed(1)+"%");
-    
-    
-			var publishedInfo=[{label:"Published", data:userPublishedPosts, color:"#FF4500"},
-			{label:"Total", data:totalPublishedPosts-userPublishedPosts, color:"#EAEAEA"}];
-				
-				$.plot($("#publisherdonut"), publishedInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-			    
-			    $("#publishdonutData").text(((userPublishedPosts/totalPublishedPosts)*100).toFixed(1)+"%");
-			    
-			 var awardsInfo=[{label:"Awards", data:userAwards, color:"#FF4500"},
-				{label:"Total", data:totalAwards-userAwards, color:"#EAEAEA"}];
-				
-				$.plot($("#awardsdonut"), awardsInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-			    
-			    $("#awardsdonutData").text(((userAwards/totalAwards)*100).toFixed(1)+"%");
-			    
-			    var coolInfo=[{label:"Cool", data:userTotalCoolScore, color:"#FF4500"},
-				{label:"Total", data:networkTotalCoolScore-userTotalCoolScore, color:"#EAEAEA"}];
-				
-				$.plot($("#cooldonut"), coolInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-			    
-			    $("#cooldonutData").text(((userTotalCoolScore/networkTotalCoolScore)*100).toFixed(1)+"%");
+	});			
 
 	
 });

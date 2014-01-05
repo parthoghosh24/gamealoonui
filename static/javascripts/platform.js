@@ -209,8 +209,7 @@ $(window).load(function() {
     				categoryIconMap["gloonicle"]=["icon-user","Gloonicle- user video game blogs"];
     				categoryIconMap["video"]=["icon-play-3","Video- user created and shared videos"];
     				
-    				var articleHtml="";
-    				console.log(index);
+    				var articleHtml="";    				
     				   if(index == 1 || index == 6)
     				   {
     				   		articleHtml+='<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								

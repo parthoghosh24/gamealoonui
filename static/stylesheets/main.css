@@ -289,12 +289,12 @@ footer{
 
 #socialInteraction
 {
-	font-size: medium;
 	font-weight: bolder;
 	font-style: italic;
-	margin-left: 35px;
-	width: 200px;
-	height: 50px;
+	width: 150px;
+	height: 35px;
+	font-size: 14px;	
+	
 }
 .follow
 {
@@ -725,11 +725,6 @@ footer{
 	border-color:#E46F62
 }
 
-#userActivityContent
-{
-	min-height: 800px;
-}
-
 .postTr
 {
 	border-bottom: 2px solid;
@@ -949,58 +944,14 @@ form {
 	min-height: 1080px;
 }
 
-#carousel {
-	position: relative;
-	width: 920px;
-	overflow: hidden;
-	margin-bottom: 10px;
-}
+
 
 img {
 	border: 0;
 }
-/* Carousel CSS*/
 
-.carouselHeaderFooterPadding
-{
-	padding: 5px;
-}
-.positionAbsolute
-{
-	position: absolute;
-}
-.marginTopMinus60
-{
-	margin-top: -60px;
-}
 
-.marginTopMinus40
-{
-	margin-top: -40px;
-}
 
-.height40
-{
-	height: 40px;
-}
-.height60
-{
-	height: 60px;
-}
-.z500
-{
-	z-index: 500;
-}
-.carousalHeader
-{
-	background-color: #222;
-	opacity: 0.95;
-}
-.carousalFooter
-{
-	background-color: #f4f4f4;
-	opacity: 0.95;
-}
 
 /*---Videos---*/
 
@@ -1041,34 +992,7 @@ img {
 {
 	width:400px;
 }
-#newsBox {
-	margin-left: 305px;
-	margin-top: -260px;	
-	
-}
 
-
-/*---Features---*/
-
-#featureBox {		
-	margin-left: 610px;
-	margin-top: -260px;
-}
-
-
-/*---Reviews---*/
-
-#reviewBox {	
-	margin-top: 5px;
-}
-
-
-/*---Gloonicles---*/
-
-#gloonicleBox {		
-	margin-left: 505px;
-	margin-top: -260px;
-}
 
 
 
@@ -1078,15 +1002,15 @@ img {
 }
 
 
-#restcontent {
+#restContent {
 	position: relative;
-	width: 948px;
+	width: 950px;
 	margin-top: 20px;
 	overflow: hidden;
 }
 #recentArticles {	
-	float: left;
-	width: 600px;		
+	float: left; 
+	width: 100%;		
 }
 .articleUsernameBox
 {
@@ -1104,7 +1028,7 @@ img {
 }
 .articleContentPreview
 {
-	height: 200px;
+	height: 240px;
 	overflow: hidden;
 }
 .articleContentPreviewData
@@ -1117,15 +1041,21 @@ img {
 	height: 30px;
 	padding: 5px;
 }
-
-.recentArticleDiv {
-	position: relative;
-	width: 570px;
-	height: 270px;
+.smallPostDiv
+{
+	width: 300px;
+	height: 240px;
+}
+.bigPostDiv
+{
+	width: 620px;
+	height: 240px;
+}
+.recentArticleDiv {		
 	background-color: #f4f4f4;
-	box-shadow: 0 0 8px #ccc;
-	-webkit-box-shadow: 0 0 8px #ccc;
-	-moz-box-shadow: 0 0 8px #ccc;
+	box-shadow: 0 0 8px #000;
+	-webkit-box-shadow: 0 0 8px #000;
+	-moz-box-shadow: 0 0 8px #000;
 	margin-top: 20px;
 }
 .textCapitalization
@@ -1136,6 +1066,7 @@ img {
 {
 	text-transform: uppercase;
 }
+/*Gloon font sizes begin*/
 .font7
 {
 	font-size: 7px;
@@ -1200,6 +1131,43 @@ img {
 {
 	font-size: 25px;
 }
+.font26
+{
+	font-size: 26px;	
+}
+.font27
+{
+	font-size: 27px;	
+}
+.font28
+{
+	font-size: 28px;
+}
+.font29
+{
+	font-size: 29px;
+}
+.font35
+{
+	font-size: 35px;
+}
+
+.font37
+{
+	font-size: 37px;
+}
+
+.font40
+{
+	font-size: 40px;
+}
+
+.font50
+{
+	font-size: 50px;
+}
+/*Gloon font sizes end*/
+
 .colorLightGray
 {
 	color: #f3f3f3;
@@ -1209,13 +1177,8 @@ img {
 	background-color: #009AF0;
 	margin-left: 5px;
 }
-#rightBoxRestContent {	
-	position:relative;
-	float: left;
-	width: 300px;
-	padding: 35px 20px 20px 20px;
-	overflow: hidden;
-	margin-right: 0;
+#gameAndUserLists {				
+	overflow: hidden;	
 	margin-top: 25px;
 }
 #adbox1 {
@@ -1353,8 +1316,7 @@ img {
 }
 .activityRow{
 	padding: 20px;
-	font-size: 15px;
-	margin-top:20px;
+	font-size: 15px;	
 	box-shadow: 0 0 8px #ccc;
 	-webkit-box-shadow: 0 0 8px #ccc;
 	-moz-box-shadow: 0 0 8px #ccc;	
@@ -2028,6 +1990,10 @@ a {
 {
 	padding: 2px;
 }
+.padding5
+{
+	padding: 5px;
+}
 .donutData
 {
 	position: absolute;
@@ -2098,8 +2064,7 @@ a {
 
 .statsLabel
 {
-	margin-left: 10px;
-	font-size: 15px;
+	margin-left: 10px;	
 	font-weight:bolder;
 }
 
@@ -2207,19 +2172,10 @@ img.fade
 
 #userPostsAndOtherContents
 {
-	padding-top:20px;	
-	margin-left:-20px;
-	width:940px;
-	border-top-style: solid;
-	border-top-width: 10px;
-	border-top-color: #005FB3;
+	padding-top:20px;		
+	width:950px;	
 }
 
-#userTabContents
-{
-	width:600px;
-	
-}
 /*Single article css begin*/
 
 #voteButtons
@@ -2671,6 +2627,264 @@ img.fade
 }
 /*About ends*/
 
+/*Home begins*/
+#carouselNav
+{
+	z-index:10; 
+	margin-top:200px;
+}
+#carouselNav li span
+{
+	display: block;
+	width: 125px;
+}
+
+.carouselHeaderPadding
+{
+	padding: 5px;
+}
+.positionAbsolute
+{
+	position: absolute;
+}
+.marginTopMinus60
+{
+	margin-top: -60px;
+}
+
+.marginTopMinus40
+{
+	margin-top: -40px;
+}
+
+.height40
+{
+	height: 40px;
+}
+.height60
+{
+	height: 60px;
+}
+.z500
+{
+	z-index: 500;
+}
+.carouselHeader
+{
+	background-color: #222;
+	opacity: 0.95;
+}
+.carousalFooter
+{
+	background-color: #f4f4f4;
+	opacity: 0.95;
+}
+#carousel {	
+	width: 950px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.carouselContainer
+{
+	width: 950px; 
+	height: 610px;
+}
+.carouselTopTabDim
+{
+	width: 950px; 
+	min-height: 60px;	
+}
+.carouselBottomTabDim
+{
+	width:950px; 
+	height: 200px;
+	margin-top: -200px;
+	background-color: #11151d;
+	border-top-style: dashed;
+	border-width: 2px;
+	border-color: #fff;
+	opacity: 0.9;
+}
+.carouselTitle
+{
+	margin-left: 50px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	margin-top: 20px;
+	font-size: 45px;
+	line-height: 1;
+}
+.carouselOuterRing
+{
+	width: 100px;
+	height: 100px;	
+	margin-top: -50px;
+}
+.carouselOuterRingMarginLeft
+{
+	margin-left: 100px
+}
+.carouselOuterRingMarginRight
+{
+	margin-right: 100px
+}
+.carouselInnerRing
+{
+	width: 90px;
+	height: 90px;
+}
+.carouselInnerRing span
+{
+	display: block; 
+	font-size: 50px;
+	line-height: 1.5;
+	height: 90px;
+}
+.leaderBoardToppers
+{
+	width: 950px; 
+	height: 350px;
+	background-image: url(/static/images/diagmonds.png); 
+	padding-top: 5px;
+}
+#learderboardUserContainer
+{
+	margin-left: 220px;
+	margin-top: 30px;
+}
+#leaderboardText
+{
+	width: 720px;
+	height: 240px;
+	text-align: center;
+	margin-top: -153px;
+	margin-left: 100px;
+	border-style: dashed;
+	border-color: #fff;
+	border-width: 2px;
+	padding-top: 179px;
+}
+#number2user .outerBox
+{
+	width: 110px;
+	height: 110px;
+	margin-left: 20px;
+}
+
+#number2user .outerBox .innerBox
+{
+	width: 100px;
+	height: 100px;
+}
+
+#number1user .outerBox
+{
+	width: 130px;
+	height: 130px;
+	margin-left: 10px;
+}
+
+#number1user .outerBox .innerBox
+{
+	height: 120px;
+	width: 120px;
+}
+
+#number3user .outerBox
+{
+	width: 90px;
+	height: 90px;
+	margin-left: 30px;
+}
+
+#number3user .outerBox .innerBox
+{
+	width: 80px;
+	height: 80px;
+}
+
+#number2UserData
+{
+	width: 153px;
+	overflow: hidden;
+}
+#number1UserData
+{
+	width: 160px;
+	overflow: hidden;
+}
+#number3UserData
+{
+	width: 152px;
+	overflow: hidden;
+}
+
+.leaderBoardToppersData
+{
+	padding-top: 10px;
+	min-width: 152px;
+	text-align: center;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.postTop
+{
+	height: 30px;
+	position: absolute;
+	overflow: hidden;
+	background-color: #222;
+	opacity: 0.8;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.postBottom
+{
+	height: 100px;
+	margin-top: 140px;
+	background-color: #11151d;
+	border-top-style: dashed;
+	border-width: 2px;
+	border-color: #fff;
+	opacity: 0.9;
+}
+
+.postTitle
+{
+	margin-left: 30px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+}
+
+.postListOuterBoxRing
+{
+	width: 50px;
+	height: 50px;	
+	margin-top: -20px;
+}
+
+.postListOuterBoxRingMarginRight
+{
+	margin-right: 30px;
+}
+
+.postListOuterBoxRingMarginLeft
+{
+	margin-left: 30px;
+}
+.postListInnerRing
+{
+	width: 40px;
+	height: 40px;
+}
+.postListCategoryDim
+{
+	display: block; 
+	font-size: 20px;
+	height: 40px;
+}
+/*Home ends*/
 /*Post Creator/Article start*/
 .editorButtons
 {	
@@ -2680,13 +2894,7 @@ img.fade
 	opacity: 0.9;
 }
 
-#richEditor
-{
-	width: 500px; 
-	height: 80px; 
-	border: none;
-	background-color: #FFFFFF
-}
+
 
 #postContainer
 {
@@ -2757,9 +2965,8 @@ img.fade
 	color: #fff;
 	border-radius: 50%;
 }
-#author
+.authorPostMargin
 {
-	float: right;
 	margin-top: -78px;
 }
 #gameRow
@@ -2773,29 +2980,35 @@ img.fade
 	float: left;
 	margin-right: 5px;
 }
-#outerBox
+#userPostAndCreatorOuterCircle
 {
 	width: 160px;
 	height: 160px;
+}
+.outerBox
+{	
 	border-style: dashed;
 	border-color: #fff;
-	border-width: 1px;
+	border-width: 2px;
 	border-radius: 50%;
 }
-#innerBox
+#userPostAndCreatorInnerCircle
+{
+	height: 150px;
+	width: 150px;
+}
+.innerBox
 {
 	text-align: center;
 	border-style: solid;
 	border-color: #00A3FF;
 	border-width: 5px;
-	border-radius: 50%;
-	height: 150px;
-	width: 150px;
+	border-radius: 50%;	
 	overflow: hidden;
 	margin-left: 3px;
 	margin-top: 3px;
 }
-#innerBox a
+.innerBox a
 {
 	margin-left: -4px;
 }
@@ -2823,6 +3036,11 @@ img.fade
 	padding: 20px;
 	opacity: 0.8;
 }
+.marginRight61
+{
+	margin-right: 61px;
+}
+
 /*Review start*/
 #platformOptions
 {
@@ -2907,7 +3125,7 @@ img.fade
 }
 .divider
 {
-	height: 80px;
+	height: 100px;
 }
 .reviewPointButtons
 {
@@ -2994,14 +3212,45 @@ img.fade
 }
 /*News end */
 /*Video start */
+.videoPlayButton
+{
+	color: #fff;
+	position: absolute;
+	margin-top: 180px;
+	margin-left: 360px;
+	font-size: 150px;
+}
+.videoPlayButton:hover
+{
+	text-shadow: 0px 0px 8px #fff; 
+}
 /*Video end */
 /*Gloonicle start */
+.gloonicleEditButtons
+{
+	width: 800px;
+}
+.glooniclePostSnippet
+{
+	width: 800px;
+	height: 600px;
+}
 /*Gloonicle end */
+.nonGlooniclePostSnippet
+{
+	width: 500px; 
+	height: 80px; 
+}
+#richEditor
+{	
+	border: none;
+	background-color: #FFFFFF
+}
 /*Post Creator/Article end*/	
 nav {
 	
 	height: 152px;
-	width: 650px;	
+	width: 550px;	
 	margin: 0 auto -100px;
 	background: -webkit-linear-gradient(top,#003869 0,#151515 120%);
 	background: -moz-linear-gradient(top,#003869 0,#151515 120%);

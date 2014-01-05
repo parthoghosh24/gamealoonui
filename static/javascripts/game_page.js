@@ -299,95 +299,9 @@ $(function(){
 		
 	});
 				
-			var userInterested =parseFloat($('#userInterested').val());
-			var userPlayed =parseFloat($('#userPlayed').val());
-			var userScored =parseFloat($('#userScored').val());
-			var articlesPublishedForGame =parseFloat($('#articlesPublished').val());
 			
-			var totalUsers=parseFloat($('#totalUsers').val());
-			if(totalUsers == 0)
-			{
-				totalUsers=1;
-			}
-			var totalPublishedPosts =parseFloat($('#totalPublishedPosts').val());
-			if(totalPublishedPosts == 0)
-			{
-				totalPublishedPosts=1;
-			}
-			var gameScore =parseFloat($('#gameScore').val());
-			
-			console.log("Total interested "+userInterested);
-		 	var interstedInfo=[{label:"Interested", data:userInterested, color:"#FF4500"},
-							{label:"Total", data:(totalUsers-userInterested), color:"#EAEAEA"}];
-	
-				$.plot($("#interesteddonut"), interstedInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-    
-    
-    			$("#interesteddonutData").text(((userInterested/totalUsers)*100).toFixed(1)+"%");
-    
-               
-		    var playedInfo=[{label:"Played", data:userPlayed, color:"#FF4500"},
-		        {label:"Total", data:totalUsers-userPlayed, color:"#EAEAEA"}];
-		                        
-		        $.plot($("#playeddonut"), playedInfo,
-		        {
-		            series: {
-		                pie: {
-		                    innerRadius: 0.7,
-		                    show: true,
-		                    label: { show: false }
-		                }
-		            },
-		            legend: { show: false }
-		        });
-		        
-		        $("#playeddonutData").text(((userPlayed/totalUsers)*100).toFixed(1)+"%");
-    
-    
-			var scoredInfo=[{label:"Scored", data:userScored, color:"#FF4500"},
-			{label:"Total", data:totalUsers-userScored, color:"#EAEAEA"}];
-				
-				$.plot($("#scoreddonut"), scoredInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-			    
-			    $("#scoreddonutData").text(((userScored/totalUsers)*100).toFixed(1)+"%");
-			    
-			    
-			var publishedInfo=[{label:"Published", data:articlesPublishedForGame, color:"#FF4500"},
-			{label:"Total", data:totalPublishedPosts-articlesPublishedForGame, color:"#EAEAEA"}];
-				
-				$.plot($("#publisherdonut"), publishedInfo,
-			    {
-			        series: {
-			            pie: {
-			                innerRadius: 0.7,
-			                show: true,
-			                label: { show: false }
-			            }
-			        },
-			        legend: { show: false }
-			    });
-			    
-			    $("#publishdonutData").text(((articlesPublishedForGame/totalPublishedPosts)*100).toFixed(1)+"%");				   
+			var gameScore =parseFloat($('#networkScore').val());
+						
 			     						   	  
 			    var gameScoreInfo=[{label:"GameScore", data:gameScore, color:"#76A7F5"},
 				{label:"max", data:10-gameScore, color:"#EAEAEA"}];

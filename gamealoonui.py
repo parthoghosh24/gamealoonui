@@ -21,9 +21,9 @@ urls = (
         '/about','About',
         '/users','Users',
         '/games','Games',        
-        '/post/create','InitCreatePost',
         '/post/save','CreateOrUpdatePost',        
         '/post/scrapeLink','GetLinkData',
+        '/post/(.+)/create','InitCreatePost',        
         '/platform/(.+)/(.+)','Platform',
         '/article/article-preview','ArticlePreview',
         '/article/updateATS','ArticleUpdateAverageTimeSpent',
@@ -207,7 +207,7 @@ class UserStats:
         return "success"
 
 class InitCreatePost:
-    def GET(self): 
+    def GET(self, userId): 
         if session.userId == "Guest":
             return web.redirect("/") 
         else:
