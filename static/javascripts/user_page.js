@@ -4,143 +4,67 @@
 
 $(window).load(function() {
 		
-	  function onFeaturedAfter()
+	  function onAfter()
 		{
 			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#featuredArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#featuredArticleTitle span').text(title);
-			$('a#featuredArticleAuthor').attr('href','/'+username);
-			$('a#featuredArticleAuthor span').text(username);	  
-			$('#featuredCommentCount').text(commentCount);      
+			var encodedTitle=$(this).data('encodedtitle');			
+			var username=$(this).data('username');			    
+			var category=$(this).data('category');
+			$('a#articleTitle').attr('href','/article/'+username+'/'+encodedTitle);
+			$('a#articleTitle p').text(title);
+			if($('.postCategory').hasClass('review'))
+			{
+				$('.postCategory').removeClass('review')
+			}
+			else if($('.postCategory').hasClass('video'))
+			{
+				$('.postCategory').removeClass('video')
+			}
+			else if($('.postCategory').hasClass('gloonicle'))
+			{
+				$('.postCategory').removeClass('gloonicle')
+			}
+			else if($('.postCategory').hasClass('news'))
+			{
+				$('.postCategory').removeClass('news')
+			}
+			
+			$('.postCategory').addClass(category);
 		}		
-		
-		function onNotFeatured1After()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			$('a#notFeatured1ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#notFeatured1ArticleTitle span').text(title);
-			$('a#notFeatured1ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured1ArticleAuthor span').text(username);
-			$('#notFeatured1CommentCount').text(commentCount);	        
-		}
-		
-		function onNotFeatured2After()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#notFeatured2ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#notFeatured2ArticleTitle span').text(title);
-			$('a#notFeatured2ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured2ArticleAuthor span').text(username);
-			$('#notFeatured2CommentCount').text(commentCount);	        
-		}
-		
-		function onNotFeatured3After()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#notFeatured3ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#notFeatured3ArticleTitle span').text(title);
-			$('a#notFeatured3ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured3ArticleAuthor span').text(username);
-			$('#notFeatured3CommentCount').text(commentCount);	        
-		}
-		
-		function onNotFeatured4After()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#notFeatured4ArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#notFeatured4ArticleTitle span').text(title);
-			$('a#notFeatured4ArticleAuthor').attr('href','/'+username);
-			$('a#notFeatured4ArticleAuthor span').text(username);
-			$('#notFeatured4CommentCount').text(commentCount);	        
-		}
-		
-		
-		
-		$("#cFeatured").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,			
-			delay : 10,
-			pager:'#featuredCarouselNav',
-			after: onFeaturedAfter,
+				
+		$("#cPosts").cycle({
+			fx : 'scrollLeft',						
+			delay : -2000,
+			pager:'#carouselNav',
+			after: onAfter,
 			pagerAnchorBuilder:function(idx, slide) { 
         		// return selector string for existing anchor 
-        			return '#featuredCarouselNav span:eq(' + idx + ') a'; 
-    }
+        			return '#carouselNav span:eq(' + idx + ') a'; 
+    		}
 		});	
 		
-		$("#cNotFeatured1").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 100,
-			pager:'#notFeatured1CarouselNav',
-			after: onNotFeatured1After,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor              		           		   	        		   
-        			return '#notFeatured1CarouselNav span:eq(' + idx + ') a'; 
-    }
+});
+
+  
+ function  applyPauseResumeToCarousel()
+ {
+ 	
+ 	$('a.playPause').click(function() { 		
+		  if($(this).children('i').hasClass('icon-pause-3'))
+		  {
+		  	$("#cPosts").cycle('pause');
+		  	$(this).children('i').removeClass('icon-pause-3');
+		  	$(this).children('i').addClass('icon-play-2');
+		  }
+		  else
+		  {
+		  	
+		  	$("#cPosts").cycle('resume');
+		  	$(this).children('i').removeClass('icon-play-2');
+		  	$(this).children('i').addClass('icon-pause-3');
+		  }
 		});	
-		
-		$("#cNotFeatured2").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 1000,
-			pager:'#notFeatured2CarouselNav',
-			after: onNotFeatured2After,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        			return '#notFeatured2CarouselNav span:eq(' + idx + ') a'; 
-    }
-		});	
-		
-		$("#cNotFeatured3").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 1500,
-			pager:'#notFeatured3CarouselNav',
-			after: onNotFeatured3After,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        			return '#notFeatured3CarouselNav span:eq(' + idx + ') a'; 
-    }
-		});	
-		
-		$("#cNotFeatured4").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 2000,
-			pager:'#notFeatured4CarouselNav',
-			after: onNotFeatured4After,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        			return '#notFeatured4CarouselNav span:eq(' + idx + ') a'; 
-    }
-		});	
-		
-	});
+ } 
 	
  function onArticleClick()
  {
@@ -269,19 +193,19 @@ $(window).load(function() {
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
 														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
 											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
 												'</div>'+
 											'</div>'+
 											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
-												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'</p>'+
+												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
 											'</a>'+
 										'</div>'+
 									'</div>'+																
@@ -300,19 +224,19 @@ $(window).load(function() {
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
 														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
 											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
 												'</div>'+
 											'</div>'+
 											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
-												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
 											'</a>'+
 										'</div>'+
 									'</div>'+																
@@ -331,19 +255,19 @@ $(window).load(function() {
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
 														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
 											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
 												'</div>'+
 											'</div>'+
 											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
-												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
 											'</a>'+
 										'</div>'+
 									'</div>'+																
@@ -365,93 +289,100 @@ $(window).load(function() {
     	},'json');  
     }
     	
- function  applyPauseResumeToCarousel()
+ function getSocialData(username)
  {
- 	//featured
- 	$('#featuredBottomTab span span a.playPause').click(function() { 		
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cFeatured").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cFeatured").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-	
-	//not featured 1	
-	$('#notFeatured1BottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cNotFeatured1").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cNotFeatured1").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-		
-	//not featured 2	
-	$('#notFeatured2BottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cNotFeatured2").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cNotFeatured2").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-		
-	//not featured 3	
-	$('#notFeatured3BottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cNotFeatured3").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cNotFeatured3").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-		
-	//not featured 4	
-	$('#notFeatured4BottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cNotFeatured4").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  } 
-		  else
-		  {
-		  	
-		  	$("#cNotFeatured4").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});				
+ 	$.get('/user/social/'+username,function(data){
+ 		if(data.status == "success")
+ 		{
+ 			var followedByHtml="";
+ 			$.each(data.userFollowedBy, function(index, user) {
+			   followedByHtml= '<div id="'+user.buddyUsername+'" class="floatLeft overflowHidden innerBox followRing otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">'+		    			 	    
+					'<a href ="/'+user.buddyUsername+'"><img src="'+user.buddyUserAvatar+'" alt="'+user.buddyUsername+'" title="'+user.buddyUsername+'"width="100" height="100"/></a>'+
+				'</div>'
+				
+				var followedByEl=$(followedByHtml);
+				followedByEl.hide();
+				$('#followersList').append(followedByEl);
+				followedByEl.fadeIn();
+			});			
+			if(data.userFollowedBy.length>0)
+			{
+				$("#followers div.noData").addClass('hiddenDiv');
+			}
+			
+			
+			
+			
+			var followingHtml="";
+			$.each(data.userFollowingOthers, function(index, user) {
+			   followingHtml= '<div id="'+user.buddyUsername+'" class="floatLeft overflowHidden innerBox followRing otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">'+		    			 	    
+					'<a href ="/'+user.buddyUsername+'"><img src="'+user.buddyUserAvatar+'" alt="'+user.buddyUsername+'" title="'+user.buddyUsername+'"width="100" height="100"/></a>'+
+				'</div>'
+				
+				var followingEl=$(followingHtml);
+				followingEl.hide();
+				$('#followingList').append(followingEl);
+				followingEl.fadeIn();
+			});
+			if(data.userFollowingOthers.length>0)
+			{
+				$("#following div.noData").addClass('hiddenDiv');
+			}
+			
+			
+			var interestedGamesHtml="";
+			$.each(data.userInterestedGames, function(index, game) {								
+				interestedGamesHtml= '<div id="'+game.interestedGameId+'" class="floatLeft overflowHidden innerBox followRing otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">'+		    			 	    
+					'<a href ="/game/'+game.interestedGameURL+'"><img src="'+game.interestedGameBoxShot+'" alt="'+game.interestedGameTitle+'" title="'+game.interestedGameTitle+'"width="100" height="100"/></a>'+
+				'</div>'
+				
+				var interestedGamesEl=$(interestedGamesHtml);
+				interestedGamesEl.hide();
+				$('#interestedGamesList').append(interestedGamesEl);
+				interestedGamesEl.fadeIn();
+			});
+			if(data.userInterestedGames.length>0)
+			{
+				$("#games div.noData").addClass('hiddenDiv');
+			}
+			
+ 		}
+ 		else
+ 		{
+ 			alert("Something wrong happened");
+ 		}
+ 	},'json');
  } 
+ 
+ function getUserStats(username)
+ {
+ 	$.get('/user/stats/'+username, function(data)
+ 	{
+ 		if(data.status == "success")
+ 		{
+ 			var userStatsHtml="";
+ 			$.each(data.userAchievements, function(index, award) { 			
+			   userStatsHtml= '<div class="floatLeft overflowHidden ">'+		    			 	    
+					'<img src="http://192.168.0.103:9000/assets/images/default/new_gloonie_achievement.png" title="'+award.title+'-'+award.description+'" alt="'+award.title+'" height="200"/>'+
+				'</div>'				
+				var userStatsEl=$(userStatsHtml);
+				userStatsEl.hide();
+				$('#userAwards').append(userStatsEl);
+				userStatsEl.fadeIn();
+			});	
+			if(data.userAchievements.length>0)
+			{
+				$("#awards div.noData").addClass('hiddenDiv');
+			}
+			
+ 		}
+ 		else
+ 		{
+ 			alert("Something wrong happened");
+ 		}
+
+ 	},'json');
+ }
  	
 $(function(){
 	
@@ -459,7 +390,47 @@ $(function(){
 			onArticleClick();
 			
     
-			$("#tabs-min").tabs();
+			$("#tabs-min").tabs({
+				beforeActivate: function(event, ui){						 
+				var timestamp=new Date().getTime();
+				var username=$('#userPostAndCreatorInnerCircle img').attr('title');	
+				if(ui.newPanel.index()== 2)
+				{	
+					if($('.allList').is(':empty'))
+					{					
+						getData(username,"all", timestamp);					
+					}												
+					
+				}			
+				else if(ui.newPanel.index()== 3)
+				{				
+					/*
+					if($('.newsList').is(':empty'))
+										{
+											getData(platform,"news", timestamp);
+											
+										}*/
+					
+					
+					
+				}
+				else if(ui.newPanel.index()== 4)
+				{				
+					if($('#followersList').is(':empty') && $('#followersList').is(':empty') && $('#interestedGamesList').is(':empty'))
+					{					
+						console.log("Social data");
+						getSocialData(username);					
+					}
+				}				
+				else if(ui.newPanel.index()== 5)
+				{
+					if($('#userAwards').is(':empty'))				
+					{
+						getUserStats(username);
+					}
+				}
+		}
+			});
 	
 	$(document).on({
 	    mouseenter: function () {
@@ -470,13 +441,14 @@ $(function(){
 	    }
 	},".articleContentPreview");
 	
+	var blockSocial = false;
 	$(document).ajaxStart(function() {
-	  $('#socialInteraction').addClass('disableOpacity');
-	  $('#socialInteraction').prop("disabled",true);
+	  $('#userPostAndCreatorInnerCircle').addClass('disableOpacity');	  
+	  blockSocial = true;
 	});
 	$(document).ajaxStop(function() {
-	  $('#socialInteraction').removeClass('disableOpacity');
-	  $('#socialInteraction').prop("disabled",false);
+	  $('#userPostAndCreatorInnerCircle').removeClass('disableOpacity');	  
+	  blockSocial = false;
 	});
 	
     $('.loadMore').click(function() {
@@ -488,40 +460,54 @@ $(function(){
        });
 	
 	//Follow Unfollow
-			 $('#socialInteraction').click(function() {
-			 	   if("Guest"==$("div#userdetailsbox span").text())
+			 $('#userPostAndCreatorInnerCircle a').click(function() {
+			 	   var loggedIn = $(this).data('loggedin');		
+			 	   if("False"==loggedIn)
 		 		   {
 		 				openLoginModal();
 		 		   }
 		 		   else
 		 		   {
-			 		   	if($('#socialInteraction').hasClass('follow'))
-				 	   	{
-				 	   	  $.post('/user/followOrUnfollow',{"buddyUsername":$('#userName span').text(),"type":0},function(data){
-				 	   	  	if(data.status == "success")
-				 	   	  	{
-				 	   	  		$('#socialInteraction').removeClass('follow');
-				 	   	  		$('#socialInteraction').addClass('unfollow');   
-				 	   	  		$('#socialInteraction').text('- Unfollow');			 	   	  		
-				 	   	  	}
-				 	   	  	
-				 	   	  },'json');
-				 	   	  
-				 	   	  
-				 	   }
-				 	   if($('#socialInteraction').hasClass('unfollow'))
-				 	   {			 	   	
-				 	   	$.post('/user/followOrUnfollow',{"buddyUsername":$('#userName span').text(),"type":1},function(data){
-				 	   		if(data.status == "success")
-				 	   	  	{
-				 	   	  		$('#socialInteraction').removeClass('unfollow');
-				 	   	  		$('#socialInteraction').addClass('follow');
-				 	   	  		$('#socialInteraction').text('+ Follow');			 	   	  		
-				 	   	  	}
-				 	   	  	   
-				 	   	  },'json');
-				 	   	  	
-				 	   }
+		 		   		if(!blockSocial)
+		 		   		{
+		 		   			if($('#userPostAndCreatorInnerCircle').hasClass('unfollowRing'))
+					 	   	{
+					 	   		console.log($('a#user').text().trim());
+					 	   		console.log($('#gamerName').text().trim());
+					 	   		if($('a#user').text().trim() === $('#gamerName').text().trim())
+					 	   		{
+					 	   			alert("Really?? You wanna follow yourself? Not a great Idea :(");
+					 	   			return false;
+					 	   		}
+					 	   		else
+					 	   		{
+					 	   			
+										$.post('/user/followOrUnfollow',{"buddyUsername":$('#gamerName').text().trim(),"type":0},function(data){
+																				  if(data.status == "success")
+																				  {
+																					  $('#userPostAndCreatorInnerCircle').removeClass('unfollowRing');
+																					  $('#userPostAndCreatorInnerCircle').addClass('followRing');   
+																																																	   }
+																																					 },'json');
+										
+					 	   		}
+					 	   }
+					 	   
+					 	   if($('#userPostAndCreatorInnerCircle').hasClass('followRing'))
+					 	   {			 	   	
+					 	   	$.post('/user/followOrUnfollow',{"buddyUsername":$('#gamerName').text().trim(),"type":1},function(data){
+					 	   		if(data.status == "success")
+					 	   	  	{
+					 	   	  		$('#userPostAndCreatorInnerCircle').removeClass('followRing');
+					 	   	  		$('#userPostAndCreatorInnerCircle').addClass('unfollowRing');
+					 	   	  				 	   	  	
+					 	   	  	}
+					 	   	  	   
+					 	   	  },'json');
+					 	   	  	
+					 	   }
+		 		   		}
+			 		   	
 		 		   }
 			 	   			 	   
 				 });
@@ -542,39 +528,26 @@ $(function(){
 			 	   	  $(this).text('+ Block');   	
 			 	   }			 	   
 				 });	 	  
-				 
-	var mode = 1;
-	$('#toggleWindow').click(function() {
-		
-		if(mode ==1)
-		{			
-			
-			$('#userDetailsBox').animate({			
-			width:"940"}, 500);
-			
-			$('#toggleWindow').animate({
-			left:"+=630"}, 500);
-			
-			mode=2;			
-			$('#toggleWindow span').removeClass('icon-right-open-1');
-			$('#toggleWindow span').addClass('icon-left-open-1');
-		}
-		else
-		{			
-			
-			$('#userDetailsBox').animate({			
-			width:"310"}, 500);
-			
-			$('#toggleWindow').animate({
-			left:"-=630"}, 500);
-			
-			mode=1;
-			$('#toggleWindow span').removeClass('icon-left-open-1');
-			$('#toggleWindow span').addClass('icon-right-open-1');
-		}
-		
-		
-	});			
+				 		
+	
+	
+	$(document).on({
+			mouseenter: function () {
+				$(this).children('.carouselTopTabDim').slideDown("slow");
+			},
+			mouseleave: function () {
+				$(this).children('.carouselTopTabDim').slideUp(150);
+			}
+		},".carouselContainer");
+	
+	$(document).on({
+			mouseenter: function () {
+				$(this).children('a').children('p').css("opacity","0.9");
+			},
+			mouseleave: function () {
+				$(this).children('a').children('p').css("opacity","0.4");
+			}
+		},".activityVeil");
 
 	
 });

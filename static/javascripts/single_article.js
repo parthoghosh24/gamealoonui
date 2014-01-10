@@ -8,7 +8,7 @@ function generateComment(data)
 			 	      {
 			 	      	var commentHtml ="<div id=\""+data.conversationId+"\" class=\"commentData\">"+
 												"<input type=\"hidden\" id=\"conversationTimestamp\" name=\"conversationTimestamp\" value=\""+data.conversationTimeStamp+"\" />"+
-					 							"<header class=\"commentUserBox\">"+
+					 							"<div class=\"commentUserBox\">"+
 							 						"<div class=\"commentuserAvatarCircle\">"+
 							 							"<a href=\"/"+data.ownerName+"\" target=\"_blank\">"+
 							 								"<img src=\""+data.ownerAvatarImage+"\" height=\"25\" alt=\"avatar\">"+
@@ -41,7 +41,7 @@ function generateComment(data)
 							 								"</a>"+
 							 							"</div>"+
 							 						"</div>"+
-							 					"</header>"+
+							 					"</div>"+
 							 					"<span class=\"commentBody applyJura\">"+
 							 						"<span class=\"colorGray font12\">"+data.converstationTimeFormatted+"- </span>"+data.message+
 							 					"</span>"+  
@@ -61,19 +61,21 @@ function generateComment(data)
 			}
 
 function pollForComments()
+	
 	{ 		
-		var articleId = $('.articleBody').attr('id');		
-		var lastTimeStamp = $('#commentList div:first-child #conversationTimestamp').val();				 
-		if(lastTimeStamp != undefined)
-		{			
-			$.ajax({url:"/comment/get/"+articleId+"/"+lastTimeStamp, success: function(data){			
-			generateComment(data);
-			$('#noComments').hide();
+			/*var articleId = $('.articleBody').attr('id');		
+			var lastTimeStamp = $('#commentList div:first-child #conversationTimestamp').val();				 
+			if(lastTimeStamp != undefined)
+			{			
+				$.ajax({url:"/comment/get/"+articleId+"/"+lastTimeStamp, success: function(data){			
+				generateComment(data);
+				$('#noComments').hide();
+				
+				}, dataType:"json", cache:false,complete:pollForComments, timeout:30000});
+			}*/
 			
-			}, dataType:"json", cache:false,complete:pollForComments, timeout:30000});
 		}
-		
-	}
+	
 
 var startTime;
 var endTime;
@@ -147,7 +149,7 @@ $(function(){
 		 
 		 
 		});
-	pollForComments();
+	//pollForComments();
 	$('#postContent').click(function() {
 		if($('div#userdetailsbox span').text() == "Guest")
 		{
@@ -176,12 +178,12 @@ $(function(){
 					if(data.status === "success")
 					{					
 						console.log('success');
-						if(lastTimeStamp == undefined)
-						{
+						//if(lastTimeStamp == undefined)
+						//{
 							generateComment(data);
 							$('#noComments').hide();
-						}
-						$('#commentBody').val("");
+						//}
+						//$('#commentBody').val("");
 					}
 					else
 					{

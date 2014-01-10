@@ -105,16 +105,7 @@ $(function() {
 		});
 	$("#logout").click(function(e) {
 		 
-		    $.get('/logout/', function(data) {	
-		    	/*var spanTag=$("#userdetailsbox span")		    	
-		    	if(spanTag.parent().is("a")){
-		    		$("#userdetailsbox span").unwrap();
-		    	}			    								    
-				
-				$("#userdetailsbox span").text("Guest");				
-				$("#logout").css("display","none");
-				$("#login").css("display","block");	
-				$("#userAvatarImage").css("display","none");*/
+		    $.get('/logout/', function(data) {			    	
 				var currentUrl =$(location).attr('href');
 				if(currentUrl.indexOf("profile")!=-1)
 				{
@@ -138,14 +129,7 @@ $(function() {
 			    processMode=3;
 				$.post('/login/', $("#loginForm").serialize(), function(data) {			
 				if (data.status=="success") {
-					$.modal.close();
-					/*$("#userdetailsbox span").text("" + data.username + "");
-					var url="/profile/"+data.userid
-					$("#userdetailsbox span").wrap('<a href='+url+' class="colorWhite"></a>');		
-							
-					$("#login").css("display","none");
-					$("#logout").css("display","block");
-					$("#userAvatarImage").attr("src",data.userAvatar);*/
+					$.modal.close();					
 					location.reload();
 	
 				} else {

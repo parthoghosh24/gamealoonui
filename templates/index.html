@@ -5,7 +5,7 @@ $ platformValue = jsonData['platform']
 $ platformMessageMap ={"ps3":"Latest Playstation 3 Articles","all":"Latest All Articles","ps4":"Latest Playstation 4 Articles","xbox360":"Latest Xbox 360 Articles","xboxOne":"Latest Xbox One Articles", "pc":"Latest PC Articles", "n3ds":"Latest Nintendo 3DS Articles", "vita":"Latest Playstation Vita Articles","wiiu":"Latest Nintendo Wii-U Articles","ios":"Latest IOS Articles","android":"Latest Android Articles"}
 $if platformValue == 'all':
 	$var title:Welcome to gamealoon Beta- Find all gamer generated reviews, gloonicles, videos, news and more at Gamealoon	
-	$var description: Gamealoon is world's first totally video gamer centric video game entertainment and media website and also a social network. Gamealoon is a platform which lets video gamers from all around the world come, make a network, collaborate and generate reviews, videos, news, and gloonicles for their favorite video games and platforms such as PS3, PS4, Vita, Xbox 360, Xbox one ,Wii u, 3ds, Android, PC and iOS or video games in general. 
+	$var description: Gamealoon is world's first totally video gamer centric video game entertainment, media and social network website. Gamealoon is a platform which lets video gamers from all around the world come, make a network, collaborate and generate reviews, videos, news and gloonicles for their favorite video games and platforms such as PS3, PS4, Vita, Xbox 360, Xbox one ,Wii u, 3ds, Android, PC and iOS or video games in general. 
 					    		
 <div class="mainContainer">
 			<div id="container_layout">			
@@ -13,15 +13,15 @@ $if platformValue == 'all':
 
 <div id="carousel" class="blackBoxShadow">
 	<ul id="carouselNav" class="blackBoxShadow positionAbsolute">
-		<li class="cursorPointer"><span class="applyMontserratBold icon-thumbs-up-1 review font15 colorWhite">REVIEW</span></li>
-		<li class="cursorPointer"><span class="applyMontserratBold icon-signal-2 news font15 colorWhite">NEWS</span></li>
-		<li class="cursorPointer"><span class="applyMontserratBold icon-play-3 video font15 colorWhite">VIDEO</span></li>
-		<li class="cursorPointer"><span class="applyMontserratBold icon-user gloonicle font15 colorWhite">GLOONICLE</span></li>
+		<li class="cursorPointer"><span class="applyMontserratBold icon-thumbs-up-1 review font15 colorWhite" title="Review- User created crisp and micro reviews.">REVIEW</span></li>
+		<li class="cursorPointer"><span class="applyMontserratBold icon-signal-2 news font15 colorWhite" title="News- user shared news">NEWS</span></li>
+		<li class="cursorPointer"><span class="applyMontserratBold icon-play-3 video font15 colorWhite" title="Video- user created and shared videos">VIDEO</span></li>
+		<li class="cursorPointer"><span class="applyMontserratBold icon-user gloonicle font15 colorWhite" title="Gloonicle- user video game blogs">GLOONICLE</span></li>
 	</ul>
 	<div id="carouselContent">
 		<div id='reviewBox' class="carouselContainer">
 				$if len(carouselData['carouselReviews']) == 0:
-					<div id='rTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">
+					<div id='rTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">
 						<span class="floatRight colorWhite">
 							<span class="font10"><i class="font13 icon-users"></i>No Comments</span>							
 						</span>							
@@ -31,19 +31,19 @@ $if platformValue == 'all':
 					</div>
 					<div id="rBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox floatRight carouselOuterRingMarginRight carouselOuterRing">
-								<div class="innerBox carouselInnerRing">									
+								<div class="innerBox unfollowRing  unfollowRing carouselInnerRing">									
 										<img src="$session.baseUrl/assets/images/default/avatar.png" alt="no user" width="90" height="90" title="No User" style="margin-left: -4px;">
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-thumbs-up-1 review colorWhite" title="Review- User created crisp and micro reviews."></span>
 								</div>
 							</div>							
 								<p class="applyFranklinGothic font23 colorLightGray carouselTitle">No Review</p>							
 					</div>	
 				$else:
-					<div id='rTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
+					<div id='rTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
 						<span class="floatLeft">
 							<span class="marginRight10">
 								<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorWhite'></i></a>
@@ -59,20 +59,20 @@ $if platformValue == 'all':
 					</div>
 					<div id="cReviews" class="slider overflowHidden carouselContainer">
 						$for article in carouselData['carouselReviews']:
-							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
+							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-useravatar="$article['articleAuthorAvatar']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
 			
 					</div>
 					<div id="rBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginRight floatRight">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<a id='rArticleAuthor' href="/$carouselData['carouselReviews'][0]['articleAuthor']">
-										<img src="/static/images/photo.jpg" alt="maxpayne" title="maxpayne" width="90" height="90" title="$carouselData['carouselReviews'][0]['articleAuthor']">
+										<img src="$carouselData['carouselReviews'][0]['articleAuthorAvatar']" alt="$carouselData['carouselReviews'][0]['articleAuthor']" title="$carouselData['carouselReviews'][0]['articleAuthor']" width="90" height="90" title="$carouselData['carouselReviews'][0]['articleAuthor']">
 									</a>
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
-									<span class="icon-thumbs-up-1 review colorWhite" title="Review- User created crisp and micro reviews."></span>
+								<div class="innerBox unfollowRing  carouselInnerRing">
+									<span class="icon-thumbs-up-1 review colorWhite" title="Review- User created crisp and micro reviews"></span>
 								</div>
 							</div>
 							<a id='rArticleTitle' href="/article/$carouselData['carouselReviews'][0]['articleAuthor']/$carouselData['carouselReviews'][0]['articleEncodedUrlTitle']">
@@ -82,7 +82,7 @@ $if platformValue == 'all':
 	</div>		
 	<div id="newsBox" class="carouselContainer">
 				$if len(carouselData['carouselNews']) == 0:
-					<div id='nTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">			
+					<div id='nTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">			
 						<span class="floatRight colorWhite">
 							<span class="font10"><i class="font13 icon-users"></i>No Comments</span>							
 						</span>	
@@ -92,12 +92,12 @@ $if platformValue == 'all':
 					</div>					
 					<div id="nBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginRight floatRight">
-								<div class="innerBox carouselInnerRing">									
+								<div class="innerBox unfollowRing  carouselInnerRing">									
 										<img src="$session.baseUrl/assets/images/default/avatar.png" alt="no user" width="90" height="90" title="No User" style="margin-left: -4px;">
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-signal-2 news colorWhite" title="News- user shared news"></span>
 								</div>
 							</div>							
@@ -105,7 +105,7 @@ $if platformValue == 'all':
 					</div>
 				
 				$else:					
-					<div id='nTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
+					<div id='nTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
 						<span class="floatLeft">
 							<span class="marginRight10">
 								<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorWhite'></i></a>
@@ -122,19 +122,19 @@ $if platformValue == 'all':
 					<div id="cNews" class="slider overflowHidden carouselContainer">
 						
 						$for article in carouselData['carouselNews']:
-							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
+							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-useravatar="$article['articleAuthorAvatar']"  data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
 						
 					</div>					
 					<div id="nBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginRight floatRight">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<a id='nArticleAuthor' href="/$carouselData['carouselNews'][0]['articleAuthor']">
-										<img src="/static/images/photo.jpg" alt="$carouselData['carouselNews'][0]['articleAuthor']" width="90" height="90" title="$carouselData['carouselNews'][0]['articleAuthor']">
+										<img src="$carouselData['carouselNews'][0]['articleAuthorAvatar']" alt="$carouselData['carouselNews'][0]['articleAuthor']" width="90" height="90" title="$carouselData['carouselNews'][0]['articleAuthor']">
 									</a>
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-signal-2 news colorWhite" title="News- user shared news"></span>
 								</div>
 							</div>
@@ -147,7 +147,7 @@ $if platformValue == 'all':
 	<div id="videoBox" class="carouselContainer">
 		
 			$if len(carouselData['carouselVideos']) == 0:
-				<div id='vTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">
+				<div id='vTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">
 					<span class="floatRight colorWhite">
 							<span class="font10"><i class="font13 icon-users"></i>No Comments</span>							
 						</span>					
@@ -158,12 +158,12 @@ $if platformValue == 'all':
 				</div>				
 				<div id="vBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginRight floatRight">
-								<div class="innerBox carouselInnerRing">									
+								<div class="innerBox unfollowRing  carouselInnerRing">									
 										<img src="$session.baseUrl/assets/images/default/avatar.png" alt="no user" width="90" height="90" title="No User" style="margin-left: -4px;">
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-play-3 video colorWhite" title="Video- user created and shared videos"></span>
 								</div>
 							</div>							
@@ -172,7 +172,7 @@ $if platformValue == 'all':
 				
 			
 			$else:				
-				<div id='vTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
+				<div id='vTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
 						<span class="floatLeft">
 							<span class="marginRight10">
 								<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorWhite'></i></a>
@@ -189,18 +189,18 @@ $if platformValue == 'all':
 			
 				<div id="cVideos" class="slider overflowHidden carouselContainer">
 					$for article in carouselData['carouselVideos']:
-						<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>
+						<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-useravatar="$article['articleAuthorAvatar']"  data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>
 				</div>				
 				<div id="vBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginRight floatRight">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<a id='vArticleAuthor' href="/$carouselData['carouselVideos'][0]['articleAuthor']">
-										<img src="/static/images/photo.jpg" alt="maxpayne" width="90" height="90" title="$carouselData['carouselVideos'][0]['articleAuthor']">
+										<img src="$carouselData['carouselVideos'][0]['articleAuthorAvatar']" alt="$carouselData['carouselVideos'][0]['articleAuthor']" width="90" height="90" title="$carouselData['carouselVideos'][0]['articleAuthor']">
 									</a>
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-play-3 video colorWhite" title="Video- user created and shared videos"></span>
 								</div>
 							</div>
@@ -212,7 +212,7 @@ $if platformValue == 'all':
 
 	<div id="gloonicleBox" class="carouselContainer">
 				$if len(carouselData['carouselGloonicles']) == 0:
-					<div id='gTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">
+					<div id='gTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">
 						<span class="floatRight colorWhite">
 							<span class="font10"><i class="font13 icon-users"></i>No Comments</span>							
 						</span>	
@@ -222,19 +222,19 @@ $if platformValue == 'all':
 					</div>					
 					<div id="gBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing floatRight">
-								<div class="innerBox carouselInnerRing">									
+								<div class="innerBox unfollowRing  carouselInnerRing">									
 										<img src="$session.baseUrl /assets/images/default/avatar.png" alt="no user" width="90" height="90" title="No User" style="margin-left: -4px;">
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-user gloonicle colorWhite" title="Gloonicle- user video game blogs"></span>
 								</div>
 							</div>							
 								<p class="applyFranklinGothic font23 colorLightGray carouselTitle">No Gloonicle</p>							
 					</div>
 				$else:					
-					<div id='gTopTab' class="carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
+					<div id='gTopTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">	
 						<span class="floatLeft">
 							<span class="marginRight10">
 								<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorWhite'></i></a>
@@ -250,18 +250,18 @@ $if platformValue == 'all':
 					</div>
 					<div id="cGloonicles" class="slider overflowHidden carouselContainer">
 						$for article in carouselData['carouselGloonicles']:
-							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
+							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-useravatar="$article['articleAuthorAvatar']"  data-commentcount="$article['articleCommentCount']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
 					</div>					
 					<div id="gBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginRight floatRight">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<a id='gArticleAuthor' href="/$carouselData['carouselGloonicles'][0]['articleAuthor']">
-										<img src="/static/images/photo.jpg" alt="$carouselData['carouselGloonicles'][0]['articleAuthor']" width="90" height="90" title="$carouselData['carouselGloonicles'][0]['articleAuthor']">
+										<img src="$carouselData['carouselGloonicles'][0]['articleAuthorAvatar']" alt="$carouselData['carouselGloonicles'][0]['articleAuthor']" width="90" height="90" title="$carouselData['carouselGloonicles'][0]['articleAuthor']">
 									</a>
 								</div>
 							</div>
 							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
-								<div class="innerBox carouselInnerRing">
+								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-user gloonicle colorWhite" title="Gloonicle- user video game blogs"></span>
 								</div>
 							</div>
@@ -281,7 +281,7 @@ $if platformValue == 'all':
         <div id="learderboardUserContainer" class="overflowHidden">
                 <div id="number2user" class="floatLeft">
                         <div class="outerBox">
-                                <div class="innerBox">
+                                <div class="innerBox unfollowRing ">
                                         <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="100" height="100" style="margin-left: -4px;">
                                 </div>
                         </div>
@@ -298,7 +298,7 @@ $if platformValue == 'all':
                 </div>
                 <div id="number1user" class="floatLeft marginLeft30">
                         <div class="outerBox">
-                                <div class="innerBox">
+                                <div class="innerBox unfollowRing ">
                                         <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="120" height="120" style="margin-left: -4px;">
                                 </div>
                         </div>
@@ -315,7 +315,7 @@ $if platformValue == 'all':
                 </div>
                 <div id="number3user" class="floatLeft marginLeft20">
                         <div class="outerBox">
-                                <div class="innerBox">
+                                <div class="innerBox unfollowRing ">
                                         <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="80" height="80" style="margin-left: -4px;">
                                 </div>
                         </div>
@@ -378,14 +378,14 @@ $if platformValue == 'all':
 										</div>
 										<div class="postBottom">
 											<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">
-												<div class="innerBox postListInnerRing">
+												<div class="innerBox unfollowRing  postListInnerRing">
 													<a href="/$article['articleAuthor']">
-														<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
+														<img src="$article['articleAuthorAvatar']" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
 													</a>
 												</div>
 											</div>
 											<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-												<div class="innerBox postListInnerRing">
+												<div class="innerBox unfollowRing  postListInnerRing">
 													$if article['articleCategory']=="review":
 														<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
 													$elif article['articleCategory']=="news":
@@ -397,7 +397,7 @@ $if platformValue == 'all':
 												</div>
 											</div>
 											<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-												<p class="applyMontserratBold colorWhite font19 postTitle">$article['articleTitle']</p>
+												<p class="applyMontserratBold colorWhite font19 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 											</a>
 										</div>
 									</div>																
@@ -413,14 +413,14 @@ $if platformValue == 'all':
 										</div>
 										<div class="postBottom">
 											<div class="outerBox floatRight postListOuterBoxRing postListOuterBoxRingMarginRight">
-												<div class="innerBox postListInnerRing">
+												<div class="innerBox unfollowRing  postListInnerRing">
 													<a href="/$article['articleAuthor']">
-														<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
+														<img src="$article['articleAuthorAvatar']" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
 													</a>
 												</div>
 											</div>
 											<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-												<div class="innerBox postListInnerRing">
+												<div class="innerBox unfollowRing  postListInnerRing">
 													$if article['articleCategory']=="review":
 														<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
 													$elif article['articleCategory']=="news":
@@ -432,7 +432,7 @@ $if platformValue == 'all':
 												</div>
 											</div>
 											<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-												<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']</p>
+												<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 											</a>	
 										</div>
 										
@@ -449,14 +449,14 @@ $if platformValue == 'all':
 										</div>
 										<div class="postBottom">
 											<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginRight floatRight">
-												<div class="innerBox postListInnerRing">
+												<div class="innerBox unfollowRing  postListInnerRing">
 													<a href="/$article['articleAuthor']">
-														<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
+														<img src="$article['articleAuthorAvatar']" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
 													</a>
 												</div>
 											</div>
 											<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-												<div class="innerBox postListInnerRing">
+												<div class="innerBox unfollowRing  postListInnerRing">
 													$if article['articleCategory']=="review":
 														<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
 													$elif article['articleCategory']=="news":
@@ -468,7 +468,7 @@ $if platformValue == 'all':
 												</div>
 											</div>
 											<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-												<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']</p>
+												<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 											</a>	
 										</div>
 									</div>																

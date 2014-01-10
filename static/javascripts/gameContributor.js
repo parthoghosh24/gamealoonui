@@ -14,12 +14,15 @@ function gameAutoComplete()
 								 $('#gameBoxShot img').attr('src',ui.item.gameBoxShot);
 								 $('#gameTitle').html(ui.item.gameTitle);
 								 $('#gameGenre').html(ui.item.gameGenre);
-								 $('#gameId').val(ui.item.gameId);
+								 $('#gameId').val(ui.item.gameId);								 
 								 var platformHtml = "";			
+								 var platforms="";
 								 $.each(ui.item.gamePlatforms, function(index, platform) 
 								 {
 								   platformHtml+= '<span class="'+platform.platformShortTitle+' marginLeft5">'+platform.platformTitle+'</span>';
-								 });												 
+								   platforms+=platform.platformShortTitle+" ";
+								 });									
+								  $('#platforms').val(platforms)			 
 								 platformEl=$(platformHtml);
 								 $('#gamePlatforms').html(platformEl);
 								 $('#selectedGame').fadeIn('slow');
@@ -53,8 +56,11 @@ function setGameInfo()
 	var gameBoxshotSrc= $('#gameBoxShot img').attr('src');
 	parent.$('#gameSelector img').attr('id',gameId);
 	parent.$('#gameSelector img').attr('src',gameBoxshotSrc);
+	parent.$('#selectedGamePlatform').attr('class','all');
+	parent.$('#selectedGamePlatform').text('Select Platform');
 	parent.$('#playedOn').attr("href","javascript:;");
-	parent.$('#playedOn').attr("title","Select a platform on which you have played this game");
+	parent.$('#playedOn').attr("title","Select a platform on which you have played this game");	
+	parent.$('#gamePlatforms').val($('#platforms').val());
 }
 
 $(function(){

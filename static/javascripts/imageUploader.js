@@ -10,8 +10,7 @@ function showImage()
 				reader.onload= function(event) {
 	    			var img = event.target.result;
 	    			$('img#preview').show();    			
-	    			$('img#preview').attr('src', img);
-	    			$('img#preview').attr('width', "640");
+	    			$('img#preview').attr('src', img);	    			
 	    			$('img#preview').attr('height', "400");
 				};		
 				reader.readAsDataURL(file);
@@ -45,7 +44,8 @@ $(function(){
 			if(replaceImage == 0) //request came from featured Image
 			{
 				parent.$('.coverSection').css('background-image','url('+targetSrc+')');
-				parent.$('.coverSection').attr('id',targetId);						
+				parent.$('.coverSection').attr('id',targetId);			
+				parent.hasBeenEdited=true;			
 			}
 			else if(replaceImage == 1) //request came from editor
 			{
@@ -114,7 +114,7 @@ $(function(){
 				if(images.length>0)
 				{
 					$.each(images, function(index,image) {
-					  var imageHtml = "<img id='"+image.mediaId+"' src='"+image.mediaUrl+"' height='180' class='fade browserImage marginLeft25 marginTop10 blackBoxShadow cursorPointer'/>";
+					  var imageHtml = "<img id='"+image.mediaId+"' src='"+image.mediaUrl+"' width='240' height='180' class='fade browserImage marginLeft25 marginTop10 blackBoxShadow cursorPointer'/>";
 					  var imageEl=$(imageHtml);
 					  imageEl.hide();
 					   $('#imageBrowser').prepend(imageEl);

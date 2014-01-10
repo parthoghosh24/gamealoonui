@@ -9,6 +9,12 @@ $def with (page)
 	Remove this if you use the .htaccess -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="description" content="$:page.description"/>
+	<!--<meta property="og:title" content="title" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="image" />
+	<meta property="og:url" content="url" />
+	<meta property="og:description" content="Gamealoon is world's first totally video gamer centric video game entertainment, media and social network website. Gamealoon is a platform which lets video gamers from all around the world come, make a network, collaborate and create and share reviews, videos, news and gloonicles for their favorite video games and platforms such as PS3, PS4, Vita, Xbox 360, Xbox one ,Wii u, 3ds, Android, PC and iOS or video games in general." />
+	<meta property="og:site_name" content="Gamealoon" />-->
 	<meta name="author" content="Partho" />
 	<meta name="robots" content="noodp, noydir" />
 	<head>
@@ -38,9 +44,44 @@ $def with (page)
 				<div id='headerBox'>				
 				<div id='box'>
 					$if session.loggedIn:
-						<a id="logout" href="javascript:;" class="colorWhite marginTop30 textShadowWhite font12" style=" position: absolute;"><i class="icon-off font20"></i></a><a id="user" href="/$session.username" rel="nofollow" class="textShadowBlack colorWhite marginTop30 font12 marginLeft30" >$session.username<img class="marginTop30 marginLeft5 textShadowBlack" src="$session.userAvatar" alt="$session.username" title="$session.username" height="20"/></a><a id="userSettings" href="/profile/$session.userId" class="colorWhite marginLeft10" title="User Settings"><i class="icon-cog-2"></i></a>																					
+							<ul class="marginTop30">
+								<li class="floatLeft">
+									<a id="logout" href="javascript:;" class="colorWhite textShadowWhite font12">
+										<i class="icon-off font20"></i>
+									</a>
+								</li>
+								<li class="floatLeft">
+									<a id="user" href="/$session.username" rel="nofollow" class="textShadowBlack colorWhite font12" >
+										$session.username
+										<img class="textShadowBlack" src="$session.userAvatar" alt="$session.username" title="$session.username" height="20"/>
+									</a>
+								</li>
+								<li class="floatLeft marginTopMinus5">
+									<a id="userSettings" href="/profile/$session.userId" class="colorWhite marginLeft10" title="User Settings">
+										<i class="icon-cog-2"></i>
+									</a>
+								</li>
+								<li class="floatLeft marginTopMinus5">
+									<a id="createPostButton" href="/post/$session.userId/create" class="colorWhite font12 fontWeightBold" title="Create Post">
+										<i class="icon-doc"></i>Create
+									</a>
+								</li>
+							</ul>
+						
+						
+						
+																											
 					$else:
-						<a id="login" href="javascript:;" class="colorWhite marginTop30 textShadowBlack font12" style=" position: absolute;"><i class="icon-off font20"></i>Signin</a><img class="marginTop30 marginLeft70 textShadowBlack" src="$session.userAvatar" alt="Signin" title="Not Logged in" height="20"/>												
+						<ul class="marginTop30">
+							<li class="floatLeft">
+								<a id="login" href="javascript:;" class="colorWhite textShadowBlack font12" >
+									<i class="icon-off font20"></i>Sign-In
+								</a>
+								<img class="textShadowBlack" src="$session.userAvatar" alt="Signin" title="Not Logged in" height="20"/>
+								
+							</li>							
+						</ul>
+																		
 						
 					<div class='signupOrLogin textureBg'>
 						<div id='signInBox'>

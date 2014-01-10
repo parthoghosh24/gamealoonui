@@ -1,79 +1,133 @@
 $def with (user)
-$ categoryIconMap={"review":"icon-thumbs-up-1", "news":"icon-signal-2", "gloonicle":"icon-user", "feature":"icon-star ", "video":"icon-play-3"}
-$var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName'] @ Gamealoon - Find all $user['userUserName']'s reviews, gloonicles, news, features and videos on Gamealoon!
+$ categoryIconMap={"review":"icon-thumbs-up-1", "news":"icon-signal-2", "gloonicle":"icon-user", "video":"icon-play-3"}
+$var title: $user['userFirstName'] $user['userLastName'] aka $user['userUserName'] @ Gamealoon - Find all $user['userUserName']'s reviews, gloonicles, news and videos on Gamealoon!
 $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUserName'] @ Gamealoon - Find all $user['userUserName']'s reviews, gloonicles, news and videos on Gamealoon! 
 
 <div class="mainContainer">
 	<div id="container_layout">
 		<div class="divider"> </div>
-<div class="coverSection" style="padding-top: 200px;background-image: url('/static/images/uc3_2.jpg');background-size: 960px 720px; margin-bottom: 10px;">		
-			
-  <div style="position: absolute;width: 950px;margin-top: -200px;height: 200px;padding: 5px;border-bottom-style: dashed;border-bottom-width: 2px;border-bottom-color: #f0f0f0;z-index: 1;">
-  	<div id="user" style="margin-top: 115px;margin-left: 390px;">
-  		<div id="userPostAndCreatorOuterCircle" class="outerBox">
-  			<div id="userPostAndCreatorInnerCircle" class="innerBox">
-  				<img id="$user['userAvatarId']" src="$user['userAvatarUrl']" alt="$user['userUserName']" title="$user['userUserName']" width="150" height="150" style="margin-left: -4px;">
-  			</div>
-  		</div>
-  	</div>
-  	
-  	<div style="height: 100px;text-align: center;margin-top: 10px;">
-  		<p style="font-size: 30px;color: #fff;font-weight: bold;text-shadow: 0px 2px 3px #000;">
-  			$user['userFirstName'] $user['userLastName'] <span style="font-size: 14px;" class="colorGray">aka</span> 
-  			<span style="font-size: 18px;color: #FF5555;">$user['userUserName']</span>
-  		</p>
-  		
-  		<p>
-  			<span class="colorGray icon-location" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				<span style="color: #76A7F5;">$user['userCountry']</span>,</span>  
-  				<span class="colorGray icon-gift" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  					<span style="color: #76A7F5;">$user['userMonth']/$user['userDay']/$user['userYear']</span>,</span>
-  					<span class="colorGray icon-trophy" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  						<span style="color: #76A7F5;">New Gloonie</span>
-  					</span>
-  		</p>
-  		
-  		<p style="font-size: 13px;color: #fff;font-weight: bold;font-style: italic;text-shadow: 0px 2px 3px #000;">
-  			<span>"</span>
-  			<span id="userGameBio">$user['userGameBio']</span>
-  			<span>"</span>
-		</p>
-		
-		<div style="width: 100%; text-align: center;">
-			 <ul style="color: #fff;width: 57%;margin:25px auto;font-weight: bold;">
-			        <li style="float: left;padding: 3px;"><span class="font40">33.3%</span><br>
-			        	<i class="icon-doc-text-inv"></i> Published
-			        </li>
-			        
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">64.2%</span><br>
-			        	<i class="icon-users-1"></i>Following
-			        </li>
-			        
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">35.8%</span><br>
-			        	<i class="icon-users-1"></i>Followed
-			        </li>
-			        
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">75%</span><br>
-			        	<i class="icon-award-1"></i>Won
-			        </li>
-			  </ul>
-			
-		</div>
+<div id="carousel" class="blackBoxShadow">	
+	<div id="carouselContent">
+		<div id='userCarouselBox' class="carouselContainer">
+			<div style="position: absolute;width: 950px;margin-top: 110px;height: 200px;padding: 5px;border-bottom-style: dashed;border-bottom-width: 2px;border-bottom-color: #f0f0f0;z-index: 10;">
+				<div id="userRing" style="margin-top: 115px;margin-left: 390px;">
+					<div id="userPostAndCreatorOuterCircle" class="outerBox">
+						$if user['isFollowing'] == 1:
+							<div id="userPostAndCreatorInnerCircle" class="innerBox followRing">
+						$else:
+							<div id="userPostAndCreatorInnerCircle" class="innerBox unfollowRing">		
+                                
+                        <a href="javascript:;" data-loggedin="$session.loggedIn"><img id="$user['userAvatarId']" src="$user['userAvatarUrl']" alt="$user['userUserName']" title="$user['userUserName']" width="150" height="150"></a>
+                        </div>
+                	</div>
+        		</div>
+        		
+        		<div style="height: 100px;text-align: center;margin-top: 10px;">
+                	<p style="font-size: 30px;color: #fff;font-weight: bold;text-shadow: 0px 2px 3px #000;">
+                    	    $user['userFirstName'] $user['userLastName'] <span style="font-size: 14px;" class="colorGray">aka</span> 
+                        	<span id="gamerName" style="font-size: 18px;color: #FF5555;">$user['userUserName']</span>
+                	</p>
+                
+                	<p>
+                        <span class="colorGray icon-location" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
+                                <span style="color: #76A7F5;">$user['userCountry']</span>,</span>  
+                                <span class="colorGray icon-gift" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
+                                        <span style="color: #76A7F5;">$user['userMonth']/$user['userDay']/$user['userYear']</span>,</span>
+                                        <span class="colorGray icon-trophy" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
+                                                <span style="color: #76A7F5;">New Gloonie</span>
+                                        </span>
+                	</p>
+                
+                	<p style="font-size: 13px;color: #fff;font-weight: bold;font-style: italic;text-shadow: 0px 2px 3px #000;">
+                        	<span>"</span>
+                        	<span id="userGameBio">$user['userGameBio']</span>
+                        	<span>"</span>
+                	</p>
+                
+                	<div style="width: 100%; text-align: center;">
+                         <ul style="color: #fff;width: 60%;margin:25px auto;font-weight: bold;">
+                                <li style="float: left;padding: 3px;"><span class="font40">$user['userPublishedRatio']%</span><br>
+                                        <i class="icon-doc-text-inv"></i> Published
+                                </li>
+                                
+                                <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">$user['userFollowingRatio']%</span><br>
+                                        <i class="icon-users-1"></i>Following
+                                </li>
+                                
+                                <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">$user['userFollowersRatio']%</span><br>
+                                        <i class="icon-users-1"></i>Followed
+                                </li>
+                                
+                                <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">$user['userCoolScoreRatio']%</span><br>
+                                        <i class="icon-smile"></i>Yeahs
+                                </li>
+                          </ul>
+                        
+               	 	</div>
    
    
   
  
-		</div>  
+                </div>  
+        </div>
+        <div style="position: absolute;width: 950px;height: 300px;background-color: #11151d; opacity: 0.8;z-index: 8;margin-top: 309px;"> </div>
+        
+				$if len(user['userCarouselArticles']) == 0:
+					<div id='topTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">						
+						<p class="applyFranklinGothic font25 colorLightGray ">No Post Published</p>	
+					</div>
+					<div class="overflowHidden carouselContainer">
+						<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="960" height="720" />	
+					</div>
+				$else:
+					<div id='topTab' class="hiddenDiv carouselTopTabDim z500 positionAbsolute carouselHeader carouselHeaderPadding">							
+						<span class="floatLeft">
+							<ul>
+								<li class="floatLeft">
+									<span class="marginRight10">
+										<a class='playPause' href='javascript:;'><i class='icon-pause-3 colorWhite'></i></a>
+									</span>
+								</li>
+								<li class="floatLeft">
+									<span id='carouselNav'>
+									$for article in user['userCarouselArticles']:						       							
+										<span><a href='javascript:;'><i class="icon-circle font7 colorWhite"></i></a></span>								
+									</span>
+								</li>
+								<li class="floatLeft marginLeft40">
+									<a id='articleTitle' href="/article/$user['userCarouselArticles'][0]['articleAuthor']/$user['userCarouselArticles'][0]['articleEncodedUrlTitle']">
+										<p class="applyFranklinGothic font25 colorLightGray">$user['userCarouselArticles'][0]['articleTitle']</p>
+									</a>	
+								</li>
+							</ul>
+							
+							
+						</span>			
+						<div class="userCarouselOuterBoxRing postListOuterBoxRingMarginRight floatRight marginTop30">
+							<div class="innerBox unfollowRing postListInnerRing">
+								<span class="postCategory postListCategoryDim $user['userCarouselArticles'][0]['articleCategory'] colorWhite"></span>
+							</div>
+						</div>																													
+					</div>
+					<div id="cPosts" class="slider overflowHidden carouselContainer">
+						$for article in user['userCarouselArticles']:
+							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']" data-encodedtitle="$article['articleEncodedUrlTitle']" data-title="$article['articleTitle']" data-username="$article['articleAuthor']" data-category="$article['articleCategory']"><img src="$article['articleFeaturedImage']" width="960" height="720"/></a>				
+			
+					</div>									
+		</div>		
+		
 	</div>
-	<div style="height: 300px;background-color: #11151d; opacity: 0.8;"> </div>					
-					       			
+	
+
 </div>
+
+
 <div class="blackBoxShadow leaderBoardToppers">
 	<a href="/users">
         <div id="learderboardUserContainer" class="overflowHidden">
                 <div id="number2user" class="floatLeft">
                         <div class="outerBox">
-                                <div class="innerBox">
+                                <div class="innerBox unfollowRing">
                                         <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="100" height="100" style="margin-left: -4px;">
                                 </div>
                         </div>
@@ -90,7 +144,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
                 </div>
                 <div id="number1user" class="floatLeft marginLeft30">
                         <div class="outerBox">
-                                <div class="innerBox">
+                                <div class="innerBox unfollowRing">
                                         <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="120" height="120" style="margin-left: -4px;">
                                 </div>
                         </div>
@@ -107,7 +161,7 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
                 </div>
                 <div id="number3user" class="floatLeft marginLeft20">
                         <div class="outerBox">
-                                <div class="innerBox">
+                                <div class="innerBox unfollowRing">
                                         <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="80" height="80" style="margin-left: -4px;">
                                 </div>
                         </div>
@@ -136,9 +190,14 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 				<li>
 					<a href="#userPosts">Posts</a>
 				</li>
-				<li>
-					<a href="#drafts">Drafts</a>
-				</li>				
+					$if session.loggedIn and session.username == user['userUserName']:
+						<li>
+							<a href="#drafts">Drafts</a>
+						</li>
+					$else:
+						<li class="hiddenDiv">
+							<a href="#drafts">Drafts</a>
+						</li>					
 				<li>
 					<a href="#social">Social</a>
 				</li>				
@@ -151,47 +210,294 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 					$if len(user['userPublicActivities']) == 0:
 						<div class="noData applyBevan">No Data</div>
 					$else:
-						<div class="overflowHidden activityList">
-							<table width="100%">
-								<tbody>
-									<tr>
-										<td width="50%" style="vertical-align: top;">
-											$for activity in user['userPublicActivities']:
-												$if loop.index%2 != 0:
-													<div class="activityRow marginTop10">
-														$if activity['activityType'] == 1:								
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-														$if activity['activityType'] == 2:							
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/$activity['followingUserName']" target="_blank"><strong>$activity['followingUserName']</strong></a>
-														$if activity['activityType'] == 3:								
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-														$if activity['activityType'] == 4:								
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank"><strong>$activity['articleTitle']</strong>, &nbsp;&nbsp;<strong><i class="colorGray">"$activity['activityComment']..."</i></strong></a>	
-														$if activity['activityType'] == 11:
-															<a href="/$activity['activityUserName']">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>																									
-													</div>
-										</td>
-										<td width="50%" style="vertical-align: top;">
-											$for activity in user['userPublicActivities']:
-											$if loop.index%2 == 0:
-													<div class="activityRow marginLeft10 marginTop10">
-														$if activity['activityType'] == 1:								
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-														$if activity['activityType'] == 2:							
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/$activity['followingUserName']" target="_blank"><strong>$activity['followingUserName']</strong></a>
-														$if activity['activityType'] == 3:								
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-														$if activity['activityType'] == 4:								
-																<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank"><strong>$activity['articleTitle']</strong>, &nbsp;&nbsp;<strong><i class="colorGray">"$activity['activityComment']..."</i></strong></a>	
-														$if activity['activityType'] == 11:
-															<a href="/$activity['activityUserName']">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>																									
-													</div>
-											
-										</td>
-									</tr>
-								</tbody>
-							</table>							
-						</div>													
+					<div class="overflowHidden activityList">
+						<table width="100%">
+							<tbody>
+								<tr>
+									<td width="50%" style="vertical-align: top;">
+									$for activity in user['userPublicActivities']:
+										$if loop.index%2 != 0:
+											<div class="activityRow marginTop10 font13 blackBoxShadow">
+												
+												$if activity['activityType'] == 1:							
+															<div style="height:353px; background-image: url($activity['articleFeaturedImage']); background-size:470px 353px;">
+																<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																	<div class="floatLeft">
+																		<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																			<a href="/$activity['activityUserName']">
+																				<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																			</a>
+																		</div>																		
+																	</div>
+																	<div class="floatLeft marginLeft10">
+																		<span class="colorGray">published a new </span>																			
+																		<span class="colorWhite $activity['articleCategory']"></span>
+																		<span><a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" class="colorOrange" target="_blank"><strong>$activity['articleTitle']</strong></a></span>																		
+																	</div>
+																</div>
+																<div class="activityVeil" style="height: 303px;">
+																	<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank" style="height: 100%; display: block;">
+																		<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="$categoryIconMap[activity['articleCategory']]"></i></p>
+																	</a>
+																</div>
+															</div>
+																					
+												$if activity['activityType'] == 2:	
+														<div style="height:300px; background-image: url(/static/images/diagmonds.png);">
+															<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="colorGray">now <span class="icon-plus-circled colorWhite interested" title="follows"></span></span>																			
+																	<span><a href="/$activity['followingUserName']" target="_blank" class="colorOrange"><strong>$activity['followingUserName']</strong></a></span>																	
+																</div>
+															</div>
+															<div style="height: 250px;">
+																	<div style="width:100%;">
+																		<div class="outerBox" style="width: 180px;height: 180px;margin: 10px auto;">
+																			<div class="innerBox unfollowRing" style="width: 170px;height: 170px;">
+																				<img src="$activity['followingUserAvatar']" alt="$activity['followingUserName']" title="$activity['followingUserName']" height="170" style="margin-left: -4px;">
+																			</div>
+																		</div>
+																	</div>
+																	<p class="textCenter colorWhite marginTop20 font20 fontWeightBold">$activity['followingUserName']</p>
+															</div>	
+															<div class="activityVeil" style="position:absolute;width:469px;height: 250px;margin-top: -250px;">
+																	<a href="/$activity['followingUserName']" target="_blank" style="height: 100%; display: block;">
+																		<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-plus-circled"></i></p>
+																	</a>
+															</div>																	
+														</div>																																				
+												$if activity['activityType'] == 3:	
+														<div style="height:353px; background-image: url($activity['articleFeaturedImage']); background-size:470px 353px;">
+															<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="colorGray">found </span>																			
+																	<span><a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" class="colorOrange" target="_blank"><strong>$activity['articleTitle']</strong></a></span>
+																	<span class="icon-smile colorWhite interested" title="Yeah"></span>	
+																</div>
+															</div>
+															<div class="activityVeil" style="height: 303px;">
+																<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank" style="height: 100%; display: block;">
+																	<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-smile"></i></p>
+																</a>
+															</div>			
+														</div>							
+																		
+												$if activity['activityType'] == 4:								
+														<div style="height:353px; background-image: url($activity['articleFeaturedImage']); background-size:470px 353px;">
+															<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="icon-comment-1 colorWhite interested" title="comments"></span>
+																	<span class="colorGray">on </span>																			
+																	<span><a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" class="colorOrange" target="_blank"><strong>$activity['articleTitle']</strong></a></span>
+																	<span class="colorWhite">,<strong><i class="colorLightGray">"$activity['activityComment']..."</i></strong></span>																		
+																</div>
+															</div>
+															<div class="activityVeil" style="height: 303px;">
+																<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank" style="height: 100%; display: block;">
+																	<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-comment-1"></i></p>
+																</a>
+															</div>
+														</div>	
+												$if activity['activityType'] == 11:
+													<div style="height:300px; background-image: url(/static/images/diagmonds.png);">
+														<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="colorGray"><span class="icon-plus-circled colorWhite interested" title="interested"></span> in</span>																			
+																	<span><a href="/game/$activity['gameEncodedUrl']" target="_blank" class="colorOrange"><strong>$activity['followingGame']</strong></a></span>																	
+																</div>
+														</div>
+														<div style="height: 250px;">
+																	<div style="width:100%;">
+																		<div class="outerBox" style="width: 180px;height: 180px;margin: 10px auto;">
+																			<div class="innerBox unfollowRing" style="width: 170px;height: 170px;">
+																				<img src="$activity['gameBoxShot']" alt="$activity['followingGame']" title="$activity['followingGame']" height="250" style="margin-left: -4px;">
+																			</div>
+																		</div>
+																	</div>
+																	<p class="textCenter colorWhite marginTop20 font20 fontWeightBold">$activity['followingGame']</p>
+														</div>	
+														<div class="activityVeil" style="position:absolute;width:469px;height: 250px;margin-top: -250px;">
+															<a href="/game/$activity['gameEncodedUrl']" target="_blank" style="height: 100%; display: block;">
+																<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-plus-circled"></i></p>
+															</a>
+														</div>	
+													</div>	
+																																							
+											</div>
+									</td>
+									<td width="50%" style="vertical-align: top;">
+									$for activity in user['userPublicActivities']:
+										$if loop.index%2 == 0:
+												<div class="activityRow marginLeft10 marginTop10 font13 blackBoxShadow">
+												
+												
+												$if activity['activityType'] == 1:							
+															<div style="height:353px; background-image: url($activity['articleFeaturedImage']); background-size:470px 353px;">
+																<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																	<div class="floatLeft">
+																		<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																			<a href="/$activity['activityUserName']">
+																				<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																			</a>
+																		</div>																		
+																	</div>
+																	<div class="floatLeft marginLeft10">
+																		<span class="colorGray">published a new </span>																			
+																		<span class="colorWhite $activity['articleCategory']"></span>
+																		<span><a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" class="colorOrange" target="_blank"><strong>$activity['articleTitle']</strong></a></span>																		
+																	</div>
+																</div>
+																<div class="activityVeil" style="height: 303px;">
+																	<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank" style="height: 100%; display: block;">
+																		<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="$categoryIconMap[activity['articleCategory']]"></i></p>
+																	</a>
+																</div>
+															</div>
+																					
+												$if activity['activityType'] == 2:							
+															<div style="height:300px; background-image: url(/static/images/diagmonds.png);">
+																<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																	<div class="floatLeft">
+																		<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																			<a href="/$activity['activityUserName']">
+																				<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																			</a>
+																		</div>																		
+																	</div>
+																	<div class="floatLeft marginLeft10">
+																		<span class="colorGray">now <span class="icon-plus-circled colorWhite interested" title="follows"></span></span>																			
+																		<span><a href="/$activity['followingUserName']" target="_blank" class="colorOrange"><strong>$activity['followingUserName']</strong></a></span>																	
+																	</div>
+																</div>	
+																<div style="height: 250px;">
+																	<div style="width:100%;">
+																		<div class="outerBox" style="width: 180px;height: 180px;margin: 10px auto;">
+																			<div class="innerBox unfollowRing" style="width: 170px;height: 170px;">
+																				<img src="$activity['followingUserAvatar']" alt="$activity['followingUserName']" title="$activity['followingUserName']" height="170" style="margin-left: -4px;">
+																			</div>
+																		</div>
+																	</div>
+																	<p class="textCenter colorWhite marginTop20 font20 fontWeightBold">$activity['followingUserName']</p>																	
+																</div>	
+																<div class="activityVeil" style="position:absolute;width:458px;height: 250px;margin-top: -250px;">
+																	<a href="/$activity['followingUserName']" target="_blank" style="height: 100%; display: block;">
+																		<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-plus-circled"></i></p>
+																	</a>
+																</div>																
+														</div>
+															
+												$if activity['activityType'] == 3:	
+														<div style="height:353px; background-image: url($activity['articleFeaturedImage']); background-size:470px 353px;">
+															<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="colorGray">found </span>																			
+																	<span><a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" class="colorOrange" target="_blank"><strong>$activity['articleTitle']</strong></a></span>
+																	<span class="icon-smile colorWhite interested" title="Yeah"></span>	
+																</div>
+															</div>
+															<div class="activityVeil" style="height: 303px;">
+																<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank" style="height: 100%; display: block;">
+																	<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-smile"></i></p>
+																</a>
+															</div>
+																		
+														</div>							
+																		
+												$if activity['activityType'] == 4:		
+														<div style="height:353px; background-image: url($activity['articleFeaturedImage']); background-size:470px 353px;">
+															<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="icon-comment-1 colorWhite interested" title="comments"></span>
+																	<span class="colorGray">on </span>																			
+																	<span><a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" class="colorOrange" target="_blank"><strong>$activity['articleTitle']</strong></a></span>
+																	<span class="colorWhite">,<strong><i class="colorLightGray">"$activity['activityComment']..."</i></strong></span>																		
+																</div>
+															</div>
+															<div class="activityVeil" style="height: 303px;">
+																<a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']#commentList" target="_blank" style="height: 100%; display: block;">
+																	<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-comment-1"></i></p>
+																</a>
+															</div>
+														</div>																					
+												$if activity['activityType'] == 11:
+													<div style="height:300px; background-image: url(/static/images/diagmonds.png);">
+														<div style="height: 50px; background-color: #222;" class="overflowHidden">
+																<div class="floatLeft">
+																	<div class="innerBox unfollowRing postListInnerRing" style="width: 30px;height: 30px;" title="$activity['activityUserName']">
+																		<a href="/$activity['activityUserName']">
+																			<img src="/static/images/photo.jpg" alt="$activity['activityUserName']" title="$activity['activityUserName']" width="30" height="30">
+																		</a>
+																	</div>																		
+																</div>
+																<div class="floatLeft marginLeft10">
+																	<span class="colorGray"><span class="icon-plus-circled colorWhite interested" title="interested"></span> in </span>																			
+																	<span><a href="/game/$activity['gameEncodedUrl']" target="_blank" class="colorOrange"><strong>$activity['followingGame']</strong></a></span>																	
+																</div>
+														</div>
+														<div style="height: 250px;">
+															<div style="width:100%;">
+																<div class="outerBox" style="width: 180px;height: 180px;margin: 10px auto;">
+																	<div class="innerBox unfollowRing" style="width: 170px;height: 170px;">
+																		<img src="$activity['gameBoxShot']" alt="$activity['followingGame']" title="$activity['followingGame']" height="250" style="margin-left: -4px;">
+																	</div>
+																</div>
+															</div>
+															<p class="textCenter colorWhite marginTop20 font20 fontWeightBold">$activity['followingGame']</p>
+														</div>	
+														<div class="activityVeil" style="position:absolute;width:458px;height: 250px;margin-top: -250px;">
+															<a href="/game/$activity['gameEncodedUrl']" target="_blank" style="height: 100%; display: block;">
+																<p class="textCenter colorWhite textShadowWhite" style="font-size: 150px; opacity: 0.4;"><i class="icon-plus-circled"></i></p>
+															</a>
+														</div>													
+													</div>																										
+												</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>							
+					</div>													
 				</div>			
 			</div>
 			
@@ -205,130 +511,8 @@ $var description: $user['userFirstName'] $user['userLastName'] aka $user['userUs
 	</div>
 	
 <div id='all'>
-$if len(user['userRecentArticles'])==0:
 	<div class="noData applyBevan">No Data</div>
-$else:	
-	<div class="noData applyBevan hiddenDiv">No Data</div>
-	<div class="allList overflowHidden">					
-	$for article in user['userRecentArticles']:
-			$if loop.index == 2 or loop.index == 7: 							
-				<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="$article['articleTimestamp']">								
-					<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 620px;">
-						<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 620px;">
-							<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
-							<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
-							<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-							<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
-						</div>
-					
-						<div class="postBottom">
-							<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">
-								<div class="innerBox postListInnerRing">
-									<a href="/$article['articleAuthor']">
-										<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
-									</a>
-								</div>
-							</div>
-							
-							<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-								<div class="innerBox postListInnerRing">
-										$if article['articleCategory']=="review":
-											<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
-										$elif article['articleCategory']=="news":
-											<span class="postListCategoryDim icon-signal-2 $article['articleCategory'] colorWhite" title="News- user shared news"></span>
-										$elif article['articleCategory']=="video":
-											<span class="postListCategoryDim icon-play-3 $article['articleCategory'] colorWhite" title="Video- user created and shared videos"></span>
-										$else:
-											<span class="postListCategoryDim icon-user $article['articleCategory'] colorWhite" title="Gloonicle- user video game blogs"></span>
-								</div>
-							</div>
-							
-							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-								<p class="applyMontserratBold colorWhite font19 postTitle">$article['articleTitle']</p>
-							</a>
-						</div>
-					</div>																
-				</div>
-
-			$elif loop.index == 4 or loop.index == 5 or loop.index == 9 or loop.index == 10:	
-				<div class="recentArticleDiv smallPostDiv floatLeft marginLeft20" id="$article['articleTimestamp']">								
-					<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 300px 240px;">
-						<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">
-							<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
-							<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
-							<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-							<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
-						</div>
-						
-							<div class="postBottom">
-								<div class="outerBox floatRight postListOuterBoxRing postListOuterBoxRingMarginRight">
-									<div class="innerBox postListInnerRing">
-										<a href="/$article['articleAuthor']">
-											<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
-										</a>
-									</div>
-								</div>
-								
-								<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-									<div class="innerBox postListInnerRing">
-										$if article['articleCategory']=="review":
-											<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
-										$elif article['articleCategory']=="news":
-											<span class="postListCategoryDim icon-signal-2 $article['articleCategory'] colorWhite" title="News- user shared news"></span>
-										$elif article['articleCategory']=="video":
-											<span class="postListCategoryDim icon-play-3 $article['articleCategory'] colorWhite" title="Video- user created and shared videos"></span>
-										$else:
-											<span class="postListCategoryDim icon-user $article['articleCategory'] colorWhite" title="Gloonicle- user video game blogs"></span>
-									</div>
-								</div>
-							
-									<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-										<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']</p>
-									</a>	
-							</div>
-												
-						</div>																
-				</div>
-			$else:
-				<div class="recentArticleDiv smallPostDiv floatLeft" id="$article['articleTimestamp']">								
-					<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 300px 240px;">
-						<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;" >
-							<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
-							<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
-							<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-							<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
-						</div>
-						<div class="postBottom">
-							<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginRight floatRight">
-									<div class="innerBox postListInnerRing">
-											<a href="/$article['articleAuthor']">
-												<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
-											</a>
-									</div>
-							</div>
-							<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-								<div class="innerBox postListInnerRing">
-									$if article['articleCategory']=="review":
-										<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
-									$elif article['articleCategory']=="news":
-										<span class="postListCategoryDim icon-signal-2 $article['articleCategory'] colorWhite" title="News- user shared news"></span>
-									$elif article['articleCategory']=="video":
-										<span class="postListCategoryDim icon-play-3 $article['articleCategory'] colorWhite" title="Video- user created and shared videos"></span>
-									$else:
-										<span class="postListCategoryDim icon-user $article['articleCategory'] colorWhite" title="Gloonicle- user video game blogs"></span>
-								</div>
-							</div>
-							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-								<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']</p>
-							</a>	
-						</div>
-					</div>																
-				</div>
-										
-	</div>
-$if len(user['userRecentArticles'])>0:
-	<p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>
-$else:
+	<div class="allList overflowHidden"></div>					
 	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>					
 </div>
 
@@ -363,59 +547,36 @@ $else:
 </div>			
 <div id="social">
 	<div id='followers' class="overflowHidden padding5 marginTop30">
-		<span class="icon-users-1 applyBevan" style="display: block;width: 300px; font-size:20px; margin-bottom: 30px;background-color: #3B6EAF;color: #fff;padding: 5px;">Followers</span>
-		$if len(user['userFollowedBy']) == 0:
-			<div class="noData applyBevan">No Followers</div>
-		$else:
-			<div style="height: 240px;overflow-y: scroll;">
-			$for follower in user['userFollowedBy']:
-				<div id="$follower['buddyUsername']" class="floatLeft overflowHidden innerBox otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">		    			 	    
-					<a href ="/$follower['buddyUsername']"><img src="$follower['buddyUserAvatar']" alt="$follower['buddyUsername']" title="$follower['buddyUsername']"width="100" height="100"/></a>
-				</div>
-			</div>
-			<p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>
+		<span class="icon-users-1 applyBevan socialHeaders">Followers</span>
+		
+			<div class="noData applyBevan">No Followers</div>		
+			<div id="followersList" class="socialList"></div>
+			
 				  
 	</div>
 
 	<div id='following' class="overflowHidden padding5">
-		<span class="icon-users-1 applyBevan" style="display: block;width: 300px; font-size:20px; margin-bottom: 30px;background-color: #3B6EAF;color: #fff;padding: 5px;">Following</span>
-		$if len(user['userFollowingOthers']) == 0:
-			<div class="noData applyBevan">No Followings</div>
-		$else:
-			<div style="height: 240px;overflow-y: scroll;">
-			$for following in user['userFollowingOthers']:
-				<div id="$following['buddyUsername']" class="floatLeft overflowHidden innerBox otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">		    			 		
-					<a href ="/$following['buddyUsername']"><img src="$following['buddyUserAvatar']" alt="$following['buddyUsername']" title="$following['buddyUsername']" width="100" height="100"/></a>
-				</div>
-			</div>	   
-			<p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>
+		<span class="icon-users-1 applyBevan socialHeaders">Following</span>		
+			<div class="noData applyBevan">No Followings</div>		
+			<div id="followingList"  class="socialList"></div>	   
+			
 	</div>
 	
 	<div id='games' class="overflowHidden padding5">
-		<span class="icon-joystick applyBevan" style="display: block;width: 300px; font-size:20px; margin-bottom: 30px;background-color: #3B6EAF;color: #fff;padding: 5px;">Games Interested in</span>
-		$if len(user['userInterestedGames']) == 0:
-			<div class="noData applyBevan">No Games</div>
-		$else:
-			<div style="height: 240px; overflow-y: scroll;">
-			$for game in user['userInterestedGames']:
-				<div id="$game['interestedGameId']" class="floatLeft overflowHidden innerBox otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">		    			 		
-					<a href ="/game/$game['interestedGameURL']"><img src="$game['interestedGameBoxShot']" alt="$game['interestedGameTitle']" title="$game['interestedGameTitle']" height="140"/></a>
-				</div>  
-			</div>	 
-			<p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>
+		<span class="icon-joystick applyBevan socialHeaders">Games Interested in</span>		
+			<div class="noData applyBevan">No Games</div>		
+			<div id="interestedGamesList"  class="socialList"></div>	 
+			
 	</div>
 </div>			
 						
 <div id='stats'>
-	$if len(user['userAchievements']) == 0:
-		<span id="noAwards" class="noData applyBevan">No Awards</span>
-	$else:
-		<div class="overflowHidden">
-		$for award in user['userAchievements']:    				
-			<div id="$award['achievementImage']"  class="floatLeft overflowHidden tabGrid otherGridDim">
-				<img src="$session.baseUrl/assets/images/default/boxShot.png" title="$award['title']-$award['description']" alt="$award['title']" height="125"/>
-			</div>
-		</div>	 	
+		<div id="awards"  class="overflowHidden padding5 marginTop30">
+			<span class="icon-trophy applyBevan socialHeaders">Awards</span>
+			<div class="noData applyBevan">No Awards</div>	
+			<div id="userAwards" class="overflowHidden"></div>
+		</div>	
+			 	
 </div>
 
 		</div>

@@ -117,7 +117,9 @@ function videoSelected()
 	{
 		$('#snippetText i#snippetTextTitle').removeClass('icon-user');
 	}
-	
+	$('#postSnippet').css('width','560px');
+	$('#postData').width(560);
+	$('#postSnippet a.doneEditiingButton').addClass('marginRight61');
 	$('#reviewGamePlayedOn').hide();
 	$('#snippetText i#snippetTextTitle').addClass('icon-play-3');
 	$('#snippetText i#snippetTextTitle').text('Caption');
@@ -143,6 +145,9 @@ function reviewSelected()
 	{
 		$('#snippetText i#snippetTextTitle').removeClass('icon-user');
 	}
+	$('#postSnippet').css('width','560px');
+	$('#postData').width(560);
+	$('#postSnippet a.doneEditiingButton').addClass('marginRight61');
 	$('#snippetText i#snippetTextTitle').addClass('icon-thumbs-up-1');
 	$('#snippetText i#snippetTextTitle').text('Microverdict');
 	$('#snippetText p').text('Add your micro verdict.');
@@ -171,6 +176,9 @@ function newsSelected()
 	{
 		$('#snippetText i#snippetTextTitle').removeClass('icon-user');
 	}	
+	$('#postSnippet').css('width','560px');
+	$('#postData').width(560);
+	$('#postSnippet a.doneEditiingButton').addClass('marginRight61');
 	$('#reviewGamePlayedOn').hide();
 	$('#snippetText i#snippetTextTitle').addClass('icon-signal-2');
 	$('#snippetText i#snippetTextTitle').text('Bulletin');
@@ -202,6 +210,7 @@ function gloonicleSelected()
 		$('#snippetText i#snippetTextTitle').removeClass('icon-play-3');
 	}
 	$('#postSnippet').css('width','800px');
+	$('#postData').width(800);
 	$('#postSnippet a.doneEditiingButton').removeClass('marginRight61');	
 	$('#richEditor').removeClass('nonGlooniclePostSnippet');
 	$('#richEditor').addClass('glooniclePostSnippet');
@@ -295,7 +304,7 @@ function selectCategory()
 
 function resetGameData()
 {
-	$('#gameSelector img').attr("id","nothing");
+	$('#gameSelector img').attr("id","noGame");
 	$('#gameSelector img').attr("src","http://192.168.0.103:9000/assets/images/default/boxShot.png");
 	
 	if($('#playedOn').is(':visible'))
@@ -311,8 +320,9 @@ function resetCommonData()
 	$('#postTitleText').text('My Post Title');
 	$('#postTitleInput').val("");
 	$('.coverSection').css('background-image',"url('http://192.168.0.103:9000/assets/images/default/featuredBg.png')");
-	$('.coverSection').attr('id','default');
+	$('.coverSection').attr('id','noBg');
 	$('#charMaxLimit').text('200');
+	$('#videoUrlInput').val("");
 }
 
 function resetReview()
@@ -360,9 +370,9 @@ function stinkButtonPressed()
 		$('#stink').append(stinkElement);
 	}
 }
-function initUploader()
+function initUploader(replaceImage)
 		{			
-			$.modal('<iframe id="browser" src="/media/imageUploader" class="selectorBox" data-replaceimage="0"/>', {
+			$.modal('<iframe id="browser" src="/media/imageUploader" class="selectorBox" data-replaceimage="'+replaceImage+'"/>', {
     			
     			onOpen : function(dialog) {
 					dialog.overlay.fadeIn('slow', function() {
@@ -374,9 +384,10 @@ function initUploader()
 			    containerCss:{
 			        backgroundColor:"#fff",
 			        borderColor:"#fff",
-			        height:780,
+			        height:600,
 			        padding:0,
-			        width:1024
+			        width:800
+			       
 			    },
 			    overlayClose:true
 				});			
@@ -397,9 +408,9 @@ function initGameCreator()
 			    containerCss:{
 			        backgroundColor:"#fff",
 			        borderColor:"#fff",
-			        height:780,
+			        height:600,
 			        padding:0,
-			        width:1024
+			        width:800
 			    },
 			    overlayClose:true
 				});
@@ -421,8 +432,7 @@ function doneEditingTitle()
 }
 function countCharInEditor(charCount)
 {	
-	$('#charMaxLimit').text(charCount);
-	console.log("count"+ charCount);	
+	$('#charMaxLimit').text(charCount);	
 }
 
 function charCountCheck()
@@ -433,10 +443,8 @@ function charCountCheck()
 		if(!$('#selectedCategory').hasClass('gloonicle'))
 		{
 			var text=window.frames['richEditor'].document.body.innerText;
-			var currentCharCount = text.length;								
-			console.log("char count: "+currentCharCount);				
-			var charsLeft=maxChars-currentCharCount;	
-			console.log("char count left: "+charsLeft);		
+			var currentCharCount = text.length;													
+			var charsLeft=maxChars-currentCharCount;				
 			countCharInEditor(charsLeft);
 			if(charsLeft<=0)
 			{
@@ -550,7 +558,7 @@ function doneAddingLink()
 {
 	$('#newsLinkContainer').hide();
 	var link=$('#newsLink').val();
-	if(link.length>0)
+	if(link.length>0 && link.indexOf("http")!=-1)
 	{
 		$('#linkDefaultData a').text(link);
 		$('#linkDefaultData a').attr("href",link);
@@ -568,8 +576,7 @@ function doneAddingLink()
 						"<p class='linkColor font11'>"+domain+"</p>"+
 						"<p class='colorGray font13'>"+description+"</p>"+
 						"</div><img height='200' src='"+imgUrl+"'>"+
-						"</a>"
-						console.log("html: "+htmlContent);
+						"</a>"						
 						$('#linkContent').hide();																
 						$('#linkContent').html(htmlContent);
 						$('#linkContent').addClass('linkDesign');
@@ -598,8 +605,7 @@ function doneAddingVideo()
 
 function playVideo()
 {
-	var src=$('#videoUrlInput').val();
-	console.log("Src "+src);
+	var src=$('#videoUrlInput').val();	
 	if(src.length>0 && src.indexOf("www.youtube.com")!=-1)
 	{
 		var processedUrl = src.replace("watch?v=","embed/");   
@@ -624,7 +630,238 @@ function playVideo()
 	}
 	
 }
-var hasBeenEdited=false
+
+function onPlayedOnClick(el)
+{
+	if($(el).attr('href')!=undefined)
+		{
+			$('input.platform').prop("disabled",true);
+			var gamePlatforms =$('#gamePlatforms').val();
+			var trimPlatformText = gamePlatforms.trim();
+			var splittedPlatforms = trimPlatformText.split(" ");			
+			for(var count=0; count<splittedPlatforms.length;++count)
+			{
+				$('input#'+splittedPlatforms[count]).prop("disabled",false);
+			}
+			$('#platformOptions').show();
+		 	$('#platformOptions').animate({
+				 width:"400", height:"300"}, 500);
+		}
+}
+
+function editorImageClose()
+{
+	$('#imageSelectorForEditor').hide();
+	$('#imageHolder img').attr('src',"");
+	$('#imageCaption i').text('Click to set caption');
+}
+
+function onInsertImage()
+{	
+	$('#imageSelectorForEditor').fadeIn('slow');	
+	
+	
+}
+function onSetImage()
+{
+		var url=$('#imageHolder img').attr('src');		
+		var imgId=$('#imageHolder img').attr('id');
+		var caption = $('#imageCaption i').text();
+		
+			var imageHtml='<img id="'+imgId+'"style="border-style:solid; border-width:15px;border-color:#FCEEE2"src="'+url+'" width="640" height="480"/><p style="text-align;"><span style="font-size:14px;"><i>'+caption+'</i></span></p>'		
+			if(navigator.appName=="Microsoft Internet Explorer")
+			{				
+				document.getElementsByName("richEditor")[0].contentWindow.focus();
+				richEditor.document.selection.createRange().pasteHTML(imageHtml);
+			}
+			else{
+				richEditor.document.execCommand('insertHTML',false,imageHtml);
+			}
+			editorImageClose();
+		
+			
+}
+
+	
+		
+function onSave(state)
+{	
+	var title=$('#postTitleInput').val();	
+	var body=window.frames['richEditor'].document.body.innerHTML;
+	var featuredImage=$('.coverSection').attr('id');
+	var category=$('#selectedCategory').text().trim();		
+	var videoLink=$('#videoUrlInput').val();
+	var gameId= "";
+	var articleId=$('#articleId').val();
+	var articleState=state;
+	var platform = "";		
+	var reviewGameScore=0;	
+	var newsSrcLink="";
+	
+	var articleJson ={};
+	
+	articleJson["articleId"]=articleId;
+	articleJson["articleState"]=articleState;
+	articleJson["title"]=title;	
+	articleJson["body"]=body;
+	articleJson["featuredImage"]=featuredImage;
+	articleJson["category"]=category;			
+	articleJson["videoLink"]=videoLink;
+	
+	if(category == "review")
+	{
+		platform=$('#selectedGamePlatform').attr('class');
+		articleJson["platform"]=platform;
+		reviewGameScore=$('#userScoreDonutContainer input').val();
+		articleJson["gameScore"]=reviewGameScore;
+		
+		if($('#sweet dd').length>0)
+		{
+			var sweets = $('#sweet dd');
+			var sweetJson ={};
+			sweets.each(function(index, sweet)
+			{
+				sweetJson[index]=$(sweet).children('span').text();				
+			});
+		}
+		if($('#stink dd').length>0)
+		{
+			var stinks = $('#stink dd');
+			var stinkJson ={};
+			stinks.each(function(index, stink)
+			{
+				stinkJson[index]=$(stink).children('span').text();				
+			});
+		}
+					
+		
+		
+		articleJson["sweets"]= JSON.stringify(sweetJson);
+		articleJson["sweetsLength"]=$('#sweet dd').length;
+		articleJson["stinks"]= JSON.stringify(stinkJson);
+		articleJson["stinksLength"]=$('#stink dd').length;
+		
+	}
+	
+	if(category == "news")
+	{
+		newsSrcLink=$('#newsLink').val();
+		articleJson["newsSrcLink"]=newsSrcLink;
+	}
+	if(category == "review" || category == "news" || category == "video")
+	{
+		gameId= $('#gameSelector img').attr("id");
+		articleJson["gameId"]=gameId;	
+	}	
+		
+		
+
+	
+	if(validateEditor())
+		{
+			console.log("Success");
+			return true;
+			/*
+			$.post('/post/save',articleJson,function(data){
+							if(data=='success')
+							{					
+								return true;
+							}
+						},'json');		*/
+			
+		}
+		else
+		{
+			console.log("Fail");
+			return false;
+		}
+
+	
+	
+}
+
+function validateEditor()
+{
+	var validationSuccess=false;
+	var title=$('#postTitleInput').val();	
+	var body=window.frames['richEditor'].document.body.innerHTML;
+	var featuredImage=$('.coverSection').attr('id');
+	var category=$('#selectedCategory').text().trim();		
+	var videoLink=$('#videoUrlInput').val();
+	var gameId= "";		
+	var platform = "";			
+	var sweetPoints = new Array();
+	var stinkPoints= new Array();
+	var newsSrcLink="";
+	var errorMessage="The following conditions to be met for validation:";	
+	if(featuredImage != "noBg" && title.length >0 && body.length >0)
+	{
+			validationSuccess=true;			
+	}
+	else
+	{
+		validationSuccess=false;
+		errorMessage+="\n*A featured cover image is compulsory\n*Valid title for Post\n*Valid Post Body";
+	}
+	if(category == "review")
+	{
+		gameId= $('#gameSelector img').attr("id");
+		console.log("gameId: "+gameId);
+		platform = $('#selectedGamePlatform').attr('class');
+		var sweetsCount=$('#sweet dd').length;
+		var stinksCount=$('#stink dd').length;
+		console.log("platform: "+platform);
+		console.log("Sweets: "+$('#sweet dd').length);
+		console.log("Stinks: "+$('#stink dd').length);
+		if(gameId != "noGame" && (sweetsCount>0 || stinksCount>0) && platform != "all")
+		{			
+			validationSuccess=true;
+		}
+		else
+		{
+			validationSuccess=false;
+			errorMessage+="\n*Game is compulsory for Review\n*A 'Played on' Platform is must\n*Atleast one sweet or stink point\n*A valid score should be given via the 'score dial'";
+		}
+	}
+	else if(category == "news")
+	{
+		newsSrcLink=$('#newsLink').val();
+		if(newsSrcLink.length>0 && newsSrcLink.indexOf("http")!=-1)
+		{
+			validationSuccess=true;
+		}
+		else
+		{
+			validationSuccess=false;
+			errorMessage+="\n*A valid news source link";
+		}
+	}
+	else if(category == "video")
+	{
+		if(videoLink.length>0 && videoLink.indexOf("www.youtube.")!=-1)
+		{
+			validationSuccess=true;
+		}
+		else
+		{
+			validationSuccess=false;
+			errorMessage+="";
+			errorMessage+="\n*A valid youtube video link";
+		}
+	}
+	
+	if(!validationSuccess)
+	{
+		
+		alert(errorMessage);
+	}
+	
+	return validationSuccess;
+}
+
+var hasBeenEdited=false;
+var hasBeenSaved=false;
+var hasBeenPublished=false;
 
 $(function(){
 	
@@ -649,9 +886,14 @@ $(function(){
 		hasBeenEdited=true;
 		stinkButtonPressed();
 		});	
-	$('#imageUploader').click(function() {
-		initUploader();
-		});	
+	$('#imageUploader').click(function() { //featured image
+		initUploader(0);
+	});
+	
+	$('#imageHolder img').click(function(){ //gloonicle editor
+		initUploader(1);
+	});
+		
 	$('#changeTitle').click(function() {
 		initTitleEditor();
 		});	
@@ -692,13 +934,7 @@ $(function(){
 	});
 		
 	$('#playedOn').click(function() {
-		if($(this).attr('href')!=undefined)
-		{
-			$('#platformOptions').show();
-		 	$('#platformOptions').animate({
-				 width:"400", height:"300"}, 500);
-		}
-					
+		onPlayedOnClick(this);
 	});
 	
 	$('#platformSet').click(function() {
@@ -735,10 +971,52 @@ $(function(){
 	});
 	
 	$('#addVideoUrl a.doneEditiingButton').click(function() {
+		hasBeenEdited=true;
 		doneAddingVideo();
 	});
 		
 	$('.videoPlayButton').click(function() {
 		playVideo();
 	});	
+	
+	$('#close').click(function() {
+		var username=$('#user').text().trim();		
+		window.location.href="/"+username;
+	});
+	
+	$('#save').click(function() {
+		var username=$('#user').text().trim();		
+		
+		if(onSave(1))
+		{
+			hasBeenSaved=true;
+			 window.location.href="/"+username+"#drafts";
+		}
+				
+	});
+	
+	
+	
+	
+	$('#publish').click(function() {
+		var username=$('#user').text().trim();				
+		if(onSave(2))
+		{
+			hasBeenPublished=true;
+			window.location.href="/"+username;
+		}
+				
+	});
+	
+	window.onbeforeunload=function()
+	{
+		console.log("hasBeenEdited: "+hasBeenEdited);
+		console.log("hasBeenSaved: "+hasBeenSaved);
+		console.log("hasBeenPublished: "+hasBeenPublished);
+		
+		if(hasBeenEdited && !(hasBeenSaved || hasBeenPublished))
+		{
+			return "Post edited.";
+		}
+	}
 });

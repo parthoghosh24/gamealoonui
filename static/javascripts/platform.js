@@ -7,11 +7,14 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var userAvatar=$(this).data('useravatar');
 			var commentCount=$(this).data('commentcount');
 			$('a#vArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#vArticleTitle span').text(title);
+			$('a#vArticleTitle p').text(title);
 			$('a#vArticleAuthor').attr('href','/'+username);
-			$('a#vArticleAuthor span').text(username);	       
+			$('a#vArticleAuthor img').attr('title',username);
+			$('a#vArticleAuthor img').attr('alt',username);	   
+			$('a#vArticleAuthor img').attr('src',userAvatar);	       
 			$('#videoCommentCount').text(commentCount); 
 		}		
 		
@@ -20,11 +23,14 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var userAvatar=$(this).data('useravatar');
 			var commentCount=$(this).data('commentcount');
 			$('a#nArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#nArticleTitle span').text(title);
+			$('a#nArticleTitle p').text(title);
 			$('a#nArticleAuthor').attr('href','/'+username);
-			$('a#nArticleAuthor span').text(username);	  
+			$('a#nArticleAuthor img').attr('title',username);
+			$('a#nArticleAuthor img').attr('alt',username);	   
+			$('a#nArticleAuthor img').attr('src',userAvatar);	  
 			$('#newsCommentCount').text(commentCount);      
 		}		
 		
@@ -33,11 +39,15 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var userAvatar=$(this).data('useravatar');
 			var commentCount=$(this).data('commentcount');
+			
 			$('a#rArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
 			$('a#rArticleTitle p').text(title);
 			$('a#rArticleAuthor').attr('href','/'+username);
-			$('a#rArticleAuthor img').attr('title',username);	   
+			$('a#rArticleAuthor img').attr('title',username);
+			$('a#rArticleAuthor img').attr('alt',username);	   
+			$('a#rArticleAuthor img').attr('src',userAvatar);
 			$('#reviewCommentCount').text(commentCount);     
 		}
 		
@@ -46,11 +56,14 @@ $(window).load(function() {
 			var title = $(this).data('title');
 			var encodedTitle=$(this).data('encodedtitle');
 			var username=$(this).data('username');
+			var userAvatar=$(this).data('useravatar');
 			var commentCount=$(this).data('commentcount');
 			$('a#gArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#gArticleTitle span').text(title);
+			$('a#gArticleTitle p').text(title);
 			$('a#gArticleAuthor').attr('href','/'+username);
-			$('a#gArticleAuthor span').text(username);	   
+			$('a#gArticleAuthor img').attr('title',username);
+			$('a#gArticleAuthor img').attr('alt',username);	   
+			$('a#gArticleAuthor img').attr('src',userAvatar);			
 			$('#gloonicleCommentCount').text(commentCount);     
 		}
 		
@@ -129,7 +142,7 @@ $(window).load(function() {
  function  applyPauseResumeToCarousel()
  {
  	//news
- 	$('#nBottomTab span span a.playPause').click(function() { 		
+ 	$('#nTopTab span span a.playPause').click(function() { 		
 		  if($(this).children('i').hasClass('icon-pause-3'))
 		  {
 		  	$("#cNews").cycle('pause');
@@ -146,7 +159,7 @@ $(window).load(function() {
 		});
 	
 	//videos	
-	$('#vBottomTab span span a.playPause').click(function() {
+	$('#vTopTab span span a.playPause').click(function() {
 		  if($(this).children('i').hasClass('icon-pause-3'))
 		  {
 		  	$("#cVideos").cycle('pause');
@@ -180,7 +193,7 @@ $(window).load(function() {
 		});
 		
 	//gloonicles	
-	$('#gBottomTab span span a.playPause').click(function() {
+	$('#gTopTab span span a.playPause').click(function() {
 		  if($(this).children('i').hasClass('icon-pause-3'))
 		  {
 		  	$("#cGloonicles").cycle('pause');
@@ -222,19 +235,19 @@ $(window).load(function() {
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
-														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
 											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
 												'</div>'+
 											'</div>'+
 											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
-												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'</p>'+
+												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
 											'</a>'+
 										'</div>'+
 									'</div>'+																
@@ -253,19 +266,19 @@ $(window).load(function() {
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
-														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
 											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
 												'</div>'+
 											'</div>'+
 											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
-												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
 											'</a>'+
 										'</div>'+
 									'</div>'+																
@@ -284,19 +297,19 @@ $(window).load(function() {
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
-														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
 											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
-												'<div class="innerBox postListInnerRing">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
 												'</div>'+
 											'</div>'+
 											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
-												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
 											'</a>'+
 										'</div>'+
 									'</div>'+																
@@ -394,6 +407,15 @@ $(function() {
 	        $(this).children('.postTop').slideUp(150);
 	    }
 	},".articleContentPreview");
+	
+	$(document).on({
+	    mouseenter: function () {
+	        $(this).children('.carouselTopTabDim').slideDown("slow");
+	    },
+	    mouseleave: function () {
+	        $(this).children('.carouselTopTabDim').slideUp(150);
+	    }
+	},".carouselContainer");
 	
 
 });

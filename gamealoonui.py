@@ -41,6 +41,9 @@ urls = (
         '/user/gameInterestedOrNot','InterestedInorNotInGame',
         '/user/interest','CreateOrUpdateUserInterest',
         '/user/password/reset','ResetPassword',        
+        '/user/social/(.+)','FetchUserSocial',
+        '/user/stats/(.+)','FetchUserStats',
+        '/user/drafts/(.+)','FetchUserDrafts',
         '/media/imageUploader','InitImageUploader',
         '/game/gameCreator','InitGameCreator',
         '/game/(.+)','SingleGame',
@@ -140,7 +143,20 @@ class FetchGames:
         games=json.load(response)        
         return json.dumps(games)        
         
-
+class FetchUserSocial:
+    def GET(self,username):        
+        url="http://localhost:9000/user/socialData/"+username                                    
+        response = urllib2.urlopen(url)
+        socialData = json.load(response)  
+        return json.dumps(socialData)
+    
+class FetchUserStats:
+        def GET(self,username):        
+            url="http://localhost:9000/user/stats/"+username                                    
+            response = urllib2.urlopen(url)
+            stats = json.load(response)  
+            return json.dumps(stats)
+    
 class InitImageUploader:
     def GET(self):
         if session.userId == "Guest":
@@ -230,26 +246,59 @@ class CreateOrUpdatePost:
         articleFormData = web.input()                
         articleId=articleFormData.articleId
         print "Article Id:",articleFormData.articleId
-        print "Article Title: ", articleFormData.title        
-        print "Article SubTitle: ", articleFormData.subTitle
+        print "Article Title: ", articleFormData.title                
         print "Article Body: ", articleFormData.body
         print "Article Category: ",articleFormData.category
         print "Article UserName: ",session.username
-        print "Article Platforms: ",articleFormData.platforms
+        print "Article videoLink: ",articleFormData.videoLink
+        cat = articleFormData.category
+        if cat == "review":
+            print "Article Platform: ",articleFormData.platform
+            print "Article game score: ",articleFormData.gameScore
+            print "Article Review Sweets: ",articleFormData.sweets            
+            print "Article Review stinks: ",articleFormData.stinks
+            
+        if cat == "news":
+            print "Article News link",articleFormData.newsSrcLink
+               
         print "Article State: ",articleFormData.articleState
-        print "Article featured image url: ",articleFormData.featuredImage
-        print "Article game score: ",articleFormData.gameScore
+        print "Article featured image url: ",articleFormData.featuredImage        
         print "Article game Id: ",articleFormData.gameId
+        
         url="http://localhost:9000/article/save"                                            
-        values={"gameScore":articleFormData.gameScore,"articleId":articleId,"articleTitle":articleFormData.title, "articleSubTitle":articleFormData.subTitle, "articleBody":articleFormData.body, "articleCategory":articleFormData.category
-                , "articleUsername":session.username, "articlePlatforms":articleFormData.platforms,"articleFeaturedImage":articleFormData.featuredImage,"articleGameId":articleFormData.gameId, "articleState":articleFormData.articleState}
+        values={
+                "articleId":articleId,
+                "articleTitle":articleFormData.title,                
+                "articleBody":articleFormData.body, 
+                "articleCategory":articleFormData.category, 
+                "articleUsername":session.username,                 
+                "articleFeaturedImage":articleFormData.featuredImage,                
+                "articleState":articleFormData.articleState,
+                "articleVideoLink":articleFormData.videoLink}
+        
+        if cat == "review":            
+            values["gameScore"]=articleFormData.gameScore
+            values["playedOnPlatform"]=articleFormData.platform
+            values["gameScore"]=articleFormData.gameScore
+            values["sweets"]=articleFormData.sweets;
+            values["stinks"]=articleFormData.stinks;
+            values["sweetsLength"]=articleFormData.sweetsLength
+            values["stinksLength"]=articleFormData.stinksLength
+        
+        if cat == "news":
+            values["newsSrcLink"]=articleFormData.newsSrcLink
+            
+        if cat == "review" or cat == "news" or cat == "video":
+            values["gameId"]=articleFormData.gameId;
+             
         data=urllib.urlencode(values)
         request = urllib2.Request(url,data)
         response = urllib2.urlopen(request)
         articleCreationStatus = json.load(response)
         articleCreationStatus['userId']=session.userId
         print articleCreationStatus
-        return json.dumps(articleCreationStatus)         
+        return json.dumps(articleCreationStatus)
+#        return "success"         
        
 
 class CreateOrUpdateComment:
@@ -392,9 +441,9 @@ class Logout:
     def GET(self):
         session.username="Guest"
         session.userId="Guest"
-        session.loggedIn=False   
-        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
-        session.kill()                  
+        session.loggedIn=False
+        session.kill()   
+        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"                        
         return "done"
     
 class Signup:

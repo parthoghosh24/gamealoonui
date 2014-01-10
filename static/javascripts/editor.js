@@ -93,14 +93,7 @@ function countCharInEditor(charCount)
 	$('#editorCharLimit').text(charCount);
 	console.log("count"+ charCount);	
 }
-function initUploader(replaceImage)
-		{
-			var browserIframe=$('<iframe id="browser" class="selectorBox" data-replaceimage="'+replaceImage+'"/>');
-			browserIframe.attr("src","/media/imageUploader");
-			browserIframe.hide();
-			browserIframe.appendTo('.userPost');
-			browserIframe.fadeIn("slow");			
-		}
+
 		
 function uploaderClose()
 		{
@@ -204,38 +197,7 @@ function onJustify()
 	richEditor.document.execCommand('justifyFull',false,null);
 }
 
-function editorImageClose()
-{
-	$('#imageSelectorForEditor').hide();
-	$('#imageHolder img').attr('src',"");
-	$('#imageCaption i').text('Click to set caption');
-}
 
-function onInsertImage()
-{	
-	$('#imageSelectorForEditor').fadeIn('slow');	
-	
-	
-}
-function onSetImage()
-{
-		var url=$('#imageHolder img').attr('src');		
-		var imgId=$('#imageHolder img').attr('id');
-		var caption = $('#imageCaption i').text();
-		
-			var imageHtml='<img id="'+imgId+'"style="border-style:solid; border-width:15px;border-color:#FCEEE2"src="'+url+'" width="400" height="300"/><p style="text-align;"><span style="font-size:14px;"><i>'+caption+'</i></span></p>'		
-			if(navigator.appName=="Microsoft Internet Explorer")
-			{				
-				document.getElementsByName("richEditor")[0].contentWindow.focus();
-				richEditor.document.selection.createRange().pasteHTML(imageHtml);
-			}
-			else{
-				richEditor.document.execCommand('insertHTML',false,imageHtml);
-			}
-			editorImageClose();
-		
-			
-}
 
 function editorVideoClose()
 {
@@ -280,66 +242,8 @@ function onRedo()
 	document.getElementsByName("richEditor")[0].contentWindow.focus();
 	richEditor.document.execCommand('redo',false,null);
 }
-function onSave()
-{	
-	var title=$('#title').val();
-	var subTitle=$('#subTitle').val();
-	var body=window.frames['richEditor'].document.body.innerHTML;
-	var featuredImage=$('#ariticleFeaturedImageSelector img').attr('id');
-	var category=$('input[name="category"]:checked').val();
-	var userName=$('#userName a').text();
-	var userGameBio=$('#userGameBio').text();
-	var gameId= "";
-	var articleId=$('#articleId').val();
-	var articleState=$('#articleState').val();
-	var platforms = $('input.eplatform:checked').map(function(index, elem) {		
-	    return $(this).val();
-	}).get().join();	
-	if($('#isGame').is(':checked'))
-	{		
-		gameId= $('#gameId').val();
-		
-	}	
-	var reviewGameScore=0;
-	if(category == "review")
-	{
-		reviewGameScore=gameScore;
-		
-	}
-	
-	var articleJson ={};
-	
-	articleJson["articleId"]=articleId;
-	articleJson["articleState"]=articleState;
-	articleJson["title"]=title;
-	articleJson["subTitle"]=subTitle;
-	articleJson["body"]=body;
-	articleJson["featuredImage"]=featuredImage;
-	articleJson["category"]=category;		
-	articleJson["gameId"]=gameId;
-	articleJson["platforms"]=platforms;
-	articleJson["gameScore"]=reviewGameScore;
-	
-	console.log(articleJson);	
-		
-	
-	if(validateEditor())
-		{
-			$.post('/post/save',articleJson,function(data){
-				if(data.status=='success')
-				{
-					window.location.href="/profile/"+data.userId;
-				}
-			},'json');		
-		}
-	
-	
-}
-function onPublish()
-{
-	$('#articleState').val("2");
-	onSave();
-}
+
+
 
 function onPreview()
 {
@@ -386,27 +290,4 @@ function onClose()
 	$.modal.close();
 }
 
-function validateEditor()
-{
-	var title=$('#title').val();
-	var subTitle=$('#subTitle').val();
-	var body=window.frames['richEditor'].document.body.innerHTML;
-	var category=$('input[name="category"]:checked').val();
-	var videoCheckerString ="http://www.youtube."
-	var isGame=0;
-	if($('#isGame').is(':checked'))
-	{
-		isGame=1;
-		var gameId= $('#gameId').val();
-	}
-	var platformCount =$('input.eplatform:checked').length;
-	
-	if(title.length==0 || subTitle.length==0 || body.length==0 || category==undefined || category=="video" && body.indexOf(videoCheckerString)==-1 || (isGame ==1 && gameId == "empty") || platformCount==0)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
+

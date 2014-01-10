@@ -3,10 +3,11 @@ $var description: Create post from here
 <div class="mainContainer">
 	<div id="container_layout">
 		<div class="divider"> </div>
-		<div id="default" class="coverSection">		
+		<div id="noBg" class="coverSection">		
+			<input type="hidden" id="articleId" name="articleId" value="">
 			<a class="videoPlayButton" href="javascript:;"><i class="icon-play-circled2-1"></i></a>
-			<div id="coverSectionHead" class="applyFranklinGothic coverSectionHeaderFooter">						
-					<span id="selectedCategory" class="cursorPointer textCapitalization colorWhite review" title="Click to choose and select category">
+			<div id="coverSectionHeadPostCreator" class="applyFranklinGothic coverSectionHeaderFooter">						
+					<span id="selectedCategory" class="selectedCategory cursorPointer textCapitalization colorWhite review" title="Click to choose and select category">
 						review
 					</span>			
 					<ul id="postCreatorCategorySelector">
@@ -46,15 +47,7 @@ $var description: Create post from here
 							<input class="width300" id="videoUrlInput" name="videoUrlInput" type="text" placeholder="Youtube video link"/>
 							<a href="javascript:;" class="font16 doneEditiingButton" title="Add a video"><i class="icon-ok"></i></a>	
 				</span>
-			</div>		
-			<div id="coverSectionFoot" class="coverSectionHeaderFooter">				
-				<div id="moreInformation" class="floatRight fontWeightBold" >
-					<span class="icon-fire-1">Yet to ignite</span>
-					<span class="icon-smile">0</span>
-					<span class="icon-frown">0</span>
-					<span class="icon-users">0</span>
-				</div>
-			</div>		       			
+			</div>					    		
 		</div>
 		<div class="divider"> </div>
                 <div id="postContainer" style="">
@@ -62,7 +55,8 @@ $var description: Create post from here
                 		<div id="gameRow">
                 			<div id="gameBoxArt">
                 				<a id="gameSelector" href="javascript:;" title="Add a game">
-                					<img id="nothing" src="http://192.168.0.103:9000/assets/images/default/boxShot.png" height="150">
+                					<input type="hidden" id="gamePlatforms" name="gamePlatforms" value=""/>
+                					<img id="noGame" src="http://192.168.0.103:9000/assets/images/default/boxShot.png" height="150">
                 				</a>
                 				
                 			</div>
@@ -78,22 +72,22 @@ $var description: Create post from here
 					  					<form id="platformListForm" name="plaformListForm">
 					  						<div class="checkBoxFont divTable userInterestListBorderBottom">
 					  							<div class="divRow">
-					  								<div class="divCell"><input type="radio" id="ps3" name="playedOn" class="platform" value="ps3" />Playstation 3</div>
-					  								<div class="divCell"><input type="radio" id="x360" name="playedOn" class="platform" value="xbox360" />Xbox 360</div>
-					  								<div class="divCell"><input type="radio" id="ps4" name="playedOn" class="platform" value="ps4" />Playstation 4</div>
+					  								<div class="divCell"><input type="radio" id="ps3" name="playedOn" class="platform" value="ps3" disabled="disabled"/>Playstation 3</div>
+					  								<div class="divCell"><input type="radio" id="xbox360" name="playedOn" class="platform" value="xbox360" disabled="disabled"/>Xbox 360</div>
+					  								<div class="divCell"><input type="radio" id="ps4" name="playedOn" class="platform" value="ps4" disabled="disabled"/>Playstation 4</div>
 					  							</div>
 					  							<div class="divRow">
-					  								<div class="divCell"><input type="radio" id="xone" name="playedOn" class="platform" value="xboxOne" />Xbox One</div>
-					  								<div class="divCell"><input type="radio" id="wiiu" name="playedOn" class="platform" value="wiiu" />WII-U</div>
-					  								<div class="divCell"><input type="radio" id="pc" name="playedOn" class="platform" value="pc" />PC</div>
+					  								<div class="divCell"><input type="radio" id="xboxOne" name="playedOn" class="platform" value="xboxOne" disabled="disabled"/>Xbox One</div>
+					  								<div class="divCell"><input type="radio" id="wiiu" name="playedOn" class="platform" value="wiiu" disabled="disabled"/>WII-U</div>
+					  								<div class="divCell"><input type="radio" id="pc" name="playedOn" class="platform" value="pc" disabled="disabled"/>PC</div>
 					  							</div>
 					  							<div class="divRow">
-					  								<div class="divCell"><input type="radio" id="vita" name="playedOn" class="platform" value="vita" />PS VITA</div>
-					  								<div class="divCell"><input type="radio" id="n3ds" name="playedOn" class="platform" value="n3ds" />N3DS</div>
-					  								<div class="divCell"><input type="radio" id="ios" name="playedOn" class="platform" value="ios" />IOS</div>
+					  								<div class="divCell"><input type="radio" id="vita" name="playedOn" class="platform" value="vita" disabled="disabled"/>PS VITA</div>
+					  								<div class="divCell"><input type="radio" id="n3ds" name="playedOn" class="platform" value="n3ds" disabled="disabled"/>N3DS</div>
+					  								<div class="divCell"><input type="radio" id="ios" name="playedOn" class="platform" value="ios" disabled="disabled"/>IOS</div>
 					  							</div>
 					  							<div class="divRow">
-					  								<div class="divCell"><input type="radio" id="android" name="playedOn" class="platform" value="android" />Android</div>  								
+					  								<div class="divCell"><input type="radio" id="android" name="playedOn" class="platform" value="android" disabled="disabled"/>Android</div>  								
 					  							</div>
 					  							<div class="divRow divTableFooterHeight">  													
 					  							</div>
@@ -181,9 +175,9 @@ $var description: Create post from here
                 				 </div>
                 		</div>
                 		<div id="postCreatorButtons" class="marginTop30">
-                			<button class="cursorPointer padding2"><span class="icon-doc-inv">Save</span></button>
-                			<button class="cursorPointer padding2"><span class="icon-publish">Publish</span></button>
-                			<button class="cursorPointer padding2"><span class=" icon-cancel-circled-1">Close</span></button>
+                			<button id="save" class="cursorPointer padding2"><span class="icon-doc-inv">Save</span></button>
+                			<button id="publish" class="cursorPointer padding2"><span class="icon-publish">Publish</span></button>
+                			<button id="close" class="cursorPointer padding2"><span class=" icon-cancel-circled-1">Close</span></button>
                 		</div>
                 	</div>
                 	<div id="score" class="floatLeft">
@@ -191,7 +185,7 @@ $var description: Create post from here
                 			<div class="reviewLine"> </div>
                 		</div>
                 		<div id="authorScore">
-                			<div id="userScoreDonutContainer" class="dottedScoreBorder cursorPointer">
+                			<div id="userScoreDonutContainer" class="dottedScoreBorder cursorPointer" title="Score Dial">
                 				<input class="knob" data-width="100" data-angleOffset=1 data-angleArc=360 data-linecap=round data-min="0" data-displayPrevious=true data-max="100" data-step="1" value="0" data-fgColor="#FF4500" data-thickness=".2">                				
 								
                 			</div>
@@ -199,7 +193,23 @@ $var description: Create post from here
                      </div>
                </div>
          </div>
+        
    </div>
 </div>		
+<div id="imageSelectorForEditor" class="imageUploaderBox">
+					 	<div class="imageUploaderOverlay"> </div>		
+					 	<div id="editorImageSelector">
+					 		<div id="imageSection">
+					 			<div id="imageHolder">
+					 				<img id="none" src="" width="640" height="480" class="cursorPointer"/><br>
+					 				<span id="imageCaption" class="font14" contenteditable="true"><i>Click to set caption</i></span>
+					 			</div>
+					 		</div>
+					 		<div id="buttonSection">
+					 			<button id="editorImageSet" class="applyBevan imageAndVideoButtons colorWhite" onclick="onSetImage()">SET</button>
+					 			<button id="editorImageClose" class="applyBevan imageAndVideoButtons colorWhite" onclick="editorImageClose()">CANCEL</button>
+					 		</div>	
+					 	</div>			 	
+</div>
 <script src="/static/javascripts/post_creator.js"></script>
 <script src="/static/javascripts/jquery.knob.js"></script>
