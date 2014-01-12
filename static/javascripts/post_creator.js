@@ -756,26 +756,33 @@ function onSave(state)
 		
 		
 
-	
 	if(validateEditor())
-		{
-			console.log("Success");
-			return true;
-			/*
-			$.post('/post/save',articleJson,function(data){
-							if(data=='success')
-							{					
-								return true;
-							}
-						},'json');		*/
+		{								
 			
+			$.post('/post/save',articleJson,function(data){
+							if(data.status=='success')
+							{
+								console.log("Success");
+								var username=$('#user').text().trim();
+								hasBeenSaved=true;					
+								if(state == 1)
+								{
+									
+			 						window.location.href="/"+username+"#drafts";
+								}
+								else
+							    {
+							    	hasBeenPublished=true;
+									window.location.href="/"+username;
+							    }
+							}
+						},'json');											
 		}
 		else
 		{
 			console.log("Fail");
-			return false;
+			alert('Something wrong happened');			
 		}
-
 	
 	
 }
@@ -984,28 +991,15 @@ $(function(){
 		window.location.href="/"+username;
 	});
 	
-	$('#save').click(function() {
-		var username=$('#user').text().trim();		
-		
-		if(onSave(1))
-		{
-			hasBeenSaved=true;
-			 window.location.href="/"+username+"#drafts";
-		}
-				
+	$('#save').click(function() {			
+		onSave(1);				
 	});
 	
 	
 	
 	
-	$('#publish').click(function() {
-		var username=$('#user').text().trim();				
-		if(onSave(2))
-		{
-			hasBeenPublished=true;
-			window.location.href="/"+username;
-		}
-				
+	$('#publish').click(function() {						
+		onSave(2);		
 	});
 	
 	window.onbeforeunload=function()

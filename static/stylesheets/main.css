@@ -214,12 +214,7 @@ footer{
 	text-align: center;
 }
 
-#userDetailsContainer
-{
-	width:920px; 
-	height: 800px;	
-	margin-bottom: 20px;
-}
+
 
 #userDetails
 {
@@ -1267,27 +1262,7 @@ img {
 }
 
 /*user profile*/
-#profile_container {
-	position: relative;
-	width: 940px;
-	overflow: hidden;
-	padding: 10px;
-	margin-left: -10px;
-}
 
-#user_card {
-	float: left;
-	width: 250px;
-	overflow: hidden;
-	margin: 0 auto;
-	padding: 10px;
-	word-wrap: break-word;
-	background: -webkit-linear-gradient(top,#000000 0,#FAFAFA 200%);
-	background: -moz-linear-gradient(top,#000000 0,#FAFAFA 200%);
-	background: -o-linear-gradient(top,#000000 0,#FAFAFA 200%);
-	background: -ms-linear-gradient(top,#000000 0,#FAFAFA 200%);
-	background: linear-gradient(top,#000000 0,#FAFAFA 200%);	 
-}
 #labeldiv {
 	position: absolute;
 	width: 200px;
@@ -2635,6 +2610,25 @@ img.fade
 
 /*User Page begins*/
 
+.carouselEntityDetails
+{
+	height: 100px;
+	text-align: center;
+	margin-top: 10px;
+}
+.carouselMainRing
+{
+	margin-top: 115px;
+	margin-left: 390px;
+}
+.carouselContent
+{
+	width: 950px;
+	margin-top: 110px;
+	height: 200px;
+	padding: 5px;
+	z-index: 10;
+}
 .socialList
 {
 	height: 240px;overflow-y: scroll;
@@ -2649,7 +2643,24 @@ img.fade
 	color: #fff;
 	padding: 5px;
 }
+
 /*User Page ends*/
+/*User Settings begins*/
+#userDetailsContainer
+{
+	width:950px; 
+	min-height: 800px;	
+	margin-bottom: 20px;
+}
+
+#profile_container {
+	position: relative;
+	width: 950px;
+	overflow: hidden;
+	padding: 10px;	
+}
+
+/*User Settings end*/
 /*Home begins*/
 #carouselNav
 {

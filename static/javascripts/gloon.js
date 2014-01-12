@@ -244,7 +244,7 @@ $(function() {
 						{
 							$('#signUpStatusMessage').addClass('success');
 							$('#signUpStatusMessage').text('Registration Successful');			
-											
+							$('#signupForm').find("input[type=text],input[type=password]").val("");				
 						}
 						else
 						{
@@ -256,7 +256,7 @@ $(function() {
 					}, 'json');
 		       	   }
 		       		
-		
+				
 				return false;
 			});
 	

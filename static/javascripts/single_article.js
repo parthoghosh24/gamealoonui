@@ -2,6 +2,70 @@
  * @author Partho
  */
 
+function fetchLinkData()
+{
+	var link=$('.newsLink').text().trim();
+	
+	if(link.length>0 && link.indexOf("http")!=-1)
+	{
+		console.log("here");				
+		$.post("/post/scrapeLink",{"newsLink":link},function(data){				
+					
+					if(data.status === "success")
+					{																		
+						var title=data.title;						
+						var description=data.description;						
+						var domain=data.domainUrl;						
+						var imgUrl=data.image;
+						var htmlContent="<a href='"+link+"' target='_blank'>"+
+						"<div class='floatLeft' style='width:400px;'>"+
+						"<p class='colorWhite'>"+title+"</p>"+
+						"<p class='linkColor font11'>"+domain+"</p>"+
+						"<p class='colorGray font13'>"+description+"</p>"+
+						"</div><img height='200' src='"+imgUrl+"'>"+
+						"</a>"						
+						$('#linkContent').hide();																
+						$('#linkContent').html(htmlContent);
+						$('#linkContent').addClass('linkDesign');
+						$('#linkContent').fadeIn();
+					}
+					else
+					{						
+						console.log('failed');
+						$('#parseError').fadeIn().delay(1000).fadeOut();
+					}				
+				}, 'json');
+	}	
+}
+
+function playVideo(el)
+{
+	var src=$(el).data('videourl');	
+	if(src.length>0 && src.indexOf("www.youtube.com")!=-1)
+	{
+		var processedUrl = src.replace("watch?v=","embed/");   
+		$.modal('<iframe width="853" height="480" src="'+processedUrl+'" frameborder="0" allowfullscreen></iframe>', {
+    			
+    			onOpen : function(dialog) {
+					dialog.overlay.fadeIn('slow', function() {
+						dialog.container.slideDown('slow', function() {
+							dialog.data.fadeIn('slow');
+						});
+					});
+				},
+			    containerCss:{
+			        backgroundColor:"#fff",
+			        borderColor:"#fff",
+			        height:490,
+			        padding:0,
+			        width:860
+			    },
+			    overlayClose:true
+		});
+	}
+	
+}
+
 function generateComment(data)
 			 {								 	      
 			 	      if(!$.isEmptyObject(data))
@@ -131,10 +195,34 @@ function updateNotCoolState(articleId)
 	}
 	
 }
-$(function(){
-	
 
+$(window).load(function() {   		
+	var newsLinkLength=$('.newsLink').length ;
+	if(newsLinkLength>0)
+	{
+		fetchLinkData();
+	}
+	
+});
+
+
+$(function(){
+	console.log("category: "+$('#articleCategory').text());
+	$(document).ajaxStart(function() {
+	  $('#loadingIcon').show();
+	});
+	
+	$(document).ajaxStop(function() {
+	  $('#loadingIcon').hide();
+	});
+	
+	
 	startTime=new Date().getTime();
+	
+	$('.videoPlayButton').click(function(){
+		playVideo(this);
+	});
+	
 	$('.notActiveButton').click(function() {
 		if("Guest"==$("div#userdetailsbox span").text())
 		 {

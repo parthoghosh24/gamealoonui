@@ -141,7 +141,7 @@ $(function(){
 			    var image=$('#previewFile').get(0).files[0];
 			    if(image.type.indexOf("image") == 0 && image.size < 1000000)
 			    {
-			    	var userName=parent.$('#box a#user').text();			    					    
+			    	var userName=parent.$('#box a#user').text().trim();			    					    
 					var formdata = new FormData();
 										 formdata.append('previewFile',image);		
 										 uploading=true;					 	

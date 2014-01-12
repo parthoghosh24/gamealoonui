@@ -262,8 +262,7 @@ class CreateOrUpdatePost:
             print "Article News link",articleFormData.newsSrcLink
                
         print "Article State: ",articleFormData.articleState
-        print "Article featured image url: ",articleFormData.featuredImage        
-        print "Article game Id: ",articleFormData.gameId
+        print "Article featured image url: ",articleFormData.featuredImage                
         
         url="http://localhost:9000/article/save"                                            
         values={
@@ -294,11 +293,9 @@ class CreateOrUpdatePost:
         data=urllib.urlencode(values)
         request = urllib2.Request(url,data)
         response = urllib2.urlopen(request)
-        articleCreationStatus = json.load(response)
-        articleCreationStatus['userId']=session.userId
+        articleCreationStatus = json.load(response)    
         print articleCreationStatus
         return json.dumps(articleCreationStatus)
-#        return "success"         
        
 
 class CreateOrUpdateComment:

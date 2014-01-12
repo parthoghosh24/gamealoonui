@@ -80,10 +80,8 @@ $(window).load(function() {
 		
 		$("#cVideos").cycle({
 			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,			
-			delay : 10,
+			randomizeEffects : true,			
+			delay : 100,
 			pager:'#vCarouselNav',
 			after: onVideoAfter,
 			pagerAnchorBuilder:function(idx, slide) { 
@@ -95,9 +93,7 @@ $(window).load(function() {
 		
 		$("#cNews").cycle({
 			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
+			randomizeEffects : true,			
 			delay : 100,
 			pager:'#nCarouselNav',
 			after: onNewsAfter,
@@ -110,10 +106,8 @@ $(window).load(function() {
 		
 		$("#cReviews").cycle({
 			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 1500,
+			randomizeEffects : true,			
+			delay : 100,
 			pager:'#rCarouselNav',
 			after: onReviewAfter,
 			pagerAnchorBuilder:function(idx, slide) { 
@@ -124,10 +118,8 @@ $(window).load(function() {
 		
 		$("#cGloonicles").cycle({
 			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 2000,
+			randomizeEffects : true,			
+			delay : 100,
 			pager:'#gCarouselNav',
 			after: onGloonicleAfter,
 			pagerAnchorBuilder:function(idx, slide) { 
