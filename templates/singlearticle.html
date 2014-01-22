@@ -34,24 +34,24 @@ $var description: $:article['articleTitle']- Gamealoon
 			<div id="coverSectionHead" class="coverSectionHeaderFooter">				
 				$if session.username=="Guest": 
 					<div id="voteButtons" class="floatLeft applyChunkFive">
-						<span id="yeah" class="icon-smile cursorPointer notSelected notActiveButton">Yeah!</span>
-						<span id="meh" class="icon-frown cursorPointer notSelected notActiveButton">Meh!</span>				
+						<span id="yeah" class="icon-smile cursorPointer notSelected notActiveButton yeahButton">Yeah!</span>
+						<span id="meh" class="icon-frown cursorPointer notSelected notActiveButton mehButton">Meh!</span>				
 					</div>
 				$else:		
 					<div id="voteButtons" class="floatLeft applyChunkFive">
 						$if article['articleUserCoolState'] == 1:
-							<span id="yeah" class="icon-smile cursorPointer selected activeButton">Yeah!</span>
+							<span id="yeah" class="icon-smile cursorPointer selected activeButton yeahBg">Yeah!</span>
 						$else:
-							<span id="yeah" class="icon-smile cursorPointer notSelected activeButton">Yeah!</span>
+							<span id="yeah" class="icon-smile cursorPointer notSelected activeButton yeahButton">Yeah!</span>
 							
 						$if article['articleUserNotCoolState'] == 1:					
-							<span id="meh" class="icon-frown cursorPointer selected activeButton">Meh!</span>
+							<span id="meh" class="icon-frown cursorPointer selected activeButton mehBg">Meh!</span>
 						$else:
-							<span id="meh" class="icon-frown cursorPointer notSelected activeButton">Meh!</span>				
+							<span id="meh" class="icon-frown cursorPointer notSelected activeButton mehButton">Meh!</span>				
 					</div>			
 			<div id="moreInformation" class="floatRight fontWeightBold" >
 					
-			<span class="icon-fire-1">Yet to ignite</span>
+			<span class="icon-fire-1">$article['articleHotnessLevel']</span>
 			<span class="icon-smile">$article['articleCoolScore']</span>
 			<span class="icon-frown">$article['articleNotCoolScore']</span>
 			<span class="icon-users">$article['articleCommentCount']</span>
@@ -73,8 +73,10 @@ $var description: $:article['articleTitle']- Gamealoon
 				                		<div id="gameRow">
 				                			$if categoryInLower == "review" or categoryInLower == "news" or categoryInLower == "video":
 				                				$if len(article['articleGame'])>0:
-						                			<div id="gameBoxArt">                				
-						                					<img id="$article['articleGame']['gameId']" src="$article['articleGame']['boxshotPath']" height="150" title="$article['articleGame']['title']">                				                				
+						                			<div id="gameBoxArt">            
+						                					<a href="/game/$article['articleGame']['gameEncodedUrl']">
+						                						<img id="$article['articleGame']['gameId']" src="$article['articleGame']['boxshotPath']" height="150" title="$article['articleGame']['title']">
+						                					</a>    					                				                				
 						                			</div>
 				                			$if categoryInLower == "review":
 				                			
@@ -89,7 +91,7 @@ $var description: $:article['articleTitle']- Gamealoon
 				                		<div id="author" class="floatRight authorPostMargin">
 				                			<div id="userPostAndCreatorOuterCircle" class="outerBox">
 				                				<div id="userPostAndCreatorInnerCircle" class="innerBox unfollowRing ">
-				                					<a href="/$author['articleAuthorUsername']"><img src="$session.userAvatar" alt="$author['articleAuthorUsername']" title="$author['articleAuthorUsername']" width="150" height="150"></a>
+				                					<a href="/$author['articleAuthorUsername']"><img src="$author['articleAuthorAvatarPath']" alt="$author['articleAuthorUsername']" title="$author['articleAuthorUsername']" width="150" height="150"></a>
 				                				</div>
 				                			</div>
 				                		</div>    
@@ -104,13 +106,13 @@ $var description: $:article['articleTitle']- Gamealoon
 							                			<div id="snippetText">
 							                				$if categoryInLower == "review":
 							                					<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
-							                					<p class="colorGray marginTop10 font14">$article['articleBody']</p>
+							                					<p class="colorGray marginTop10 font14">$:article['articleBody']</p>
 							                				$elif categoryInLower == "news":
 							                					<i id="snippetTextTitle" class="icon-signal-2 colorWhite font20">Bulletin</i>
-							                					<p class="colorGray marginTop10 font14">$article['articleBody']</p>
+							                					<p class="colorGray marginTop10 font14">$:article['articleBody']</p>
 							                				$elif categoryInLower == "video":
 							                					<i id="snippetTextTitle" class="icon-play-3  colorWhite font20">Caption</i>
-							                					<p class="colorGray marginTop10 font14">$article['articleBody']</p>
+							                					<p class="colorGray marginTop10 font14">$:article['articleBody']</p>
 							                				$else:
 							                				    <i id="snippetTextTitle" class="icon-user colorWhite font20">$author['articleAuthorUsername'] thinks...</i>            				
 							                					<div class="colorGray marginTop10 font14">$:article['articleBody']</div>                				                				
@@ -135,7 +137,7 @@ $var description: $:article['articleTitle']- Gamealoon
 									                					<dt class="icon-emo-angry">
 									                						<i>Stinks</i>                						
 									                					</dt>
-									                					$if len(article['articleReviewSweetPoints'])==0:
+									                					$if len(article['articleReviewStinkPoints'])==0:
 									                						<p id="noStinkPoint" class="noReviewPoints">No Stink points</p>
 									                					$else:
 									                						$for stink in article['articleReviewStinkPoints']:
@@ -213,7 +215,7 @@ $var description: $:article['articleTitle']- Gamealoon
 											<div id="commentForm">	 				
 															 <form id="commentFormInput" method="get" class="overflowHidden">
 																 <textarea id="commentBody"  name="commentBody" cols="60" rows="10"></textarea><br>
-																 <button id="postContent" class="colorWhite blackBoxShadow icon-comment-1">Post Comment</button>	 					
+																 <button id="postContent" class="colorWhite blackBoxShadow icon-comment-1 cursorPointer">Post Comment</button>	 					
 															 </form>
 														 </div>
 														 <div id="commentList">

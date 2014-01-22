@@ -23,9 +23,9 @@ urls = (
         '/games','Games',        
         '/post/save','CreateOrUpdatePost',        
         '/post/scrapeLink','GetLinkData',
-        '/post/(.+)/create','InitCreatePost',        
-        '/platform/(.+)/(.+)','Platform',
-        '/article/article-preview','ArticlePreview',
+        '/post/(.+)/create','InitCreatePost',
+        '/post/(.+)/edit/(.+)','EditPost',        
+        '/platform/(.+)/(.+)','Platform',        
         '/article/updateATS','ArticleUpdateAverageTimeSpent',
         '/article/coolOrNotCool/','ArticleCoolOrNotCool',
         '/articles/(.+)/(.+)/(.+)','ArticleList',    
@@ -48,7 +48,7 @@ urls = (
         '/game/gameCreator','InitGameCreator',
         '/game/(.+)','SingleGame',
         '/user/userstats','UserStats',
-        '/profile/(.+)','UserProfile',        
+        '/profile/(.+)','UserSettings',        
         '/(.+)','SingleUser'                
         )
 
@@ -58,9 +58,10 @@ session = web.session.Session(app, store, initializer={'username':'Guest','userI
 web.config.session_parameters.update(cookie_name="test_cookie", cookie_domain="/",cookie_path=store,timeout=86400)    
 render = web.template.render(curPath+'/templates/', base='main', globals={'session':session})
 iframeTemplate = web.template.render(curPath+'/templates/', base='iframetemplate',globals={'session':session})
-
+baseUrl="http://162.144.38.150:9000"
 class Index:
-    def GET(self):       
+    def GET(self):
+        global baseUrl       
         print "cur path---->", curPath
         print "Session username---->", session.username
         print "Session loggedIn---->", session.loggedIn
@@ -69,8 +70,9 @@ class Index:
         print "Session baseUrl---->", session.baseUrl                                      
         url="http://localhost:9000/platform/all/all"
         response = urllib2.urlopen(url)
-        jsonData=json.load(response)        
-        session.baseUrl=jsonData['baseUrl']
+        jsonData=json.load(response)                
+        baseUrl=jsonData['baseUrl']
+        session.baseUrl=baseUrl
         if  not session.userAvatar:
             session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"
         web.header('Content-Type','text/html;charset=utf-8')
@@ -120,6 +122,19 @@ class ArticleList:
         response = urllib2.urlopen(request)
         articleList=json.load(response)
         return json.dumps(articleList)
+
+class FetchUserDrafts:
+    def GET(self, userId):
+        print "Here"
+        if  userId != session.userId:            
+            return web.redirect('/')   
+        else:                        
+            url="http://localhost:9000/articles/drafts/"+session.username       
+            request = urllib2.Request(url)        
+            response = urllib2.urlopen(request)
+            articleList=json.load(response)
+            return json.dumps(articleList)    
+        
 
 class ArticleCoolOrNotCool:
     def POST(self):
@@ -179,17 +194,7 @@ class SingleGame:
         web.header('Content-Type','text/html;charset=utf-8')
         return render.singlegame(gameJson)
     
-class UserProfile:
-    def GET(self,userid):        
-        if session.userId == userid:
-            url="http://localhost:9000/user/"+userid+"/1/"+session.username
-            response = urllib2.urlopen(url)
-            user=json.load(response)
-            print "USERPROFILE JSON", user
-            web.header('Content-Type','text/html;charset=utf-8')
-            return render.userprofile(user)
-        else:
-            return web.redirect("/") 
+
         
         
 class User: 
@@ -212,12 +217,31 @@ class FetchImages:
 
 class SingleUser:
     def GET(self,username):
-        url="http://localhost:9000/user/"+username+"/2/"+session.username
+        if session.loggedIn and username == session.username:                    
+            url="http://localhost:9000/user/"+username+"/2/"+session.username       
+        else: 
+            url="http://localhost:9000/user/"+username+"/1/"+session.username
         response = urllib2.urlopen(url)
         user=json.load(response)
+        
+        if session.loggedIn and username == session.username:
+            session.userAvatar=user['userAvatarUrl']   
         web.header('Content-Type','text/html;charset=utf-8')
         return render.singleuser(user)
 
+class UserSettings:
+    def GET(self,userid):        
+        if session.loggedIn and session.userId == userid:
+            url="http://localhost:9000/user/"+userid+"/3/"+session.username
+            response = urllib2.urlopen(url)
+            user=json.load(response)
+            print "USERPROFILE JSON", user
+            session.userAvatar=user['userAvatarUrl']
+            web.header('Content-Type','text/html;charset=utf-8')
+            return render.userprofile(user)
+        else:
+            return web.redirect("/") 
+        
 class UserStats:
     def GET(self):
         return "success"
@@ -228,6 +252,16 @@ class InitCreatePost:
             return web.redirect("/") 
         else:
             return render.postcreator()
+        
+class EditPost:
+    def GET(self, userId, articleId):
+        if session.userId == "Guest" or session.userId != userId:
+            return web.redirect("/") 
+        else:        
+            url="http://localhost:9000/article/''/"+articleId
+            response = urllib2.urlopen(url)
+            post=json.load(response)
+            return render.postedit(post)
 
 class GetLinkData:
     def POST(self):
@@ -254,9 +288,7 @@ class CreateOrUpdatePost:
         cat = articleFormData.category
         if cat == "review":
             print "Article Platform: ",articleFormData.platform
-            print "Article game score: ",articleFormData.gameScore
-            print "Article Review Sweets: ",articleFormData.sweets            
-            print "Article Review stinks: ",articleFormData.stinks
+            print "Article game score: ",articleFormData.gameScore            
             
         if cat == "news":
             print "Article News link",articleFormData.newsSrcLink
@@ -319,9 +351,7 @@ class CreateOrUpdateComment:
 
 class CreateOrUpdateUser:
     def POST(self):
-        userData = web.input()
-        print "User exist: ",userData.userExist
-        print "User userName: ",userData.userName
+        userData = web.input()                
         print "User firstName: ",userData.userFirstName
         print "User lastName: ",userData.userLastName
         print "User country: ",userData.country
@@ -383,16 +413,6 @@ class GetComment:
         comment=json.load(response)
         return json.dumps(comment)
                         
-class ArticlePreview:
-    def POST(self):
-        previewData = web.input()        
-        print "previewData: ", previewData
-        web.header("X-XSS-Protection","0")      
-        print "gameScore ",previewData.pGameScore       
-        score= float(previewData.pGameScore)/10   
-        previewPage={"title":previewData.ptitle, "subTitle":previewData.psubTitle, "body":previewData.pbody, "featuredImage":previewData.pfeaturedImageUrl, "category":previewData.pcategory,"gameBio":previewData.puserGameBio,"username":previewData.puserName,"articleGame":previewData.pGame, "articleGameBoxShot":previewData.pGameBoxShot,"gameScore":score}
-        web.header('Content-Type','text/html;charset=utf-8')
-        return render.postpreview(previewPage)        
 
 class ArticleUpdateAverageTimeSpent:
     def POST(self):
@@ -435,12 +455,13 @@ class Login:
         return json.dumps(user)    
         
 class Logout:
-    def GET(self):
+    def GET(self):        
         session.username="Guest"
         session.userId="Guest"
         session.loggedIn=False
-        session.kill()   
-        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"                        
+        session.kill()           
+        session.userAvatar=session.baseUrl+"/assets/images/default/avatar.png"              
+        print session.userAvatar          
         return "done"
     
 class Signup:

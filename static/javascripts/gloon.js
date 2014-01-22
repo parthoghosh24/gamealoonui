@@ -112,7 +112,7 @@ $(function() {
 					window.location.href='/';
 				}
 				else
-				{
+				{					
 					location.reload();
 				}
 					

@@ -72,8 +72,7 @@ $(window).load(function() {
 			timeout : 0,	
 			pager:'#carouselNav',
 			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        		    console.log('#carouselNav li:eq(' + idx + ')');
+        		// return selector string for existing anchor         		    
         			return '#carouselNav li:eq(' + idx + ')'; 
     }
 		});
@@ -223,7 +222,7 @@ $(window).load(function() {
 											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
-											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
@@ -254,7 +253,7 @@ $(window).load(function() {
 											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
-											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
@@ -285,7 +284,7 @@ $(window).load(function() {
 											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
-											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
 										'</div>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
@@ -383,13 +382,34 @@ $(function() {
 		}
 	});
 	
+	var loadingContent=false;
+	
     $('.loadMore').click(function() {
-    	var platform=$('.platormHeading').attr('id');    	
-    	var category=$(this).parents('div').attr('id');
-    	var categoryList=category+"List";
-    	var timestampVal = $('div.'+categoryList+' div.recentArticleDiv:last-child').attr('id');    	    	
-    	getData(platform, category, timestampVal);
+    	
+    	if(!loadingContent)
+    	{
+    		var platform='all';    	
+	    	var category=$(this).parents('div').attr('id');
+	    	var categoryList=category+"List";
+	    	var timestampVal = $('div.'+categoryList+' div.recentArticleDiv:last-child').attr('id');    
+	    	console.log("timestampVal: "+timestampVal);	    	
+	    	getData(platform, category, timestampVal);
+    	}
+    	    	
        });
+	
+	$(document).ajaxStart(function() {
+	   $('.loadMore').addClass('hiddenDiv');
+	   $('.contentLoading').removeClass('hiddenDiv');	  
+	   loadingContent = true;
+	});
+	
+	$(document).ajaxStop(function() {
+	   $('.loadMore').removeClass('hiddenDiv');
+	   $('.contentLoading').addClass('hiddenDiv');	  	   	 
+	   loadingContent = false;
+	});
+	
 	
 	$(document).on({
 	    mouseenter: function () {

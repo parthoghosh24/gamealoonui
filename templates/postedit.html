@@ -1,0 +1,251 @@
+$def with (post)
+$ categoryInLower = post['articleCategory'].lower()
+$ author = post['articleAuthor']
+$var title: Editing $:post['articleTitle']
+$var description: Editing $:post['articleTitle']
+
+<div class="mainContainer">
+	<div id="container_layout">
+		<div class="divider"> </div>
+		<div id="$post['articleFeaturedImageId']" class="coverSection" style="background-image: url($post['articleFeaturedImage']); background-size:960px 720px;">
+			<input type="hidden" id="articleState" name="articleState" value="$post['articleState']">		
+			<input type="hidden" id="articleId" name="articleId" value="$post['articleId']">
+			<a class="videoPlayButton" href="javascript:;"><i class="icon-play-circled2-1"></i></a>
+			<div id="coverSectionHeadPostCreator" class="applyFranklinGothic coverSectionHeaderFooter">						
+					<span id="selectedCategory" class="selectedCategory textCapitalization colorWhite $post['articleCategory']">
+						$post['articleCategory']
+					</span>								
+				<span id="postTitle" class="colorWhite textShadowOrange">
+						- <span id="postTitleText">$post['articleTitle']</span>
+						<span id="postTitleEdit" class="hiddenDiv">
+							<input class="width300" id="postTitleInput" name="postTitle" type="text" placeholder="Upto 60 characters" maxlength="60" value="$post['articleTitle']"/>
+							<a href="javascript:;" class="font16 doneEditiingButton" title="Update Title"><i class="icon-ok"></i></a>	
+						</span>
+						
+				</span>
+				<a id="changeTitle" href="javascript:;" title="Add title to this Post"><i class="icon-pencil-1 editButton"> </i></a>
+				<a id="imageUploader" href="javascript:;" title="Add featured Cover image of Post"><i class="icon-picture-3 editButton"> </i></a>
+				<a id="videoForm" href="javascript:;" title="Add a video to the post"><i class="icon-youtube-squared editButton"> </i></a>
+				<span id="addVideoUrl" class="hiddenDiv marginLeft10">
+							<input class="width300" id="videoUrlInput" name="videoUrlInput" type="text" placeholder="Youtube video link" value="$post['articleVideoLink']"/>
+							<a href="javascript:;" class="font16 doneEditiingButton" title="Add a video"><i class="icon-ok"></i></a>	
+				</span>
+			</div>					    		
+		</div>
+<div class="divider"> </div>
+<div id="postContainer" style="">
+<div id="initRow" class="positionAbsolute">
+<div id="gameRow">
+$if categoryInLower == "review" or categoryInLower == "news" or categoryInLower == "video":
+	$if len(post['articleGame'])>0:	
+		<div id="gameBoxArt">
+			<a id="gameSelector" href="javascript:;" title="Add a game">
+				<input type="hidden" id="gamePlatforms" name="gamePlatforms" value=""/>
+				<img id="$post['articleGame']['gameId']" src="$post['articleGame']['boxshotPath']" height="150">
+			</a>
+		</div>
+	$if categoryInLower == "review":		
+		<h3 id="reviewGamePlayedOn">
+			played on 
+			<a id="playedOn" title="Please select a game before selecting platform">
+				<span id="selectedGamePlatform" class="$post['articleReviewPlayedOnPlatform']">
+					$post['articleReviewPlayedOnPlatformFullTitle']
+				</span>
+			</a>
+			<div id="platformOptions" class="overflowHidden blackBoxShadow">  					
+				<h4>Choose Platfom</h4>
+				<form id="platformListForm" name="plaformListForm">
+					<div class="checkBoxFont divTable userInterestListBorderBottom">
+						<div class="divRow">
+							<div class="divCell"><input type="radio" id="ps3" name="playedOn" class="platform" value="ps3" disabled="disabled"/>Playstation 3</div>
+							<div class="divCell"><input type="radio" id="xbox360" name="playedOn" class="platform" value="xbox360" disabled="disabled"/>Xbox 360</div>
+							<div class="divCell"><input type="radio" id="ps4" name="playedOn" class="platform" value="ps4" disabled="disabled"/>Playstation 4</div>
+						</div>
+						
+						<div class="divRow">
+							<div class="divCell"><input type="radio" id="xboxOne" name="playedOn" class="platform" value="xboxOne" disabled="disabled"/>Xbox One</div>
+							<div class="divCell"><input type="radio" id="wiiu" name="playedOn" class="platform" value="wiiu" disabled="disabled"/>WII-U</div>
+							<div class="divCell"><input type="radio" id="pc" name="playedOn" class="platform" value="pc" disabled="disabled"/>PC</div>
+						</div>
+						
+						<div class="divRow">
+							<div class="divCell"><input type="radio" id="vita" name="playedOn" class="platform" value="vita" disabled="disabled"/>PS VITA</div>
+							<div class="divCell"><input type="radio" id="n3ds" name="playedOn" class="platform" value="n3ds" disabled="disabled"/>N3DS</div>
+							<div class="divCell"><input type="radio" id="ios" name="playedOn" class="platform" value="ios" disabled="disabled"/>IOS</div>
+						</div>
+						
+						<div class="divRow">
+							<div class="divCell"><input type="radio" id="android" name="playedOn" class="platform" value="android" disabled="disabled"/>Android</div>  								
+						</div>
+						<div class="divRow divTableFooterHeight"> </div>
+					</div>	
+					<div class="marginTop10">
+						<button id="platformSet">Close</button>  							
+					</div>
+				</form>
+			</div>
+		</h3>
+</div> 
+	<div id="author" class="floatRight authorPostMargin">
+		<div id="userPostAndCreatorOuterCircle" class="outerBox">
+			<div id="userPostAndCreatorInnerCircle" class="innerBox unfollowRing">
+				<a href="/$session.username"><img src="$session.userAvatar" alt="$session.username" title="$session.username" width="150" height="150"></a>
+			</div>
+		</div>
+	</div>    
+</div>
+<div id="contentRow" class="overflowHidden">
+$if categoryInLower == "gloonicle":
+	<div id="postData" class="floatLeft" style="width: 800px;">                			
+$else:
+	<div id="postData" class="floatLeft">                			
+<div id="snippetText">
+$if categoryInLower == "review":
+	<i id="snippetTextTitle" class="icon-thumbs-up-1 colorWhite font20">Microverdict</i>
+	<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>
+	<p class="colorGray marginTop10 font14">$:post['articleBody']</p>
+								
+$if categoryInLower == "news":												
+	<i id="snippetTextTitle" class="icon-signal-2 colorWhite font20">Bulletin</i>
+	<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>
+	<p class="colorGray marginTop10 font14">$:post['articleBody']</p>
+								
+$if categoryInLower == "video":												
+	<i id="snippetTextTitle" class="icon-play-3  colorWhite font20">Caption</i>
+	<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>
+	<p class="colorGray marginTop10 font14">$:post['articleBody']</p>
+								
+$if categoryInLower == "gloonicle":
+	<i id="snippetTextTitle" class="icon-user colorWhite font20">$author['articleAuthorUsername'] thinks...</i>     
+	<a id="addSnippetText" href="javascript:;"><i title="add your verdict" class="icon-pencil-1 editButton"></i></a>       				
+	<div class="colorGray marginTop10 font14">$:post['articleBody']</div>
+								
+<div id="postSnippet" class="hiddenDiv">
+	<textarea id="snippetTextInput" cols="60" rows="5" class="hiddenDiv">$post['articleBody']</textarea>
+	<span id="maxCharLimitContainer" class="colorWhite font14" style="margin-left: 400px;">Limit(<span id="charMaxLimit"></span>)</span><a href="javascript:;" class="doneEditiingButton floatRight font16 marginRight61"><i class="icon-ok"></i></a><br>	                					
+	<div class="editorButtons displayInline nonGloonicleEditButtons">
+		<a href="javascript:;" onclick="onBold()"><span class="icon-bold colorBlack" title="Bold"></span></a>
+		<a href="javascript:;" onclick="onUnderline()"><span class="icon-underline colorBlack" title="Underline"></span></a>										     										    										    										    
+	</div>
+	<div class="editorButtons displayInline gloonicleEditButtons hiddenDiv">
+		<a href="javascript:;" onclick="onBold()"><span class="icon-bold colorBlack" title="Bold"></span></a>
+		<a href="javascript:;" onclick="onUnderline()"><span class="icon-underline colorBlack" title="Underline"></span></a>
+		<a href="javascript:;" onclick="onItalic()"><span class="icon-italic colorBlack" title="Italic"></span></a>  
+		<a href="javascript:;" onclick="onUlist()"><span class="icon-list-bullet colorBlack" title="Unorderd List"></span></a>
+		<a href="javascript:;" onclick="onOlist()"><span class="icon-list-numbered colorBlack" title="Ordered List"></span></a>
+		<a href="javascript:;" onclick="onLink()"><span class="icon-link colorBlack" title="Insert Link"></span></a>
+		<a href="javascript:;" onclick="onUnlink()"><span class="icon-unlink colorBlack" title="Remove Link"></span></a>
+		<a href="javascript:;" onclick="onOutdent()"><span class="icon-indent-left colorBlack" title="Left Indent"></span></a>
+		<a href="javascript:;" onclick="onIndent()"><span class="icon-indent-right colorBlack" title="Right Indent"></span></a>			     
+		<a href="javascript:;" onclick="onLeft()"><span class="icon-align-left colorBlack" title="Left"></span></a>
+		<a href="javascript:;" onclick="onCenter()"><span class="icon-align-center colorBlack" title="Center"></span></a>
+		<a href="javascript:;" onclick="onRight()"><span class="icon-align-right colorBlack" title="Right"></span></a>
+		<a href="javascript:;" onclick="onJustify()"><span class="icon-align-justify colorBlack" title="Justify"></span></a>
+		<a href="javascript:;" onclick="onInsertImage()"><span class="icon-picture-3 colorBlack" title="Insert Image"></span></a>										    
+		<a href="javascript:;" onclick="onUndo()"><span class="icon-reply colorBlack" title="Undo"></span></a>
+		<a href="javascript:;" onclick="onRedo()"><span class="icon-forward colorBlack" title="Redo"></span></a>
+	</div>			 						
+	
+	<iframe name="richEditor" id="richEditor" class="nonGlooniclePostSnippet"></iframe>
+</div>
+	                				
+</div>
+$if categoryInLower == "review":
+	<div id="reviewPoints" class="overflowHidden marginTop30">
+	<dl id="sweet" class="floatLeft reviewPointWidth">
+	<dt class="icon-emo-grin">
+		<i>Sweet</i>
+		<a id="sweetButton" href="javascript:;" class="reviewPointButtons"><i class="icon-plus"></i>Max 5 Sweets</a>
+	</dt>		           
+	$if len(post['articleReviewSweetPoints']) == 0:
+		<p id="noSweetPoint" class="noReviewPoints">No Sweet points
+	$else:			                					      			
+		<p id="noSweetPoint" class="noReviewPoints hiddenDiv">No Sweet points</p>	
+		$for sweet in post['articleReviewSweetPoints']:
+			<dd class='reviewPointDd'>
+				<i class='icon-thumbs-up-alt sweetIcon'></i>
+				<span class='colorWhite'>$sweet<a href='javascript:;' title='Edit Point' class='marginLeft5 colorGray editPoint'><i class='icon-edit'></i></a><a href='javascript:;' title='Remove Point' class='marginLeft5 colorGray removePoint'><i class='icon-cancel-circled'></i></a></span>
+				<input type='text' placeholder='Upto 50 chars' maxLength='50' value="$sweet" class="hiddenDiv">
+				<a href='javascript:;' title='Add Sweet' class='hiddenDiv marginLeft5 sweetEditButton doneEditiingButton font16'>
+					<i class='icon-ok'></i>
+				</a>
+			</dd>	                					               				
+	</dl>
+	                				
+	<dl id="stink" class="floatLeft reviewPointWidth">
+	<dt class="icon-emo-angry"> 
+		<i>Stinks</i>
+		<a id="stinkButton" href="javascript:;" class="reviewPointButtons"><i class="icon-plus" ></i>Max 5 Stinks</a>
+	</dt>	
+	$if len(post['articleReviewStinkPoints']) == 0:
+		<p id="noStinkPoint" class="noReviewPoints">No Stink points
+	$else:			                					      			
+		<p id="noStinkPoint" class="noReviewPoints hiddenDiv">No Stink points</p>	
+		$for stink in post['articleReviewStinkPoints']:
+			<dd class='reviewPointDd'>
+				<i class='icon-thumbs-down-alt stinkIcon'></i>
+				<span class='colorWhite'>$stink<a href='javascript:;' title='Edit Point' class='marginLeft5 colorGray editPoint'><i class='icon-edit'></i></a><a href='javascript:;' title='Remove Point' class='marginLeft5 colorGray removePoint'><i class='icon-cancel-circled'></i></a></span>
+				<input type='text' placeholder='Upto 50 chars' maxLength='50' value="$stink" class="hiddenDiv">
+				<a href='javascript:;' title='Add Stink' class='hiddenDiv marginLeft5 stinkEditButton doneEditiingButton font16'>
+					<i class='icon-ok'></i>
+				</a>
+			</dd>	                					                				
+	</dl>
+	</div>
+$if categoryInLower == "news":	
+	<div id="newsSource" class="marginTop20">
+		<i class="icon-link-ext-alt colorWhite font20">Source Link</i>
+		<a id="newsSourceLinkButton" href="javascript:;"><i title="add News Source" class="icon-link editButton"> </i></a>
+		<p id="linkDefaultData" class="font14 marginTop30"><a class="newsLink" href="$post['articleNewsLink']" target="_blank">$post['articleNewsLink']</a></p>
+		<div id="newsLinkContainer" class="hiddenDiv marginTop30">                					
+			<input type="text" name="newsLink" id="newsLink" class="width300" value="$post['articleNewsLink']">
+			<a href="javascript:;" class="doneEditiingButton font16"><i class="icon-ok"></i></a><br>                					                					                			
+		</div>
+		<span id="parseError" class="hiddenDiv error font13 fontWeightBold">Unable to parse link</span>
+		<div id="linkContent" class="marginTop20 overflowHidden">
+			<p id="loadingIcon" class="hiddenDiv textCenter font23 colorLightGray"><i class="icon-spin5 animate-spin"></i></p>
+		</div>
+	</div>
+<div id="postCreatorButtons" class="marginTop30">
+<button id="save" class="cursorPointer padding2"><span class="icon-doc-inv">Save</span></button>
+$if post['articleState'] == 2: 
+	<button id="publish" class="padding2 disableOpacity" disabled="disabled"><span class="icon-publish">Publish</span></button>
+$else:
+	<button id="publish" class="cursorPointer padding2"><span class="icon-publish">Publish</span></button>	
+<button id="close" class="cursorPointer padding2"><span class=" icon-cancel-circled-1">Close</span></button>
+</div>
+</div>
+
+$if categoryInLower == "review": 
+	<div id="score" class="floatLeft">
+		<div id="lineSegment1">
+			<div class="reviewLine"> </div>
+	    </div>
+		<div id="authorScore">
+			<div id="userScoreDonutContainer" class="dottedScoreBorder cursorPointer" title="Score Dial">
+				<input value="$post['articleGameUserRawScore']" class="knob" data-width="100" data-angleOffset=1 data-angleArc=360 data-linecap=round data-min="0" data-displayPrevious=true data-max="100" data-step="1" value="0" data-fgColor="#FF4500" data-thickness=".2">                													
+	        </div>
+		</div>                  		
+	</div>
+</div>
+</div>        
+</div>
+</div>
+		
+<div id="imageSelectorForEditor" class="imageUploaderBox">
+					 	<div class="imageUploaderOverlay"> </div>		
+					 	<div id="editorImageSelector">
+					 		<div id="imageSection">
+					 			<div id="imageHolder">
+					 				<img id="none" src="" width="640" height="480" class="cursorPointer"/><br>
+					 				<span id="imageCaption" class="font14" contenteditable="true"><i>Click to set caption</i></span>
+					 			</div>
+					 		</div>
+					 		<div id="buttonSection">
+					 			<button id="editorImageSet" class="applyBevan imageAndVideoButtons colorWhite" onclick="onSetImage()">SET</button>
+					 			<button id="editorImageClose" class="applyBevan imageAndVideoButtons colorWhite" onclick="editorImageClose()">CANCEL</button>
+					 		</div>	
+					 	</div>			 	
+</div>
+<script src="/static/javascripts/post_creator.js"></script>
+<script src="/static/javascripts/jquery.knob.js"></script>

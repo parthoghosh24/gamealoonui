@@ -2,178 +2,214 @@
  * @author Partho
  */
 
-$(window).load(function() {
-		
-	  function onAllArticlesAfter()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#allArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#allArticleTitle span').text(title);
-			$('a#allArticleAuthor').attr('href','/'+username);
-			$('a#allArticleAuthor span').text(username);	     
-			$('#allCommentCount').text(commentCount);   
-		}		
-		
-		function onVideosAfter()
-		{
-			var title = $(this).data('title');
-			var encodedTitle=$(this).data('encodedtitle');
-			var username=$(this).data('username');
-			var commentCount=$(this).data('commentcount');
-			$('a#videoArticleTitle').attr('href','/article/'+username+'/'+encodedTitle);
-			$('a#videoArticleTitle span').text(title);
-			$('a#videoArticleAuthor').attr('href','/'+username);
-			$('a#videoArticleAuthor span').text(username);
-			$('#videoCommentCount').text(commentCount);   	        
-		}				
-		
-		
-		
-		
-		
-		$("#cAll").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,			
-			delay : 10,
-			pager:'#allCarouselNav',
-			after: onAllArticlesAfter,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        			return '#allCarouselNav span:eq(' + idx + ') a'; 
-    }
-		});	
-		
-		$("#cVideo").cycle({
-			fx : 'scrollUp, scrollDown, scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 100,
-			pager:'#videoCarouselNav',
-			after: onVideosAfter,
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor              		           		   	        		   
-        			return '#videoCarouselNav span:eq(' + idx + ') a'; 
-    }
-		});	
-		
-		$("#cActivity").cycle({
-			fx : 'scrollLeft, scrollRight',
-			randomizeEffects : true,
-			speed : 400,
-			timeout : 5000,
-			delay : 1000,
-			pager:'#activityCarouselNav',			
-			pagerAnchorBuilder:function(idx, slide) { 
-        		// return selector string for existing anchor 
-        			return '#activityCarouselNav span:eq(' + idx + ') a'; 
-    }
-		});				
-		
-	});
-
-function  applyPauseResumeToCarousel()
+ function onArticleClick()
  {
- 	//all
- 	$('#allBottomTab span span a.playPause').click(function() { 		
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cAll").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cAll").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-	
-	//videos	
-	$('#videosBottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cVideo").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cVideo").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
-		
-	//activities	
-	$('#activityBottomTab span span a.playPause').click(function() {
-		  if($(this).children('i').hasClass('icon-pause-3'))
-		  {
-		  	$("#cActivity").cycle('pause');
-		  	$(this).children('i').removeClass('icon-pause-3');
-		  	$(this).children('i').addClass('icon-play-2');
-		  }
-		  else
-		  {
-		  	
-		  	$("#cActivity").cycle('resume');
-		  	$(this).children('i').removeClass('icon-play-2');
-		  	$(this).children('i').addClass('icon-pause-3');
-		  }
-		});
+ 	var timestamp=new Date().getTime();
+	var gameId=$('#userPostAndCreatorInnerCircle a img').attr('id');
+	 
+	$('#allTab').click(function() {
+				if($('.allList').is(':empty'))
+				{
+					getData(gameId,"all", timestamp);					
+				}	
+				$(this).addClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
 				
+				$('#all').removeClass('hiddenDiv');				
+				$('#review').addClass('hiddenDiv');
+				$('#feature').addClass('hiddenDiv');
+				$('#news').addClass('hiddenDiv');
+				$('#gloonicle').addClass('hiddenDiv');
+				$('#video').addClass('hiddenDiv');
+		});
+	$('#reviewTab').click(function() {				
+				console.log($('.reviewList').is(':empty'));
+				if($('.reviewList').is(':empty'))
+				{
+					console.log("Getting review");
+					getData(gameId,"review", timestamp);					
+				}	
+				$(this).addClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');
+				
+				$('#all').addClass('hiddenDiv');
+				$('#review').removeClass('hiddenDiv');
+				$('#feature').addClass('hiddenDiv');
+				$('#news').addClass('hiddenDiv');
+				$('#gloonicle').addClass('hiddenDiv');
+				$('#video').addClass('hiddenDiv');
+		});	
+	$('#newsTab').click(function() {
+				if($('.newsList').is(':empty'))
+				{
+					getData(gameId,"news", timestamp);					
+				}	
+				$(this).addClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');
+				
+				$('#all').addClass('hiddenDiv');
+				$('#review').addClass('hiddenDiv');
+				$('#feature').addClass('hiddenDiv');
+				$('#news').removeClass('hiddenDiv');
+				$('#gloonicle').addClass('hiddenDiv');
+				$('#video').addClass('hiddenDiv');
+		
+		});
+	$('#gloonicleTab').click(function() {
+				if($('.gloonicleList').is(':empty'))
+				{
+					getData(gameId,"gloonicle", timestamp);					
+				}	
+				$(this).addClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				$('#videoTab').removeClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');
+				
+				$('#all').addClass('hiddenDiv');
+				$('#review').addClass('hiddenDiv');
+				$('#feature').addClass('hiddenDiv');
+				$('#news').addClass('hiddenDiv');
+				$('#gloonicle').removeClass('hiddenDiv');
+				$('#video').addClass('hiddenDiv');
+		
+		});						
+	$('#videoTab').click(function() {
+				if($('.videoList').is(':empty'))
+				{
+					getData(gameId,"video", timestamp);					
+				}	
+				$(this).addClass('disableOpacity');
+				$('#reviewTab').removeClass('disableOpacity');
+				$('#gloonicleTab').removeClass('disableOpacity');
+				$('#newsTab').removeClass('disableOpacity');
+				$('#allTab').removeClass('disableOpacity');				
+				
+				$('#all').addClass('hiddenDiv');
+				$('#review').addClass('hiddenDiv');
+				$('#feature').addClass('hiddenDiv');
+				$('#news').addClass('hiddenDiv');
+				$('#gloonicle').addClass('hiddenDiv');
+				$('#video').removeClass('hiddenDiv');
+		
+		});	
  } 
-
+ 
 function getData(gameId, category, timestampVal)
-    {    	    	
+    {    	    	    	
     	$.get('/articles/'+gameId+'/'+category+'/3',{"timestamp":timestampVal},function(data){
     		if(data.length>0)
     		{
     			$.each(data, function(index, item) {
     				var categoryIconMap ={};
-    				categoryIconMap["news"]="icon-signal-2";
-    				categoryIconMap["review"]="icon-thumbs-up-1";
-    				categoryIconMap["feature"]="icon-star";
-    				categoryIconMap["gloonicle"]="icon-user";
-    				categoryIconMap["video"]="icon-play-3";
+    				categoryIconMap["news"]=["icon-signal-2","News- user shared news"];
+    				categoryIconMap["review"]=["icon-thumbs-up-1","Review- user generated crisp and micro reviews"];    				
+    				categoryIconMap["gloonicle"]=["icon-user","Gloonicle- user video game blogs"];
+    				categoryIconMap["video"]=["icon-play-3","Video- user created and shared videos"];
     				
-    				var articleHtml='<div class="recentArticleDiv" id="'+item.articleTimestamp+'">'+
-						'<div class="articleContentHeader">'+							
-						'<span class="textCapitalization '+categoryIconMap[item.articleCategory.toLowerCase()]+' '+item.articleCategory.toLowerCase()+' marginRight10 fontWeightBold font11 colorWhite">'+item.articleCategory+'</span>'+
-						'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'"><span class="applyMontserratBold font13 colorBlack">'+item.articleTitle+'</span></a>'+	
-						'<a href="/'+item.articleAuthor+'"><span class="floatRight icon-user-2 colorWhite articleUsernameBox">'+item.articleAuthor+'</span></a>'+			
-						'</div>'+	
-						'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 570px;">'+	
-						'<div class="articleContentPreviewData">'+
-						'<p>'+
-						'<span class="applyJura colorWhite font12">'+item.articleTimeSpentFromPublish+' - </span>'+	
-						'<span class="colorWhite applyFranklinGothicRegular font13">'+item.articleSubTitle+'</span>'+		
-						'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'"><i class="icon-ellipsis colorWhite moreLink"></i></a>'+			
-						'</p>'+			
-						'</div>'+			
-						'</div>'+			
-						'<div class="articleContentFooter">'+		
-						'<span class="icon-gamepad floatLeft fontWeightBold">';
-						$.each(item.articlePlatforms, function(index, platform)
-						{
-							articleHtml+='<a id="'+platform.shortTitle+'" href="/platform/'+platform.shortTitle+'/all" target="_blank"><span class="'+platform.shortTitle+' marginLeft5 interestUserProfileFontSize" >'+platform.title+'</span></a>';
-						});
-						articleHtml+='</span>'+	
-						'<span class="floatRight fontWeightBold font10">'+							
-						'<span><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
-						'<span><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+	
-						'<span><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+		
-						'</span>'+		
-						'</div>'+		
-						'</div>';	
+    				var articleHtml="";    				
+    				   if(index == 1 || index == 6)
+    				   {
+    				   		articleHtml+='<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 620px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 620px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font19 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   }
+    				   else if(index == 3 || index ==4 || index ==8 || index ==9)
+    				   {
+    				   		articleHtml+='<div class="recentArticleDiv smallPostDiv floatLeft marginLeft20" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   }
+    				   else
+    				   {
+    				   			articleHtml+='<div class="recentArticleDiv smallPostDiv floatLeft" id="'+item.articleTimestamp+'">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+
+										'<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">'+
+											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
+											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
+										'</div>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/article/'+item.articleAuthor+'/'+item.articleEncodedUrlTitle+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'<span class="font11 applyJura marginLeft5">-'+item.articleTimeSpentFromPublish+'</span></p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'								    				   			
+    				   }
+    				   	
 						
 					var articleElement = $(articleHtml);	
 					articleElement.hide();					
@@ -189,81 +225,54 @@ function getData(gameId, category, timestampVal)
     	},'json');  
     }
      	
-$(function(){
-	applyPauseResumeToCarousel();
-	$(document).ajaxStart(function() {
-	  $('#interestedInButton').addClass('disableOpacity');
-	  $('#interestedInButton').prop("disabled",true);
-	});
-	$(document).ajaxStop(function() {
-		$('#interestedInButton').removeClass('disableOpacity');
-	    $('#interestedInButton').prop("disabled",false);
-	});
+$(function(){	
+	onArticleClick();
+	
+	
 	
     
-    $("#tabs-min").tabs({		
-		beforeActivate: function(event, ui){						 
-			var timestamp=new Date().getTime();
-			var gameId=$('#gameBoxArt img').attr('id');			
-			if(ui.newPanel.index()== 2)
-			{	
-				if($('.videoList').is(':empty'))
-				{
-					getData(gameId,"video", timestamp);					
-				}												
-				
-			}
-			else if(ui.newPanel.index()== 3)
-			{
-				//TODO fetch users			
-						
-			}
-			else if(ui.newPanel.index()== 4)
-			{				
-				//TODO fetch activities							
-			}			
-			else
-			{				
-				if($('.allList').is(':empty'))
-				{
-					getData(gameId,"all", timestamp);
-					
-				}
-				
-				
-			}
-		}
-	});
+    $("#tabs-min").tabs();
     
     //Interested Not-interested
-			 $('#interestedInButton').click(function() {
-			 	   if($('#interestedInButton').hasClass('follow'))
-			 	   {
-			 	   	  $.post('/user/gameInterestedOrNot',{"gameId":$('#gameBoxArt img').attr('id'),"type":0},function(data){
-			 	   	  	if(data.status == "success")
-			 	   	  	{
-			 	   	  		$('#interestedInButton').removeClass('follow');
-			 	   	  		$('#interestedInButton').addClass('unfollow');   
-			 	   	  		$('#interestedInButton').text('- Not Interested');
-			 	   	  	}
-			 	   	  	
-			 	   	  },'json');
-			 	   	  
-			 	   	  
-			 	   }
-			 	   if($('#interestedInButton').hasClass('unfollow'))
-			 	   {			 	   	
-			 	   	$.post('/user/gameInterestedOrNot',{"gameId":$('#gameBoxArt img').attr('id'),"type":1},function(data){
-			 	   		if(data.status == "success")
-			 	   	  	{
-			 	   	  		$('#interestedInButton').removeClass('unfollow');
-			 	   	  		$('#interestedInButton').addClass('follow');
-			 	   	  		$('#interestedInButton').text('+ Interested');
-			 	   	  	}
-			 	   	  	   
-			 	   	  },'json');
-			 	   	  	
-			 	   }			 	   
+			 $('#userPostAndCreatorInnerCircle a').click(function() {
+			 	   var loggedInStatus=$('.loginButton').data('loggedin');		
+			 	   if("False"==loggedInStatus)
+		 		   {
+		 				openLoginModal();
+		 		   }
+		 		   else
+		 		   {
+		 		   		if(!blockSocial)
+		 		   		{
+		 		   			var gameId= $('#userPostAndCreatorInnerCircle a img').attr('id').trim();
+		 		   			if($('#userPostAndCreatorInnerCircle').hasClass('unfollowRing'))
+						 	   {
+						 	   	  $.post('/user/gameInterestedOrNot',{"gameId":gameId,"type":0},function(data){
+						 	   	  	if(data.status == "success")
+						 	   	  	{
+						 	   	  		$('#userPostAndCreatorInnerCircle').removeClass('unfollowRing');
+										$('#userPostAndCreatorInnerCircle').addClass('followRing'); 
+						 	   	  	}
+						 	   	  	
+						 	   	  },'json');
+						 	   	  
+						 	   	  
+						 	   }
+						 	   if($('#userPostAndCreatorInnerCircle').hasClass('followRing'))
+						 	   {			 	   	
+						 	   	$.post('/user/gameInterestedOrNot',{"gameId":gameId,"type":1},function(data){
+						 	   		if(data.status == "success")
+						 	   	  	{
+						 	   	  		$('#userPostAndCreatorInnerCircle').removeClass('followRing');
+					 	   	  			$('#userPostAndCreatorInnerCircle').addClass('unfollowRing');
+						 	   	  	}
+						 	   	  	   
+						 	   	  },'json');
+						 	   	  	
+						 	   }
+		 		   		}
+		 		   }
+			 	   			 	   
 				 });
 				 
 	var mode = 1;
@@ -327,6 +336,56 @@ $(function(){
 			    	$("#gameScoredonutData").text(gameScore.toFixed(1));
 			    }
 			    
-			    
+			 
+		$(document).on({
+		    mouseenter: function () {
+		        $(this).children('.postTop').slideDown("slow");
+		    },
+		    mouseleave: function () {
+		        $(this).children('.postTop').slideUp(150);
+		    }
+		},".articleContentPreview");
+		
+		
+		var blockSocial = false;
+		
+		$(document).ajaxStart(function() {
+		  $('#userPostAndCreatorInnerCircle').addClass('disableOpacity');	  
+		  blockSocial = true;
+		  if(loadMoreClicked)
+		  {
+		  	$('.loadMore').addClass('hiddenDiv');
+		    $('.contentLoading').removeClass('hiddenDiv');	  
+		    loadingContent = true;
+		  }
+		});
+		
+		$(document).ajaxStop(function() {
+		  $('#userPostAndCreatorInnerCircle').removeClass('disableOpacity');	  
+		  blockSocial = false;
+		  if(loadMoreClicked)
+		  {
+		  	$('.loadMore').removeClass('hiddenDiv');
+		    $('.contentLoading').addClass('hiddenDiv');	  	   	 
+		    loadingContent = false;
+		  	loadMoreClicked=false;
+		  }
+		});
+	
+	
+		var loadingContent=false;
+		var loadMoreClicked = false;
+		
+		$('.loadMore').click(function() {
+			loadMoreClicked = true;
+    		if(!loadingContent)
+    		{
+		    	var gameId=$('#userPostAndCreatorInnerCircle a img').attr('id').trim();	    	
+		    	var category=$(this).parents('div').attr('id');
+		    	var categoryList=category+"List";
+		    	var timestampVal = $('div.'+categoryList+' div.recentArticleDiv:last-child').attr('id');    	    	
+		    	getData(gameId, category, timestampVal);
+		    }	
+       	});
 	
 });

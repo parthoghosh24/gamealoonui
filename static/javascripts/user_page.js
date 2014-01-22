@@ -170,6 +170,7 @@ $(window).load(function() {
  
  function getData(username, category, timestampVal)
     {    	    	    	
+    	var userId=$('#user').data('userid');
     	$.get('/articles/'+username+'/'+category+'/2',{"timestamp":timestampVal},function(data){
     		if(data.length>0)
     		{
@@ -189,13 +190,16 @@ $(window).load(function() {
 											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
-											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
 										'</div>'+
+										'<p class="postEditButton hiddenDiv" style="width: 620px;">'+
+											'<a id="'+item.articleId+'" href="/post/'+userId+'/edit/'+item.articleId+'"><i class="icon-edit colorWhite textShadowOrange font40"></i></a>'+
+										'</p>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
 												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
-														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
@@ -220,13 +224,16 @@ $(window).load(function() {
 											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
-											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
 										'</div>'+
+										'<p class="postEditButton hiddenDiv" style="width: 300px;">'+
+											'<a id="'+item.articleId+'" href="/post/'+userId+'/edit/'+item.articleId+'"><i class="icon-edit colorWhite textShadowOrange font40"></i></a>'+
+										'</p>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
 												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
-														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
@@ -251,13 +258,16 @@ $(window).load(function() {
 											'<span class="floatLeft"><i class="font13 icon-users"></i>'+item.articleCommentCount+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-frown"></i>'+item.articleNotCoolScore+'</span>'+
 											'<span class="floatRight"><i class="font13 icon-smile"></i>'+item.articleCoolScore+'</span>'+										
-											'<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>'+
+											'<span class="floatRight"><i class="icon-fire-1"></i>'+item.articleHotnessLevel+'</span>'+
 										'</div>'+
+										'<p class="postEditButton hiddenDiv" style="width: 300px;">'+
+											'<a id="'+item.articleId+'" href="/post/'+userId+'/edit/'+item.articleId+'"><i class="icon-edit colorWhite textShadowOrange font40"></i></a>'+
+										'</p>'+
 										'<div class="postBottom">'+
 											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
 												'<div class="innerBox unfollowRing  postListInnerRing">'+
 													'<a href="'+item.articleAuthor+'">'+
-														'<img src="/static/images/photo.jpg" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
 													'</a>'+
 												'</div>'+
 											'</div>'+
@@ -288,7 +298,64 @@ $(window).load(function() {
     		
     	},'json');  
     }
-    	
+ 
+ function getDrafts()
+    {    	    	    	
+    	var userId=$('#user').data('userid');
+    	console.log("Drafts userId: "+userId);
+    	$.get('/user/drafts/'+userId,function(data){
+    		console.log("here");
+    		if(data.length>0)
+    		{
+    			$.each(data, function(index, item) {
+    				var categoryIconMap ={};
+    				categoryIconMap["news"]=["icon-signal-2","News- user shared news"];
+    				categoryIconMap["review"]=["icon-thumbs-up-1","Review- user generated crisp and micro reviews"];    				
+    				categoryIconMap["gloonicle"]=["icon-user","Gloonicle- user video game blogs"];
+    				categoryIconMap["video"]=["icon-play-3","Video- user created and shared videos"];
+    				
+    				var articleHtml='<div class="recentArticleDiv smallPostDiv floatLeft marginLeft20">'+								
+									'<div class="articleContentPreview" style="background-image: url('+item.articleFeaturedImage+');background-size: 300px 240px;">'+										
+										'<p class="postEditButton hiddenDiv" style="width: 300px;">'+
+											'<a id="'+item.articleId+'" href="/post/'+userId+'/edit/'+item.articleId+'"><i class="icon-edit colorWhite textShadowOrange font40"></i></a>'+
+										'</p>'+
+										'<div class="postBottom">'+
+											'<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<a href="'+item.articleAuthor+'">'+
+														'<img src="'+item.articleAuthorAvatar+'" alt="'+item.articleAuthor+'" title="'+item.articleAuthor+'" width="40" height="40">'+
+													'</a>'+
+												'</div>'+
+											'</div>'+
+											'<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">'+
+												'<div class="innerBox unfollowRing  postListInnerRing">'+
+													'<span class="postListCategoryDim '+categoryIconMap[item.articleCategory][0]+' '+item.articleCategory+' colorWhite" title="'+categoryIconMap[item.articleCategory][1]+'"></span>'+													
+												'</div>'+
+											'</div>'+
+											'<a href="/post/'+userId+'/edit/'+item.articleId+'">'+
+												'<p class="applyMontserratBold colorWhite font14 postTitle">'+item.articleTitle+'</p>'+
+											'</a>'+
+										'</div>'+
+									'</div>'+																
+								'</div>'
+    				   	
+    				   
+    				   
+    				   	
+						
+					var articleElement = $(articleHtml);	
+					articleElement.hide();					
+					var articles =$(".draftList");  
+				    articles.append(articleElement);
+				    articleElement.fadeIn();
+					
+				});				
+				$("#drafts div.noData").addClass('hiddenDiv');
+    		}
+    		
+    	},'json');  
+    }
+       	
  function getSocialData(username)
  {
  	$.get('/user/social/'+username,function(data){
@@ -404,15 +471,12 @@ $(function(){
 				}			
 				else if(ui.newPanel.index()== 3)
 				{				
-					/*
-					if($('.newsList').is(':empty'))
-										{
-											getData(platform,"news", timestamp);
-											
-										}*/
 					
-					
-					
+					if($('.draftList').is(':empty'))
+					{
+						console.log("Drafts called");
+						getDrafts();											
+					}					
 				}
 				else if(ui.newPanel.index()== 4)
 				{				
@@ -432,37 +496,52 @@ $(function(){
 		}
 			});
 	
-	$(document).on({
-	    mouseenter: function () {
-	        $(this).children('.postTop').slideDown("slow");
-	    },
-	    mouseleave: function () {
-	        $(this).children('.postTop').slideUp(150);
-	    }
-	},".articleContentPreview");
+
 	
 	var blockSocial = false;
 	$(document).ajaxStart(function() {
 	  $('#userPostAndCreatorInnerCircle').addClass('disableOpacity');	  
 	  blockSocial = true;
+	  if(loadMoreClicked)
+	  {
+	  	$('.loadMore').addClass('hiddenDiv');
+	    $('.contentLoading').removeClass('hiddenDiv');	  
+	    loadingContent = true;
+	  }
 	});
 	$(document).ajaxStop(function() {
 	  $('#userPostAndCreatorInnerCircle').removeClass('disableOpacity');	  
 	  blockSocial = false;
+	  if(loadMoreClicked)
+	  {
+	  	$('.loadMore').removeClass('hiddenDiv');
+	    $('.contentLoading').addClass('hiddenDiv');	  	   	 
+	    loadingContent = false;
+	  	loadMoreClicked=false;
+	  }
 	});
 	
+	var loadingContent=false;
+	var loadMoreClicked = false;
     $('.loadMore').click(function() {
-    	var username=$('#userName span').text();	    	
-    	var category=$(this).parents('div').attr('id');
-    	var categoryList=category+"List";
-    	var timestampVal = $('div.'+categoryList+' div.recentArticleDiv:last-child').attr('id');    	    	
-    	getData(username, category, timestampVal);
+    	loadMoreClicked = true;
+    	if(!loadingContent)
+    	{
+    		var username=$('#userPostAndCreatorInnerCircle img').attr('title').trim();	    	
+    		var category=$(this).parents('div').attr('id');
+    		var categoryList=category+"List";
+    		var timestampVal = $('div.'+categoryList+' div.recentArticleDiv:last-child').attr('id');    	    	
+    		getData(username, category, timestampVal);
+    	}
+    	
        });
+    
+  
 	
 	//Follow Unfollow
 			 $('#userPostAndCreatorInnerCircle a').click(function() {
-			 	   var loggedIn = $(this).data('loggedin');		
-			 	   if("False"==loggedIn)
+			 	   var loggedInStatus=$('.loginButton').data('loggedin');		
+			 	   if("False"==loggedInStatus)
 		 		   {
 		 				openLoginModal();
 		 		   }
@@ -531,12 +610,36 @@ $(function(){
 				 		
 	
 	
+	var loggedInStatus=$('.loginButton').data('loggedin');
+	var loggedInUser=$('a#user').text().trim();
+	var pageOwner= $('span#gamerName').text().trim();
+	
+	$(document).on({
+	    mouseenter: function () {
+	        $(this).children('.postTop').slideDown("slow");
+	        if("False"!= loggedInStatus && pageOwner == loggedInUser)
+	        {
+	        	$(this).children('.postEditButton').removeClass('hiddenDiv');
+	        }
+	        
+	    },
+	    mouseleave: function () {
+	        $(this).children('.postTop').slideUp(150);
+	        if("False"!= loggedInStatus && pageOwner == loggedInUser)
+	        {
+	        	$(this).children('.postEditButton').addClass('hiddenDiv');
+	        }	
+	    }
+	},".articleContentPreview");
+	
 	$(document).on({
 			mouseenter: function () {
 				$(this).children('.carouselTopTabDim').slideDown("slow");
+				
 			},
 			mouseleave: function () {
 				$(this).children('.carouselTopTabDim').slideUp(150);
+				
 			}
 		},".carouselContainer");
 	

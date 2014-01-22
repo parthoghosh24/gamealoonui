@@ -5,14 +5,14 @@ $var description:All PS3, PS4, Xbox 360, Xbox One, Wii u, Vita, 3DS, Android, IO
 <div class="mainContainer">
 			<div id="container_layout">			
 				<div class="divider"> </div>
-				<div id='games'>
+				<div id='games' class="overflowHidden">
 					$if len(games) == 0:
 	    				<div id="noGames" class="noData applyBevan">No Games</div>
 	    			$else:
 	    				$for game in games:    		
 	    				    <div class="floatLeft textCenter gridDim">
 	    				    	<div id="$game['gameId']" class="overflowHidden tabGrid" >		    			 		
-			    			    	<a href ="/game/$game['gameEncodedUrl']"><img src="$game['gameBoxShot']" alt="$game['gameTitle']" title="$game['gameTitle']" height="125"/></a>
+			    			    	<a href ="/game/$game['gameEncodedUrl']"><img src="$game['gameBoxShot']" alt="$game['gameTitle']" title="$game['gameTitle']" height="150"/></a>
 			    			    </div>
 			    			    <a href ="/game/$game['gameEncodedUrl']"><span class="applyBevan colorGray">$game['gameTitle']</span></a>
 	    				    </div>	

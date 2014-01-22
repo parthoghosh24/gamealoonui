@@ -218,15 +218,15 @@ $if platformValue == 'all':
 						</span>	
 					</div>
 					<div class="overflowHidden carouselContainer">
-						<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="960" height="720" />
+						<img src="$session.baseUrl/assets/images/default/featuredBg.png" width="960" height="720" />	
 					</div>					
-					<div id="gBottomTab" class="z500 positionAbsolute carouselBottomTabDim carouselOuterRingMarginLeft" >
-							<div class="outerBox carouselOuterRing floatRight">
-								<div class="innerBox unfollowRing  carouselInnerRing">									
-										<img src="$session.baseUrl /assets/images/default/avatar.png" alt="no user" width="90" height="90" title="No User" style="margin-left: -4px;">
+					<div id="gBottomTab" class="z500 positionAbsolute carouselBottomTabDim" >
+							<div class="outerBox floatRight carouselOuterRingMarginRight carouselOuterRing">
+								<div class="innerBox unfollowRing  unfollowRing carouselInnerRing">									
+										<img src="$session.baseUrl/assets/images/default/avatar.png" alt="no user" width="90" height="90" title="No User" style="margin-left: -4px;">
 								</div>
 							</div>
-							<div class="outerBox carouselOuterRing">
+							<div class="outerBox carouselOuterRing carouselOuterRingMarginLeft">
 								<div class="innerBox unfollowRing  carouselInnerRing">
 									<span class="icon-user gloonicle colorWhite" title="Gloonicle- user video game blogs"></span>
 								</div>
@@ -280,9 +280,11 @@ $if platformValue == 'all':
 	<a href="/users">
         <div id="learderboardUserContainer" class="overflowHidden">
                 <div id="number2user" class="floatLeft">
+                	$if len(jsonData['top3Users'][1])>0:
+                		
                         <div class="outerBox">
                                 <div class="innerBox unfollowRing ">
-                                        <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="100" height="100" style="margin-left: -4px;">
+                                        <img src="$jsonData['top3Users'][1]['userAvatar']" alt="$jsonData['top3Users'][1]['userName']" title="$jsonData['top3Users'][1]['userName']" width="100" height="100" style="margin-left: -4px;">
                                 </div>
                         </div>
                         <div id="number2UserData">
@@ -291,15 +293,16 @@ $if platformValue == 'all':
                                 </div>                                                          
                                 <div id="trophyBase" class="applyBevan font12">
                                         <span>
-                                                <i class="icon-award-1 font13"></i>500 XP<i class="icon-award-1 font13"></i>
+                                                <i class="icon-award-1 font13"></i>$jsonData['top3Users'][1]['userXp'] XP<i class="icon-award-1 font13"></i>
                                         </span>                                                                                                                  
                 				</div>
                         </div>
                 </div>
                 <div id="number1user" class="floatLeft marginLeft30">
+                	$if len(jsonData['top3Users'][0])>0:
                         <div class="outerBox">
                                 <div class="innerBox unfollowRing ">
-                                        <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="120" height="120" style="margin-left: -4px;">
+                                        <img src="$jsonData['top3Users'][0]['userAvatar']" alt="$jsonData['top3Users'][0]['userName']" title="$jsonData['top3Users'][0]['userName']" width="120" height="120" style="margin-left: -4px;">
                                 </div>
                         </div>
                         <div id="number1UserData">
@@ -308,15 +311,16 @@ $if platformValue == 'all':
                                 </div>                                                          
                                 <div id="trophyBase" class="applyBevan">
                                         <span>
-                                                <i class="icon-award-1 font13"></i>1000 XP<i class="icon-award-1 font13"></i>
+                                                <i class="icon-award-1 font13"></i>$jsonData['top3Users'][0]['userXp'] XP<i class="icon-award-1 font13"></i>
                                         </span>                                                                                                                    
                                 </div>
                         </div>
                 </div>
                 <div id="number3user" class="floatLeft marginLeft20">
+                	$if len(jsonData['top3Users'][2])>0:
                         <div class="outerBox">
                                 <div class="innerBox unfollowRing ">
-                                        <img src="/static/images/photo.jpg" alt="loonatic86" title="loonatic86" width="80" height="80" style="margin-left: -4px;">
+                                        <img src="$jsonData['top3Users'][2]['userAvatar']" alt="$jsonData['top3Users'][2]['userName']" title="$jsonData['top3Users'][2]['userName']" width="80" height="80" style="margin-left: -4px;">
                                 </div>
                         </div>
                         <div id="number3UserData">
@@ -325,7 +329,7 @@ $if platformValue == 'all':
                                 </div>                                                          
                                 <div id="trophyBase" class="applyBevan font13">
                                         <span>
-                                                <i class="icon-award-1 font13"></i>210 XP<i class="icon-award-1 font13"></i>
+                                                <i class="icon-award-1 font13"></i>$jsonData['top3Users'][2]['userXp'] XP<i class="icon-award-1 font13"></i>
                                         </span>                                                                                                                  
                                 </div>
                         </div>
@@ -368,13 +372,15 @@ $if platformValue == 'all':
 				<div class="allList overflowHidden">					
 						$for article in recentNArticles:
 							$if loop.index == 2 or loop.index == 7: 							
-								<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="$article['articleTimestamp']">								
+								<div class="recentArticleDiv bigPostDiv floatLeft marginLeft20" id="$article['articleTimestamp']">
+													
 									<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 620px;">
+										
 										<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 620px;">
 											<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
 											<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 											<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-											<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
+											<span class="floatRight"><i class="icon-fire-1"></i>$article['articleHotnessLevel']</span>
 										</div>
 										<div class="postBottom">
 											<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">
@@ -400,16 +406,19 @@ $if platformValue == 'all':
 												<p class="applyMontserratBold colorWhite font19 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 											</a>
 										</div>
-									</div>																
+										
+									</div>		
+																						
 								</div>
 							$elif loop.index == 4 or loop.index == 5 or loop.index == 9 or loop.index == 10:	
 								<div class="recentArticleDiv smallPostDiv floatLeft marginLeft20" id="$article['articleTimestamp']">								
 									<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 300px 240px;">
+										
 										<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;">
 											<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
 											<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 											<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-											<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
+											<span class="floatRight"><i class="icon-fire-1"></i>$article['articleHotnessLevel']</span>
 										</div>
 										<div class="postBottom">
 											<div class="outerBox floatRight postListOuterBoxRing postListOuterBoxRingMarginRight">
@@ -441,11 +450,12 @@ $if platformValue == 'all':
 							$else:
 								<div class="recentArticleDiv smallPostDiv floatLeft" id="$article['articleTimestamp']">								
 									<div class='articleContentPreview' style="background-image: url($article['articleFeaturedImage']);background-size: 300px 240px;">
+										
 										<div class="postTop hiddenDiv fontWeightBold font10 colorWhite" style="width: 300px;" >
 											<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
 											<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 											<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-											<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
+											<span class="floatRight"><i class="icon-fire-1"></i>$article['articleHotnessLevel']</span>
 										</div>
 										<div class="postBottom">
 											<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginRight floatRight">
@@ -471,34 +481,40 @@ $if platformValue == 'all':
 												<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 											</a>	
 										</div>
+										
 									</div>																
 								</div>
 								
 				</div>
 			$if len(recentNArticles)>0:
-				  <p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>
+				  <p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>				  
 			$else:
-				  <p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>					
+				  <p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>
+			<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>	  					
 			</div>
 			<div id='review'>
 				<div class="noData applyBevan">No Data</div>
 				<div class="reviewList overflowHidden"></div>
 				<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+				<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 			</div>			
 			<div id='news'>
 				<div class="noData applyBevan">No Data</div>
 				<div class="newsList overflowHidden"></div>
 				<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+				<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 			</div>
 			<div id='gloonicle'>
 				<div class="noData applyBevan">No Data</div>
 				<div class="gloonicleList overflowHidden"></div>
 				<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+				<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 			</div>
 			<div id='video'>
 				<div class="noData applyBevan">No Data</div>
 				<div class="videoList overflowHidden"></div>
 				<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+				<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 			</div>
 
 		</div>

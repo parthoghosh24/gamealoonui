@@ -1,4 +1,5 @@
 $def with (game)
+$ categoryIconMap={"review":"icon-thumbs-up-1", "news":"icon-signal-2", "gloonicle":"icon-user", "video":"icon-play-3"}
 $var title: $:game['gameTitle'] on Gamealoon - Find all gamer generated $:game['gameTitle'] news, reviews, features, gloonicles and videos at Gamealoon  
 $var description:All gamer generated $:game['gameTitle'] news, reviews, features, gloonicles and videos at Gamealoon
 
@@ -6,71 +7,78 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 	<div id="container_layout">
 		<div class="divider"> </div>
 
-<div class="coverSection" style="padding-top: 200px;background-image: url('/static/images/uc3_2.jpg');background-size: 960px 720px; margin-bottom: 10px;">		
+<div class="coverSection marginBottom10 gameCoverSectionPaddigTop" style="background-image: url('/static/images/uc3_2.jpg');">		
 			
-  <div style="position: absolute;width: 950px;margin-top: -200px;height: 200px;padding: 5px;border-bottom-style: dashed;border-bottom-width: 2px;border-bottom-color: #f0f0f0;z-index: 1;">
-  	<div id="game" style="margin-top: 115px;margin-left: 390px;">
+  <div class="dashedBorder gameCoverSectionContainer">
+  	<div id="game" class="gameCarouselMainRing">
   		<div id="userPostAndCreatorOuterCircle" class="outerBox">
-  			<div id="userPostAndCreatorInnerCircle" class="innerBox">
-  				<img id="$game['gameId']" src="$game['gameBoxShot']" alt="$game['gameTitle']" title="$game['gameTitle']" height="230" style="margin-left: -4px;">
+  			$if game['isInterestedIn'] == 1:
+				<div id="userPostAndCreatorInnerCircle" class="innerBox followRing">
+			$else:
+				<div id="userPostAndCreatorInnerCircle" class="innerBox unfollowRing">  			
+  			<a href="javascript:;"><img id="$game['gameId']" src="$game['gameBoxShot']" alt="$game['gameTitle']" title="$game['gameTitle']" height="230" style="margin-left: -4px;"></a>
   			</div>
   		</div>
   	</div>
   	
-  	<div style="height: 100px;text-align: center;margin-top: 10px;">
-  		<p style="font-size: 30px;color: #fff;font-weight: bold;text-shadow: 0px 2px 3px #000;margin-top: 10px;margin-bottom: 20px;">
+  	<div class="marginTop10 textCenter" style="height: 100px;">
+  		<p class="gameTitle">
   			$game['gameTitle']   			
   		</p>
   		
   		<p>
-  			<span class="colorGray" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				Published By: <span style="color: #76A7F5;">$game['gamePublisher']</span>,</span>  
-  				<span class="colorGray" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				Developed By:<span style="color: #76A7F5;">$game['gameDeveloper']</span>,</span>
-  				<span class="colorGray" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				Genre:<span style="color: #76A7F5;">$game['gameGenere']</span>,</span>
-  				<span class="colorGray" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				Released on:		<span style="color: #76A7F5;">$game['gameReleaseDate']</span></span>  				
+  			<span class="colorGray gameDetailsHeaders">
+  				Published By: <span class="userGamePageDetailValueColor">$game['gamePublisher']</span>,</span>  
+  				<span class="colorGray gameDetailsHeaders">
+  				Developed By:<span class="userGamePageDetailValueColor">$game['gameDeveloper']</span>,</span>
+  				<span class="colorGray gameDetailsHeaders">
+  				Genre:<span class="userGamePageDetailValueColor">$game['gameGenere']</span>,</span>
+  				<span class="colorGray gameDetailsHeaders">
+  				Released on:		<span class="userGamePageDetailValueColor">$game['gameReleaseDate']</span></span>  				
   					
   		</p>
-  		<p>
-  			<span class="colorGray" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				Rating: <span style="color: #76A7F5;">Teen</span>,</span>
-  			<span class="colorGray" style="text-shadow: 0px 2px 3px #000;  font-size: 13px;  font-weight: bolder;">
-  				Platforms:
-  					$for platform in game['gamePlatforms']:
-		        					<span class="$platform['platformShortTitle'] blackBoxShadow interestUserProfileFontSize marginLeft5">$platform['platformTitle']</span>
-  				
-  			</span>	
-  		</p>
+  		<ul class="overflowHidden gamePageRatingAndPlatformList">
+  			<li class="floatLeft">
+  				<ul class="overflowHidden">
+  					<li class="floatLeft">
+  						<span class="colorGray gameDetailsHeaders">
+                                Rating: 
+                        </span>
+                    </li>
+                    <li class="floatLeft marginLeft10 gamePageRatingHeight gamePageRatingWidth">
+                    	<div id="$game['gameRating']" class="gamePageRatingHeight"></div>
+                    </li>
+               </ul>
+           </li>
+           <li class="floatLeft">
+           	<span class="colorGray gameDetailsHeaders">,Platforms:
+           			$for platform in game['gamePlatforms']:
+           				<span class="$platform['platformShortTitle'] blackBoxShadow interestUserProfileFontSize marginLeft5">$platform['platformTitle']</span>           		                        
+            </span>
+           </li>     
+        </ul>
   		
-  		<p style="font-size: 13px;color: #fff;font-weight: bold;font-style: italic;text-shadow: 0px 2px 3px #000;margin-top: 10px;">
+  		<p class="gameDetailsHeaders colorWhite marginTop10" style="font-style: italic;">
   			<span>"</span>
   			<span id="userGameBio">$game['gameDescription']</span>
   			<span>"</span>
 		</p>
-		
-		
-   
-   
-  
- 
 		</div>  
 	</div>
-	<div style="height: 300px;background-color: #11151d; opacity: 0.8;"> </div>					
+	<div class="gamePageVeilBg"> </div>					
 					       			
 </div>
 <div class="blackBoxShadow leaderBoardToppers">
-        <div style="width: 100%; text-align: center;" class="overflowHidden">
-			 <ul style="color: #fff;width: 82%;margin:25px auto;font-weight: bold;">
-			        <li style="float: left;padding: 3px;"><span class="font40">33.3%</span><br>
+        <div class="overflowHidden listDataHolderDiv">
+			 <ul class="gameStatsList">
+			        <li class="floatLeft"><span class="font40">$game['gameArticlesPublishedRatio']%</span><br>
 			        	<i class="icon-doc-text-inv"></i> Published
 			        </li>
 			        
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">64.2%</span><br>
+			        <li  class="floatLeft marginLeft20"><span class="font40">$game['gameInterestedUsersRatio']%</span><br>
 			        	<i class="icon-users-1"></i>Interested
 			        </li>
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;">
+			        <li class="floatLeft marginLeft20">
 			        	<div id="gameScore">                			
 			        		<input type="hidden" id="networkScore" name="networkScore" value="$game['gameScore']">
                 			<div id="gameScoreDonutContainer" class="dottedScoreBorder">
@@ -98,11 +106,11 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
                            </div>
                        </div>
 			        </li>
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">35.8%</span><br>
+			        <li class="floatLeft marginLeft20"><span class="font40">$game['gameTotalUsersPlayedRatio']%</span><br>
 			        	<i class="icon-users-1"></i>Played
 			        </li>
 			        
-			        <li style="float: left;margin-left: 20px;border-left-width: 1px;  padding: 3px;"><span class="font40">75%</span><br>
+			        <li class="floatLeft marginLeft20"><span class="font40">$game['gameTotalUsersScoredRatio']%</span><br>
 			        	<i class="icon-users-1"></i>Scored
 			        </li>
 			  </ul>
@@ -114,53 +122,12 @@ $var description:All gamer generated $:game['gameTitle'] news, reviews, features
 		<div id="tabs-min" class="tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
 			<ul id='contents' >
 				<li>
-					<a href="#activities">Activities</a>
-				</li>
-				<li>
 					<a href="#posts">Posts</a>
 				</li>								
 				<li>
 					<a href="#users">Users</a>
 				</li>							
 			</ul>
-			<div id='activities'>
-				$if len(game['gameActivities']) == 0:
-					<div class="noData applyBevan">No Data</div>
-				$else:						
-				<div class="overflowHidden gameActivityList">
-					<table width="100%">
-						<tr>
-							<td width="50%" style="vertical-align: top;">
-								$for activity in game['gameActivities']:
-									$if loop.index %2 !=0:
-										<div class="activityRow marginTop10">
-										$if activity['activityType'] == 1:								
-												<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']">$activity['articleGame']</a>, <a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-										$if activity['activityType'] == 3:								
-												<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message'], <a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a> for <a href="/game/$activity['gameEncodedUrl']">$activity['articleGame']</a>								
-										$if activity['activityType'] == 11:
-											<a href="/$activity['activityUserName']">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>							 
-										</div>
-								
-							</td>
-							<td width="50%" style="vertical-align: top;">
-								$for activity in game['gameActivities']:
-									$if loop.index %2 ==0:
-										<div class="activityRow marginLeft10 marginTop10">
-										$if activity['activityType'] == 1:								
-												<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']">$activity['articleGame']</a>, <a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a>
-										$if activity['activityType'] == 3:								
-												<a href="/$activity['activityUserName']" target="_blank">$activity['activityUserName']</a>$activity['message'], <a href="/article/$activity['activityUserName']/$activity['articleEncodedUrl']" target="_blank"><strong>$activity['articleTitle']</strong></a> for <a href="/game/$activity['gameEncodedUrl']">$activity['articleGame']</a>								
-										$if activity['activityType'] == 11:
-											<a href="/$activity['activityUserName']">$activity['activityUserName']</a>$activity['message']<a href="/game/$activity['gameEncodedUrl']" target="_blank"><strong>$activity['followingGame']</strong></a>							 
-										</div>
-								
-							</td>
-						</tr>
-					</table>
-					
-				</div>			
-			</div>
 <div id='posts'>
 	<div class="colorWhite fontWeightBold font11 marginTop20 marginLeft20">
 		<span id="allTab" class="all icon-doc cursorPointer disableOpacity">All</span>
@@ -184,20 +151,20 @@ $else:
 							<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
 							<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 							<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-							<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
+							<span class="floatRight"><i class="icon-fire-1"></i>$article['articleHotnessLevel']</span>
 						</div>
 					
 						<div class="postBottom">
 							<div class="outerBox postListOuterBoxRing floatRight postListOuterBoxRingMarginRight">
-								<div class="innerBox postListInnerRing">
+								<div class="innerBox unfollowRing postListInnerRing">
 									<a href="/$article['articleAuthor']">
-										<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
+										<img src="$article['articleAuthorAvatar']" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
 									</a>
 								</div>
 							</div>
 							
 							<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-								<div class="innerBox postListInnerRing">
+								<div class="innerBox unfollowRing postListInnerRing">
 										$if article['articleCategory']=="review":
 											<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
 										$elif article['articleCategory']=="news":
@@ -210,7 +177,7 @@ $else:
 							</div>
 							
 							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-								<p class="applyMontserratBold colorWhite font19 postTitle">$article['articleTitle']</p>
+								<p class="applyMontserratBold colorWhite font19 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 							</a>
 						</div>
 					</div>																
@@ -223,20 +190,20 @@ $else:
 							<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
 							<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 							<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-							<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
+							<span class="floatRight"><i class="icon-fire-1"></i>$article['articleHotnessLevel']</span>
 						</div>
 						
 							<div class="postBottom">
 								<div class="outerBox floatRight postListOuterBoxRing postListOuterBoxRingMarginRight">
-									<div class="innerBox postListInnerRing">
+									<div class="innerBox unfollowRing postListInnerRing">
 										<a href="/$article['articleAuthor']">
-											<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
+											<img src="$article['articleAuthorAvatar']" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
 										</a>
 									</div>
 								</div>
 								
 								<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-									<div class="innerBox postListInnerRing">
+									<div class="unfollowRing innerBox postListInnerRing">
 										$if article['articleCategory']=="review":
 											<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
 										$elif article['articleCategory']=="news":
@@ -249,7 +216,7 @@ $else:
 								</div>
 							
 									<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-										<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']</p>
+										<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 									</a>	
 							</div>
 												
@@ -262,18 +229,18 @@ $else:
 							<span class="floatLeft"><i class="font13 icon-users"></i>$article['articleCommentCount']</span>
 							<span class="floatRight"><i class="font13 icon-frown"></i>$article['articleNotCoolScore']</span>
 							<span class="floatRight"><i class="font13 icon-smile"></i>$article['articleCoolScore']</span>											
-							<span class="floatRight"><i class="icon-fire-1"></i>Cold</span>
+							<span class="floatRight"><i class="icon-fire-1"></i>$article['articleHotnessLevel']</span>
 						</div>
 						<div class="postBottom">
 							<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginRight floatRight">
-									<div class="innerBox postListInnerRing">
+									<div class="innerBox unfollowRing postListInnerRing">
 											<a href="/$article['articleAuthor']">
-												<img src="/static/images/photo.jpg" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
+												<img src="$article['articleAuthorAvatar']" alt="$article['articleAuthor']" title="$article['articleAuthor']" width="40" height="40">
 											</a>
 									</div>
 							</div>
 							<div class="outerBox postListOuterBoxRing postListOuterBoxRingMarginLeft">
-								<div class="innerBox postListInnerRing">
+								<div class="innerBox unfollowRing postListInnerRing">
 									$if article['articleCategory']=="review":
 										<span class="postListCategoryDim icon-thumbs-up-1 $article['articleCategory'] colorWhite" title="Review- user generated crisp and micro reviews"></span>
 									$elif article['articleCategory']=="news":
@@ -285,7 +252,7 @@ $else:
 								</div>
 							</div>
 							<a href="/article/$article['articleAuthor']/$article['articleEncodedUrlTitle']">
-								<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']</p>
+								<p class="applyMontserratBold colorWhite font14 postTitle">$article['articleTitle']<span class="font11 applyJura marginLeft5">-$article['articleTimeSpentFromPublish']</span></p>
 							</a>	
 						</div>
 					</div>																
@@ -295,48 +262,61 @@ $else:
 $if len(game['gameArticles'])>0:
 	<p class="textCenter marginTop20"><button class="loadMore">Fetch More</button></p>
 $else:
-	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>					
+	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>		
+<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>			
 </div>
 
 <div id='review' class="hiddenDiv">
 	<div class="noData applyBevan">No Data</div>
 	<div class="reviewList overflowHidden"></div>
 	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+	<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 </div>
 			
 <div id='news' class="hiddenDiv">
 	<div class="noData applyBevan">No Data</div>
 	<div class="newsList overflowHidden"></div>
 	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+	<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 </div>
 
 <div id='gloonicle' class="hiddenDiv">
 	<div class="noData applyBevan">No Data</div>
 	<div class="gloonicleList overflowHidden"></div>
 	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+	<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 </div>
 
 <div id='video' class="hiddenDiv">
 	<div class="noData applyBevan">No Data</div>
 	<div class="videoList overflowHidden"></div>
 	<p class="textCenter marginTop20"><button class="loadMore hiddenDiv">Fetch More</button></p>	
+	<p class="contentLoading hiddenDiv textCenter font23 colorOrange"><i class="icon-spin3 animate-spin"></i></p>
 </div>
 			
 </div>												
 						
 			
-			<div id='users'>
-				$if game['totalInterestedUsers'] == 0:
+			<div id='users' class="overflowHidden padding5 marginTop30">
+				<span class="icon-users-1 applyBevan socialHeaders">Followers</span>
+				
+				$if len(game['gameInterestedUsers']) == 0:
     				<div class="noData applyBevan">No Users</div>
     			$else:
-    			    $for user in game['gameInterestedUsers']:
-		    			 <div id="$user['interestedUserUserName']" class="floatLeft overflowHidden tabGrid otherGridDim">		    			 	    
-		    			    	<a href ="/$user['interestedUserUserName']"><img src="$user['interestedAvatarPath']" alt="$user['interestedUserUserName']" title="$user['interestedUserUserName']"width="100" height="100"/></a>
-		    			 </div> 
+    			
+    				<div id="followersList" class="socialList">
+    					$for user in game['gameInterestedUsers']:    			
+			    			 <div id="$user['interestedUserUserName']" class="floatLeft overflowHidden innerBox unfollowRing otherGridDim" style="margin-left: 60px; margin-bottom: 50px;">		    			 	    
+			    			    	<a href ="/$user['interestedUserUserName']"><img src="$user['interestedAvatarPath']" alt="$user['interestedUserUserName']" title="$user['interestedUserUserName']"width="100" height="100"/></a>
+			    			 </div>
+    				</div>
+    			     
 			</div>			
 			
-		</div>
+		
 	</div>	
+</div>
+</div>
 </div>
 </div>
 </div>

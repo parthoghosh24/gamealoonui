@@ -22,7 +22,7 @@ function fetchLinkData()
 						"<p class='colorWhite'>"+title+"</p>"+
 						"<p class='linkColor font11'>"+domain+"</p>"+
 						"<p class='colorGray font13'>"+description+"</p>"+
-						"</div><img height='200' src='"+imgUrl+"'>"+
+						"</div><img height='200' width='350' src='"+imgUrl+"'>"+
 						"</a>"						
 						$('#linkContent').hide();																
 						$('#linkContent').html(htmlContent);
@@ -152,15 +152,19 @@ function updateCoolState(articleId)
 		$.post('/article/coolOrNotCool/',{"type":0,"articleId":articleId},function(data){
 			if(data.status == "success")
 			{
-				var coolScore = parseInt($('div#moreInformation span.icon-smile').text());
+				var coolScore = parseInt($('div#moreInformation span.icon-smile').text().trim());
 				if($('#yeah').hasClass('notSelected'))
 				{
+					$('#yeah').removeClass('yeahButton');
+					$('#yeah').addClass('yeahBg');
 					$('#yeah').removeClass('notSelected');
 					$('#yeah').addClass('selected');
 					$('div#moreInformation span.icon-smile').text(coolScore+1);
 				}
 				else
 				{
+					$('#yeah').removeClass('yeahBg');
+					$('#yeah').addClass('yeahButton');
 					$('#yeah').removeClass('selected');
 					$('#yeah').addClass('notSelected');
 					$('div#moreInformation span.icon-smile').text(coolScore-1);
@@ -180,6 +184,8 @@ function updateNotCoolState(articleId)
 				var notCoolScore = parseInt($('div#moreInformation span.icon-frown').text());
 				if($('#meh').hasClass('notSelected'))
 				{
+					$('#meh').removeClass('mehButton');
+					$('#meh').addClass('mehBg');
 					$('#meh').removeClass('notSelected');
 					$('#meh').addClass('selected');
 					$('div#moreInformation span.icon-frown').text(notCoolScore+1);
@@ -188,6 +194,8 @@ function updateNotCoolState(articleId)
 				{
 					$('#meh').removeClass('selected');
 					$('#meh').addClass('notSelected');
+					$('#meh').removeClass('mehBg');
+					$('#meh').addClass('mehButton');
 					$('div#moreInformation span.icon-frown').text(notCoolScore-1);
 				}
 			}
@@ -207,7 +215,9 @@ $(window).load(function() {
 
 
 $(function(){
-	console.log("category: "+$('#articleCategory').text());
+	
+	startTime=new Date().getTime();
+		
 	$(document).ajaxStart(function() {
 	  $('#loadingIcon').show();
 	});
@@ -217,29 +227,31 @@ $(function(){
 	});
 	
 	
-	startTime=new Date().getTime();
+	
 	
 	$('.videoPlayButton').click(function(){
 		playVideo(this);
 	});
 	
 	$('.notActiveButton').click(function() {
-		if("Guest"==$("div#userdetailsbox span").text())
+		var loggedInStatus=$('.loginButton').data('loggedin');
+		if("False" == loggedInStatus)
 		 {
 		 	openLoginModal();
 		 }
 		});
 	$('.activeButton').click(function() {
-		 var articleId = $('.articleBody').attr('id');		 		
+		 var articleId = $('.coverSection').attr('id');		 		
 		 ($(this).attr('id')=="yeah")?updateCoolState(articleId):updateNotCoolState(articleId);
 		 
 		 
 		 
 		 
 		});
-	//pollForComments();
+	
 	$('#postContent').click(function() {
-		if($('div#userdetailsbox span').text() == "Guest")
+		var loggedInStatus=$('.loginButton').data('loggedin');
+		if("False"==loggedInStatus)
 		{
 			openLoginModal();
 		}
@@ -248,9 +260,9 @@ $(function(){
 			if(message.length>0)
 			{
 				var commentJson ={};
-				var articleId = $('.articleBody').attr('id');
+				var articleId = $('.coverSection').attr('id');
 				var message = $('#commentBody').val();			
-				var userName =$('#userdetailsbox span').text()
+				var userName =$('#user').text().trim();
 				var commentScore = 0.0;
 				var spamScore = 0.0;
 				var lastTimeStamp = $('#commentList div:first-child #conversationTimestamp').val();
@@ -265,13 +277,9 @@ $(function(){
 					
 					if(data.status === "success")
 					{					
-						console.log('success');
-						//if(lastTimeStamp == undefined)
-						//{
+						console.log('success');						
 							generateComment(data);
-							$('#noComments').hide();
-						//}
-						//$('#commentBody').val("");
+							$('#noComments').hide();						
 					}
 					else
 					{
@@ -292,33 +300,60 @@ $(function(){
 		}
 		
 		return false; 
-		});
-		
-		if($('#previewOverlay').length==0)
-	    {
-	    	/*
-			window.onbeforeunload=function()
-						{
-							endTime=new Date().getTime(); 
-							var elapsedTime=endTime-startTime; //in ms
-							var articleId = $('.articleBody').attr('id');
-							var TWO_MINUTES = 2*60*1000;			
-							if(elapsedTime>=TWO_MINUTES)
-							{
-								elapsedTime = elapsedTime/(60.0*1000.0);
-								console.log(elapsedTime);
-								 $.ajaxSetup({async: false});
-								$.post('/article/updateATS',{"elapsedTime":elapsedTime, "articleId":articleId}, function(data){
-									if(data.status=='success')
-									{
-										console.log('success');
-									}
-																	 },'json');
-								 $.ajaxSetup({async: true});
-							}	
-						}*/
+		});			
+	    	
+		window.onbeforeunload=function()
+		{
+			console.log("I am called");
+			var ONE_AND_A_HALF_MINUTES = 1*90*1000;
+			var TWO_MINUTES = 2*60*1000;
+			var FIFTY_SECONDS=50*1000;
+			var baseTime;
+			if($('#articleCategory').hasClass('review'))
+			{
+				console.log("Review");
+				baseTime=FIFTY_SECONDS;
+				console.log("baseTime: "+baseTime);
+			}
+			if($('#articleCategory').hasClass('video'))
+			{
+				console.log("video");
+				baseTime = ONE_AND_A_HALF_MINUTES;
+				console.log("baseTime: "+baseTime);
+			}
+			if($('#articleCategory').hasClass('news'))
+			{
+				console.log("news");
+				baseTime=FIFTY_SECONDS;
+				console.log("baseTime: "+baseTime);
+			}
+			if($('#articleCategory').hasClass('gloonicle'))
+			{
+				console.log("gloonicle");
+				baseTime = TWO_MINUTES;
+				console.log("baseTime: "+baseTime);
+			}
+			endTime=new Date().getTime(); 
+			var elapsedTime=endTime-startTime; //in ms
+			console.log("Elapsed Time: "+elapsedTime);
+			var articleId = $('.coverSection').attr('id');
+									
+			if(elapsedTime>=baseTime)
+			{
+				elapsedTime = elapsedTime/(60.0*1000.0);
+				console.log(elapsedTime);
+				$.ajaxSetup({async: false});
+				$.post('/article/updateATS',{"elapsedTime":elapsedTime, "articleId":articleId}, function(data){
+					if(data.status=='success')
+					{
+						console.log('success');
+					}
+				},'json');
+				$.ajaxSetup({async: true});
+			}	
+		}
 			
-	    }
+	    
 		
 		
 

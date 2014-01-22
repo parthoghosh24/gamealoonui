@@ -4,6 +4,7 @@ $var description: Create post from here
 	<div id="container_layout">
 		<div class="divider"> </div>
 		<div id="noBg" class="coverSection">		
+			<input type="hidden" id="articleState" name="articleState" value="">
 			<input type="hidden" id="articleId" name="articleId" value="">
 			<a class="videoPlayButton" href="javascript:;"><i class="icon-play-circled2-1"></i></a>
 			<div id="coverSectionHeadPostCreator" class="applyFranklinGothic coverSectionHeaderFooter">						
@@ -63,7 +64,7 @@ $var description: Create post from here
                 				<h3 id="reviewGamePlayedOn">
                 					 played on 
                 					 <a id="playedOn" title="Please select a game before selecting platform">
-                					 	<span id="selectedGamePlatform" class="all">
+                					 	<span id="selectedGamePlatform" class="all disableOpacity">
                 					 		Select Platform
                 					 	</span>
                 					 </a>

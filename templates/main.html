@@ -46,12 +46,12 @@ $def with (page)
 					$if session.loggedIn:
 							<ul class="marginTop30">
 								<li class="floatLeft">
-									<a id="logout" href="javascript:;" class="colorWhite textShadowWhite font12">
+									<a id="logout" href="javascript:;" class="loginButton colorWhite textShadowWhite font12" data-loggedin="True">
 										<i class="icon-off font20"></i>
 									</a>
 								</li>
 								<li class="floatLeft">
-									<a id="user" href="/$session.username" rel="nofollow" class="textShadowBlack colorWhite font12" >
+									<a id="user" href="/$session.username" rel="nofollow" class="textShadowBlack colorWhite font12" data-userid="$session.userId">
 										$session.username
 										<img class="textShadowBlack" src="$session.userAvatar" alt="$session.username" title="$session.username" height="20"/>
 									</a>
@@ -74,10 +74,10 @@ $def with (page)
 					$else:
 						<ul class="marginTop30">
 							<li class="floatLeft">
-								<a id="login" href="javascript:;" class="colorWhite textShadowBlack font12" >
+								<a id="login" href="javascript:;" class="loginButton colorWhite textShadowBlack font12" data-loggedin="False">
 									<i class="icon-off font20"></i>Sign-In
-								</a>
-								<img class="textShadowBlack" src="$session.userAvatar" alt="Signin" title="Not Logged in" height="20"/>
+								</a>								
+								<img class="textShadowBlack" src="http://192.168.0.103:9000/assets/images/default/avatar.png" alt="Signin" title="Not Logged in" height="20"/>
 								
 							</li>							
 						</ul>

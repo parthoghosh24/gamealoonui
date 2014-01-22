@@ -57,6 +57,7 @@ function setGameInfo()
 	parent.$('#gameSelector img').attr('id',gameId);
 	parent.$('#gameSelector img').attr('src',gameBoxshotSrc);
 	parent.$('#selectedGamePlatform').attr('class','all');
+	parent.$('#selectedGamePlatform').removeClass('disableOpacity');
 	parent.$('#selectedGamePlatform').text('Select Platform');
 	parent.$('#playedOn').attr("href","javascript:;");
 	parent.$('#playedOn').attr("title","Select a platform on which you have played this game");	

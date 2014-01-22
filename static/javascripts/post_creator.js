@@ -157,6 +157,7 @@ function reviewSelected()
 	$('#score').show();
 	$('#gameBoxArt').show();
 	$('#reviewGamePlayedOn').show();
+	$('#reviewGamePlayedOn').addClass('disableOpacity');
 	
 }
 
@@ -437,7 +438,7 @@ function countCharInEditor(charCount)
 
 function charCountCheck()
 {
-	var maxChars=parseInt($('#charMaxLimit').text());	
+	var maxChars=200;	
 
 	$(document.getElementById("richEditor").contentWindow.document).keyup(function(event){			
 		if(!$('#selectedCategory').hasClass('gloonicle'))
@@ -575,7 +576,7 @@ function doneAddingLink()
 						"<p class='colorWhite'>"+title+"</p>"+
 						"<p class='linkColor font11'>"+domain+"</p>"+
 						"<p class='colorGray font13'>"+description+"</p>"+
-						"</div><img height='200' src='"+imgUrl+"'>"+
+						"</div><img height='200' width='350' src='"+imgUrl+"'>"+
 						"</a>"						
 						$('#linkContent').hide();																
 						$('#linkContent').html(htmlContent);
@@ -714,23 +715,24 @@ function onSave(state)
 		articleJson["platform"]=platform;
 		reviewGameScore=$('#userScoreDonutContainer input').val();
 		articleJson["gameScore"]=reviewGameScore;
-		
+		var sweetJson ={};
+		var stinkJson ={};
 		if($('#sweet dd').length>0)
 		{
 			var sweets = $('#sweet dd');
-			var sweetJson ={};
+			
 			sweets.each(function(index, sweet)
 			{
-				sweetJson[index]=$(sweet).children('span').text();				
+				sweetJson[index]=$(sweet).children('span').text().trim();				
 			});
 		}
 		if($('#stink dd').length>0)
 		{
 			var stinks = $('#stink dd');
-			var stinkJson ={};
+			
 			stinks.each(function(index, stink)
 			{
-				stinkJson[index]=$(stink).children('span').text();				
+				stinkJson[index]=$(stink).children('span').text().trim();				
 			});
 		}
 					
@@ -756,7 +758,7 @@ function onSave(state)
 		
 		
 
-	if(validateEditor())
+		 if(validateEditor())
 		{								
 			
 			$.post('/post/save',articleJson,function(data){
@@ -780,8 +782,8 @@ function onSave(state)
 		}
 		else
 		{
-			console.log("Fail");
-			alert('Something wrong happened');			
+			console.log("Fail");	
+			alert("Something went wrong or your are trying to create review for same game for same platform");		
 		}
 	
 	
@@ -866,12 +868,31 @@ function validateEditor()
 	return validationSuccess;
 }
 
+function loadPostBody()
+{
+	window.frames['richEditor'].document.body.innerHTML=$('#snippetTextInput').val();
+	var text=window.frames['richEditor'].document.body.innerText;
+	var currentCharCount = text.length;
+	$('#charMaxLimit').text(200-currentCharCount);	
+}
+
+function blockReviewScoreKnob()
+{
+	if("review" == $('#selectedCategory').text().trim() && "2" == $('#articleState').val())
+	{		
+		$('.knob').knob({readOnly:true});
+	}
+	
+}
+
 var hasBeenEdited=false;
 var hasBeenSaved=false;
 var hasBeenPublished=false;
 
 $(function(){
 	
+	loadPostBody();
+	blockReviewScoreKnob();
 	$(document).ajaxStart(function() {
 	  $('#loadingIcon').show();
 	});
@@ -949,13 +970,13 @@ $(function(){
 			width:"0", height:"0"}, 500);	
 		$('#platformOptions').hide();
 		
-		if($('input.platform[name=playedOn ]:checked').length>0)
+		if($('input.platform[name=playedOn]:checked').length>0)
 		{
-			var platformValue=$('input.platform[name=playedOn ]:checked').val();
-			var platformText=$('input.platform[name=playedOn ]:checked').parent('div.divCell').text();
+			var platformValue=$('input.platform[name=playedOn]:checked').val();
+			var platformText=$('input.platform[name=playedOn]:checked').parent('div.divCell').text();
 			$('#selectedGamePlatform').attr('class',platformValue);
 			$('#selectedGamePlatform').text(platformText);
-			$('input.platform[name=playedOn ]:checked').removeAttr('checked');
+			$('input.platform[name=playedOn]:checked').removeAttr('checked');
 		}							
 		return false;
 	});
@@ -991,15 +1012,28 @@ $(function(){
 		window.location.href="/"+username;
 	});
 	
-	$('#save').click(function() {			
-		onSave(1);				
+	$('#save').click(function() {		
+		var state = $('#articleState').val();
+		var stateValue = 1;
+		if(state.length>0)
+		{
+			stateValue=parseInt(state);
+		}	
+		onSave(stateValue);				
 	});
 	
 	
 	
 	
-	$('#publish').click(function() {						
-		onSave(2);		
+	$('#publish').click(function() {
+		var state = $('#articleState').val();
+		var stateValue = 2;
+		if(state.length>0 && "2" == state)
+		{
+			stateValue=parseInt(state);			
+		}						
+		console.log("state value: "+stateValue);
+		onSave(stateValue);		
 	});
 	
 	window.onbeforeunload=function()

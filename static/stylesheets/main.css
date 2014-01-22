@@ -218,14 +218,13 @@ footer{
 
 #userDetails
 {
-	width: 920px;
-	height: 320px;
+	padding-top: 40px;
+	padding-bottom: 50px;
 }
-#userAvatar
-{
-	width: 282px;	
-	padding-top: 10px;
-	overflow: hidden;
+	
+#userAvatarBox
+{	
+	padding-top: 10px;	
 }
 #userAvatar a
 {
@@ -243,13 +242,19 @@ footer{
 
 #userInformation
 {
-	width: 638px;	
+	width: 700px;
+	margin: 0 auto;
+	border-width: 2px;
+	border-style: dashed;
+	border-color: #fff;
 }
-#userNameDetails
+#profileHeader
 {
-	width: 100%;
-	height: 64px;
+	height: 70px;
 	padding: 20px;
+	border-width: 2px;
+	border-bottom-style: dashed;
+	border-color: #fff;
 }
 .userProfileNameFont
 {
@@ -326,14 +331,58 @@ footer{
 {
 	font-size: 30px;
 }
-#userContact
-{
-	width: 100%;
-	height: 30%;
+.profileFormFieldBox
+{	
 	padding: 10px 30px 10px 30px;
 	margin-top: 30px;
 }
 
+.profileSectionHeader
+{
+	color: #0087FF;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.updatesButton
+{
+	color: #fff;
+	padding: 5px;
+	background-color: #00ADFF;
+	border-color: #00ADFF;
+}
+.profileInputGameBio
+{
+	margin-left: 20px;
+	width: 350px;
+}
+.profileFormLabel
+{
+	width: 120px;
+	text-align: right;
+}
+.profileEmailWidth
+{
+	width: 250px;
+}
+.profileUpdateStatusNotification
+{
+	position: absolute;
+	text-align: center;
+	line-height: 5;
+	width: 300px;
+	height: 100px;
+	margin-left: 320px;
+	margin-top: 40px;
+	color: #fff;
+	background-color: #111;
+	opacity: 0.8;
+}
+.profileUserForm
+{
+	border-width: 2px;  
+	border-bottom-style: dashed;  
+	border-color: #fff;
+}
 #contactDetails
 {
 	width: 100%;
@@ -442,6 +491,10 @@ footer{
 	color:#fff;
 }
 
+.marginRight5
+{
+	margin-right: 5px;
+}
 .marginRight10
 {
 	margin-right: 10px;
@@ -480,9 +533,19 @@ footer{
 	margin-top: 30px;
 }
 
+.marginTop40
+{
+	margin-top: 40px;
+}
+
 .textShadowBlack
 {
 	text-shadow: 0px 3px 8px #000;
+}
+
+.textShadowBlackUserPage
+{
+	text-shadow: 0px 2px 3px #000;
 }
 
 #userSettings:hover
@@ -653,13 +716,13 @@ footer{
 
 #passwordButton
 {
-	margin-left: 35px;
-	width: 200px;
+	margin-left: 20px;
+	width: 100px;
 	height: 50px;
 	border-color: #005FB3;
 	background-color: #005FB3;
 	color: #FFF;
-	font-size: medium;
+	font-size: 12px;
 	font-weight: bolder;
 	font-style: italic;
 }
@@ -850,6 +913,10 @@ footer{
 .colorOrange
 {
 	color: #FF4500;
+}
+.colorGreenConfirmed
+{
+	color: #7BEBA3;
 }
 fieldset{
 	padding:0 5px 0 5px;
@@ -2159,8 +2226,7 @@ img.fade
 /*Single article css begin*/
 
 #voteButtons
-{
-	color:#005FB3;
+{	
 	font-size: 16px;
 	line-height: 3;
 }
@@ -2171,14 +2237,28 @@ img.fade
    -moz-transition: background .25s ease-in-out;
    -webkit-transition: background .25s ease-in-out;
 }
-#voteButtons span.notSelected:hover
+.yeahButton:hover
 {
-	background-color:#005FB3;
+	background-color:#00A3FF;
+	color: #fff; 
+}
+
+.yeahBg
+{
+	background-color:#00A3FF;
+}
+
+.mehBg
+{
+	background-color:#F84747;
+}
+.mehButton:hover
+{
+	background-color:#F84747;
 	color: #fff; 
 }
 .selected
-{
-	background-color:#005FB3;
+{	
 	color: #fff; 
 	padding: 3px 8px;
 }
@@ -2561,8 +2641,7 @@ img.fade
 /*About begins*/
 #aboutContainer
 {
-	min-height: 2500px;
-	margin-left: -25px;
+	min-height: 2500px;	
 }
 .aboutSection
 {
@@ -2608,8 +2687,109 @@ img.fade
 }
 /*About ends*/
 
+/*Game Page Begins*/
+.gameCoverSectionPaddigTop
+{
+	padding-top: 200px;
+}
+.gameCoverSectionContainer
+{
+	position: absolute;
+	width: 950px;
+	margin-top: -200px;
+	height: 210px;
+	padding: 5px;
+	z-index: 1;
+}
+.gameCarouselMainRing
+{
+	margin-top: 130px;
+	margin-left: 390px;
+}
+.gameTitle
+{
+	font-size: 30px;
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 0px 2px 3px #000;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+.gameDetailsHeaders
+{
+	text-shadow: 0px 2px 3px #000;  
+	font-size: 13px;  
+	font-weight: bolder;
+}
+.gamePageRatingAndPlatformList
+{
+	width: 52%;
+	margin: 0 auto;
+}
+.gameStatsList
+{
+	color: #fff;
+	width: 82%;
+	margin:25px auto;
+	font-weight: bold;
+}
+.gameStatsList li
+{
+	padding:3px;
+}
+.gamePageRatingHeight
+{
+	height: 67px;
+}
+.gamePageRatingWidth
+{
+	width: 47px;
+}
+.gamePageVeilBg
+{
+	height: 400px;
+	margin-top: 10px;
+	background-color: #11151d; 
+	opacity: 0.8;
+}
+/*Game Page End*/
+.userGamePageDetailValueColor
+{
+	color: #76A7F5;
+}
+.listDataHolderDiv
+{
+	width: 100%; 
+	text-align: center;
+}
 /*User Page begins*/
 
+.userPageList
+{
+	color: #fff;
+	width: 60%;
+	margin:25px auto;
+	font-weight: bold;
+}
+.userPageList li
+{
+	float: left;
+	padding: 3px;
+}
+.userPageVeilBg
+{
+	position: absolute;
+	width: 950px;
+	height: 300px;
+	background-color: #11151d; 
+	opacity: 0.8;
+	z-index: 8;
+	margin-top: 309px;
+}
+.userTitle
+{
+	font-size: 18px;color: #FF5555;
+}
 .carouselEntityDetails
 {
 	height: 100px;
@@ -2644,8 +2824,81 @@ img.fade
 	padding: 5px;
 }
 
+.levelMeter
+{
+	display: block;
+	text-align: center;
+    font-weight: bold;
+    width: 200px;
+    height: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #777;
+}
+.toGoText
+{
+	position: absolute;
+    font-size: 12px;
+    color: #fff;
+    margin-top: -3px;
+}
+.levelMeterJuice
+{
+	height: 20px;
+    background-color: #0085FF;
+}
+.userGamifySpanData
+{
+	display: block;  
+	text-align: center;  
+	font-weight: bold;
+}
+
+.userLeadeboardInfo
+{
+	border-style: dashed;
+	border-width: 2px;
+	border-color: #f4f4f4;
+	height: 300px;
+	padding:50px 5px 5px 9px;
+}
 /*User Page ends*/
+/*Users Page begins*/
+.usersTable
+{
+	margin: 0 auto;
+	width: 90%;
+	border-spacing: 20px;
+}
+.usersContainer
+{
+	width: 950px; 
+	min-height:1080px; 
+	background-image: url(/static/images/diagmonds.png);
+}
+.postEditButton
+{
+	position: absolute;	
+	text-align: right;
+	margin-top: 40px;
+}
+.yeahButton
+{
+	color:#00A3FF;
+}
+.mehButton
+{
+	color:#F84747;
+}
+/*Users Page end*/
 /*User Settings begins*/
+.profileFieldset
+{
+	padding: 0;  
+	margin: 0;  
+	border: 0;
+	margin-bottom: 20px;
+}
 #userDetailsContainer
 {
 	width:950px; 
@@ -2654,10 +2907,8 @@ img.fade
 }
 
 #profile_container {
-	position: relative;
 	width: 950px;
-	overflow: hidden;
-	padding: 10px;	
+	background-color: #11151d;
 }
 
 /*User Settings end*/
