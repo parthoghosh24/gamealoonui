@@ -1,0 +1,15 @@
+$def with (confirmStatus)
+$var title: Confirming User's email
+$var description: User's mail confirmation page.
+
+<div class="mainContainer">
+	<div id="container_layout">
+		<div class="divider"> </div>
+		<div>
+			$if confirmStatus['status'] == 'success':
+				<p>Congratulations. Your mail has been confirmed. Now create, share and follow everything in gaming while having fun at Gamealoon.</p>
+			$else:
+				<p>Oh oh! Something wrong happened. Check your mail status in user profile.</p>	
+		</div>
+	</div>
+</div>		 

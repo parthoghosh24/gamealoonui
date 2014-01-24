@@ -15,6 +15,7 @@ urls = (
         '/login/','Login',
         '/logout/','Logout',
         '/signup/','Signup',
+        '/confirmuser/(.+)/(.+)','ConfirmUser',
         '/search/','SearchHome',
         '/searchSite/','Search',
         '/media','Media',
@@ -48,7 +49,7 @@ urls = (
         '/game/gameCreator','InitGameCreator',
         '/game/(.+)','SingleGame',
         '/user/userstats','UserStats',
-        '/profile/(.+)','UserSettings',        
+        '/profile/(.+)','UserSettings',            
         '/(.+)','SingleUser'                
         )
 
@@ -476,7 +477,16 @@ class Signup:
         registrationStatus = json.load(response)
         print "Registration status:-> ", registrationStatus
         return json.dumps(registrationStatus)                       
-       
+
+class ConfirmUser:
+    
+    def GET(self, username, token):
+        url="http://localhost:9000/confirmEmail/"+username+"/"+token
+        print "URL: "+url
+        response = urllib2.urlopen(url)        
+        confirmStatus=json.load(response)        
+        return render.confirmemail(confirmStatus)       
+    
 class Search:
     
     def GET(self):                        

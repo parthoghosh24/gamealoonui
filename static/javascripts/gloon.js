@@ -243,7 +243,7 @@ $(function() {
 						if (data.status=='success') 
 						{
 							$('#signUpStatusMessage').addClass('success');
-							$('#signUpStatusMessage').text('Registration Successful');			
+							$('#signUpStatusMessage').text('Registration Successful. We have sent a confirmation mail to the email provided.');			
 							$('#signupForm').find("input[type=text],input[type=password]").val("");				
 						}
 						else

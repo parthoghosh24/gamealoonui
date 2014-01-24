@@ -204,6 +204,7 @@ $(window).load(function() {
  function getData(platform, category, timestampVal)
     {    	    	    	
     	$.get('/articles/'+platform+'/'+category+'/1',{"timestamp":timestampVal},function(data){
+    		console.log("Data length: "+data.length);
     		if(data.length>0)
     		{
     			$.each(data, function(index, item) {
@@ -318,9 +319,15 @@ $(window).load(function() {
 				$("#"+category+" button.loadMore").removeClass('hiddenDiv');
 				$("#"+category+" div.noData").addClass('hiddenDiv');
     		}
+    		else
+    		{
+    			
+    		}
     		
     	},'json');  
-    }
+    }    
+    
+    var loadingContent=false;
     
 $(function() {			
 	
@@ -332,7 +339,7 @@ $(function() {
 			var timestamp=new Date().getTime();
 			var platform="all";
 			if(ui.newPanel.index()== 2)
-			{	
+			{					
 				if($('.reviewList').is(':empty'))
 				{					
 					getData(platform,"review", timestamp);					
@@ -382,12 +389,13 @@ $(function() {
 		}
 	});
 	
-	var loadingContent=false;
+	
 	
     $('.loadMore').click(function() {
     	
     	if(!loadingContent)
     	{
+    		loadingContent = true;
     		var platform='all';    	
 	    	var category=$(this).parents('div').attr('id');
 	    	var categoryList=category+"List";
@@ -399,15 +407,20 @@ $(function() {
        });
 	
 	$(document).ajaxStart(function() {
-	   $('.loadMore').addClass('hiddenDiv');
-	   $('.contentLoading').removeClass('hiddenDiv');	  
-	   loadingContent = true;
+		if(loadingContent)
+		{
+			$('.loadMore').addClass('hiddenDiv');
+	   		$('.contentLoading').removeClass('hiddenDiv');
+		}	   
 	});
 	
 	$(document).ajaxStop(function() {
-	   $('.loadMore').removeClass('hiddenDiv');
-	   $('.contentLoading').addClass('hiddenDiv');	  	   	 
-	   loadingContent = false;
+		if(loadingContent)
+		{
+			$('.loadMore').removeClass('hiddenDiv');
+	   		$('.contentLoading').addClass('hiddenDiv');	  	   	 
+	   		loadingContent = false;
+		}	   
 	});
 	
 	

@@ -106,7 +106,7 @@
  
 function getData(gameId, category, timestampVal)
     {    	    	    	
-    	$.get('/articles/'+gameId+'/'+category+'/3',{"timestamp":timestampVal},function(data){
+    	$.get('/articles/'+gameId+'/'+category+'/3',{"timestamp":timestampVal},function(data){    		
     		if(data.length>0)
     		{
     			$.each(data, function(index, item) {

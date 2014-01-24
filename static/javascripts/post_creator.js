@@ -1036,6 +1036,56 @@ $(function(){
 		onSave(stateValue);		
 	});
 	
+	$('#editorHelper').click(function() {		
+		if("review" == $('#selectedCategory').text().trim())
+		{
+			$('#reviewTutorialSteps').joyride({
+				autoStart : true, 
+				modal:true,
+	        	expose: false,
+	        	postRideCallback : function () {
+            		$(this).joyride('destroy');
+        		}
+			});
+			
+		}
+		if("video" == $('#selectedCategory').text().trim())
+		{			
+			$('#videoTutorialSteps').joyride({
+				autoStart : true, 
+				modal:true,
+	        	expose: false,
+	        	postRideCallback : function () {
+            		$(this).joyride('destroy');
+        		}
+			});
+		}
+		if("news" == $('#selectedCategory').text().trim())
+		{
+			$('#newsTutorialSteps').joyride({
+				autoStart : true, 
+				modal:true,
+	        	expose: false,
+	        	postRideCallback : function () {
+            		$(this).joyride('destroy');
+        		}
+			});
+		}
+		if("gloonicle" == $('#selectedCategory').text().trim())
+		{
+			$('#gloonicleTutorialSteps').joyride({
+				autoStart : true, 
+				modal:true,
+	        	expose: false,
+	        	postRideCallback : function () {
+            		$(this).joyride('destroy');
+        		}
+			});
+		}
+		
+		
+	});
+	
 	window.onbeforeunload=function()
 	{
 		console.log("hasBeenEdited: "+hasBeenEdited);

@@ -13,22 +13,22 @@ $var description: Create post from here
 					</span>			
 					<ul id="postCreatorCategorySelector">
 						<li>
-							<span id="review" class="option cursorPointer textCapitalization colorWhite review">
+							<span id="review" class="option cursorPointer textCapitalization colorWhite review" title="Write short and crisp game reviews to let the world know what you think.">
 								review
 							</span>
 						</li>
 						<li>
-							<span id="news" class="option cursorPointer textCapitalization colorWhite news">
+							<span id="news" class="option cursorPointer textCapitalization colorWhite news" title="Have any news to share? Write few lines and share link of the news source.">
 								news
 							</span>
 						</li>
 						<li>
-							<span id="video" class="option cursorPointer textCapitalization colorWhite video">
+							<span id="video" class="option cursorPointer textCapitalization colorWhite video" title="Share what you loved visually currently in the world of video gaming.">
 								video
 							</span>
 						</li>
 						<li>
-							<span id="gloonicle" class="option cursorPointer textCapitalization colorWhite gloonicle">
+							<span id="gloonicle" class="option cursorPointer textCapitalization colorWhite gloonicle" title="Write your heart out. This can be a blog, a frequent section or anything where you want to share what you feel for gaming.">
 								gloonicle
 							</span>
 						</li>
@@ -48,6 +48,7 @@ $var description: Create post from here
 							<input class="width300" id="videoUrlInput" name="videoUrlInput" type="text" placeholder="Youtube video link"/>
 							<a href="javascript:;" class="font16 doneEditiingButton" title="Add a video"><i class="icon-ok"></i></a>	
 				</span>
+				<a id="editorHelper" href="javascript:;" title="click to go through tutorial"><i class="icon-help-circled editButton"> </i></a>
 			</div>					    		
 		</div>
 		<div class="divider"> </div>
@@ -212,5 +213,114 @@ $var description: Create post from here
 					 		</div>	
 					 	</div>			 	
 </div>
+<ol id="reviewTutorialSteps" class="hiddenDiv">
+	<li data-id="changeTitle" data-text="Next" class="custom">
+        <h2>Step #1</h2>
+        <p>Click to set a title</p>
+    </li>
+    <li data-id="imageUploader" data-text="Next" class="custom">
+        <h2>Step #2</h2>
+        <p>Click to browse/upload an image to be used as cover image</p>
+    </li>
+    <li data-id="gameBoxArt" data-text="Next" data-options="tipLocation:top">
+        <h2>Step #3</h2>
+        <p>Click to search and add game</p>
+    </li>
+    <li data-id="selectedGamePlatform" data-text="Next" data-options="tipLocation:top">
+        <h2>Step #4</h2>
+        <p>Click to add platform on which you have played the game</p>
+    </li>    
+    <li data-id="addSnippetText" data-text="Next" class="custom">
+        <h2>Step #5</h2>
+        <p>Click to add review body</p>
+    </li>    
+    <li data-id="reviewPoints" data-text="Next" class="custom">
+        <h2>Step #6</h2>
+        <p>Click to add review points. At least 1 review point required. Click "Max 5 Sweets" and "Max 5 Stinks" to add points.</p>
+    </li>
+    <li data-id="userScoreDonutContainer" data-text="Next" class="custom">
+        <h2>Step #7</h2>
+        <p>Score the game by rotating the scoring dial</p>
+    </li>
+    <li data-id="postCreatorButtons" data-button="Close">
+        <h2>Step #8</h2>
+        <p>Hit save or publish to finish. Save will save the post as draft. Publish will publish the post at will appear in the network.</p>
+    </li>
+</ol>
+
+<ol id="videoTutorialSteps" class="hiddenDiv">
+	<li data-id="changeTitle" data-text="Next" class="custom">
+        <h2>Step #1</h2>
+        <p>Click to set a title</p>
+    </li>
+    <li data-id="imageUploader" data-text="Next" class="custom">
+        <h2>Step #2</h2>
+        <p>Click to browse/upload an image to be used as cover image</p>
+    </li>
+     <li data-id="videoForm" data-text="Next" class="custom">
+        <h2>Step #3</h2>
+        <p>Click to add youtube video url. This is mandatory in video category.</p>
+    </li> 
+    <li data-id="gameBoxArt" data-text="Next" data-options="tipLocation:top">
+        <h2>Step #4(Optional)</h2>
+        <p>Click to search and add game if this video is related to a particular game.</p>
+    </li>
+      
+    <li data-id="addSnippetText" data-text="Next" class="custom">
+        <h2>Step #5</h2>
+        <p>Click to add video caption</p>
+    </li>    
+    <li data-id="postCreatorButtons" data-button="Close">
+        <h2>Step #6</h2>
+        <p>Hit save or publish to finish. Save will save the post as draft. Publish will publish the post at will appear in the network.</p>
+    </li>
+</ol>
+
+<ol id="newsTutorialSteps" class="hiddenDiv">
+	<li data-id="changeTitle" data-text="Next" class="custom">
+        <h2>Step #1</h2>
+        <p>Click to set a title</p>
+    </li>
+    <li data-id="imageUploader" data-text="Next" class="custom">
+        <h2>Step #2</h2>
+        <p>Click to browse/upload an image to be used as cover image</p>
+    </li>
+    <li data-id="gameBoxArt" data-text="Next" data-options="tipLocation:top">
+        <h2>Step #3(Optional)</h2>
+        <p>Click to search and add game if this news is related to a particular game.</p>
+    </li>
+    <li data-id="addSnippetText" data-text="Next" class="custom">
+        <h2>Step #4</h2>
+        <p>Click to add news body</p>
+    </li>    
+    <li data-id="newsSourceLinkButton" data-text="Next" class="custom">
+        <h2>Step #5</h2>
+        <p>Click to add news source link.</p>
+    </li>
+    <li data-id="postCreatorButtons" data-button="Close">
+        <h2>Step #6</h2>
+        <p>Hit save or publish to finish. Save will save the post as draft. Publish will publish the post at will appear in the network.</p>
+    </li>
+</ol>
+
+<ol id="gloonicleTutorialSteps" class="hiddenDiv">
+	<li data-id="changeTitle" data-text="Next" class="custom">
+        <h2>Step #1</h2>
+        <p>Click to set a title</p>
+    </li>
+    <li data-id="imageUploader" data-text="Next" class="custom">
+        <h2>Step #2</h2>
+        <p>Click to browse/upload an image to be used as cover image</p>
+    </li>           
+    <li data-id="addSnippetText" data-text="Next" class="custom">
+        <h2>Step #3</h2>
+        <p>Click to add your gloonicle article with images.</p>
+    </li>
+    <li data-id="postCreatorButtons" data-button="Close">
+        <h2>Step #4</h2>
+        <p>Hit save or publish to finish. Save will save the post as draft. Publish will publish the post at will appear in the network.</p>
+    </li>
+</ol>
 <script src="/static/javascripts/post_creator.js"></script>
 <script src="/static/javascripts/jquery.knob.js"></script>
+<script src ="/static/javascripts/jquery.joyride.js"></script>
