@@ -148,29 +148,32 @@ function updateCoolState(articleId)
 {
 	if($('#meh').hasClass('notSelected'))
 	{
+		if(!updatingCoolNotCoolState)
+		{
+			$.post('/article/coolOrNotCool/',{"type":0,"articleId":articleId},function(data){
+				if(data.status == "success")
+				{
+					var coolScore = parseInt($('div#moreInformation span.icon-smile').text().trim());
+					if($('#yeah').hasClass('notSelected'))
+					{
+						$('#yeah').removeClass('yeahButton');
+						$('#yeah').addClass('yeahBg');
+						$('#yeah').removeClass('notSelected');
+						$('#yeah').addClass('selected');
+						$('div#moreInformation span.icon-smile').text(coolScore+1);
+					}
+					else
+					{
+						$('#yeah').removeClass('yeahBg');
+						$('#yeah').addClass('yeahButton');
+						$('#yeah').removeClass('selected');
+						$('#yeah').addClass('notSelected');
+						$('div#moreInformation span.icon-smile').text(coolScore-1);
+					}
+				}
+			},'json');
+		}
 		
-		$.post('/article/coolOrNotCool/',{"type":0,"articleId":articleId},function(data){
-			if(data.status == "success")
-			{
-				var coolScore = parseInt($('div#moreInformation span.icon-smile').text().trim());
-				if($('#yeah').hasClass('notSelected'))
-				{
-					$('#yeah').removeClass('yeahButton');
-					$('#yeah').addClass('yeahBg');
-					$('#yeah').removeClass('notSelected');
-					$('#yeah').addClass('selected');
-					$('div#moreInformation span.icon-smile').text(coolScore+1);
-				}
-				else
-				{
-					$('#yeah').removeClass('yeahBg');
-					$('#yeah').addClass('yeahButton');
-					$('#yeah').removeClass('selected');
-					$('#yeah').addClass('notSelected');
-					$('div#moreInformation span.icon-smile').text(coolScore-1);
-				}
-			}
-		},'json');
 	}		
 }	
 
@@ -178,28 +181,32 @@ function updateNotCoolState(articleId)
 {
 	if($('#yeah').hasClass('notSelected'))
 	{
-		$.post('/article/coolOrNotCool/',{"type":1,"articleId":articleId},function(data){
-			if(data.status == "success")
-			{
-				var notCoolScore = parseInt($('div#moreInformation span.icon-frown').text());
-				if($('#meh').hasClass('notSelected'))
+		if(!updatingCoolNotCoolState)
+		{
+			$.post('/article/coolOrNotCool/',{"type":1,"articleId":articleId},function(data){
+				if(data.status == "success")
 				{
-					$('#meh').removeClass('mehButton');
-					$('#meh').addClass('mehBg');
-					$('#meh').removeClass('notSelected');
-					$('#meh').addClass('selected');
-					$('div#moreInformation span.icon-frown').text(notCoolScore+1);
+					var notCoolScore = parseInt($('div#moreInformation span.icon-frown').text());
+					if($('#meh').hasClass('notSelected'))
+					{
+						$('#meh').removeClass('mehButton');
+						$('#meh').addClass('mehBg');
+						$('#meh').removeClass('notSelected');
+						$('#meh').addClass('selected');
+						$('div#moreInformation span.icon-frown').text(notCoolScore+1);
+					}
+					else
+					{
+						$('#meh').removeClass('selected');
+						$('#meh').addClass('notSelected');
+						$('#meh').removeClass('mehBg');
+						$('#meh').addClass('mehButton');
+						$('div#moreInformation span.icon-frown').text(notCoolScore-1);
+					}
 				}
-				else
-				{
-					$('#meh').removeClass('selected');
-					$('#meh').addClass('notSelected');
-					$('#meh').removeClass('mehBg');
-					$('#meh').addClass('mehButton');
-					$('div#moreInformation span.icon-frown').text(notCoolScore-1);
-				}
-			}
-		},'json');
+			},'json');
+		}
+		
 	}
 	
 }
@@ -213,17 +220,29 @@ $(window).load(function() {
 	
 });
 
+var updatingCoolNotCoolState=false;
+var initUpdatingCoolNotCool=false;
 
 $(function(){
 	
 	startTime=new Date().getTime();
 		
 	$(document).ajaxStart(function() {
-	  $('#loadingIcon').show();
+	  $('#loadingIcon').show();	  
+	  if(initUpdatingCoolNotCool)
+	  {
+	  	updatingCoolNotCoolState=true;
+	  }
+	  
 	});
 	
 	$(document).ajaxStop(function() {
 	  $('#loadingIcon').hide();
+	  if(initUpdatingCoolNotCool)
+	  {
+	  	updatingCoolNotCoolState=false;
+	  	initUpdatingCoolNotCool=false;
+	  }	
 	});
 	
 	
@@ -242,8 +261,15 @@ $(function(){
 		});
 	$('.activeButton').click(function() {
 		 var articleId = $('.coverSection').attr('id');		 		
-		 ($(this).attr('id')=="yeah")?updateCoolState(articleId):updateNotCoolState(articleId);
-		 
+		 initUpdatingCoolNotCool=true;		 
+		 if("yeah" == $(this).attr('id'))
+		 {
+		 	updateCoolState(articleId);
+		 }
+		 else
+		 {
+		 	updateNotCoolState(articleId);
+		 }
 		 
 		 
 		 

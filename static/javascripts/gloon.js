@@ -25,8 +25,8 @@ function ajaxStartProcess(processMode)
      	        $('#signupSpinner').addClass('icon-spin1 animate-spin');
      	        $('#signUpStatusMessage').addClass('colorWhite');
 				$('#signUpStatusMessage').text('Please wait...');				
-			    $('signUp').prop('disabled',true);
-			    $('signUp').addClass('disableOpacity');
+			    $('#signUp').prop('disabled',true);
+			    $('#signUp').addClass('disableOpacity');
      			break;
      	case 1:
      	        $('#usernameErrorMessage').text('Please Wait...');
@@ -42,8 +42,8 @@ function ajaxStartProcess(processMode)
      	        $('#signInStatusMessage').addClass('colorWhite');
      	        $('#signInSpinner').addClass('icon-spin1 animate-spin');
      	        $('#signInStatusMessage').text('Signing in...');							    
-     	        $('signIn').prop('disabled',true);
-			    $('signIn').addClass('disableOpacity');
+     	        $('#signIn').prop('disabled',true);
+			    $('#signIn').addClass('disableOpacity');
      			break;						
      	
      }
@@ -54,11 +54,11 @@ function ajaxStopProcess(processMode)
 	switch(processMode)
 	 {
      	 
-     	case 0:
+     	case 0:     			
                 $('#signUpStatusMessage').removeClass('colorWhite');	            
                 $('#signupSpinner').removeClass('icon-spin1 animate-spin');    				
-                $('signUp').prop('disabled',false);
-			    $('signUp').removeClass('disableOpacity');					
+                $('#signUp').prop('disabled',false);
+			    $('#signUp').removeClass('disableOpacity');					
      			break;
      	case 1: 
      	    	 		
@@ -73,8 +73,8 @@ function ajaxStopProcess(processMode)
      			$('#signInSpinner').removeClass('icon-spin1 animate-spin');
      			$('#signInStatusMessage').removeClass('colorWhite');
      	        $('#signInStatusMessage').text('');				
-				$('signIn').prop('disabled',false);
-			    $('signIn').removeClass('disableOpacity');
+				$('#signIn').prop('disabled',false);
+			    $('#signIn').removeClass('disableOpacity');
      			break;
      }
 }
