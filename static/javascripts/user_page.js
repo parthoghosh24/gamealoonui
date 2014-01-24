@@ -430,7 +430,7 @@ $(window).load(function() {
  			var userStatsHtml="";
  			$.each(data.userAchievements, function(index, award) { 			
 			   userStatsHtml= '<div class="floatLeft overflowHidden ">'+		    			 	    
-					'<img src="http://192.168.0.103:9000/assets/images/default/new_gloonie_achievement.png" title="'+award.title+'-'+award.description+'" alt="'+award.title+'" height="200"/>'+
+					'<img src="'+award.achievementImage+'" title="'+award.title+'-'+award.description+'" alt="'+award.title+'" height="200"/>'+
 				'</div>'				
 				var userStatsEl=$(userStatsHtml);
 				userStatsEl.hide();
