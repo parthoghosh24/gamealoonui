@@ -117,7 +117,7 @@ class SingleArticle:
 class ArticleList:
     def GET(self, carosuselSelector, category, mode):            
         timestampMap=web.input()
-        timestamp = timestampMap.timestamp                
+        timestamp = timestampMap.timestamp                        
         url="http://localhost:9000/articles/"+carosuselSelector+"/"+category+"/"+timestamp+"/"+mode        
         request = urllib2.Request(url)        
         response = urllib2.urlopen(request)

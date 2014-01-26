@@ -4,7 +4,7 @@
 
  function onArticleClick()
  {
- 	var timestamp=new Date().getTime();
+ 	var timestamp=-1;
 	var gameId=$('#userPostAndCreatorInnerCircle a img').attr('id');
 	 
 	$('#allTab').click(function() {

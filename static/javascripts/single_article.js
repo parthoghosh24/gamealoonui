@@ -232,6 +232,8 @@ $(function(){
 	  if(initUpdatingCoolNotCool)
 	  {
 	  	updatingCoolNotCoolState=true;
+	  	$('.profileUpdateStatusNotification').fadeIn();
+	  	$('.profileUpdateStatusNotification').removeClass('hiddenDiv');
 	  }
 	  
 	});
@@ -242,6 +244,8 @@ $(function(){
 	  {
 	  	updatingCoolNotCoolState=false;
 	  	initUpdatingCoolNotCool=false;
+	  	$('.profileUpdateStatusNotification').fadeOut();
+	  	$('.profileUpdateStatusNotification').addClass('hiddenDiv');
 	  }	
 	});
 	

@@ -337,7 +337,7 @@ $(function() {
 
 	$("#tabs-min").tabs({		
 		beforeActivate: function(event, ui){						 
-			var timestamp=new Date().getTime();
+			var timestamp=-1;
 			var platform="all";
 			if(ui.newPanel.index()== 2)
 			{					

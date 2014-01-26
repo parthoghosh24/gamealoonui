@@ -68,7 +68,7 @@ $(window).load(function() {
 	
  function onArticleClick()
  {
- 	var timestamp=new Date().getTime();
+ 	var timestamp=-1;
 	var username=$('#userPostAndCreatorInnerCircle img').attr('title');		
 	 
 	$('#allTab').click(function() {
@@ -459,7 +459,7 @@ $(function(){
     
 			$("#tabs-min").tabs({
 				beforeActivate: function(event, ui){						 
-				var timestamp=new Date().getTime();
+				var timestamp=-1;
 				var username=$('#userPostAndCreatorInnerCircle img').attr('title');	
 				if(ui.newPanel.index()== 2)
 				{	
@@ -473,8 +473,7 @@ $(function(){
 				{				
 					
 					if($('.draftList').is(':empty'))
-					{
-						console.log("Drafts called");
+					{						
 						getDrafts();											
 					}					
 				}
