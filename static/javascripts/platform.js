@@ -1,6 +1,32 @@
 
+
 	
 $(window).load(function() {
+	
+		
+		if("set" != $.cookie('introVideo'))
+		{
+			$.modal('<iframe width="853" height="480" src="//www.youtube.com/embed/pRWG21fhEQc" frameborder="0" allowfullscreen></iframe>', {
+    			
+    			onOpen : function(dialog) {
+					dialog.overlay.fadeIn('slow', function() {
+						dialog.container.slideDown('slow', function() {
+							dialog.data.fadeIn('slow');
+						});
+					});
+					$.cookie('introVideo','set');
+				},
+			    containerCss:{
+			        backgroundColor:"#fff",
+			        borderColor:"#fff",
+			        height:490,
+			        padding:0,
+			        width:860
+			    },
+			    overlayClose:true
+			});
+		}
+		
 	
 	    function onVideoAfter()
 		{
