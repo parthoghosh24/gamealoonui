@@ -3232,7 +3232,7 @@ img.fade
 	width:950px;
 	height: 610px;		
 	box-shadow: 0px 0px 8px #000;
-	background-image: url('http://192.168.0.103:9000/assets/images/default/featuredBg.png');
+	background-image: url('http://162.144.38.150:9000/assets/images/default/featuredBg.png');
 	background-size: 960px 720px;
 }
 .coverSectionHeaderFooter
