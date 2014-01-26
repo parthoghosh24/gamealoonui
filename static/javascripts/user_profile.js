@@ -349,7 +349,7 @@ $(function() {
 			 var userAvatarId=$('.selectAvatar').attr('id');
 			 formdata.append('userAvatarFile',avatarImage);			
 		     $.ajax({          
-		     	url: "http://localhost:9000/user/saveOrUpdateUserAvatar/"+userName+"/"+userAvatarId, 		
+		     	url: "http://162.144.38.150:9000/user/saveOrUpdateUserAvatar/"+userName+"/"+userAvatarId, 		
         		type: "POST",        
         		dataType:'json',  		
         		data: formdata,         		

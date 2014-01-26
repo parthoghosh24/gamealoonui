@@ -146,7 +146,7 @@ $(function(){
 										 formdata.append('previewFile',image);		
 										 uploading=true;					 	
 										 $.ajax({          
-											 url: "http://localhost:9000/media/uploadImage/"+userName+"/none/user", 					     		
+											 url: "http://162.144.38.150:9000/media/uploadImage/"+userName+"/none/user", 					     		
 											type: "POST",          		
 											data: formdata,      
 											dataType:'json',   		
