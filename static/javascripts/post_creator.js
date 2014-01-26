@@ -127,6 +127,8 @@ function videoSelected()
 	$('#richEditor').addClass('nonGlooniclePostSnippet');
 	$('#richEditor').removeClass('glooniclePostSnippet');
 	$('#gameBoxArt').show();
+	$('#snippetText div.gloonicleText').addClass('hiddenDiv');
+	$('#snippetText p').removeClass('hiddenDiv');
 	
 }
 
@@ -158,6 +160,8 @@ function reviewSelected()
 	$('#gameBoxArt').show();
 	$('#reviewGamePlayedOn').show();
 	$('#reviewGamePlayedOn').addClass('disableOpacity');
+	$('#snippetText div.gloonicleText').addClass('hiddenDiv');
+	$('#snippetText p').removeClass('hiddenDiv');
 	
 }
 
@@ -188,6 +192,8 @@ function newsSelected()
 	$('#richEditor').removeClass('glooniclePostSnippet');
 	$('#newsSource').show();
 	$('#gameBoxArt').show();
+	$('#snippetText div.gloonicleText').addClass('hiddenDiv');
+	$('#snippetText p').removeClass('hiddenDiv');
 	
 }
 
@@ -219,7 +225,8 @@ function gloonicleSelected()
 	$('#reviewGamePlayedOn').hide();
 	$('#snippetText i#snippetTextTitle').addClass('icon-user');
 	$('#snippetText i#snippetTextTitle').text($('#box a#user').text()+' thinks...');
-	$('#snippetText p').text('Blog your gaming adventures and thoughts.');
+	$('#snippetText div.gloonicleText').removeClass('hiddenDiv');
+	$('#snippetText p').addClass('hiddenDiv');
 }
 function selectCategory()
 {
@@ -464,35 +471,61 @@ function charCountCheck()
 function addSnippetText()
 {
 	iFrameOn();
-	$('#snippetText p').hide();
-	$('#postSnippet').show();		
 	charCountCheck();
-	if(!$('#selectedCategory').hasClass('gloonicle'))
+	$('#postSnippet').show();
+	if($('#selectedCategory').hasClass('gloonicle'))
 	{
-		$('#maxCharLimitContainer').show();
-		$('.nonGloonicleEditButtons').show();
-		$('.gloonicleEditButtons').hide();
-	}
-	else
-	{
+		$('#snippetText div.gloonicleText').addClass('hiddenDiv');
 		$('#maxCharLimitContainer').hide();
 		$('.nonGloonicleEditButtons').hide();
 		$('.gloonicleEditButtons').show();
-	}	
-	
-
-	
+		$('#postSnippet').css('width','800px');
+		$('#postData').width(800);
+		$('#postSnippet a.doneEditiingButton').removeClass('marginRight61');	
+		$('#richEditor').removeClass('nonGlooniclePostSnippet');
+		$('#richEditor').addClass('glooniclePostSnippet');
+	}
+	else
+	{
+		$('#snippetText p').addClass('hiddenDiv');
+		$('#maxCharLimitContainer').show();
+		$('.nonGloonicleEditButtons').show();
+		$('.gloonicleEditButtons').hide();
+		$('#postSnippet').css('width','560px');
+		$('#postData').width(560);
+		$('#postSnippet a.doneEditiingButton').addClass('marginRight61');	
+		$('#richEditor').addClass('nonGlooniclePostSnippet');
+		$('#richEditor').removeClass('glooniclePostSnippet');
+	}
 } 
 
 function doneEditingSnippet()
 {
 	var text=window.frames['richEditor'].document.body.innerHTML;
-	console.log(text);
+	console.log(text.length);
 	if(text.length>0)
 	{
-		$('#snippetText p').html(text);
+		if($('#selectedCategory').hasClass('gloonicle'))
+		{
+			$('#snippetText div.gloonicleText').removeClass('hiddenDiv');
+			$('#snippetText div.gloonicleText').html(text);
+		}
+		else
+		{
+			$('#snippetText p').html(text);
+			$('#snippetText p').removeClass('hiddenDiv');
+		}
+		
 	}
-	$('#snippetText p').show();
+	if($('#selectedCategory').hasClass('gloonicle'))
+	{
+		$('#snippetText div.gloonicleText').removeClass('hiddenDiv');		
+	}
+	else
+	{			
+			$('#snippetText p').removeClass('hiddenDiv');
+	}
+	
 	$('#postSnippet').hide();
 }
 
