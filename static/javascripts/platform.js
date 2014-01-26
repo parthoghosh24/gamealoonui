@@ -203,6 +203,7 @@ $(window).load(function() {
 
  function getData(platform, category, timestampVal)
     {    	    	    	
+    	console.log("Timestamp: "+timestampVal);
     	$.get('/articles/'+platform+'/'+category+'/1',{"timestamp":timestampVal},function(data){
     		console.log("Data length: "+data.length);
     		if(data.length>0)
