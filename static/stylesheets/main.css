@@ -1039,7 +1039,8 @@ img {
 .gridDim
 {
 	width:110px;
-	min-height: 200px;
+	min-height: 220px;
+	font-size: 13px;	
 }
 .otherGridDim
 {
