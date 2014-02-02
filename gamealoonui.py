@@ -41,6 +41,10 @@ urls = (
         '/user/followOrUnfollow','FollowOrUnfollow',
         '/user/gameInterestedOrNot','InterestedInorNotInGame',
         '/user/interest','CreateOrUpdateUserInterest',
+        '/user/confirmMailForPasswordReset','InitForgotPasswordProcess',
+        '/user/forgotPassword/init','SendMailForForgotPassword',
+        '/user/initResetPassword/(.+)/(.+)','InitResetPassword',
+        '/user/resetPassword','ResetForgotPassword',
         '/user/password/reset','ResetPassword',        
         '/user/social/(.+)','FetchUserSocial',
         '/user/stats/(.+)','FetchUserStats',
@@ -386,6 +390,47 @@ class CreateOrUpdateUserInterest:
         interest = json.load(response)        
         return json.dumps(interest)
 
+
+class InitForgotPasswordProcess:
+    def GET(self):        
+        return render.initforgotpasswordform()
+        
+class SendMailForForgotPassword:
+    def POST(self):
+        userEmailFormInput = web.input()
+        emailJson = {"emailId":userEmailFormInput.userEmail}
+        print emailJson
+        url="http://localhost:9000/user/confirmMailForResetPassword"     
+        emailJsonEncoded = urllib.urlencode(emailJson)
+        request = urllib2.Request(url, emailJsonEncoded)   
+        response = urllib2.urlopen(request)
+        forgotPasswordEmailState =json.load(response)
+        return json.dumps(forgotPasswordEmailState)
+
+
+class InitResetPassword:
+    def GET(self, email, token):
+        userInfo ={"email":email, "token":token}         
+        return render.forgotpassword(userInfo)
+             
+class ResetForgotPassword:
+    def POST(self):   
+        userPasswordFormInput=web.input() 
+        password =userPasswordFormInput.password
+        confirmPassword =userPasswordFormInput.confirmPassword
+        emailId=userPasswordFormInput.emailId
+        token=userPasswordFormInput.token        
+        if password == confirmPassword:
+            userForgotPasswordJson={"emailId": emailId, "token": token, "password":password}
+            userForgotPasswordJsonEncoded = urllib.urlencode(userForgotPasswordJson)
+            url="http://localhost:9000/user/resetPassword"     
+            request = urllib2.Request(url, userForgotPasswordJsonEncoded)   
+            response = urllib2.urlopen(request)
+            userForgotPasswordState=json.load(response)                        
+        else:
+            userForgotPasswordState={"status":"fail"}
+        return json.dumps(userForgotPasswordState)
+    
 class ResetPassword:
     def POST(self):
         passwordData = web.input()
