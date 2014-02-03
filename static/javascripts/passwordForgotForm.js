@@ -23,7 +23,7 @@ $(function() {
    				}
    				else
    				{
-   					alert("Something wrong happened!");
+   					alert("Either email not confirmed or something wrong happened!");
    					$('#forgetPasswordEmailSendingForm').show();
    				}
    			},'json');
