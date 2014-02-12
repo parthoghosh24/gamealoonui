@@ -928,10 +928,22 @@ $(function(){
 	blockReviewScoreKnob();
 	$(document).ajaxStart(function() {
 	  $('#loadingIcon').show();
+	  $('#save').prop('disabled',true);
+	  $('#save').addClass('disableOpacity');
+	  $('#publish').prop('disabled',true);
+	  $('#publish').addClass('disableOpacity');
+	  $('#close').prop('disabled',true);
+	  $('#close').addClass('disableOpacity');
 	});
 	
 	$(document).ajaxStop(function() {
 	  $('#loadingIcon').hide();
+	  $('#save').prop('disabled',false);
+	  $('#save').removeClass('disableOpacity');
+	  $('#publish').prop('disabled',false);
+	  $('#publish').removeClass('disableOpacity');
+	  $('#close').prop('disabled',false);
+	  $('#close').removeClass('disableOpacity');
 	});
 		
 	activateReviewKnob();
